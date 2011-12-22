@@ -1,0 +1,96 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<g:HTML wordWrap="true"><h1>Cadastro de Estabelecimento</h1></g:HTML>
+		<g:HTMLPanel ui:field="error" styleName="error"/>
+		<g:Grid width="383px">
+			<g:row>
+				<g:customCell>
+					<g:Label text="Nome:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="nome" width="200px"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Razão Social:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox width="200px" ui:field="razao"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="CNPJ:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox width="201px" ui:field="cnpj"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Logo da empresa:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox width="200px" ui:field="logo"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Password:" styleName="alpha"/>
+				</g:customCell>
+				<g:customCell>
+					<g:PasswordTextBox width="200px" ui:field="pass"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Confirma password:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:PasswordTextBox width="200px" ui:field="passConfirm"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Descricao:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextArea ui:field="descricao"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Categoria" />
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="categoria"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text=" Endereco:"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextArea ui:field="endereco"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text=" "/>
+				</g:customCell>
+				<g:customCell>
+					<g:Button text="Cadastrar" ui:field="cadastrar"/>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

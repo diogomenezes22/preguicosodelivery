@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="pedido">
+		<h2>Seu Pedido</h2>
+		<hr/>
+			<g:HTMLPanel ui:field="pedidos">
+				<g:Image ui:field="loading" styleName="loading"/>
+			</g:HTMLPanel>
+		<hr/>
+		<h3>Total: R$ <g:InlineLabel text="0,00" ui:field="total"/></h3>
+		<g:Button ui:field="pedir">Pedir</g:Button>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,48 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+    xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style>
+        .important {
+            font-weight: bold;
+        }
+        .oddRow {
+            background: #f0f0f0;
+        }
+        .evenRow {
+            background: #f6f6f6;
+        }
+        .est_forma_pagamento {
+        }
+    </ui:style>
+    <g:HTMLPanel>
+			<g:HTMLPanel ui:field="coluna1" styleName="est_endereco grid_9">
+				<div class="" style="overflow:hidden;margin-top: 36px;">	
+					<div class="grid_9 restaurante_header" style="width: 658px;">
+						<div class="grid_3 alpha omega">
+							 <g:Image ui:field="logo"/>
+						</div>
+						<div class="grid_4 alpha omega">
+							<h3><g:Label styleName="est_nome" ui:field="nome"/></h3>
+						</div>
+						<div class="grid_6 alpha omega" style="width: 438px;">
+							<h4>Horário de Funcionamento: 16:00 as 22:00</h4>
+						</div>
+						<div class="grid_6 alpha omega" style="width: 438px;">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam placerat, magna eget imperdiet viverra, nulla velit blandit erat. </p>
+						</div>
+					</div>
+					 <g:HTMLPanel ui:field="filtro" styleName="grid_3 omega alpha">
+					 	
+		        	 </g:HTMLPanel>
+					 <g:HTMLPanel ui:field="coluna2">
+		        	 </g:HTMLPanel>
+				</div>
+			 </g:HTMLPanel>  
+		<g:HTMLPanel styleName="grid_3 omega alpha" ui:field="coluna3">
+        </g:HTMLPanel>
+        <div class="clear"></div>
+            <g:Label styleName="est_endereco" ui:field="endereco"/>
+       
+        
+    </g:HTMLPanel>
+</ui:UiBinder>

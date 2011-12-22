@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName=".grid_3">
+		<h1>Categorias</h1>
+		<g:InlineHyperlink text="Pizzaria" targetHistoryToken="index/pizza" ui:field="pizza" styleName="categoria"/>
+		<g:InlineHyperlink text="Sushi" targetHistoryToken="index/sushi" ui:field="sushi" styleName="categoria"/>
+		<g:InlineHyperlink text="Italiana" targetHistoryToken="index/italiano" ui:field="italiano" styleName="categoria"/>
+		<g:InlineHyperlink text="Chinesa" targetHistoryToken="index/chines" ui:field="chines" styleName="categoria"/>
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

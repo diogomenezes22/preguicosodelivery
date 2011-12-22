@@ -1,0 +1,57 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<g:VerticalPanel>
+			<g:HorizontalPanel ui:field="nomeHPanel">
+				<g:Label text="Nome" ui:field="nomeLabel"/>
+				<g:TextBox ui:field="nomeTextbox"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="razaoSocialHPanel">
+				<g:Label text="Razão Social" ui:field="razaoSocialLabel"/>
+				<g:TextBox ui:field="razaoSocialTextbox"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="cnpjHPanel">
+				<g:Label text="CNPJ" ui:field="cnpjLabel"/>
+				<g:TextBox ui:field="cnpjTextbox"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="cepHPanel">
+				<g:Label text="CEP" ui:field="cepLabel"/>
+				<g:TextBox ui:field="cepTextbox"/>
+				<g:Button ui:field="useCepButton" text="Buscar endereço"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="ruaHPanel">
+				<g:Label text="Rua" ui:field="ruaLabel"/>
+				<g:TextBox ui:field="ruaTextbox"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="numeroHPanel">
+				<g:Label text="Numero" ui:field="numeroLabel"/>
+				<g:TextBox ui:field="numeroTextbox"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="complementoHPanel">
+				<g:Label text="Complemento" ui:field="complementoLabel"/>
+				<g:TextBox ui:field="complementoTextbox"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="bairroHPanel">
+				<g:Label text="Bairro" ui:field="bairroLabel"/>
+				<g:TextBox ui:field="bairroTextbox"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="cidadeHPanel">
+				<g:Label text="Cidade" ui:field="cidadeLabel"/>
+				<g:TextBox ui:field="cidadeTextbox"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel ui:field="estadoHPanel">
+				<g:Label text="CNPJ" ui:field="estadoLabel"/>
+				<g:TextBox ui:field="estadoTextbox"/>
+			</g:HorizontalPanel>
+			<g:Button ui:field="saveButton" text="Salvar"/>
+			<g:HTMLPanel ui:field="errorArea"/>
+			<g:Hidden name="ID" ui:field="idHidden"/>
+		</g:VerticalPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

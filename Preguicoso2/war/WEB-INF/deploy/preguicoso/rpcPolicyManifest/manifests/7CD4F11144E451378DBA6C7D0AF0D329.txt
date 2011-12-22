@@ -1,0 +1,2 @@
+serviceClass: com.preguicoso.client.estabelecimento.cardapio.CardapioService
+path: AF958DD7B9E4F9C2C138ACA6C3F9D8FA.gwt.rpc
