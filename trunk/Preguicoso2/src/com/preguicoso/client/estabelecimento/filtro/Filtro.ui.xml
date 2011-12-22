@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="filtros" ui:field="filtro">
+		<h3>Busca Rápida</h3>
+		<g:TextBox styleName="busca" ui:field="busca"/> 
+		<h3>Filtros:</h3>
+	</g:HTMLPanel>
+</ui:UiBinder> 

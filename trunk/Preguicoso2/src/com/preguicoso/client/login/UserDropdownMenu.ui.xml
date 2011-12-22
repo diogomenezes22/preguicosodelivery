@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+		.username {
+			font-weight: bold;
+		}
+	</ui:style>
+<!-- 	<div>
+		Hello,
+		
+	</div>
+	 -->
+	<div class="dropdown">
+                    <a href="#" class="button"><span class="icon icon191">&nbsp;</span><span class="label">Olá, <span class="{style.username}" ui:field="name" /></span><span class="icon icon62">&nbsp;</span></a>
+                        <div class="dropdown-slider">
+                            <a href="#" class="ddm"><span class="icon icon33">&nbsp;</span><span class="label">Histórico</span></a>
+                            <a href="#" class="ddm"><span class="icon icon51">&nbsp;</span><span class="label">Carrinho de Compras</span></a>
+                            <a href="#" class="ddm"><span class="icon icon116">&nbsp;</span><span class="label">Configurações</span></a>
+                        </div> <!-- /.dropdown-slider -->
+   </div> <!-- /.dropdown -->
+</ui:UiBinder>

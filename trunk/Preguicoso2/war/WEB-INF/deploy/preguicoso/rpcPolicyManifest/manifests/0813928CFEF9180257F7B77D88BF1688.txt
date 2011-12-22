@@ -1,0 +1,2 @@
+serviceClass: com.preguicoso.client.busca.BuscaService
+path: 5BF20D1AA894BC3441991D87CAA9BB9D.gwt.rpc
