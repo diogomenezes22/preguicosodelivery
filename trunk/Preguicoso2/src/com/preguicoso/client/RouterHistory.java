@@ -29,7 +29,7 @@ public class RouterHistory {
 			@Override
 			public void onValueChange(ValueChangeEvent<String> event) {
 				String token = History.getToken();
-				clearContent();
+				// clearContent();
 				buildHomePage(token);
 			}
 
