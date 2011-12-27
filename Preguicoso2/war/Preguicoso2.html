@@ -11,12 +11,13 @@
     <!--                                                               -->
     <!-- Consider inlining CSS to reduce the number of requested files -->
     <!--                                                               -->
+    <link type="text/css" rel="stylesheet" href="960-fluid.css">
     <link type="text/css" rel="stylesheet" href="Preguicoso2.css">
-
+	
     <!--                                           -->
     <!-- Any title is fine                         -->
     <!--                                           -->
-    <title>Web Application Starter Project</title>
+    <title>Preguicoso Backend</title>
     
     <!--                                           -->
     <!-- This script loads your compiled module.   -->
@@ -31,7 +32,7 @@
   <!-- you can leave the body empty if you want  -->
   <!-- to create a completely dynamic UI.        -->
   <!--                                           -->
-  <body>
+  <body style="background-color:#E7E0DF;">
 
     <!-- OPTIONAL: include this if you want history support -->
     <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
@@ -43,20 +44,8 @@
         in order for this application to display correctly.
       </div>
     </noscript>
-
-    <h1>Web Application Starter Project</h1>
-
-    <table align="center">
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Please enter your name:</td>        
-      </tr>
-      <tr>
-        <td id="nameFieldContainer"></td>
-        <td id="sendButtonContainer"></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
-      </tr>
-    </table>
+	<div id="content">
+		<img style="margin-top:350px;margin-left:50%;margin-right:auto" id="loading" src="img/ajax-loader.gif"/>
+	</div>
   </body>
 </html>

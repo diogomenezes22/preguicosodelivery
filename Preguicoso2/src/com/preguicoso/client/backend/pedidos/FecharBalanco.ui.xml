@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<div class="grid_6 coluna2 alpha omega">
+			<h1>Faturamento do Dia</h1>
+			<div class="container_coluna2">
+				<div class="container">
+					a
+				</div>
+			</div>
+		</div>
+		<div class="grid_3 coluna3 alpha omega">
+			<h1>Faturamento Mensal</h1>
+			<div class="container_coluna3">
+				<div class="container">
+					as
+				</div>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 
