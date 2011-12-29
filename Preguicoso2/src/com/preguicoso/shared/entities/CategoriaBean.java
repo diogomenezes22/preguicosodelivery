@@ -13,6 +13,7 @@ public class CategoriaBean implements Serializable {
 
 	private String nome;
 	private Date dataRegistro;
+	private Long estabelecimentoId;
 	private Date ultimaAtualizacao;
 
 	public CategoriaBean(){
@@ -39,6 +40,10 @@ public class CategoriaBean implements Serializable {
 	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
 		this.ultimaAtualizacao = ultimaAtualizacao;
 	}
-
-
+	public Long getEstabelecimentoId() {
+		return estabelecimentoId;
+	}
+	public void setEstabelecimentoId(Long estabelecimentoId) {
+		this.estabelecimentoId = estabelecimentoId;
+	}
 }

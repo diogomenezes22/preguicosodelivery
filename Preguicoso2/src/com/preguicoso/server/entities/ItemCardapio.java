@@ -21,6 +21,15 @@ public class ItemCardapio {
 	Long id;
 	@Indexed
 	Long estabelecimentoId;
+
+	public Long getEstabelecimentoId() {
+		return estabelecimentoId;
+	}
+
+	public void setEstabelecimentoId(Long estabelecimentoId) {
+		this.estabelecimentoId = estabelecimentoId;
+	}
+
 	@Indexed
 	String categoria;
 	@Indexed

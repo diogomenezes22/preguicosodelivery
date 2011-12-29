@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.shared.entities.CategoriaBean;
 
 public class ItemCategoria extends Composite {
 
@@ -47,6 +48,17 @@ public class ItemCategoria extends Composite {
 			}
 		});
 	}
+	public ItemCategoria(CategoriaBean i) {
+		initWidget(uiBinder.createAndBindUi(this));
+		this.categoria.setText(i.getNome());
+		fechar.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				text.setVisible(false);
+				// categoria.setVisible(false);
+			}
+		});
+	}
 
 	final TextBox campo = new TextBox();
 
@@ -67,7 +79,7 @@ public class ItemCategoria extends Composite {
 					categoria.setText(campo.getText());
 					categoria.setVisible(true);
 					campo.setVisible(false);
-
+					
 				}
 			}
 		});

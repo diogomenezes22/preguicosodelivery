@@ -35,6 +35,8 @@
   <servlet-mapping>
     <servlet-name>cadastroServlet</servlet-name>
     <url-pattern>/preguicoso/cadastro</url-pattern>
+    <url-pattern>/preguicoso2/cadastro</url-pattern>
+    
   </servlet-mapping>
   
   
@@ -46,6 +48,8 @@
   <servlet-mapping>
 	   <servlet-name>cardapioServlet</servlet-name>
 	   <url-pattern>/preguicoso/cardapio</url-pattern>
+	   <url-pattern>/preguicoso2/cardapio</url-pattern>
+	   
   </servlet-mapping>
   
   <servlet>

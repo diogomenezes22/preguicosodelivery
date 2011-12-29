@@ -6,12 +6,23 @@
 			font-weight: bold;
 		}
 	</ui:style>
-		<g:HTMLPanel styleName="grid_3 coluna3 alpha omega">
-				<div class="container_barra">x</div>
-				<div class="container_coluna3">
-					<div class="container">
-						<h1>Editando Item2</h1>
+	<g:HTMLPanel styleName="grid_3 coluna3 alpha omega"
+		ui:field="item">
+		<div class="container_barra"><img src="img/salvar.png"/>x</div>
+			<div class="container_coluna3">
+				<div class="container">
+					<h1>Editando Item</h1>
+					<div class="imagem">
+						Foto item
 					</div>
+					<h3><label><g:TextBox ui:field="nome" text="Cerveja"/></label></h3>
+					<label>Número: <g:TextBox ui:field="numero" text="110"/></label>
+					<label>Preco:<g:TextBox ui:field="preco"/></label>
+					<label>Categoria: <g:ListBox ui:field="categoria"/></label>
+					<label>Descrição do item:<g:TextArea ui:field="descricao" text="nada"/></label>
+					<label class="check"><g:SimpleCheckBox ui:field="disponivel"/>Disponivel</label>
 				</div>
-		</g:HTMLPanel>
+			</div>
+			
+	</g:HTMLPanel>
 </ui:UiBinder> 

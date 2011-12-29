@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.shared.entities.ItemCardapioBean;
 
 public class ItemCardapioUI extends Composite {
 
@@ -32,7 +33,6 @@ public class ItemCardapioUI extends Composite {
 	public ItemCardapioUI() {
 		initWidget(uiBinder.createAndBindUi(this));
 		item.addClickHandler(new ClickHandler() {
-
 			@Override
 			public void onClick(ClickEvent event) {
 				Window.alert("abraao");
@@ -51,6 +51,22 @@ public class ItemCardapioUI extends Composite {
 			public void onClick(ClickEvent event) {
 				RootPanel.get("editarItem").clear();
 				RootPanel.get("editarItem").add(new EditarItem());
+
+			}
+		});
+	}
+
+	public ItemCardapioUI(final ItemCardapioBean i) {
+		initWidget(uiBinder.createAndBindUi(this));
+		this.nome.setText(i.getNome());
+		this.numero.setText(i.getId().toString());
+		this.preco.setText("R$ " + i.getPreco().toString());
+		item.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				RootPanel.get("editarItem").clear();
+				RootPanel.get("editarItem").add(new EditarItem(i));
 			}
 		});
 	}
