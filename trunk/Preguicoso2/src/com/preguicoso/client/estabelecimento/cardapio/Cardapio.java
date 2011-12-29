@@ -133,7 +133,6 @@ public class Cardapio extends Composite {
 					}
 
 				});
-
 	}
 
 	private HTMLPanel templateBotaoItemCardapio(final ItemCardapioBean i) {

@@ -30,10 +30,10 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 
 		ItemCardapioDAO itemDAO = new ItemCardapioDAO();
 		List<ItemCardapio> itens = itemDAO.listAll();
-
 		for (ItemCardapio i : itens) {
 			if (i != null) {
-				itensBeans.add(i.toBean());
+				if (i.getEstabelecimentoId().equals(id))
+					itensBeans.add(i.toBean());
 			}
 		}
 		return itensBeans;
@@ -114,7 +114,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 	public ArrayList<CategoriaBean> getCategorias(Long Estabelecimento) {
 		ArrayList<CategoriaBean> categorias = new ArrayList<CategoriaBean>();
 		ItemCardapioDAO itemDAO = new ItemCardapioDAO();
-		List<ItemCardapio> itens = itemDAO.listAll();
+		List<ItemCardapio> itens = itemDAO.listAll(); 
 		for (ItemCardapio i : itens) {
 			if (i != null) {
 				if (i.getEstabelecimento() != null)

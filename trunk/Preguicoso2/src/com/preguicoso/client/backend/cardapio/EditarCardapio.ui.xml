@@ -7,7 +7,7 @@
 		}
 	</ui:style>
 	<g:HTMLPanel>
-		<div class="grid_6 coluna2 alpha omega">
+		<div id="cardapio" class="grid_6 coluna2 alpha omega">
 			<h1>Editando Cardapio</h1>
 			<div class="container_coluna2">
 				<div class="coluna2_barra">

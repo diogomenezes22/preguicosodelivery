@@ -40,6 +40,8 @@ public class Backend extends Composite {
 
 	public Backend() {
 		initWidget(uiBinder.createAndBindUi(this));
+		if (History.getToken().equals(""))
+			History.newItem("pedidos/ordem");
 		createMenu();
 		inicio();
 		routerHistory();
@@ -78,7 +80,9 @@ public class Backend extends Composite {
 			container.add(new FecharBalanco());
 		} else if (token.startsWith("cardapio/editar")) {
 			container.clear();
-			container.add(new EditarCardapio());
+			EditarCardapio editar = new EditarCardapio();
+			container.add(editar);
+
 		} else if (token.startsWith("restaurante/editar")) {
 			container.clear();
 			container.add(new EditarInformacao());

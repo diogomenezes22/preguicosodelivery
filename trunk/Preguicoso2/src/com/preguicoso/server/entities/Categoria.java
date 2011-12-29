@@ -19,20 +19,35 @@ import com.preguicoso.shared.entities.CategoriaBean;
 @Unindexed
 public class Categoria implements Serializable {
 	@Id @Indexed String nome;
+	@Column Long estabelecimentoId;	
 	@Column Date dataRegistro;
 	@Column Date ultimaAtualizacao;
 
 	public Categoria(){
 
 	}
+	public Long getEstabelecimentoId() {
+		return estabelecimentoId;
+	}
+	public void setEstabelecimentoId(Long estabelecimentoId) {
+		this.estabelecimentoId = estabelecimentoId;
+	}
 	public Categoria(String nome){
 		this.nome = nome;
+	}
+	public Categoria(CategoriaBean i) {
+		setNome(i.getNome());
+		setDataRegistro(i.getDataRegistro());
+		setUltimaAtualizacao(i.getUltimaAtualizacao());
+		setEstabelecimentoId(i.getEstabelecimentoId());
 	}
 	public CategoriaBean toBean(){
 		CategoriaBean bean = new CategoriaBean();
 		bean.setNome(this.nome);
 		bean.setDataRegistro(this.dataRegistro);
 		bean.setUltimaAtualizacao(this.ultimaAtualizacao);
+		if(estabelecimentoId!=null)			
+			bean.setEstabelecimentoId(this.estabelecimentoId);
 		return bean;
 	}
 
