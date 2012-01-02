@@ -10,11 +10,21 @@
 		<div class="grid_6 coluna2 alpha omega">
 			<h1>Ordem de Pedidos</h1>
 			<div class="container_coluna2">
-				<div class="container">
-					a
+				<div class="coluna2_barra">
+					Pedidos Atuais
+				</div>
+				<div class="container_ordem_pedidos">
+					<g:HTMLPanel ui:field="listaPanel" styleName="lista" />
+				</div>
+				<div class="coluna2_barra">
+					Pedidos Realizados
+				</div>
+				<div class="container_ordem_pedidos">
+					<!-- <g:HTMLPanel ui:field="lista" styleName="lista" /> -->
 				</div>
 			</div>
 		</div>
+		<div id="editarItem"></div>
 		<div class="grid_3 coluna3 alpha omega">
 			<h1>Descrição do Pedidos</h1>
 			<div class="container_coluna3">
@@ -22,6 +32,6 @@
 					as
 				</div>
 			</div>
-		</div>		
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -4,7 +4,7 @@ body{
 	}
 	
 	.coluna1{
-		background-image:url(ìmg/background_coluna1.png);
+		background-image:url(ï¿½mg/background_coluna1.png);
 		height:100%;
 		width: 18.667% !important;
 	}
@@ -159,6 +159,13 @@ body{
 		margin-right:0px;
 		height: 95%;
 	}
+	
+	.coluna2 .container_coluna2 .container_ordem_pedidos{
+		background-color:#FFFFFF;
+		border-left:#B9A39E 1px solid;
+		margin-left:30px;
+		margin-right:15px;
+	}
 
 	.coluna2_barra{
 		background-image:url(img/background_barra.png);
@@ -244,6 +251,9 @@ body{
 	.lista{
 		
 	}
+	.lista .visualizada{
+		background-color: #CCC;
+	}
 	.lista small{
 		margin-left: -25px;
 		padding-bottom: 0px;
@@ -262,6 +272,7 @@ body{
 		margin-bottom: 5px;
 		display:inline-block;
 		cursor:pointer;
+		width: 200px;
 	}
 	.lista .lista_preco{
 		float:right;
@@ -272,6 +283,23 @@ body{
 		display:inline-block;
 		cursor:pointer;
 	}
+	.lista .lista_rua{
+		margin-left: 20px;
+		margin-top: 10px;
+		margin-bottom: 5px;
+		display:inline-block;
+		cursor:pointer;
+	}
+	.lista .lista_timestamp{
+		float:right;
+		margin-left: 60px;
+		margin-right: 30px;
+		margin-top: 10px;
+		margin-bottom: 5px;
+		display:inline-block;
+		cursor:pointer;
+	}
+	
 	.listaItems{
 		border-bottom: 1px solid #E9E2E0;
 	}

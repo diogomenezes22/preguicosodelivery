@@ -12,16 +12,24 @@ import com.googlecode.objectify.annotation.Indexed;
 import com.googlecode.objectify.annotation.Unindexed;
 import com.preguicoso.shared.entities.PaisBean;
 
-
 @Entity
 @Cached
 @Unindexed
 public class Pais implements Serializable {
 
-	@Id @Indexed String nome;
-	@Indexed String sigla;
-	@Column Date dataRegistro;
-	@Column Date ultimaAtualizacao;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8222864857054849340L;
+	@Id
+	@Indexed
+	String nome;
+	@Indexed
+	String sigla;
+	@Column
+	Date dataRegistro;
+	@Column
+	Date ultimaAtualizacao;
 
 	public Pais() {
 		this.nome = "";

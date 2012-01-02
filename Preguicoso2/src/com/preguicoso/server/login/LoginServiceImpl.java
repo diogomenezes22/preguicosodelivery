@@ -96,7 +96,6 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public Boolean save(UsuarioBean Usuario) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

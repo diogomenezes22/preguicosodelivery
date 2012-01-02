@@ -22,7 +22,6 @@ import com.preguicoso.server.entities.Usuario;
 /**
  * The server side implementation of the RPC service.
  */
-@SuppressWarnings("serial")
 public class DbGenerator {
 	Usuario usuario = new Usuario();
 	// DAO

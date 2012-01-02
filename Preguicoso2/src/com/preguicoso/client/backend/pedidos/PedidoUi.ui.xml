@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:FocusPanel ui:field="item">
+		<g:HTMLPanel styleName="listaItems">
+			<g:Image />
+			<g:InlineLabel ui:field="nomeCliente" styleName="lista_texto" />
+			<g:InlineLabel ui:field="rua" styleName="lista_rua" />
+			<g:InlineLabel ui:field="timestamp" styleName="lista_timestamp" />
+		</g:HTMLPanel>
+	</g:FocusPanel>
+</ui:UiBinder> 

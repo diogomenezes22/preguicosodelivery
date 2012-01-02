@@ -56,7 +56,7 @@ public class listaCategoria extends Composite {
 		//
 		// @Override
 		// public void onFailure(Throwable caught) {
-		// // TODO Auto-generated method stub
+		//
 		//
 		// }
 		// });

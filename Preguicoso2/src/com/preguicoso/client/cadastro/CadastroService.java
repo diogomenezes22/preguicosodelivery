@@ -1,11 +1,13 @@
 package com.preguicoso.client.cadastro;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
+import com.preguicoso.shared.entities.PedidoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
 
 /**
@@ -22,9 +24,11 @@ public interface CadastroService extends RemoteService {
 	public void updateUsuario(UsuarioBean a);
 
 	public UsuarioBean getUsuario(String email);
-	
+
 	public ArrayList<CategoriaBean> getCategoria(Long idEstabelecimento);
 
-	public void salvarCategoria(Long idEstabelecimento,CategoriaBean i);
+	public void salvarCategoria(Long idEstabelecimento, CategoriaBean i);
+
+	public List<PedidoBean> getListaDePedidos(Long idEstabelecimento);
 
 }
