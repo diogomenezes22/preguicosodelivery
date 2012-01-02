@@ -36,7 +36,7 @@ public class ItemCardapioBean implements Serializable {
 
 	public ItemCardapioBean(String nome, String tipo, boolean disponivel,
 			String descricao, Double preco, CategoriaBean categoriaBean,
-			EstabelecimentoBean estabelecimentoBean) {
+			Long estabelecimentoBean) {
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
@@ -44,7 +44,7 @@ public class ItemCardapioBean implements Serializable {
 		this.descricao = descricao;
 		this.preco = preco;
 		this.categoriaBean = categoriaBean;
-		// this.estabelecimentobean = estabelecimentoBean.getId();
+		this.estabelecimentobean = estabelecimentoBean;
 	}
 
 	public Long getId() {
@@ -58,7 +58,7 @@ public class ItemCardapioBean implements Serializable {
 	public boolean isDisponivel() {
 		return this.disponivel;
 	}
-
+	
 	public void setDisponivel(boolean disponivel) {
 		this.disponivel = disponivel;
 	}

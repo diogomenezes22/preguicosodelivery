@@ -33,7 +33,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		for (ItemCardapio i : itens) {
 			if (i != null) {
 				if (i.getEstabelecimentoId().equals(id))
-					itensBeans.add(i.toBean());
+					itensBeans.add(i.toBean()); 
 			}
 		}
 		return itensBeans;
@@ -119,7 +119,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 			if (i != null) {
 				if (i.getEstabelecimento() != null)
 					if (i.getEstabelecimento().getId().equals(Estabelecimento)) {
-						categorias.add(i.getCategoria().toBean());
+						categorias.add(new CategoriaBean(i.getCategoria()));
 					}
 			}
 		}

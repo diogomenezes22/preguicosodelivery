@@ -157,7 +157,6 @@ body{
 		border-left:#B9A39E 1px solid;
 		margin-left:30px;
 		margin-right:0px;
-		height: 95%;
 	}
 	
 	.coluna2 .container_coluna2 .container_ordem_pedidos{
@@ -356,6 +355,20 @@ body{
 	.container_barra img{
 		margin-right: 89%;
 		margin-top: 8px;
+		opacity: 0.4;
+		filter:alpha(opacity=40);
+		
+	}
+    .active{
+		margin-right: 89%;
+		margin-top: 8px;
+		-moz-box-shadow: 0px 1px 3px 0.5px #C5B3B0;
+		-webkit-box-shadow: 0px 1px 3px 0.5px #C5B3B0;
+		box-shadow: 0px 1px 3px 0.5px #C5B3B0;
+		opacity: 1 !important;
+		filter:alpha(opacity=100) !important;
+		cursor:pointer;
+		
 	}
 	.container .imagem{
 		width: 139px;

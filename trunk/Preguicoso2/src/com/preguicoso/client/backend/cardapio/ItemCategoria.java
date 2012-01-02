@@ -29,15 +29,18 @@ public class ItemCategoria extends Composite {
 	HTMLPanel text;
 	@UiField
 	Button fechar;
+	
+	Long idEstabelecimento;
 
 	interface ItemCategoriaUiBinder extends UiBinder<Widget, ItemCategoria> {
 	}
+	
 
 	public ItemCategoria() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	public ItemCategoria(String categorial) {
+	public ItemCategoria(String categorial, Long idEstabelecimento) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.categoria.setText(categorial);
 		fechar.addClickHandler(new ClickHandler() {
@@ -82,6 +85,7 @@ public class ItemCategoria extends Composite {
 					
 				}
 			}
+			
 		});
 		campo.addKeyPressHandler(new KeyPressHandler() {
 
@@ -93,10 +97,15 @@ public class ItemCategoria extends Composite {
 						categoria.setText(campo.getText());
 						categoria.setVisible(true);
 						campo.setVisible(false);
+					
 					}
 				}
 			}
 		});
 
+	}
+	
+	public String getName(){
+		return categoria.getText();
 	}
 }

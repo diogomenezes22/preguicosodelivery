@@ -8,17 +8,18 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<div id="cardapio" class="grid_6 coluna2 alpha omega">
-			<h1>Editando Cardapio</h1>
-			<div class="container_coluna2">
+			<h1>Editando Cardapio</h1> 
+			<div class="container_coluna2"> 
 				<div class="coluna2_barra">
 				<g:Button ui:field="itemButton" styleName="">+Item</g:Button><g:Button ui:field="itemCategoria" styleName="">+Categoria</g:Button>
-				
+				<g:Button text="atualizar" styleName="" ui:field="atualizar"/>
 				</div>
 				<div class="container">
+					<g:HTMLPanel ui:field="listaNovos" styleName="lista"/>
 					<g:HTMLPanel ui:field="lista" styleName="lista"/>
 				</div>
 			</div>
 		</div>
-		<div id="editarItem"></div>		
+		<div id="editarItem"></div>	
 	</g:HTMLPanel>
 </ui:UiBinder> 

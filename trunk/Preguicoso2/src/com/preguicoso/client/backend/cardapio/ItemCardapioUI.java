@@ -1,5 +1,7 @@
 package com.preguicoso.client.backend.cardapio;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -40,7 +42,7 @@ public class ItemCardapioUI extends Composite {
 		});
 	}
 
-	public ItemCardapioUI(String numero, String nome, String preco) {
+	public ItemCardapioUI(String numero, String nome, String preco, ArrayList<ItemCategoria> listaCategoria) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.nome.setText(nome);
 		this.numero.setText(numero);
@@ -56,17 +58,20 @@ public class ItemCardapioUI extends Composite {
 		});
 	}
 
-	public ItemCardapioUI(final ItemCardapioBean i) {
+	public ItemCardapioUI(final ItemCardapioBean i ,final ArrayList<ItemCategoria> listaCategoria) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.nome.setText(i.getNome());
-		this.numero.setText(i.getId().toString());
+		if(i.getId()!=null)
+			this.numero.setText(i.getId().toString());
+		else
+			this.numero.setVisible(false);
 		this.preco.setText("R$ " + i.getPreco().toString());
 		item.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				RootPanel.get("editarItem").clear();
-				RootPanel.get("editarItem").add(new EditarItem(i));
+				RootPanel.get("editarItem").add(new EditarItem(i,listaCategoria));
 			}
 		});
 	}

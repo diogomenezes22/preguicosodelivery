@@ -9,8 +9,8 @@ import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Indexed;
 import com.googlecode.objectify.annotation.Unindexed;
-import com.preguicoso.server.dao.CategoriaDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
+import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 
 @Entity
@@ -21,15 +21,6 @@ public class ItemCardapio {
 	Long id;
 	@Indexed
 	Long estabelecimentoId;
-
-	public Long getEstabelecimentoId() {
-		return estabelecimentoId;
-	}
-
-	public void setEstabelecimentoId(Long estabelecimentoId) {
-		this.estabelecimentoId = estabelecimentoId;
-	}
-
 	@Indexed
 	String categoria;
 	@Indexed
@@ -59,6 +50,13 @@ public class ItemCardapio {
 		this.descricao = "";
 		this.preco = 0.0;
 	}
+	public Long getEstabelecimentoId() {
+		return estabelecimentoId;
+	}
+
+	public void setEstabelecimentoId(Long estabelecimentoId) {
+		this.estabelecimentoId = estabelecimentoId;
+	}
 
 	public ItemCardapio(String nome, String tipo, Boolean disponivel,
 			String descricao, Double preco, Estabelecimento estabelecimento,
@@ -72,6 +70,16 @@ public class ItemCardapio {
 		this.categoria = categoria.getNome();
 	}
 
+	public ItemCardapio(ItemCardapioBean i) {
+		this.nome = i.getNome();
+		this.tipo = i.getTipo();
+		this.disponivel = i.isDisponivel();
+		this.descricao = i.getDescricao();
+		this.preco = i.getPreco();
+		this.estabelecimentoId = i.getEstabelecimentoBean();
+		this.categoria = i.getCategoriaBean().getNome();
+	}
+
 	public ItemCardapioBean toBean() {
 		ItemCardapioBean bean = new ItemCardapioBean();
 		bean.setId(this.id);
@@ -79,7 +87,7 @@ public class ItemCardapio {
 		bean.setNome(this.nome);
 		bean.setPreco(this.preco);
 		bean.setTipo(this.tipo);
-		bean.setCategoriaBean(this.getCategoria().toBean());
+		bean.setCategoriaBean(new CategoriaBean(getCategoria()));
 		bean.setEstabelecimentoBean(this.estabelecimentoId);
 		bean.setDataRegistro(this.dataRegistro);
 		bean.setUltimaAtualizacao(this.ultimaAtualizacao);
@@ -144,8 +152,7 @@ public class ItemCardapio {
 		this.estabelecimentoId = estabelecimento.getId();
 	}
 
-	public Categoria getCategoria() {
-		Categoria categoria = (new CategoriaDAO()).retrieve(this.categoria);
+	public String getCategoria() {
 		return categoria;
 	}
 

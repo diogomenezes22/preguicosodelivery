@@ -8,7 +8,7 @@
 	</ui:style>
 	<g:HTMLPanel styleName="grid_3 coluna3 alpha omega"
 		ui:field="item">
-		<div class="container_barra"><img src="img/salvar.png"/>x</div>
+		<div class="container_barra"><g:Image ui:field="salvar" url="img/salvar.png"/>x</div>
 			<div class="container_coluna3">
 				<div class="container">
 					<h1>Editando Item</h1>
@@ -23,6 +23,7 @@
 					<label class="check"><g:SimpleCheckBox ui:field="disponivel"/>Disponivel</label>
 				</div>
 			</div>
+			
 			
 	</g:HTMLPanel>
 </ui:UiBinder> 
