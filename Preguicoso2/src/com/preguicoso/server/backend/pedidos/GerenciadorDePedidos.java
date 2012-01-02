@@ -1,10 +1,12 @@
 package com.preguicoso.server.backend.pedidos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.server.dao.PedidoDAO;
 import com.preguicoso.server.entities.Pedido;
+import com.preguicoso.shared.entities.ItemCardapioBean;
 
 public class GerenciadorDePedidos extends RemoteServiceServlet {
 
@@ -31,25 +33,26 @@ public class GerenciadorDePedidos extends RemoteServiceServlet {
 		PedidoDAO dao = new PedidoDAO();
 		Pedido p = new Pedido();
 		p.setIdEstabelecimento(idEstabelecimento);
-		p.setNomeCliente("Abraham Kebratodas Lacerda");
+		p.setNomeCliente("Cururu Verde");
 		p.setRua("Rua Filgueiras Lima 189");
 		p.setFormaPagamento("Cartão Crédito");
-		// List<ItemCardapio> listaItens = new ArrayList<ItemCardapio>();
-		// ItemCardapio item = new ItemCardapio();
-		// item.setNome("Maracujá");
-		// listaItens.add(item);
-		// item = new ItemCardapio();
-		// item.setNome("Caju");
-		// listaItens.add(item);
-		// item = new ItemCardapio();
-		// item.setNome("Goiaba");
-		// listaItens.add(item);
-		// p.setListaItens(listaItens);
+
+		List<ItemCardapioBean> listaItens = new ArrayList<ItemCardapioBean>();
+		ItemCardapioBean item = new ItemCardapioBean();
+		item.setNome("Maracujá");
+		listaItens.add(item);
+		item = new ItemCardapioBean();
+		item.setNome("Caju");
+		listaItens.add(item);
+		item = new ItemCardapioBean();
+		item.setNome("Goiaba");
+		listaItens.add(item);
+		p.setListaItensJSON(listaItens);
 		dao.create(p);
 
 		p = new Pedido();
 		p.setIdEstabelecimento(idEstabelecimento);
-		p.setNomeCliente("Battata das Quantas");
+		p.setNomeCliente("Chines Americano");
 		p.setRua("Rua H8A 141");
 		p.setFormaPagamento("Cartão Débito");
 		// listaItens = new ArrayList<ItemCardapio>();
@@ -67,7 +70,7 @@ public class GerenciadorDePedidos extends RemoteServiceServlet {
 
 		p = new Pedido();
 		p.setIdEstabelecimento(idEstabelecimento);
-		p.setNomeCliente("Carlos Lemos");
+		p.setNomeCliente("Cantor Jovem");
 		p.setRua("Rua SA benevides 2355");
 		p.setFormaPagamento("Dinheiro");
 		// listaItens = new ArrayList<ItemCardapio>();

@@ -3,16 +3,21 @@ package com.preguicoso.client.checkout;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
+import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
 
 public class Checkout extends Composite {
 
@@ -41,6 +46,9 @@ public class Checkout extends Composite {
 	@UiField
 	RadioButton pagseguro;
 
+	private final CardapioServiceAsync cardapioService = GWT
+			.create(CardapioService.class);
+
 	interface CheckoutUiBinder extends UiBinder<Widget, Checkout> {
 	}
 
@@ -48,7 +56,27 @@ public class Checkout extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		enderecoBox.setVisible(false);
 		loginBox.setVisible(false);
-		pedir.setEnabled(false);
+		pedir.setEnabled(true);
+		pedir.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent arg0) {
+				cardapioService.enviarPedido("Enviador",
+						"Rua Banco Funcionando 123", "Roubando",
+						new AsyncCallback<Void>() {
+
+							@Override
+							public void onSuccess(Void arg0) {
+								Window.alert("Pedido enviado com sucesso!");
+							}
+
+							@Override
+							public void onFailure(Throwable arg0) {
+								Window.alert("Erro no Envio do pedido");
+							}
+						});
+			}
+		});
 	}
 
 	public void testarEnvio() {

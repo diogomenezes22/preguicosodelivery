@@ -21,7 +21,7 @@ public interface CadastroService extends RemoteService {
 	public EstabelecimentoBean getEstabelecimento(long id);
 
 	public void salvarUsuario(UsuarioBean a);
-	
+
 	void salvarItemCardapio(ItemCardapioBean i);
 
 	public void updateUsuario(UsuarioBean a);

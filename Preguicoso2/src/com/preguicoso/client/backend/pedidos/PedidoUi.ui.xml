@@ -9,7 +9,7 @@
 	<g:FocusPanel ui:field="item">
 		<g:HTMLPanel styleName="listaItems">
 			<g:Image />
-			<g:InlineLabel ui:field="nomeCliente" styleName="lista_texto" />
+			<g:InlineLabel ui:field="nomeCliente" styleName="lista_nome_cliente" />
 			<g:InlineLabel ui:field="rua" styleName="lista_rua" />
 			<g:InlineLabel ui:field="timestamp" styleName="lista_timestamp" />
 		</g:HTMLPanel>

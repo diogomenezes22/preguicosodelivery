@@ -8,6 +8,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+import com.google.appengine.repackaged.org.json.JSONArray;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
 import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Unindexed;
@@ -34,9 +37,12 @@ public class Pedido implements Serializable {
 	String rua;
 	@Column
 	String formaPagamento;
-	List<ItemCardapio> listaItens;
 	@Column
 	Date timeStamp;
+	@Column
+	String bairro;
+
+	String listaItensJSON;
 
 	public PedidoBean toBean() {
 		PedidoBean pb = new PedidoBean();
@@ -45,12 +51,25 @@ public class Pedido implements Serializable {
 		pb.setRua(this.rua);
 		pb.setFormaPagamento(this.formaPagamento);
 		pb.setTimeStamp(this.timeStamp);
-		List<ItemCardapioBean> listaItensBean = new ArrayList<ItemCardapioBean>();
-		if (listaItens != null) {
-			for (ItemCardapio item : this.listaItens) {
-				listaItensBean.add(item.toBean());
+		pb.setBairro(this.bairro);
+
+		try {
+			if (listaItensJSON != null) {
+				JSONArray ja = new JSONArray(listaItensJSON);
+				List<ItemCardapioBean> listaRec = new ArrayList<ItemCardapioBean>();
+				JSONObject jo;
+				for (int i = 0; i < ja.length(); i++) {
+					jo = new JSONObject(ja.get(i).toString());
+					ItemCardapioBean item = new ItemCardapioBean();
+					item.setId(jo.getLong("id"));
+					item.setNumero(jo.getInt("numero"));
+					item.setNome(jo.getString("nome"));
+					listaRec.add(item);
+				}
+				pb.setListaItens(listaRec);
 			}
-			pb.setListaItens(listaItensBean);
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 		return pb;
 	}
@@ -95,14 +114,6 @@ public class Pedido implements Serializable {
 		this.formaPagamento = formaPagamento;
 	}
 
-	public List<ItemCardapio> getListaItens() {
-		return listaItens;
-	}
-
-	public void setListaItens(List<ItemCardapio> listaItens) {
-		this.listaItens = listaItens;
-	}
-
 	public Date getTimeStamp() {
 		return timeStamp;
 	}
@@ -111,10 +122,39 @@ public class Pedido implements Serializable {
 		this.timeStamp = timeStamp;
 	}
 
+	public String getListaItensJSON() {
+		return listaItensJSON;
+	}
+
+	public void setListaItensJSON(List<ItemCardapioBean> lista) {
+		List<JSONObject> listaJSON = new ArrayList<JSONObject>();
+		JSONObject jo;
+		for (ItemCardapioBean item : lista) {
+			jo = new JSONObject(item);
+			listaJSON.add(jo);
+		}
+
+		JSONArray ja = new JSONArray(lista);
+		this.listaItensJSON = ja.toString();
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public void setListaItensJSON(String listaItensJSON) {
+		this.listaItensJSON = listaItensJSON;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
 		result = prime * result
 				+ ((formaPagamento == null) ? 0 : formaPagamento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -123,7 +163,7 @@ public class Pedido implements Serializable {
 				+ ((idEstabelecimento == null) ? 0 : idEstabelecimento
 						.hashCode());
 		result = prime * result
-				+ ((listaItens == null) ? 0 : listaItens.hashCode());
+				+ ((listaItensJSON == null) ? 0 : listaItensJSON.hashCode());
 		result = prime * result
 				+ ((nomeCliente == null) ? 0 : nomeCliente.hashCode());
 		result = prime * result + ((rua == null) ? 0 : rua.hashCode());
@@ -141,6 +181,11 @@ public class Pedido implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Pedido other = (Pedido) obj;
+		if (bairro == null) {
+			if (other.bairro != null)
+				return false;
+		} else if (!bairro.equals(other.bairro))
+			return false;
 		if (formaPagamento == null) {
 			if (other.formaPagamento != null)
 				return false;
@@ -156,10 +201,10 @@ public class Pedido implements Serializable {
 				return false;
 		} else if (!idEstabelecimento.equals(other.idEstabelecimento))
 			return false;
-		if (listaItens == null) {
-			if (other.listaItens != null)
+		if (listaItensJSON == null) {
+			if (other.listaItensJSON != null)
 				return false;
-		} else if (!listaItens.equals(other.listaItens))
+		} else if (!listaItensJSON.equals(other.listaItensJSON))
 			return false;
 		if (nomeCliente == null) {
 			if (other.nomeCliente != null)
