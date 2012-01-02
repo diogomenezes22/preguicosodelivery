@@ -19,7 +19,7 @@ public class CategoriaDAO extends DAOBase {
 
 		c.setUltimaAtualizacao(Calendar.getInstance().getTime());
 		c.setDataRegistro(Calendar.getInstance().getTime());
-		this.ofy().put(c);
+		this.ofy().put(c);	
 	}
 
 	public Categoria retrieve(String nome) {

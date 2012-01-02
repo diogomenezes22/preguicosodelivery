@@ -58,14 +58,14 @@ public class Lista extends Composite {
 		this.listaEstabelecimento.add(new Label("Flag."));
 		/*;
 		if (cep.length() == 0) {
-			this.info.add(new Label("N‹o foram encontrados resultados para o seu cep."));
+			this.info.add(new Label("Nï¿½o foram encontrados resultados para o seu cep."));
 		} else {
 			this.listaService.getEstabelecimentoPorCep(cep, new AsyncCallback<ArrayList<EstabelecimentoBean>>() {
 
 				@Override
 				public void onFailure(Throwable caught) {
 					Window.alert("Couldn't get required data");
-					Lista.this.info.add(new Label("N‹o foram encontrados resultados para o seu cep."));
+					Lista.this.info.add(new Label("Nï¿½o foram encontrados resultados para o seu cep."));
 				}
 
 				@Override

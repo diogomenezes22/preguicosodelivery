@@ -20,7 +20,7 @@ public class ListaServiceImpl extends RemoteServiceServlet implements ListaServi
 	@Override
 	public ArrayList<EstabelecimentoBean> getListaEstabelecimento() {
 		/*
-		Estabelecimento novo = new Estabelecimento("AbraaoViad‹o", "Abra‹o", "123132123");
+		Estabelecimento novo = new Estabelecimento("AbraaoViadï¿½o", "Abraï¿½o", "123132123");
 		(new EstabelecimentoDAO()).create(novo);
 		 */
 		ArrayList<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
