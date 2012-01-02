@@ -1,6 +1,7 @@
 package com.preguicoso.server.busca;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,7 +13,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.server.carrinho.CarrinhoDeCompra;
 import com.preguicoso.server.dao.ItemCardapioDAO;
+import com.preguicoso.server.dao.PedidoDAO;
 import com.preguicoso.server.entities.ItemCardapio;
+import com.preguicoso.server.entities.Pedido;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 
@@ -114,7 +117,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 	public ArrayList<CategoriaBean> getCategorias(Long Estabelecimento) {
 		ArrayList<CategoriaBean> categorias = new ArrayList<CategoriaBean>();
 		ItemCardapioDAO itemDAO = new ItemCardapioDAO();
-		List<ItemCardapio> itens = itemDAO.listAll(); 
+		List<ItemCardapio> itens = itemDAO.listAll();
 		for (ItemCardapio i : itens) {
 			if (i != null) {
 				if (i.getEstabelecimento() != null)
@@ -126,4 +129,21 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		return categorias;
 
 	}
+
+	@Override
+	public void enviarPedido(String nomeCliente, String rua,
+			String formaPagamento) {
+		Pedido p = new Pedido();
+		p.setFormaPagamento(formaPagamento);
+		ArrayList<ItemCardapioBean> listaItens = getCarrinho();
+		p.setIdEstabelecimento(listaItens.get(0).getEstabelecimentoBean());
+		p.setListaItensJSON(listaItens);
+		p.setNomeCliente(nomeCliente);
+		p.setRua(rua);
+		p.setTimeStamp(new Date());
+
+		PedidoDAO pdao = new PedidoDAO();
+		pdao.create(p);
+	}
+
 }

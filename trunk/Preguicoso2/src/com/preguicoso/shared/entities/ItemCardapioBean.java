@@ -11,6 +11,7 @@ public class ItemCardapioBean implements Serializable {
 	private static final long serialVersionUID = 1490509717013671633L;
 
 	private Long id;
+	private int numero;
 	private String nome;
 	private String tipo;
 	private boolean disponivel;
@@ -144,5 +145,13 @@ public class ItemCardapioBean implements Serializable {
 	public int getQuantidade() {
 		return this.quantidade;
 
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 }

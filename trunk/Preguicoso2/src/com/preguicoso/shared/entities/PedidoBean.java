@@ -16,6 +16,15 @@ public class PedidoBean implements Serializable {
 	private String formaPagamento;
 	private List<ItemCardapioBean> listaItens;
 	private Date timeStamp;
+	private String bairro;
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 
 	public Long getIdEstabelecimento() {
 		return idEstabelecimento;

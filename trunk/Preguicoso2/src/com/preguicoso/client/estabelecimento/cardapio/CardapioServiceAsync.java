@@ -18,4 +18,8 @@ public interface CardapioServiceAsync {
 	void removeItem(ItemCardapioBean i, AsyncCallback<Void> callback);
 
 	void getCategorias(Long id, AsyncCallback<ArrayList<CategoriaBean>> callback);
+
+	void enviarPedido(String nomeCliente, String rua, String formaPagamento,
+			AsyncCallback<Void> callback);
+
 }

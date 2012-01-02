@@ -79,11 +79,17 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 //		 GerenciadorDePedidos(idEstabelecimento);
 //		 gp.gerarPedidosDeExemplo();
 
-		List<PedidoBean> lista = new ArrayList<PedidoBean>();
-		for (Pedido p : (new PedidoDAO()).listByTimeStamp(idEstabelecimento)) {
-			lista.add(p.toBean());
+		List<Pedido> lista = (new PedidoDAO())
+				.listByTimeStamp(idEstabelecimento);
+		List<PedidoBean> listaBean = new ArrayList<PedidoBean>();
+		if (lista != null) {
+			for (Pedido p : lista) {
+				// TODO @Osman testando p.toBean APAGAR
+				p.toBean();
+				listaBean.add(p.toBean());
+			}
 		}
-		return lista;
+		return listaBean;
 	}
 
 	@Override

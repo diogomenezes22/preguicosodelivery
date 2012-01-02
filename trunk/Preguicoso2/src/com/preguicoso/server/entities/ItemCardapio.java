@@ -21,6 +21,8 @@ public class ItemCardapio {
 	Long id;
 	@Indexed
 	Long estabelecimentoId;
+	@Column
+	int numero;
 	@Indexed
 	String categoria;
 	@Indexed
@@ -190,6 +192,26 @@ public class ItemCardapio {
 
 	public int getQuantidade() {
 		return this.quantidade;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public Boolean getDisponivel() {
+		return disponivel;
+	}
+
+	public void setDisponivel(Boolean disponivel) {
+		this.disponivel = disponivel;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 }

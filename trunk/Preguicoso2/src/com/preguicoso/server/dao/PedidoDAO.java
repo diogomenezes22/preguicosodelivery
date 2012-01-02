@@ -1,6 +1,5 @@
 package com.preguicoso.server.dao;
 
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -15,11 +14,6 @@ public class PedidoDAO extends DAOBase {
 	}
 
 	public void create(Pedido p) {
-		p.setNomeCliente(p.getNomeCliente());
-		p.setRua(p.getRua());
-		p.setFormaPagamento(p.getFormaPagamento());
-		p.setTimeStamp(Calendar.getInstance().getTime());
-		p.setListaItens(p.getListaItens());
 		this.ofy().put(p);
 	}
 
@@ -40,6 +34,7 @@ public class PedidoDAO extends DAOBase {
 		// restaurante
 		List<Pedido> lista = this.ofy().query(Pedido.class).list();
 		// .filter("idEstabelecimento", idEstabelecimento).list();
+
 		Collections.sort(lista, new Comparator<Pedido>() {
 
 			@Override
@@ -50,6 +45,7 @@ public class PedidoDAO extends DAOBase {
 			}
 
 		});
+
 		return lista;
 	}
 }
