@@ -40,8 +40,8 @@ public class Filtro extends Composite {
 						for (CategoriaBean categoriaBean : result) {
 							campos.put(categoriaBean, 1);
 						}
-						ArrayList<CategoriaBean> lista = new ArrayList(campos
-								.keySet());
+						ArrayList<CategoriaBean> lista = new ArrayList<CategoriaBean>(
+								campos.keySet());
 						for (CategoriaBean categoriaBean2 : lista) {
 							filtro.add(new CheckFiltro(categoriaBean2.getNome()));
 						}

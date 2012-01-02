@@ -49,13 +49,11 @@ public class FieldVerifier {
 	}
 
 	public static boolean isValidCNPJ(String text) {
-		// TODO Auto-generated method stub
 		// return text.matches("[0-9]{1}?\\.[0-9]{3}?\\.[0-9]{3}?");
 		return true;
 	}
 
 	public static boolean isValidCEP(String text) {
-		// TODO Auto-generated method stub
 		// return text.matches("[0-9]{1}?\\.[0-9]{3}?\\.[0-9]{3}?");
 		return text.matches("^\\d{5,5}-?\\d{3,3}$");
 	}

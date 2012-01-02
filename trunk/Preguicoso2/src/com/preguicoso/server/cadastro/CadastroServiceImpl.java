@@ -1,6 +1,7 @@
 package com.preguicoso.server.cadastro;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -8,13 +9,16 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.server.dao.CategoriaDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
+import com.preguicoso.server.dao.PedidoDAO;
 import com.preguicoso.server.dao.UsuarioDAO;
 import com.preguicoso.server.dbgenerator.DbGenerator;
 import com.preguicoso.server.entities.Categoria;
 import com.preguicoso.server.entities.Estabelecimento;
+import com.preguicoso.server.entities.Pedido;
 import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
+import com.preguicoso.shared.entities.PedidoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
 
 /**
@@ -66,11 +70,25 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
+	public List<PedidoBean> getListaDePedidos(Long idEstabelecimento) {
+		// TODO @Osman: Apagar depois. Gera pedidos.
+		// GerenciadorDePedidos gp = new
+		// GerenciadorDePedidos(idEstabelecimento);
+		// gp.gerarPedidosDeExemplo();
+
+		List<PedidoBean> lista = new ArrayList<PedidoBean>();
+		for (Pedido p : (new PedidoDAO()).listByTimeStamp(idEstabelecimento)) {
+			lista.add(p.toBean());
+		}
+		return lista;
+	}
+
+	@Override
 	public ArrayList<CategoriaBean> getCategoria(Long idEstabelecimento) {
 		ArrayList<CategoriaBean> lista = new ArrayList<CategoriaBean>();
 		for (Categoria categoria : (new CategoriaDAO()).listAll()) {
-			if(categoria.getEstabelecimentoId()==null)
-				if(categoria.getEstabelecimentoId().equals(idEstabelecimento)){
+			if (categoria.getEstabelecimentoId() == null)
+				if (categoria.getEstabelecimentoId().equals(idEstabelecimento)) {
 					lista.add(categoria.toBean());
 				}
 		}
@@ -83,5 +101,5 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 		Categoria e = new Categoria(i);
 		banco.create(e);
 	}
-	
+
 }
