@@ -36,7 +36,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		for (ItemCardapio i : itens) {
 			if (i != null) {
 				if (i.getEstabelecimentoId().equals(id))
-					itensBeans.add(i.toBean()); 
+					itensBeans.add(i.toBean());
 			}
 		}
 		return itensBeans;
@@ -131,7 +131,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public void enviarPedido(String nomeCliente, String rua,
+	public void enviarPedido(String nomeCliente, String rua, String bairro,
 			String formaPagamento) {
 		Pedido p = new Pedido();
 		p.setFormaPagamento(formaPagamento);
@@ -140,6 +140,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		p.setListaItensJSON(listaItens);
 		p.setNomeCliente(nomeCliente);
 		p.setRua(rua);
+		p.setBairro(bairro);
 		p.setTimeStamp(new Date());
 
 		PedidoDAO pdao = new PedidoDAO();

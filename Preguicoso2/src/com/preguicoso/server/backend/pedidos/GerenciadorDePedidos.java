@@ -25,7 +25,7 @@ public class GerenciadorDePedidos extends RemoteServiceServlet {
 	}
 
 	public List<Pedido> getListaDePedidos() {
-		return dao.listByTimeStamp(idEstabelecimento);
+		return dao.listByBairroTimeStamp(idEstabelecimento);
 	}
 
 	// TODO @Osman: Apagar esse método depois. Utilizado para gerar o banco
