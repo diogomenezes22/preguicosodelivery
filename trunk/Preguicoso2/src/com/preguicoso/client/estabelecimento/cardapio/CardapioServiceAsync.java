@@ -19,7 +19,7 @@ public interface CardapioServiceAsync {
 
 	void getCategorias(Long id, AsyncCallback<ArrayList<CategoriaBean>> callback);
 
-	void enviarPedido(String nomeCliente, String rua, String formaPagamento,
-			AsyncCallback<Void> callback);
+	void enviarPedido(String nomeCliente, String rua, String bairro,
+			String formaPagamento, AsyncCallback<Void> callback);
 
 }

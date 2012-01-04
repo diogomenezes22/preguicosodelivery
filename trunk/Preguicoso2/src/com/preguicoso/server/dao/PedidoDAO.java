@@ -29,7 +29,7 @@ public class PedidoDAO extends DAOBase {
 		this.ofy().delete(p);
 	}
 
-	public List<Pedido> listByTimeStamp(Long idEstabelecimento) {
+	public List<Pedido> listByBairroTimeStamp(Long idEstabelecimento) {
 		// TODO @Osman: fazer o filtro pra associar os pedidos a algum
 		// restaurante
 		List<Pedido> lista = this.ofy().query(Pedido.class).list();
@@ -39,9 +39,14 @@ public class PedidoDAO extends DAOBase {
 
 			@Override
 			public int compare(Pedido o1, Pedido o2) {
-				if (o1.getTimeStamp().compareTo(o2.getTimeStamp()) > 1)
-					return -1;
-				return 1;
+				if (o1.getBairro().compareTo(o2.getBairro()) > 1) {
+					return 1;
+				} else if (o1.getBairro().equals(o2.getBairro())) {
+					if (o1.getTimeStamp().compareTo(o2.getTimeStamp()) > 1)
+						return -1;
+					return 1;
+				}
+				return -1;
 			}
 
 		});

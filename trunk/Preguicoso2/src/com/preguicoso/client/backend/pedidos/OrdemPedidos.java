@@ -30,8 +30,6 @@ public class OrdemPedidos extends Composite {
 
 	public OrdemPedidos() {
 		initWidget(uiBinder.createAndBindUi(this));
-		BairroUi bu = new BairroUi("Jardim América");
-		listaPanel.add(bu);
 		cadastroService.getListaDePedidos((long) 385,
 				new AsyncCallback<List<PedidoBean>>() {
 
@@ -43,7 +41,14 @@ public class OrdemPedidos extends Composite {
 					@Override
 					public void onSuccess(List<PedidoBean> result) {
 						PedidoUi pu;
+						BairroUi bu;
+						String bairroAtual = "";
 						for (PedidoBean pb : result) {
+							if (!pb.getBairro().equals(bairroAtual)) {
+								bu = new BairroUi(pb.getBairro());
+								listaPanel.add(bu);
+								bairroAtual = pb.getBairro();
+							}
 							pu = new PedidoUi(pb);
 							listaPanel.add(pu);
 						}

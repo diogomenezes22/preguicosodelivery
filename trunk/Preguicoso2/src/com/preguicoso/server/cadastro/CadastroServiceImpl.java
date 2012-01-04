@@ -80,7 +80,7 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 //		 gp.gerarPedidosDeExemplo();
 
 		List<Pedido> lista = (new PedidoDAO())
-				.listByTimeStamp(idEstabelecimento);
+				.listByBairroTimeStamp(idEstabelecimento);
 		List<PedidoBean> listaBean = new ArrayList<PedidoBean>();
 		if (lista != null) {
 			for (Pedido p : lista) {
