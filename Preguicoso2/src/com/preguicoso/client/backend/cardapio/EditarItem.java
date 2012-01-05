@@ -70,7 +70,7 @@ public class EditarItem extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				if(flag){
-					Window.alert("Deu merda"+ flag);
+					Window.alert("Item Salvo com sucesso. Basta atualizar a lista");
 					salvar.setStyleName("");
 					flag = false;
 					cadastroService.salvarItemCardapio(i, new AsyncCallback<Void>() {
@@ -81,7 +81,7 @@ public class EditarItem extends Composite {
 						@Override
 						public void onFailure(Throwable caught) {
 							//TODO Colocar um handler do erro
-							Window.alert("asdasdasdasdasd");
+							Window.alert("Houve algum problema para salvar o item");
 							
 						}
 					});

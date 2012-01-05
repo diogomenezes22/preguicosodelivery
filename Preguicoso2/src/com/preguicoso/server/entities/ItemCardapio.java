@@ -73,6 +73,8 @@ public class ItemCardapio {
 	}
 
 	public ItemCardapio(ItemCardapioBean i) {
+		if(i.getId()!=null)
+			this.id = i.getId();
 		this.nome = i.getNome();
 		this.tipo = i.getTipo();
 		this.disponivel = i.isDisponivel();

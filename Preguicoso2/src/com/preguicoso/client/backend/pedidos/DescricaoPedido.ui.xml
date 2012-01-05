@@ -1,0 +1,102 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="grid_3 coluna3 alpha omega"	ui:field="item">
+		<div class="container_barra"><g:Image ui:field="salvar" url="img/salvar.png"/>x</div>
+			<div class="container_coluna3">
+				<div class="container">
+					<h1>Descrição do pedido</h1>
+					<h4>Pedido: <g:InlineLabel ui:field="numero"/></h4>
+					<h2>Lista de Pedidos</h2>
+					<g:HTMLPanel ui:field="pedidos">
+						<table>
+						<tr class="head">
+								<th>
+									No
+								</th>
+								<th>
+									Item
+								</th>
+								<th>
+									Observação
+								</th>
+								<th>
+									Qtd
+								</th>
+						</tr>
+					</table>
+					</g:HTMLPanel>
+					<table>
+						<tr class="head">
+								<th>
+									No
+								</th>
+								<th>
+									Item
+								</th>
+								<th>
+									Observação
+								</th>
+								<th>
+									Qtd
+								</th>
+						</tr>
+						
+						<tr class="odd">
+							<td>123
+							</td>
+							<td>
+								Item
+							</td>
+							<td>
+								Observação do item
+							</td>
+							<td>
+								3
+							</td>
+						</tr>
+						<tr>
+							<td>123
+							</td>
+							<td>
+								Item
+							</td>
+							<td>
+								Observação do itemkj askdjnasndajskn dkasdkjasndkn askjdnaskmd aksd akjsndk
+							</td>
+							<td>
+								3
+							</td>
+						</tr>
+						<tr class="odd">
+							<td>123
+							</td>
+							<td>
+								Item
+							</td>
+							<td>
+								Observação do item
+							</td>
+							<td>
+								3
+							</td>
+						</tr>
+					</table>
+					<h4>Endereço de Entrega:</h4>
+						<h3><g:InlineLabel ui:field="endereco"/></h3>
+					<h4>Forma de Pagamento:</h4>
+						<h3><g:InlineLabel ui:field="formaPagamento"/></h3>
+					
+				</div>
+			</div>
+			
+			
+			
+			
+	</g:HTMLPanel>
+</ui:UiBinder> 
