@@ -1,5 +1,6 @@
 package com.preguicoso.server.dao;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -17,6 +18,21 @@ public class PedidoDAO extends DAOBase {
 		this.ofy().put(p);
 	}
 
+	public void update(Pedido p) {
+		System.out.println(p.getId() + ">>>>" + p.getVisto());
+		this.ofy().put(p);
+	}
+
+	public Pedido retrieve(Long idPedido) {
+		try {
+			Pedido p = this.ofy().get(Pedido.class, idPedido);
+			System.out.println(p.getId() + "::::" + p.getVisto());
+			return p;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	public Pedido retrieveByNomeCliente(String nomeCliente) {
 		try {
 			return this.ofy().get(Pedido.class, nomeCliente);
@@ -32,8 +48,20 @@ public class PedidoDAO extends DAOBase {
 	public List<Pedido> listByBairroTimeStamp(Long idEstabelecimento) {
 		// TODO @Osman: fazer o filtro pra associar os pedidos a algum
 		// restaurante
-		List<Pedido> lista = this.ofy().query(Pedido.class).list();
-		// .filter("idEstabelecimento", idEstabelecimento).list();
+
+		// ArrayList<Pedido> lista = new ArrayList<Pedido>(this.ofy()
+		// .query(Pedido.class)
+		// .filter("idEstabelecimento =", idEstabelecimento).list());
+
+		List<Pedido> listaCompleta = this.ofy().query(Pedido.class).list();
+
+		List<Pedido> lista = new ArrayList<Pedido>();
+		for (Pedido p : listaCompleta) {
+			if (p != null) {
+				if (p.getIdEstabelecimento().equals(idEstabelecimento))
+					lista.add(p);
+			}
+		}
 
 		Collections.sort(lista, new Comparator<Pedido>() {
 

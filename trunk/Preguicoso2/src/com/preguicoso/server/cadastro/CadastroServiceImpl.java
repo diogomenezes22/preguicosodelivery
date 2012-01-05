@@ -75,17 +75,15 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public List<PedidoBean> getListaDePedidos(Long idEstabelecimento) {
 		// TODO @Osman: Apagar depois. Gera pedidos.
-//		 GerenciadorDePedidos gp = new
-//		 GerenciadorDePedidos(idEstabelecimento);
-//		 gp.gerarPedidosDeExemplo();
+		// GerenciadorDePedidos gp = new
+		// GerenciadorDePedidos(idEstabelecimento);
+		// gp.gerarPedidosDeExemplo();
 
 		List<Pedido> lista = (new PedidoDAO())
 				.listByBairroTimeStamp(idEstabelecimento);
 		List<PedidoBean> listaBean = new ArrayList<PedidoBean>();
 		if (lista != null) {
 			for (Pedido p : lista) {
-				// TODO @Osman testando p.toBean APAGAR
-				p.toBean();
 				listaBean.add(p.toBean());
 			}
 		}
@@ -96,7 +94,7 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	public ArrayList<CategoriaBean> getCategoria() {
 		ArrayList<CategoriaBean> lista = new ArrayList<CategoriaBean>();
 		for (Categoria categoria : (new CategoriaDAO()).listAll()) {
-					lista.add(categoria.toBean());
+			lista.add(categoria.toBean());
 		}
 		return lista;
 	}
@@ -114,6 +112,16 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 		ItemCardapioDAO banco = new ItemCardapioDAO();
 		ItemCardapio item = new ItemCardapio(i);
 		banco.create(item);
+	}
+
+	@Override
+	public void setPedidoVisualizado(Long idPedido) {
+		PedidoDAO pdao = new PedidoDAO();
+		Pedido p = pdao.retrieve(idPedido);
+		p.setVisto(true);
+		pdao.update(p);
+		// TODO apagar
+		System.out.println(p.getNomeCliente() + ": " + p.getVisto());
 	}
 
 }

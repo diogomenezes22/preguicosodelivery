@@ -33,4 +33,6 @@ public interface CadastroServiceAsync {
 
 	void salvarItemCardapio(ItemCardapioBean i, AsyncCallback<Void> callback);
 
+	void setPedidoVisualizado(Long idPedido, AsyncCallback<Void> callback);
+
 }

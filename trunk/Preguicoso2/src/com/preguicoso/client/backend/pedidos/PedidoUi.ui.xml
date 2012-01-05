@@ -6,7 +6,7 @@
 			font-weight: bold;
 		}
 	</ui:style>
-	<g:FocusPanel ui:field="item">
+	<g:FocusPanel ui:field="pedido">
 		<g:HTMLPanel styleName="listaItems">
 			<g:Image />
 			<g:InlineLabel ui:field="nomeCliente" styleName="lista_nome_cliente" />

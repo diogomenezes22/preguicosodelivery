@@ -61,8 +61,8 @@ public class Checkout extends Composite {
 
 			@Override
 			public void onClick(ClickEvent arg0) {
-				cardapioService.enviarPedido("Carloss Augusto",
-						"Rua Funcionar 456", "Parquelândia", "Dinheiro",
+				cardapioService.enviarPedido("Testando para o restaurante",
+						"Rua feito 4869", "Pirambu", "Cartão",
 						new AsyncCallback<Void>() {
 
 							@Override
@@ -72,7 +72,7 @@ public class Checkout extends Composite {
 
 							@Override
 							public void onFailure(Throwable arg0) {
-								Window.alert("Erro no Envio do pedido");
+								Window.alert("Erro no Envio do pedido.");
 							}
 						});
 			}

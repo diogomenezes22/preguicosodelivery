@@ -14,7 +14,7 @@ public class BairroUi extends Composite {
 			.create(BairroUiUiBinder.class);
 
 	@UiField
-	InlineLabel categoria;
+	InlineLabel bairro;
 	@UiField
 	HTMLPanel text;
 
@@ -27,7 +27,7 @@ public class BairroUi extends Composite {
 
 	public BairroUi(String Bairro) {
 		initWidget(uiBinder.createAndBindUi(this));
-		categoria.setText(Bairro);
+		bairro.setText(Bairro);
 	}
 
 }

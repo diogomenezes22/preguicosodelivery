@@ -34,4 +34,6 @@ public interface CadastroService extends RemoteService {
 
 	public List<PedidoBean> getListaDePedidos(Long idEstabelecimento);
 
+	public void setPedidoVisualizado(Long idPedido);
+
 }

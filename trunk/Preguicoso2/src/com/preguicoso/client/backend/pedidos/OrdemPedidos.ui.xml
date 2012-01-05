@@ -16,12 +16,6 @@
 				<div class="container_ordem_pedidos">
 					<g:HTMLPanel ui:field="listaPanel" styleName="lista" />
 				</div>
-				<div class="coluna2_barra">
-					Pedidos Realizados
-				</div>
-				<div class="container_ordem_pedidos">
-					<!-- <g:HTMLPanel ui:field="lista" styleName="lista" /> -->
-				</div>
 			</div>
 		</div>
 		<div id="editarItem"></div>
