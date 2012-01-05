@@ -1,18 +1,28 @@
 package com.preguicoso.client.backend.pedidos;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.client.cadastro.CadastroService;
+import com.preguicoso.client.cadastro.CadastroServiceAsync;
 import com.preguicoso.shared.entities.PedidoBean;
 
 public class PedidoUi extends Composite {
 
 	private static PedidoUiUiBinder uiBinder = GWT
 			.create(PedidoUiUiBinder.class);
+
+	private final CadastroServiceAsync cadastroService = GWT
+			.create(CadastroService.class);
 
 	interface PedidoUiUiBinder extends UiBinder<Widget, PedidoUi> {
 	}
@@ -23,17 +33,45 @@ public class PedidoUi extends Composite {
 	InlineLabel rua;
 	@UiField
 	InlineLabel timestamp;
+	@UiField
+	FocusPanel pedido;
 
 	public PedidoUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
+	private PedidoBean pb;
+
 	public PedidoUi(PedidoBean pb) {
+		this.pb = pb;
+
 		initWidget(uiBinder.createAndBindUi(this));
 		this.nomeCliente.setText(pb.getNomeCliente());
 		this.rua.setText(pb.getRua());
 
 		DateTimeFormat dtf = DateTimeFormat.getFormat("h:mm a dd/MM/yyyy");
 		this.timestamp.setText(dtf.format(pb.getTimeStamp()));
+	}
+
+	@UiHandler("pedido")
+	void onPedidoClick(ClickEvent event) {
+		this.setStyleName("visualizada");
+		// TODO apagar
+		System.out.println("o id do pb era: " + pb.getId() + " e Visto era: "
+				+ pb.getVisto());
+		cadastroService.setPedidoVisualizado(pb.getId(),
+				new AsyncCallback<Void>() {
+
+					@Override
+					public void onSuccess(Void result) {
+						Window.alert("Parace que deu certo, my brod!\n"
+								+ pb.getVisto());
+					}
+
+					@Override
+					public void onFailure(Throwable arg0) {
+						Window.alert("Erro");
+					}
+				});
 	}
 }

@@ -30,7 +30,7 @@ public class OrdemPedidos extends Composite {
 
 	public OrdemPedidos() {
 		initWidget(uiBinder.createAndBindUi(this));
-		cadastroService.getListaDePedidos((long) 385,
+		cadastroService.getListaDePedidos((long) 405,
 				new AsyncCallback<List<PedidoBean>>() {
 
 					@Override
@@ -40,17 +40,32 @@ public class OrdemPedidos extends Composite {
 
 					@Override
 					public void onSuccess(List<PedidoBean> result) {
-						PedidoUi pu;
-						BairroUi bu;
-						String bairroAtual = "";
-						for (PedidoBean pb : result) {
-							if (!pb.getBairro().equals(bairroAtual)) {
-								bu = new BairroUi(pb.getBairro());
+						if (result != null) {
+							if (!result.isEmpty()) {
+								PedidoUi pu;
+								BairroUi bu;
+								String bairroAtual = "";
+								for (PedidoBean pb : result) {
+									// TODO @Osman talvez seja melhor criar
+									// entidades
+									// separadas para Pedidos atuais e enviados
+									if (!pb.getEnviado()) {
+										if (!pb.getBairro().equals(bairroAtual)) {
+											bu = new BairroUi(pb.getBairro());
+											listaPanel.add(bu);
+											bairroAtual = pb.getBairro();
+										}
+										pu = new PedidoUi(pb);
+										if (pb.getVisto())
+											pu.setStyleName("visualizada");
+										listaPanel.add(pu);
+									}
+								}
+							} else {
+								BairroUi bu = new BairroUi(
+										"Sem pedidos no momento");
 								listaPanel.add(bu);
-								bairroAtual = pb.getBairro();
 							}
-							pu = new PedidoUi(pb);
-							listaPanel.add(pu);
 						}
 
 					}

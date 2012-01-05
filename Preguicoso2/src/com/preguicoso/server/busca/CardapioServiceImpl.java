@@ -142,9 +142,10 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		p.setRua(rua);
 		p.setBairro(bairro);
 		p.setTimeStamp(new Date());
+		p.setVisto(false);
+		p.setEnviado(false);
 
 		PedidoDAO pdao = new PedidoDAO();
 		pdao.create(p);
 	}
-
 }
