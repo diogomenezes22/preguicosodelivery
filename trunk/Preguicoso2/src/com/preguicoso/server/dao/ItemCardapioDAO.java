@@ -16,9 +16,9 @@ public class ItemCardapioDAO extends DAOBase{
 	}
 
 	public void create(ItemCardapio itemCardapio) {
-		if (this.retrieveItemsByEstabelecimento(itemCardapio.getEstabelecimento()).contains(itemCardapio)) {
-			assert false;
-		}
+		//if (this.retrieveItemsByEstabelecimento(itemCardapio.getEstabelecimento()).contains(itemCardapio)) {
+			//assert false;
+		//}
 
 		itemCardapio.setUltimaAtualizacao(Calendar.getInstance().getTime());
 		itemCardapio.setDataRegistro(Calendar.getInstance().getTime());
@@ -43,6 +43,7 @@ public class ItemCardapioDAO extends DAOBase{
 	}
 
 	public void update(ItemCardapio item) {
+	
 	}
 
 	public void delete(ItemCardapio item) {

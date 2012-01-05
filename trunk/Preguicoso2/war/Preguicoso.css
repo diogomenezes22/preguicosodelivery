@@ -351,6 +351,7 @@
 	-webkit-transition: all .5s ease-out,color .5s ease-out;
 	background: none;
 	border: none;
+	cursor: pointer;
   }
   .fechar_botao:hover{
   	opacity:1;

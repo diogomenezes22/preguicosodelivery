@@ -11,6 +11,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
@@ -39,19 +40,26 @@ public class PedidoUi extends Composite {
 	public PedidoUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
-
 	private PedidoBean pb;
 
 	public PedidoUi(PedidoBean pb) {
 		this.pb = pb;
 
 		initWidget(uiBinder.createAndBindUi(this));
+		this.pb = pb;
 		this.nomeCliente.setText(pb.getNomeCliente());
 		this.rua.setText(pb.getRua());
 
 		DateTimeFormat dtf = DateTimeFormat.getFormat("h:mm a dd/MM/yyyy");
 		this.timestamp.setText(dtf.format(pb.getTimeStamp()));
 	}
+
+	@UiHandler("pedido")
+	void onItemClick(ClickEvent event) {
+		RootPanel.get("editarItem").clear();
+		RootPanel.get("editarItem").add(new DescricaoPedido(pb));
+	}
+
 
 	@UiHandler("pedido")
 	void onPedidoClick(ClickEvent event) {

@@ -81,6 +81,7 @@ public class EditarCardapio extends Composite {
 						String categoria = "";
 						lista.clear();
 						listaNovos.clear();
+						listaCategorias = new ArrayList<ItemCategoria>();
 						organizarLista(result);
 						for (ItemCardapioBean itemCardapioBean : result) {
 							
