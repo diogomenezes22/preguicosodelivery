@@ -40,6 +40,7 @@ public class PedidoUi extends Composite {
 	public PedidoUi() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
+
 	private PedidoBean pb;
 
 	public PedidoUi(PedidoBean pb) {
@@ -50,7 +51,7 @@ public class PedidoUi extends Composite {
 		this.nomeCliente.setText(pb.getNomeCliente());
 		this.rua.setText(pb.getRua());
 
-		DateTimeFormat dtf = DateTimeFormat.getFormat("h:mm a dd/MM/yyyy");
+		DateTimeFormat dtf = DateTimeFormat.getFormat("hh:mm dd/MM/yyyy");
 		this.timestamp.setText(dtf.format(pb.getTimeStamp()));
 	}
 
@@ -60,20 +61,14 @@ public class PedidoUi extends Composite {
 		RootPanel.get("editarItem").add(new DescricaoPedido(pb));
 	}
 
-
 	@UiHandler("pedido")
 	void onPedidoClick(ClickEvent event) {
 		this.setStyleName("visualizada");
-		// TODO apagar
-		System.out.println("o id do pb era: " + pb.getId() + " e Visto era: "
-				+ pb.getVisto());
 		cadastroService.setPedidoVisualizado(pb.getId(),
 				new AsyncCallback<Void>() {
 
 					@Override
 					public void onSuccess(Void result) {
-						Window.alert("Parace que deu certo, my brod!\n"
-								+ pb.getVisto());
 					}
 
 					@Override

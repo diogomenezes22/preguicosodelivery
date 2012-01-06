@@ -43,21 +43,27 @@ public class EditarItem extends Composite {
 	TextArea descricao;
 	@UiField
 	TextBox preco;
-	@UiField Image salvar;
-	
+	@UiField
+	Image salvar;
+
 	boolean flag = false;
-		
-	private final CadastroServiceAsync cadastroService = GWT.create(CadastroService.class);
+
+	private final CadastroServiceAsync cadastroService = GWT
+			.create(CadastroService.class);
 
 	interface EditarItemUiBinder extends UiBinder<Widget, EditarItem> {
 	}
+
 	public EditarItem() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
+
 	ItemCardapioBean i;
-	public EditarItem(final ItemCardapioBean i, final ArrayList<ItemCategoria> lista) {
+
+	public EditarItem(final ItemCardapioBean i,
+			final ArrayList<ItemCategoria> lista) {
 		initWidget(uiBinder.createAndBindUi(this));
-		this.i= i;
+		this.i = i;
 		numero.setText("" + i.getId());
 		nome.setText(i.getNome());
 		descricao.setText(i.getDescricao());
@@ -65,54 +71,63 @@ public class EditarItem extends Composite {
 		for (ItemCategoria cat : lista) {
 			categoria.addItem(cat.getName());
 		}
-		categoria.setItemText(0,this.i.getCategoriaBean().getNome());
+		categoria.setItemText(0, this.i.getCategoriaBean().getNome());
 		salvar.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				if(flag){
+				if (flag) {
 					Window.alert("Item Salvo com sucesso. Basta atualizar a lista");
 					salvar.setStyleName("");
 					flag = false;
-					cadastroService.salvarItemCardapio(i, new AsyncCallback<Void>() {
-						@Override
-						public void onSuccess(Void result) {
-							
-						}
-						@Override
-						public void onFailure(Throwable caught) {
-							//TODO Colocar um handler do erro
-							Window.alert("Houve algum problema para salvar o item");
-							
-						}
-					});
+					cadastroService.salvarItemCardapio(i,
+							new AsyncCallback<Void>() {
+								@Override
+								public void onSuccess(Void result) {
+
+								}
+
+								@Override
+								public void onFailure(Throwable caught) {
+									// TODO @Abraão Colocar um handler do erro
+									Window.alert("Houve algum problema para salvar o item");
+
+								}
+							});
 				}
 			}
 		});
 	}
+
 	@UiHandler("numero")
 	void onNumeroBlur(BlurEvent event) {
 		foiAlterado();
 	}
+
 	@UiHandler("nome")
 	void onNomeBlur(BlurEvent event) {
 		foiAlterado();
 		this.i.setNome(nome.getText());
 	}
+
 	@UiHandler("disponivel")
 	void onDisponivelBlur(BlurEvent event) {
 		foiAlterado();
 		this.i.setDisponivel(disponivel.getValue());
 	}
+
 	@UiHandler("descricao")
 	void onDescricaoBlur(BlurEvent event) {
 		foiAlterado();
 		this.i.setDescricao(descricao.getText());
 	}
+
 	@UiHandler("categoria")
 	void onCategoriaBlur(BlurEvent event) {
 		foiAlterado();
-		this.i.setCategoriaBean(new CategoriaBean(categoria.getItemText(categoria.getSelectedIndex())));
+		this.i.setCategoriaBean(new CategoriaBean(categoria
+				.getItemText(categoria.getSelectedIndex())));
 	}
+
 	@UiHandler("preco")
 	void onPrecoBlur(BlurEvent event) {
 		foiAlterado();

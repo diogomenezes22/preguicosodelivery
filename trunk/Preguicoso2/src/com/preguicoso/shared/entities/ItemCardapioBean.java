@@ -52,6 +52,14 @@ public class ItemCardapioBean implements Serializable {
 		return this.id;
 	}
 
+	public long getEstabelecimentobean() {
+		return estabelecimentobean;
+	}
+
+	public void setEstabelecimentobean(long estabelecimentobean) {
+		this.estabelecimentobean = estabelecimentobean;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -59,7 +67,7 @@ public class ItemCardapioBean implements Serializable {
 	public boolean isDisponivel() {
 		return this.disponivel;
 	}
-	
+
 	public void setDisponivel(boolean disponivel) {
 		this.disponivel = disponivel;
 	}
