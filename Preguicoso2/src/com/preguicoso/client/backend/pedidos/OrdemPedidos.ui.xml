@@ -19,13 +19,5 @@
 			</div>
 		</div>
 		<div id="editarItem"></div>
-		<div class="grid_3 coluna3 alpha omega">
-			<h1>Descrição do Pedidos</h1>
-			<div class="container_coluna3">
-				<div class="container">
-					as
-				</div>
-			</div>
-		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

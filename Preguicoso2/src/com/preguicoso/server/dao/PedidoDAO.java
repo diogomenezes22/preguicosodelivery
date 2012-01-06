@@ -19,14 +19,12 @@ public class PedidoDAO extends DAOBase {
 	}
 
 	public void update(Pedido p) {
-		System.out.println(p.getId() + ">>>>" + p.getVisto());
 		this.ofy().put(p);
 	}
 
 	public Pedido retrieve(Long idPedido) {
 		try {
 			Pedido p = this.ofy().get(Pedido.class, idPedido);
-			System.out.println(p.getId() + "::::" + p.getVisto());
 			return p;
 		} catch (Exception e) {
 			return null;

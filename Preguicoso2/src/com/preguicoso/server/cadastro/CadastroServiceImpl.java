@@ -120,8 +120,6 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 		Pedido p = pdao.retrieve(idPedido);
 		p.setVisto(true);
 		pdao.update(p);
-		// TODO apagar
-		System.out.println(p.getNomeCliente() + ": " + p.getVisto());
 	}
 
 }

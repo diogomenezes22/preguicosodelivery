@@ -1,12 +1,16 @@
 package com.preguicoso.server.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+import com.google.appengine.repackaged.org.json.JSONArray;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
 import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Unindexed;
@@ -56,25 +60,24 @@ public class Pedido implements Serializable {
 		pb.setVisto(this.visto);
 		pb.setEnviado(this.enviado);
 
-		// TODO colocar JSON depois
-		// try {
-		// if (listaItensJSON != null) {
-		// JSONArray ja = new JSONArray(listaItensJSON);
-		// List<ItemCardapioBean> listaRec = new ArrayList<ItemCardapioBean>();
-		// JSONObject jo;
-		// for (int i = 0; i < ja.length(); i++) {
-		// jo = new JSONObject(ja.get(i).toString());
-		// ItemCardapioBean item = new ItemCardapioBean();
-		// item.setId(jo.getLong("id"));
-		// item.setNumero(jo.getInt("numero"));
-		// item.setNome(jo.getString("nome"));
-		// listaRec.add(item);
-		// }
-		// pb.setListaItens(listaRec);
-		// }
-		// } catch (JSONException e) {
-		// e.printStackTrace();
-		// }
+		try {
+			if (listaItensJSON != null) {
+				JSONArray ja = new JSONArray(listaItensJSON);
+				List<ItemCardapioBean> listaRec = new ArrayList<ItemCardapioBean>();
+				JSONObject jo;
+				for (int i = 0; i < ja.length(); i++) {
+					jo = new JSONObject(ja.get(i).toString());
+					ItemCardapioBean item = new ItemCardapioBean();
+					item.setId(jo.getLong("id"));
+					item.setNumero(jo.getInt("numero"));
+					item.setNome(jo.getString("nome"));
+					listaRec.add(item);
+				}
+				pb.setListaItens(listaRec);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		return pb;
 	}
 
@@ -83,19 +86,15 @@ public class Pedido implements Serializable {
 	}
 
 	public void setListaItensJSON(List<ItemCardapioBean> lista) {
-		// TODO colocar JSON depois
-		// List<JSONObject> listaJSON = new ArrayList<JSONObject>();
-		// JSONObject jo;
-		// for (ItemCardapioBean item : lista) {
-		// jo = new JSONObject(item);
-		// listaJSON.add(jo);
-		// }
-		//
-		// JSONArray ja = new JSONArray(lista);
-		// this.listaItensJSON = ja.toString();
+		List<JSONObject> listaJSON = new ArrayList<JSONObject>();
+		JSONObject jo;
+		for (ItemCardapioBean item : lista) {
+			jo = new JSONObject(item);
+			listaJSON.add(jo);
+		}
 
-		// TODO apagar depois
-		// System.out.println(this.nomeCliente + ": " + ja.toString());
+		JSONArray ja = new JSONArray(listaJSON);
+		this.listaItensJSON = ja.toString();
 	}
 
 	public Long getId() {
