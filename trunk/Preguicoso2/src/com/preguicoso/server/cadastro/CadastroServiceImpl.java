@@ -122,4 +122,19 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 		pdao.update(p);
 	}
 
+	@Override
+	public Integer getStatus(Long idEstabelecimento) {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		Estabelecimento e = edao.retrieve(idEstabelecimento);
+		return e.getStatus();
+	}
+
+	@Override
+	public void setStatus(Long idEstabelecimento, Integer status) {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		Estabelecimento e = edao.retrieve(idEstabelecimento);
+		e.setStatus(status);
+		edao.update(e);
+	}
+
 }

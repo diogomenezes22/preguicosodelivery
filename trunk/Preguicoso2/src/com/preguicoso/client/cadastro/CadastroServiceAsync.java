@@ -35,4 +35,9 @@ public interface CadastroServiceAsync {
 
 	void setPedidoVisualizado(Long idPedido, AsyncCallback<Void> callback);
 
+	void getStatus(Long idEstabelecimento, AsyncCallback<Integer> callback);
+
+	void setStatus(Long idEstabelecimento, Integer status,
+			AsyncCallback<Void> callback);
+
 }

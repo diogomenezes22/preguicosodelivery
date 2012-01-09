@@ -35,7 +35,7 @@ public class OrdemPedidos extends Composite {
 
 					@Override
 					public void onFailure(Throwable arg0) {
-						Window.alert("Erro");
+						Window.alert("Erro ao carregar lista de pedidos. Recarregue a página.");
 					}
 
 					@Override

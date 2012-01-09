@@ -47,6 +47,13 @@ public class PedidoDAO extends DAOBase {
 		// TODO @Osman: fazer o filtro pra associar os pedidos a algum
 		// restaurante
 
+		// Query<Pedido> query = this.ofy().query(Pedido.class)
+		// .filter("visto", false);
+		// System.out.println("Tamanho da query: " + query.count() + " - em "
+		// + new Date());
+		//
+		// List<Pedido> lista = new ArrayList<Pedido>(query.list());
+
 		// ArrayList<Pedido> lista = new ArrayList<Pedido>(this.ofy()
 		// .query(Pedido.class)
 		// .filter("idEstabelecimento =", idEstabelecimento).list());

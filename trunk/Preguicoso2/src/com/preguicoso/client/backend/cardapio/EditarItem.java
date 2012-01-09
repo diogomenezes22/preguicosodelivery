@@ -66,6 +66,7 @@ public class EditarItem extends Composite {
 		this.i = i;
 		numero.setText("" + i.getId());
 		nome.setText(i.getNome());
+		numero.setText("0");
 		descricao.setText(i.getDescricao());
 		preco.setText("R$ " + i.getPreco());
 		for (ItemCategoria cat : lista) {
@@ -76,7 +77,6 @@ public class EditarItem extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				if (flag) {
-					Window.alert("Item Salvo com sucesso. Basta atualizar a lista");
 					salvar.setStyleName("");
 					flag = false;
 					cadastroService.salvarItemCardapio(i,
@@ -93,6 +93,7 @@ public class EditarItem extends Composite {
 
 								}
 							});
+					Window.alert("Item Salvo com sucesso. Basta atualizar a lista");
 				}
 			}
 		});

@@ -1,6 +1,8 @@
 package com.preguicoso.client.backend;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -8,16 +10,21 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineHyperlink;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.backend.cardapio.EditarCardapio;
 import com.preguicoso.client.backend.pedidos.FecharBalanco;
 import com.preguicoso.client.backend.pedidos.OrdemPedidos;
 import com.preguicoso.client.backend.restaurante.EditarInformacao;
 import com.preguicoso.client.backend.restaurante.Setup;
+import com.preguicoso.client.cadastro.CadastroService;
+import com.preguicoso.client.cadastro.CadastroServiceAsync;
 
 public class Backend extends Composite {
 
@@ -34,6 +41,11 @@ public class Backend extends Composite {
 	HTMLPanel containerMenu;
 	@UiField
 	HTMLPanel container;
+	@UiField
+	ListBox status;
+
+	private final CadastroServiceAsync cadastroService = GWT
+			.create(CadastroService.class);
 
 	interface backendUiBinder extends UiBinder<Widget, Backend> {
 	}
@@ -56,6 +68,42 @@ public class Backend extends Composite {
 				"pedidos/ordem"));
 		containerMenu.add(new InlineHyperlink("Fechar balanço",
 				"pedidos/balanco"));
+		status.addItem("Online");
+		status.addItem("Offline");
+		// TODO @Osman pegar id do restaurante logado
+		cadastroService.getStatus((long) 405, new AsyncCallback<Integer>() {
+
+			@Override
+			public void onFailure(Throwable arg0) {
+				Window.alert("Ocorreu um erro ao tentar carregar o seu status. Recarregue a página e tente novamente.");
+			}
+
+			@Override
+			public void onSuccess(Integer result) {
+				status.setSelectedIndex(result);
+			}
+		});
+
+		status.addChangeHandler(new ChangeHandler() {
+
+			// TODO @Osman pegar id do restaurante logado
+			@Override
+			public void onChange(ChangeEvent event) {
+				cadastroService.setStatus((long) 405,
+						status.getSelectedIndex(), new AsyncCallback<Void>() {
+
+							@Override
+							public void onFailure(Throwable arg0) {
+								Window.alert("Ocorreu um erro ao tentar mudar o seu status. Recarregue a página e tente novamente.");
+							}
+
+							@Override
+							public void onSuccess(Void result) {
+							}
+						});
+			}
+		});
+
 	}
 
 	public void routerHistory() {
