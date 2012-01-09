@@ -23,4 +23,10 @@ public interface LoginServiceAsync {
 	void getURLLogout(AsyncCallback<String> callback);
 
 	void getURLLogin(AsyncCallback<String> callback);
+
+
+	void isEstabelecimentoLogado(AsyncCallback<Boolean> callback);
+
+	void logarEstabelecimento(String login, String pass,
+			AsyncCallback<Boolean> callback);
 }

@@ -29,64 +29,9 @@
 									Qtd
 								</th>
 						</tr>
+						
 					</table>
 					</g:HTMLPanel>
-					<table>
-						<tr class="head">
-								<th>
-									No
-								</th>
-								<th>
-									Item
-								</th>
-								<th>
-									Observação
-								</th>
-								<th>
-									Qtd
-								</th>
-						</tr>
-						
-						<tr class="odd">
-							<td>123
-							</td>
-							<td>
-								Item
-							</td>
-							<td>
-								Observação do item
-							</td>
-							<td>
-								3
-							</td>
-						</tr>
-						<tr>
-							<td>123
-							</td>
-							<td>
-								Item
-							</td>
-							<td>
-								Observação do itemkj askdjnasndajskn dkasdkjasndkn askjdnaskmd aksd akjsndk
-							</td>
-							<td>
-								3
-							</td>
-						</tr>
-						<tr class="odd">
-							<td>123
-							</td>
-							<td>
-								Item
-							</td>
-							<td>
-								Observação do item
-							</td>
-							<td>
-								3
-							</td>
-						</tr>
-					</table>
 					<h4>Endereço de Entrega:</h4>
 						<h3><g:InlineLabel ui:field="endereco"/></h3>
 					<h4>Forma de Pagamento:</h4>

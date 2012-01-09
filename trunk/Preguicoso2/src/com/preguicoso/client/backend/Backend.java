@@ -25,6 +25,9 @@ import com.preguicoso.client.backend.restaurante.EditarInformacao;
 import com.preguicoso.client.backend.restaurante.Setup;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
+import com.preguicoso.client.login.LoginService;
+import com.preguicoso.client.login.LoginServiceAsync;
+
 
 public class Backend extends Composite {
 
@@ -44,19 +47,25 @@ public class Backend extends Composite {
 	@UiField
 	ListBox status;
 
+	
+	private final LoginServiceAsync loginService = GWT
+	.create(LoginService.class);
+
+
 	private final CadastroServiceAsync cadastroService = GWT
 			.create(CadastroService.class);
 
 	interface backendUiBinder extends UiBinder<Widget, Backend> {
 	}
-
+	
+	
 	public Backend() {
 		initWidget(uiBinder.createAndBindUi(this));
-		if (History.getToken().equals(""))
-			History.newItem("pedidos/ordem");
-		createMenu();
-		inicio();
-		routerHistory();
+			if (History.getToken().equals(""))
+				History.newItem("pedidos/ordem");
+			createMenu();
+			inicio();
+			routerHistory();
 	}
 
 	private void inicio() {
@@ -138,7 +147,6 @@ public class Backend extends Composite {
 			container.clear();
 			container.add(new Setup());
 		}
-
 	}
 
 	public void clearContent() {
