@@ -7,17 +7,32 @@
 		}
 	</ui:style>
 	<g:HTMLPanel>
-		<div class="grid_1">
-			<h3></h3>
+		
+		<div class="container_12" style="margin-top:100px; color:white; font-weight:bold ">
+			<img src="img/logotipo.png" style="margin-left:30%;"/>
+			<div class="clear"></div>	
+			<div style="background-color:#A15D21">		
+				<div class="grid_1 prefix_4">
+					<p>Login:</p>
+				</div>
+				<div class="grid_2">
+					<g:TextBox ui:field="login"/>
+				</div>
+				<div class="clear"></div>
+				<div class="grid_1  prefix_4">
+					<p>Password:</p>
+				</div>
+				<div class="grid_1">
+					<g:PasswordTextBox ui:field="password"/>
+				</div>
+				<div class="clear"></div>
+				<div class="grid_1  prefix_4" style="height:10px">
+				</div>
+				<div class="grid_2" style="text-align:right">
+					<g:Button ui:field="botao">Login</g:Button>
+				</div>
+			</div>
 		</div>
-		<div class="grid_1">
-			<g:TextBox ui:field="login"/>
-		</div>
-		<div class="grid_1">
-			<h3></h3>
-		</div>
-		<div class="grid_1">
-			<g:PasswordTextBox ui:field="password"/>
-		</div>
+		
 	</g:HTMLPanel>
 </ui:UiBinder> 

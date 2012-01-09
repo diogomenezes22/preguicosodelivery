@@ -98,4 +98,17 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 	public Boolean save(UsuarioBean Usuario) {
 		return null;
 	}
+
+	@Override
+	public Boolean logarEstabelecimento(String login, String password) {
+		if(login.equals("admin") && password.equals("1234"))
+			return true;
+		return false;
+	}
+
+	@Override
+	public Boolean isEstabelecimentoLogado() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
