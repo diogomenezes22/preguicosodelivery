@@ -79,6 +79,7 @@ public class Pedido implements Serializable {
 	}
 
 	public void setListaItensJSON(List<ItemCardapioBean> lista) {
+
 		List<JSONObject> listaJSON = new ArrayList<JSONObject>();
 		JSONObject jo;
 		for (ItemCardapioBean item : lista) {
