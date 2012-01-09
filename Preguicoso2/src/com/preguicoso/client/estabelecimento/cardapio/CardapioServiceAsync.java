@@ -10,7 +10,7 @@ public interface CardapioServiceAsync {
 	void getItensCardapio(Long id,
 			AsyncCallback<ArrayList<ItemCardapioBean>> callback);
 
-	void addItem(ItemCardapioBean i, int string, String string2,
+	void addItem(ItemCardapioBean i, int quantidade, String observacao,
 			AsyncCallback<Void> callback);
 
 	void getCarrinho(AsyncCallback<ArrayList<ItemCardapioBean>> callback);

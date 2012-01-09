@@ -52,6 +52,7 @@ public class ItemCardapio {
 		this.descricao = "";
 		this.preco = 0.0;
 	}
+
 	public Long getEstabelecimentoId() {
 		return estabelecimentoId;
 	}
@@ -73,7 +74,7 @@ public class ItemCardapio {
 	}
 
 	public ItemCardapio(ItemCardapioBean i) {
-		if(i.getId()!=null)
+		if (i.getId() != null)
 			this.id = i.getId();
 		this.nome = i.getNome();
 		this.tipo = i.getTipo();
@@ -89,6 +90,7 @@ public class ItemCardapio {
 		bean.setId(this.id);
 		bean.setDescricao(this.descricao);
 		bean.setNome(this.nome);
+		bean.setNumero(this.numero);
 		bean.setPreco(this.preco);
 		bean.setTipo(this.tipo);
 		bean.setCategoriaBean(new CategoriaBean(getCategoria()));

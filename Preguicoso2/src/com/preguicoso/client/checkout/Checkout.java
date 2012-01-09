@@ -61,8 +61,8 @@ public class Checkout extends Composite {
 
 			@Override
 			public void onClick(ClickEvent arg0) {
-				cardapioService.enviarPedido("Testando para o restaurante",
-						"Rua feito 4869", "Pirambu", "Cartão",
+				cardapioService.enviarPedido("Osman Pontes",
+						"Rua Gustavo Sampaio 1331", "Parquelândia", "Dinheiro",
 						new AsyncCallback<Void>() {
 
 							@Override

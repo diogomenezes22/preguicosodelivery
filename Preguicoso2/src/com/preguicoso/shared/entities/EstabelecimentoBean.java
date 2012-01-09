@@ -21,6 +21,23 @@ public class EstabelecimentoBean implements Serializable {
 	private UsuarioBean usuarioBean;
 	private List<BairroBean> areaAtendimento;
 	private boolean userIsOwner;
+	private Integer status;
+
+	public UsuarioBean getUsuarioBean() {
+		return usuarioBean;
+	}
+
+	public void setUsuarioBean(UsuarioBean usuarioBean) {
+		this.usuarioBean = usuarioBean;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public EstabelecimentoBean() {
 		this.nome = "";

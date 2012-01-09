@@ -51,7 +51,7 @@ public class PedidoUi extends Composite {
 		this.nomeCliente.setText(pb.getNomeCliente());
 		this.rua.setText(pb.getRua());
 
-		DateTimeFormat dtf = DateTimeFormat.getFormat("hh:mm dd/MM/yyyy");
+		DateTimeFormat dtf = DateTimeFormat.getFormat("HH:mm - dd/MM/yyyy");
 		this.timestamp.setText(dtf.format(pb.getTimeStamp()));
 	}
 

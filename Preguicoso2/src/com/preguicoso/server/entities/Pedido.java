@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 
 import com.google.appengine.repackaged.org.json.JSONArray;
@@ -29,21 +28,13 @@ public class Pedido implements Serializable {
 
 	@Id
 	Long id;
-	@Column
 	Long idEstabelecimento;
-	@Column
 	String nomeCliente;
-	@Column
 	String rua;
-	@Column
 	String formaPagamento;
-	@Column
 	Date timeStamp;
-	@Column
 	String bairro;
-	@Column
 	Boolean visto;
-	@Column
 	Boolean enviado;
 
 	String listaItensJSON;
@@ -71,6 +62,8 @@ public class Pedido implements Serializable {
 					item.setId(jo.getLong("id"));
 					item.setNumero(jo.getInt("numero"));
 					item.setNome(jo.getString("nome"));
+					item.setObservacao(jo.getString("observacao"));
+					item.setQuantidade(jo.getInt("quantidade"));
 					listaRec.add(item);
 				}
 				pb.setListaItens(listaRec);

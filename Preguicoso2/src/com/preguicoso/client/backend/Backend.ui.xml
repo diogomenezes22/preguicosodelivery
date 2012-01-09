@@ -8,48 +8,53 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<div class="container_12" style="min-width:960px;height:600px;">
-		<div class="coluna1 grid_2 alpha omega">
-			<div class="container_menu">
-				<img src="img/logotipo.png" width="190px"/>
-				<div class="nome_restaurante">
-					<img src="img/rest_icone.png" /> <label><g:InlineLabel text="Nome" ui:field="nomeEstabelecimento"/></label>
-				</div>
-				<div class="nome_menu"> 
-					<div class="nome_menu_detalhe">
-						<img src="img/menu_icone.png" /> <label>Status</label>
+			<div class="coluna1 grid_2 alpha omega">
+				<div class="container_menu">
+					<img src="img/logotipo.png" width="190px" />
+					<div class="nome_restaurante">
+						<img src="img/rest_icone.png" />
+						<label>
+							<g:InlineLabel text="Nome" ui:field="nomeEstabelecimento" />
+						</label>
 					</div>
-				</div>
-				<div class="delivery_menu">
-					<div class="itens_menu">
-						<ul>
-							<li>Online</li>
-							<li>Offline</li>
-						</ul>
-					</div>
-				</div>
-				<div class="nome_menu"> 
-					<div class="nome_menu_detalhe">
-						<img src="img/menu_icone.png" /> <label>Painel de Controle</label>
-					</div>
-				</div>
-				<div class="itens_menu">
-					<div class="itens_menu">
-						<div class="menu">
-							<g:InlineLabel text="PEDIDOS" ui:field="pedidos" styleName="menuItem"/>
-							<g:InlineLabel text="CARDAPIO" ui:field="cardapio" styleName="menuItem"/>
-							<g:InlineLabel text="RESTAURANTE" ui:field="restaurante" styleName="menuItem"/>
+					<div class="nome_menu">
+						<div class="nome_menu_detalhe">
+							<img src="img/menu_icone.png" />
+							<label>Status</label>
 						</div>
-						<g:HTMLPanel ui:field="containerMenu"/>
 					</div>
+					<div class="delivery_menu">
+						<div class="itens_menu">
+							<g:ListBox ui:field="status"/>
+						</div>
+					</div>
+					<div class="nome_menu">
+						<div class="nome_menu_detalhe">
+							<img src="img/menu_icone.png" />
+							<label>Painel de Controle</label>
+						</div>
+					</div>
+					<div class="itens_menu">
+						<div class="itens_menu">
+							<div class="menu">
+								<g:InlineLabel text="PEDIDOS" ui:field="pedidos"
+									styleName="menuItem" />
+								<g:InlineLabel text="CARDAPIO" ui:field="cardapio"
+									styleName="menuItem" />
+								<g:InlineLabel text="RESTAURANTE" ui:field="restaurante"
+									styleName="menuItem" />
+							</div>
+							<g:HTMLPanel ui:field="containerMenu" />
+						</div>
+					</div>
+
 				</div>
-				
+				<br />
 			</div>
-			<br/>
+			<g:HTMLPanel ui:field="container" />
+
 		</div>
-		<g:HTMLPanel ui:field="container"/>
-		
-	</div>
-		
-		
+
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

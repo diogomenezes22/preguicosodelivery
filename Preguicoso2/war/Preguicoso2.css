@@ -263,6 +263,7 @@ body {
 	margin: 0;
 	margin-left: -6px;
 	font-size: 12px;
+	cursor: default;
 }
 
 .itens_menu .active {

@@ -11,8 +11,6 @@ import com.preguicoso.shared.entities.ItemCardapioBean;
 public interface CardapioService extends RemoteService {
 	public ArrayList<ItemCardapioBean> getItensCardapio(Long id);
 
-	void addItem(ItemCardapioBean i, int quantidade, String Observacao);
-
 	void removeItem(ItemCardapioBean i);
 
 	ArrayList<ItemCardapioBean> getCarrinho();
@@ -21,4 +19,6 @@ public interface CardapioService extends RemoteService {
 
 	void enviarPedido(String nomeCliente, String rua, String bairro,
 			String formaPagamento);
+
+	void addItem(ItemCardapioBean i, int quantidade, String observacao);
 }

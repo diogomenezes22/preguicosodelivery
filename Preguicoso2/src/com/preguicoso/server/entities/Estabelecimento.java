@@ -39,6 +39,47 @@ public class Estabelecimento implements Serializable {
 	String logoURL = "";
 	@Column
 	String categoria = "";
+	Integer status;
+
+	public Long getEnderecoId() {
+		return enderecoId;
+	}
+
+	public void setEnderecoId(Long enderecoId) {
+		this.enderecoId = enderecoId;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public List<String> getListaCep() {
+		return listaCep;
+	}
+
+	public void setListaCep(List<String> listaCep) {
+		this.listaCep = listaCep;
+	}
+
+	public String getEmailDono() {
+		return emailDono;
+	}
+
+	public void setEmailDono(String emailDono) {
+		this.emailDono = emailDono;
+	}
 
 	public String getCategoria() {
 		return this.categoria;
@@ -114,6 +155,7 @@ public class Estabelecimento implements Serializable {
 		bean.setUltimaAtualizacao(this.ultimaAtualizacao);
 		bean.setLogoURL(this.logoURL);
 		bean.setAreaAtendimento(this.getAreaAtendimentoBean());
+		bean.setStatus(this.status);
 
 		// bean.setDono(this.getDono().toBean());
 		// bean.setAreaAtendimento(this.getAreaAtendimentoBean());
