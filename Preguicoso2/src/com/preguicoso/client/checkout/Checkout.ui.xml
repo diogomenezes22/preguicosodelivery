@@ -56,7 +56,8 @@
 									</tr>
 									<tr>
 										<td width='30'>
-											<select class='font-size-1 valid' id='address_city_id' name='address[city_id]'><option value='1'>Santos / SP</option>
+											<select class='font-size-1 valid' id='address_city_id' name='address[city_id]'>
+												<option value='1'>Santos / SP</option>
 												<option value='2'>São Vicente / SP</option>
 												<option value='6'>Praia Grande / SP</option>
 												<option value='7'>Cubatão / SP</option>

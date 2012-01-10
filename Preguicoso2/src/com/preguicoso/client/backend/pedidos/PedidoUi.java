@@ -58,7 +58,7 @@ public class PedidoUi extends Composite {
 	@UiHandler("pedido")
 	void onItemClick(ClickEvent event) {
 		RootPanel.get("editarItem").clear();
-		RootPanel.get("editarItem").add(new DescricaoPedido(pb));
+		RootPanel.get("editarItem").add(new DescricaoPedido(pb, this));
 	}
 
 	@UiHandler("pedido")
@@ -72,8 +72,8 @@ public class PedidoUi extends Composite {
 					}
 
 					@Override
-					public void onFailure(Throwable arg0) {
-						Window.alert("Erro");
+					public void onFailure(Throwable caught) {
+						Window.alert("Ocorreu um erro inesperado. Por favor, recarregue a página.");
 					}
 				});
 	}

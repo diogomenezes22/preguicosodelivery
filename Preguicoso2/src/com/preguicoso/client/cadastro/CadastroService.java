@@ -1,6 +1,7 @@
 package com.preguicoso.client.cadastro;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -36,8 +37,11 @@ public interface CadastroService extends RemoteService {
 
 	public void setPedidoVisualizado(Long idPedido);
 
+	public void setPedidoEnviado(Long idPedido);
+
 	public Integer getStatus(Long idEstabelecimento);
 
 	void setStatus(Long idEstabelecimento, Integer status);
 
+	List<PedidoBean> getPedidosNovos(Long idEstabelecimento, Date lastTime);
 }

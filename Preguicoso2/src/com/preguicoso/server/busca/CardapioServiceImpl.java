@@ -76,6 +76,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 			carrinho = new CarrinhoDeCompra("anonimo");
 		}
 		HttpSession session = this.getThreadLocalRequest().getSession();
+		// TODO @Osman aqui tem erro na session
 		if (session.getAttribute("pedido") == null) {
 			session.setAttribute("pedido", new HashMap());
 		}

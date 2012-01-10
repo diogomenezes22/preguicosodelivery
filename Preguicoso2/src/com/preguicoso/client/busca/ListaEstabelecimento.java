@@ -55,7 +55,7 @@ public class ListaEstabelecimento extends Composite {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("Couldn't get required data");
+							Window.alert("Não foi possível carregar a lista de restaurantes.");
 
 						}
 					});
@@ -65,7 +65,7 @@ public class ListaEstabelecimento extends Composite {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("Couldn't get required data");
+							Window.alert("Não foi possível carregar a lista de restaurantes.");
 						}
 
 						@Override
@@ -107,7 +107,7 @@ public class ListaEstabelecimento extends Composite {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("Couldn't get required data");
+							Window.alert("Não foi possível carregar a lista de restaurantes.");
 
 						}
 					});
@@ -116,7 +116,7 @@ public class ListaEstabelecimento extends Composite {
 					new AsyncCallback<ArrayList<EstabelecimentoBean>>() {
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("Couldn't get required data");
+							Window.alert("Não foi possível carregar a lista de restaurantes.");
 						}
 
 						@Override

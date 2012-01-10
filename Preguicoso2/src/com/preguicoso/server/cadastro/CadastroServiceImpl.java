@@ -1,6 +1,7 @@
 package com.preguicoso.server.cadastro;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.google.appengine.api.users.UserService;
@@ -123,6 +124,19 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
+	public void setPedidoEnviado(Long idPedido) {
+		// TODO quando tiver histórico deve ser assim
+		// PedidoDAO pdao = new PedidoDAO();
+		// Pedido p = pdao.retrieve(idPedido);
+		// p.setEnviado(true);
+		// pdao.update(p);
+
+		PedidoDAO pdao = new PedidoDAO();
+		Pedido p = pdao.retrieve(idPedido);
+		pdao.delete(p);
+	}
+
+	@Override
 	public Integer getStatus(Long idEstabelecimento) {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		Estabelecimento e = edao.retrieve(idEstabelecimento);
@@ -137,4 +151,14 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 		edao.update(e);
 	}
 
+	@Override
+	public List<PedidoBean> getPedidosNovos(Long idEstabelecimento,
+			Date lastTime) {
+		PedidoDAO pdao = new PedidoDAO();
+		List<PedidoBean> lista = new ArrayList<PedidoBean>();
+		for (Pedido p : pdao.retrieveAfter(idEstabelecimento, lastTime)) {
+			lista.add(p.toBean());
+		}
+		return lista;
+	}
 }

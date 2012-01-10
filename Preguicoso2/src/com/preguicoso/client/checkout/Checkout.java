@@ -60,18 +60,19 @@ public class Checkout extends Composite {
 		pedir.addClickHandler(new ClickHandler() {
 
 			@Override
-			public void onClick(ClickEvent arg0) {
-				cardapioService.enviarPedido("Osman Pontes",
-						"Rua Gustavo Sampaio 1331", "Parquelândia", "Dinheiro",
+			public void onClick(ClickEvent event) {
+				cardapioService.enviarPedido("Sem Nome", endereco_rua.getText()
+						+ " " + endereco_numero.getText(),
+						endereco_bairro.getText(), dinheiro.getFormValue(),
 						new AsyncCallback<Void>() {
 
 							@Override
-							public void onSuccess(Void arg0) {
+							public void onSuccess(Void result) {
 								Window.alert("Pedido enviado com sucesso!");
 							}
 
 							@Override
-							public void onFailure(Throwable arg0) {
+							public void onFailure(Throwable caught) {
 								Window.alert("Erro no Envio do pedido.");
 							}
 						});

@@ -80,25 +80,26 @@ public class Backend extends Composite {
 		status.addItem("Online");
 		status.addItem("Offline");
 		// TODO @Osman pegar id do restaurante logado
-		cadastroService.getStatus((long) 405, new AsyncCallback<Integer>() {
+		final Long idRestauranteLogado = (long) 405;
+		cadastroService.getStatus(idRestauranteLogado,
+				new AsyncCallback<Integer>() {
 
-			@Override
-			public void onFailure(Throwable arg0) {
-				Window.alert("Ocorreu um erro ao tentar carregar o seu status. Recarregue a página e tente novamente.");
-			}
+					@Override
+					public void onFailure(Throwable arg0) {
+						Window.alert("Ocorreu um erro ao tentar carregar o seu status. Recarregue a página e tente novamente.");
+					}
 
-			@Override
-			public void onSuccess(Integer result) {
-				status.setSelectedIndex(result);
-			}
-		});
+					@Override
+					public void onSuccess(Integer result) {
+						status.setSelectedIndex(result);
+					}
+				});
 
 		status.addChangeHandler(new ChangeHandler() {
 
-			// TODO @Osman pegar id do restaurante logado
 			@Override
 			public void onChange(ChangeEvent event) {
-				cadastroService.setStatus((long) 405,
+				cadastroService.setStatus(idRestauranteLogado,
 						status.getSelectedIndex(), new AsyncCallback<Void>() {
 
 							@Override

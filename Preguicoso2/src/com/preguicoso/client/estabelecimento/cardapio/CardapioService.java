@@ -21,4 +21,5 @@ public interface CardapioService extends RemoteService {
 			String formaPagamento);
 
 	void addItem(ItemCardapioBean i, int quantidade, String observacao);
+
 }

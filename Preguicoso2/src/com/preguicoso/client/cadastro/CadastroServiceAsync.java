@@ -1,6 +1,7 @@
 package com.preguicoso.client.cadastro;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -39,5 +40,10 @@ public interface CadastroServiceAsync {
 
 	void setStatus(Long idEstabelecimento, Integer status,
 			AsyncCallback<Void> callback);
+
+	void setPedidoEnviado(Long idPedido, AsyncCallback<Void> callback);
+
+	void getPedidosNovos(Long idEstabelecimento, Date lastTime,
+			AsyncCallback<List<PedidoBean>> callback);
 
 }

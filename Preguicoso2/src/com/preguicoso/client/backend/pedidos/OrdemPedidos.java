@@ -1,10 +1,12 @@
 package com.preguicoso.client.backend.pedidos;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -30,11 +32,54 @@ public class OrdemPedidos extends Composite {
 
 	public OrdemPedidos() {
 		initWidget(uiBinder.createAndBindUi(this));
-		cadastroService.getListaDePedidos((long) 405,
+
+		final Long idEstabelecimento = (long) 405;
+		carregaListaDePedidos(idEstabelecimento);
+		// TODO @Osman existe a possibilidade de o pedido não ser atualizado
+		// caso seja
+		// enviado um pedido no instante em que o cara abriu a aba Ordem de
+		// Pedidos
+		final Date lastTimeStamp = new Date();
+
+		Timer t = new Timer() {
+
+			@Override
+			public void run() {
+				cadastroService.getPedidosNovos(idEstabelecimento,
+						lastTimeStamp, new AsyncCallback<List<PedidoBean>>() {
+
+							@Override
+							public void onFailure(Throwable caught) {
+								Window.alert("Ocorreu um erro no processo de busca de pedidos remota. "
+										+ "Por favor, recarregue a página.");
+							}
+
+							@Override
+							public void onSuccess(List<PedidoBean> result) {
+								if (!result.isEmpty()) {
+									lastTimeStamp.setTime(result.get(0)
+											.getTimeStamp().getTime());
+									Window.alert("Acaba de chegar um novo pedido!");
+									carregaListaDePedidos(idEstabelecimento);
+								}
+							}
+						});
+			}
+		};
+		t.scheduleRepeating(30000);
+	}
+
+	private void carregaListaDePedidos(final Long idEstabelecimento) {
+
+		// TODO @Osman fazer de um jeito otimizado no futuro
+		if (this.listaPanel != null) {
+			this.listaPanel.clear();
+		}
+		cadastroService.getListaDePedidos(idEstabelecimento,
 				new AsyncCallback<List<PedidoBean>>() {
 
 					@Override
-					public void onFailure(Throwable arg0) {
+					public void onFailure(Throwable caught) {
 						Window.alert("Erro ao carregar lista de pedidos. Recarregue a página.");
 					}
 
@@ -71,6 +116,5 @@ public class OrdemPedidos extends Composite {
 					}
 
 				});
-
 	}
 }
