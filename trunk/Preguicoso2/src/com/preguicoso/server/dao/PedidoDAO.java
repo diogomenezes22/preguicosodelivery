@@ -95,10 +95,10 @@ public class PedidoDAO extends DAOBase {
 
 			@Override
 			public int compare(Pedido o1, Pedido o2) {
-				if (o1.getBairro().compareTo(o2.getBairro()) > 1) {
+				if (o1.getBairro().compareTo(o2.getBairro()) > 0) {
 					return 1;
 				} else if (o1.getBairro().equals(o2.getBairro())) {
-					if (o1.getTimeStamp().compareTo(o2.getTimeStamp()) > 1)
+					if (o1.getTimeStamp().compareTo(o2.getTimeStamp()) > 0)
 						return -1;
 					return 1;
 				}
