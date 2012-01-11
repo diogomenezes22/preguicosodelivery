@@ -75,11 +75,6 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public List<PedidoBean> getListaDePedidos(Long idEstabelecimento) {
-		// TODO @Osman: Apagar depois. Gera pedidos.
-		// GerenciadorDePedidos gp = new
-		// GerenciadorDePedidos(idEstabelecimento);
-		// gp.gerarPedidosDeExemplo();
-
 		List<Pedido> lista = (new PedidoDAO())
 				.listByBairroTimeStamp(idEstabelecimento);
 		List<PedidoBean> listaBean = new ArrayList<PedidoBean>();

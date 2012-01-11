@@ -35,9 +35,10 @@ public class EditarCardapio extends Composite {
 	Button itemButton;
 	@UiField
 	Button itemCategoria;
-	@UiField Button atualizar;
-	
-	final Long idEstabelecimento = (long)405;
+	@UiField
+	Button atualizar;
+
+	final Long idEstabelecimento = (long) 405;
 
 	interface EditarCardapioUiBinder extends UiBinder<Widget, EditarCardapio> {
 	}
@@ -47,18 +48,20 @@ public class EditarCardapio extends Composite {
 
 	private final CadastroServiceAsync cadastroService = GWT
 			.create(CadastroService.class);
-	
+
 	ArrayList<CategoriaBean> categorias = new ArrayList<CategoriaBean>();
 	ArrayList<ItemCategoria> listaCategorias = new ArrayList<ItemCategoria>();
-	
+
 	public EditarCardapio() {
 		initWidget(uiBinder.createAndBindUi(this));
 		getItensCardapio();
 		itemButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				ItemCardapioBean novoItem = new ItemCardapioBean("Novo Item", "", false, "Descrição do item", (double) 0, new CategoriaBean("Sem Categoria"),idEstabelecimento);
-				listaNovos.add(new ItemCardapioUI(novoItem,listaCategorias));
+				ItemCardapioBean novoItem = new ItemCardapioBean("Novo Item",
+						"", false, "Descrição do item", (double) 0,
+						new CategoriaBean("Sem Categoria"), idEstabelecimento);
+				listaNovos.add(new ItemCardapioUI(novoItem, listaCategorias));
 			}
 		});
 		itemCategoria.addClickHandler(new ClickHandler() {
@@ -72,6 +75,7 @@ public class EditarCardapio extends Composite {
 			}
 		});
 	}
+
 	private void getItensCardapio() {
 		cardapioService.getItensCardapio(idEstabelecimento,
 				new AsyncCallback<ArrayList<ItemCardapioBean>>() {
@@ -84,30 +88,42 @@ public class EditarCardapio extends Composite {
 						listaCategorias = new ArrayList<ItemCategoria>();
 						organizarLista(result);
 						for (ItemCardapioBean itemCardapioBean : result) {
-							
-							if (!itemCardapioBean.getCategoriaBean().getNome().equals(categoria)) {
-								lista.add(new ItemCategoria(itemCardapioBean.getCategoriaBean().getNome(),idEstabelecimento));
-								categoria = itemCardapioBean.getCategoriaBean().getNome();
-								categorias.add(itemCardapioBean.getCategoriaBean());
-								ItemCategoria c = new ItemCategoria(itemCardapioBean.getCategoriaBean());
+
+							if (!itemCardapioBean.getCategoriaBean().getNome()
+									.equals(categoria)) {
+								lista.add(new ItemCategoria(itemCardapioBean
+										.getCategoriaBean().getNome(),
+										idEstabelecimento));
+								categoria = itemCardapioBean.getCategoriaBean()
+										.getNome();
+								categorias.add(itemCardapioBean
+										.getCategoriaBean());
+								ItemCategoria c = new ItemCategoria(
+										itemCardapioBean.getCategoriaBean());
 								listaCategorias.add(c);
 							}
-							lista.add(new ItemCardapioUI(itemCardapioBean,listaCategorias));
+							lista.add(new ItemCardapioUI(itemCardapioBean,
+									listaCategorias));
 						}
 					}
 
 					private void organizarLista(
 							ArrayList<ItemCardapioBean> result) {
-						Collections.sort(result, new Comparator<ItemCardapioBean>() {
+						Collections.sort(result,
+								new Comparator<ItemCardapioBean>() {
 
-							@Override
-							public int compare(ItemCardapioBean o1,
-									ItemCardapioBean o2) {
-								if(o1.getCategoriaBean().getNome().compareTo(o2.getCategoriaBean().getNome())>1)
-									return 1;
-								return -1;
-							}
-						});
+									@Override
+									public int compare(ItemCardapioBean o1,
+											ItemCardapioBean o2) {
+										if (o1.getCategoriaBean()
+												.getNome()
+												.compareTo(
+														o2.getCategoriaBean()
+																.getNome()) > 0)
+											return 1;
+										return -1;
+									}
+								});
 					}
 
 					@Override
@@ -116,8 +132,9 @@ public class EditarCardapio extends Composite {
 
 					}
 				});
-		
+
 	}
+
 	@UiHandler("atualizar")
 	void onAtualizarClick(ClickEvent event) {
 		getItensCardapio();
