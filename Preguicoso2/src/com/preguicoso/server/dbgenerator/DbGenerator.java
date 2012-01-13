@@ -1,5 +1,7 @@
 package com.preguicoso.server.dbgenerator;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.preguicoso.server.dao.BairroDAO;
 import com.preguicoso.server.dao.CategoriaDAO;
 import com.preguicoso.server.dao.CidadeDAO;
@@ -18,6 +20,8 @@ import com.preguicoso.server.entities.Estado;
 import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.server.entities.Pais;
 import com.preguicoso.server.entities.Usuario;
+import com.preguicoso.shared.RegistroStatusRestaurante;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 /**
  * The server side implementation of the RPC service.
@@ -34,6 +38,33 @@ public class DbGenerator {
 	EstadoDAO estadoDAO = new EstadoDAO();
 	PaisDAO paisDAO = new PaisDAO();
 	EnderecoDAO enderecoDAO = new EnderecoDAO();
+
+	public static void gerar() {
+		Bairro bairro = new Bairro();
+		bairro.setCep("12228-462");
+		BairroDAO bairroDAO = new BairroDAO();
+		bairroDAO.create(bairro);
+
+		Endereco endereco = new Endereco();
+		endereco.setBairro(bairro);
+		endereco.setComplemento("Proximo a casa do Ze");
+		endereco.setNumero(50);
+		EnderecoDAO enderecoDAO = new EnderecoDAO();
+		enderecoDAO.create(endereco);
+
+		Estabelecimento estabelecimento2 = new Estabelecimento();
+		estabelecimento2.setCnpj("1231231231");
+		estabelecimento2.setNome("Guerra");
+		estabelecimento2.setRazaoSocial("No Social Reason");
+		estabelecimento2.setEndereco(endereco);
+
+		DbGenerator gerar = new DbGenerator();
+		gerar.generateDatabase();
+
+		EstabelecimentoBean eBean;
+		UserService userService = UserServiceFactory.getUserService();
+		String ownerEmail = userService.getCurrentUser().getEmail();
+	}
 
 	private void presset() {
 		this.usuario.setCadastrado(true);
@@ -60,7 +91,8 @@ public class DbGenerator {
 		this.enderecoDAO.create(endereco);
 
 		Estabelecimento estabelecimento = new Estabelecimento();
-		estabelecimento.setCNPJ("1231231231");
+		estabelecimento.setId((long) 405);
+		estabelecimento.setCnpj("1231231231");
 		estabelecimento.setDono(this.usuario);
 		estabelecimento.setNome("China in Box");
 		estabelecimento.setCategoria("chines");
@@ -68,10 +100,11 @@ public class DbGenerator {
 				.setLogoURL("http://www.guiabh.com.br/imgs_cadastradas/China%20in%20Box%20logo.jpg");
 		estabelecimento.setRazaoSocial("No Social Reason");
 		estabelecimento.setEndereco(endereco);
+		estabelecimento.setStatus(RegistroStatusRestaurante.Fechado);
 		this.estabelecimentoDAO.create(estabelecimento);
 
 		Estabelecimento estabelecimento2 = new Estabelecimento();
-		estabelecimento.setCNPJ("12312331");
+		estabelecimento.setCnpj("12312331");
 		estabelecimento.setDono(this.usuario);
 		estabelecimento.setNome("Pizza Hut");
 		estabelecimento.setCategoria("pizza");
@@ -79,6 +112,7 @@ public class DbGenerator {
 				.setLogoURL("http://3.bp.blogspot.com/_AcBUSVxs82w/SsA0mmjO3oI/AAAAAAAAVKo/iaVgbZZp5gU/s400/Pizza_Hut_Logo.jpg");
 		estabelecimento.setRazaoSocial("No Social Reason");
 		estabelecimento.setEndereco(endereco);
+		estabelecimento.setStatus(RegistroStatusRestaurante.Fechado);
 		this.estabelecimentoDAO.create(estabelecimento2);
 
 		estabelecimento = this.estabelecimentoDAO.retrieve(estabelecimento

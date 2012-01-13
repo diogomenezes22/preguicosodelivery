@@ -61,7 +61,7 @@ public class AddRestaurantServlet extends HttpServlet {
 			enderecoDAO.create(endereco);
 
 			Estabelecimento estabelecimento = new Estabelecimento();
-			estabelecimento.setCNPJ(CNPJ);
+			estabelecimento.setCnpj(CNPJ);
 			estabelecimento.setNome(nome);
 			estabelecimento.setRazaoSocial(razaoSocial);
 			estabelecimento.setLogoURL(logo);

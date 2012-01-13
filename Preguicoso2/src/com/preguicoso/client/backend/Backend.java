@@ -18,7 +18,6 @@ import com.google.gwt.user.client.ui.InlineHyperlink;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.preguicoso.client.RegistroStatus;
 import com.preguicoso.client.backend.cardapio.EditarCardapio;
 import com.preguicoso.client.backend.pedidos.FecharBalanco;
 import com.preguicoso.client.backend.pedidos.OrdemPedidos;
@@ -28,6 +27,7 @@ import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
+import com.preguicoso.shared.RegistroStatusRestaurante;
 
 public class Backend extends Composite {
 
@@ -75,22 +75,22 @@ public class Backend extends Composite {
 		containerMenu.add(new InlineHyperlink("Fechar balanço",
 				"pedidos/balanco"));
 
-		for (RegistroStatus rs : RegistroStatus.values()) {
+		for (RegistroStatusRestaurante rs : RegistroStatusRestaurante.values()) {
 			status.addItem(rs.name());
 		}
 		// TODO @Osman pegar id do restaurante logado
 		final Long idRestauranteLogado = (long) 405;
 		cadastroService.getStatus(idRestauranteLogado,
-				new AsyncCallback<Integer>() {
+				new AsyncCallback<RegistroStatusRestaurante>() {
 
 					@Override
-					public void onFailure(Throwable arg0) {
+					public void onFailure(Throwable caught) {
 						Window.alert("Ocorreu um erro ao tentar carregar o seu status. Recarregue a página e tente novamente.");
 					}
 
 					@Override
-					public void onSuccess(Integer result) {
-						status.setSelectedIndex(result);
+					public void onSuccess(RegistroStatusRestaurante result) {
+						status.setSelectedIndex(result.ordinal());
 					}
 				});
 

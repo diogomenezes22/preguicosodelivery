@@ -10,8 +10,8 @@
 		ui:field="item">
 		<div class="container_barra">
 			<!-- Ajeitar tamanho da imagem enviar.png no futuro -->
-			<g:Image ui:field="enviar" url="img/enviar.png" styleName="active" width="24px"/>
-			<g:Image ui:field="remove" url="img/enviar.png" styleName="active" width="24px"/>
+			<g:Image ui:field="enviar" url="img/enviar.png" styleName="active" title="Avisar que o pedido já foi enviado." width="24px"/>
+			<g:Image ui:field="remove" url="img/remove.png" styleName="active" title="Recusar o pedido." width="24px"/>
 			x
 		</div>
 		<div class="container_coluna3">

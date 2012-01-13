@@ -16,6 +16,7 @@ import com.preguicoso.server.dao.ItemCardapioDAO;
 import com.preguicoso.server.dao.PedidoDAO;
 import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.server.entities.Pedido;
+import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 
@@ -148,8 +149,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		p.setRua(rua);
 		p.setBairro(bairro);
 		p.setTimeStamp(new Date());
-		p.setVisto(false);
-		p.setEnviado(false);
+		p.setStatus(RegistroStatusPedido.esperando);
 
 		PedidoDAO pdao = new PedidoDAO();
 		pdao.create(p);

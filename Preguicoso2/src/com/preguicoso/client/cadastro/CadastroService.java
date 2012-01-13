@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
@@ -41,9 +42,9 @@ public interface CadastroService extends RemoteService {
 
 	void removePedido(Long idPedido);
 
-	public Integer getStatus(Long idEstabelecimento);
+	public RegistroStatusRestaurante getStatus(Long idEstabelecimento);
 
-	void setStatus(Long idEstabelecimento, Integer status);
+	void setStatus(Long idEstabelecimento, int statusIndex);
 
 	List<PedidoBean> getPedidosNovos(Long idEstabelecimento, Date lastTime);
 }

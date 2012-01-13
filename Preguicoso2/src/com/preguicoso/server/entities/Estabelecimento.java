@@ -11,16 +11,15 @@ import javax.persistence.Id;
 import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Indexed;
-import com.googlecode.objectify.annotation.Unindexed;
 import com.preguicoso.server.dao.BairroDAO;
 import com.preguicoso.server.dao.EnderecoDAO;
 import com.preguicoso.server.dao.UsuarioDAO;
+import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 @Entity
 @Cached
-@Unindexed
 public class Estabelecimento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,7 +38,7 @@ public class Estabelecimento implements Serializable {
 	String logoURL = "";
 	@Column
 	String categoria = "";
-	Integer status;
+	RegistroStatusRestaurante status;
 
 	public Long getEnderecoId() {
 		return enderecoId;
@@ -57,11 +56,11 @@ public class Estabelecimento implements Serializable {
 		this.cnpj = cnpj;
 	}
 
-	public Integer getStatus() {
+	public RegistroStatusRestaurante getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(RegistroStatusRestaurante status) {
 		this.status = status;
 	}
 
@@ -97,13 +96,9 @@ public class Estabelecimento implements Serializable {
 		this.logoURL = logoURL;
 	}
 
-	@Column
 	Date dataRegistro;
-	@Column
 	Date ultimaAtualizacao;
-	@Column
 	List<String> listaCep;
-	@Indexed
 	String emailDono;
 
 	public Estabelecimento() {
@@ -194,14 +189,6 @@ public class Estabelecimento implements Serializable {
 
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
-	}
-
-	public String getCNPJ() {
-		return this.cnpj;
-	}
-
-	public void setCNPJ(String cNPJ) {
-		this.cnpj = cNPJ;
 	}
 
 	public Date getDataRegistro() {

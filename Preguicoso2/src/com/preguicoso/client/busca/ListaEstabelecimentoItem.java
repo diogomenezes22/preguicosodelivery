@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineHyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
-import com.preguicoso.client.RegistroStatus;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class ListaEstabelecimentoItem extends Composite {
@@ -48,17 +47,13 @@ public class ListaEstabelecimentoItem extends Composite {
 	public ListaEstabelecimentoItem(EstabelecimentoBean e) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.nome.setText(e.getNome());
-		RegistroStatus[] statusList = RegistroStatus.values();
-		if (statusList.length > e.getStatus()) {
-			this.status.setText(statusList[e.getStatus()].toString());
-			if (!statusList[e.getStatus()].toString().equals("Aberto")) {
-				this.link.setVisible(false);
-			} else {
-				this.link.setTargetHistoryToken("Estabelecimento/" + e.getId());
-			}
+		this.status.setText(e.getStatus().name());
+		if (!e.getStatus().name().equals("Aberto")) {
+			this.link.setVisible(false);
 		} else {
-			this.status.setText("status indisponível");
+			this.link.setTargetHistoryToken("Estabelecimento/" + e.getId());
 		}
+
 		this.endereco.setText(e.getEnderecoBean().getRua()
 				+ e.getEnderecoBean().getNumero());
 		this.descricao.setText(e.getRazaoSocial());

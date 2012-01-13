@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
+import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.PedidoBean;
 
 public class OrdemPedidos extends Composite {
@@ -59,7 +60,12 @@ public class OrdemPedidos extends Composite {
 								if (!result.isEmpty()) {
 									lastTimeStamp.setTime(result.get(0)
 											.getTimeStamp().getTime());
-									Window.alert("Acaba de chegar um novo pedido!");
+									if (result.size() == 1)
+										Window.alert("Acaba de chegar um novo pedido!");
+									else
+										Window.alert("Acabam de chegar "
+												+ result.size()
+												+ " novos pedidos!");
 									carregaListaDePedidos(idEstabelecimento);
 								}
 							}
@@ -95,7 +101,7 @@ public class OrdemPedidos extends Composite {
 									// TODO @Osman talvez seja melhor criar
 									// entidades
 									// separadas para Pedidos atuais e enviados
-									if (!pb.getEnviado()) {
+									if (pb.getStatus() != RegistroStatusPedido.enviado) {
 										todosEnviados = false;
 										if (!pb.getBairro().equals(bairroAtual)) {
 											bu = new BairroUi(pb.getBairro());
@@ -103,7 +109,7 @@ public class OrdemPedidos extends Composite {
 											bairroAtual = pb.getBairro();
 										}
 										pu = new PedidoUi(pb);
-										if (pb.getVisto())
+										if (pb.getStatus() == RegistroStatusPedido.visto)
 											pu.setStyleName("visualizada");
 										listaPanel.add(pu);
 									}
