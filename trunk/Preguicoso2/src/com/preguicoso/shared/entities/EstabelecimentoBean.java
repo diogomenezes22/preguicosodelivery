@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.preguicoso.shared.RegistroStatusRestaurante;
+
 public class EstabelecimentoBean implements Serializable {
 
 	private static final long serialVersionUID = 1921334149005836325L;
@@ -21,7 +23,7 @@ public class EstabelecimentoBean implements Serializable {
 	private UsuarioBean usuarioBean;
 	private List<BairroBean> areaAtendimento;
 	private boolean userIsOwner;
-	private Integer status;
+	private RegistroStatusRestaurante status;
 
 	public UsuarioBean getUsuarioBean() {
 		return usuarioBean;
@@ -31,11 +33,11 @@ public class EstabelecimentoBean implements Serializable {
 		this.usuarioBean = usuarioBean;
 	}
 
-	public Integer getStatus() {
+	public RegistroStatusRestaurante getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(RegistroStatusRestaurante status) {
 		this.status = status;
 	}
 

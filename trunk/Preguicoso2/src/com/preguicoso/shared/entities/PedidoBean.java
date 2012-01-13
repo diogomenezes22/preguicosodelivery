@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.preguicoso.shared.RegistroStatusPedido;
+
 public class PedidoBean implements Serializable {
 
 	/**
@@ -18,8 +20,7 @@ public class PedidoBean implements Serializable {
 	private List<ItemCardapioBean> listaItens;
 	private Date timeStamp;
 	private String bairro;
-	private Boolean visto;
-	private Boolean enviado;
+	private RegistroStatusPedido status;
 
 	public Long getId() {
 		return id;
@@ -29,20 +30,12 @@ public class PedidoBean implements Serializable {
 		this.id = id;
 	}
 
-	public Boolean getEnviado() {
-		return enviado;
+	public RegistroStatusPedido getStatus() {
+		return status;
 	}
 
-	public void setEnviado(Boolean enviado) {
-		this.enviado = enviado;
-	}
-
-	public Boolean getVisto() {
-		return visto;
-	}
-
-	public void setVisto(Boolean visto) {
-		this.visto = visto;
+	public void setStatus(RegistroStatusPedido status) {
+		this.status = status;
 	}
 
 	public String getBairro() {

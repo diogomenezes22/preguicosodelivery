@@ -12,6 +12,7 @@ import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
 import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
+import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 import com.preguicoso.shared.entities.PedidoBean;
 
@@ -32,8 +33,7 @@ public class Pedido implements Serializable {
 	String formaPagamento;
 	Date timeStamp;
 	String bairro;
-	Boolean visto;
-	Boolean enviado;
+	RegistroStatusPedido status;
 
 	String listaItensJSON;
 
@@ -46,8 +46,7 @@ public class Pedido implements Serializable {
 		pb.setFormaPagamento(this.formaPagamento);
 		pb.setTimeStamp(this.timeStamp);
 		pb.setBairro(this.bairro);
-		pb.setVisto(this.visto);
-		pb.setEnviado(this.enviado);
+		pb.setStatus(this.status);
 
 		try {
 			if (listaItensJSON != null) {
@@ -145,24 +144,16 @@ public class Pedido implements Serializable {
 		this.bairro = bairro;
 	}
 
-	public Boolean getVisto() {
-		return visto;
-	}
-
-	public void setVisto(Boolean visto) {
-		this.visto = visto;
-	}
-
-	public Boolean getEnviado() {
-		return enviado;
-	}
-
-	public void setEnviado(Boolean enviado) {
-		this.enviado = enviado;
-	}
-
 	public void setListaItensJSON(String listaItensJSON) {
 		this.listaItensJSON = listaItensJSON;
+	}
+
+	public RegistroStatusPedido getStatus() {
+		return status;
+	}
+
+	public void setStatus(RegistroStatusPedido status) {
+		this.status = status;
 	}
 
 	@Override
@@ -170,7 +161,6 @@ public class Pedido implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
-		result = prime * result + ((enviado == null) ? 0 : enviado.hashCode());
 		result = prime * result
 				+ ((formaPagamento == null) ? 0 : formaPagamento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -183,9 +173,9 @@ public class Pedido implements Serializable {
 		result = prime * result
 				+ ((nomeCliente == null) ? 0 : nomeCliente.hashCode());
 		result = prime * result + ((rua == null) ? 0 : rua.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((timeStamp == null) ? 0 : timeStamp.hashCode());
-		result = prime * result + ((visto == null) ? 0 : visto.hashCode());
 		return result;
 	}
 
@@ -202,11 +192,6 @@ public class Pedido implements Serializable {
 			if (other.bairro != null)
 				return false;
 		} else if (!bairro.equals(other.bairro))
-			return false;
-		if (enviado == null) {
-			if (other.enviado != null)
-				return false;
-		} else if (!enviado.equals(other.enviado))
 			return false;
 		if (formaPagamento == null) {
 			if (other.formaPagamento != null)
@@ -238,15 +223,12 @@ public class Pedido implements Serializable {
 				return false;
 		} else if (!rua.equals(other.rua))
 			return false;
+		if (status != other.status)
+			return false;
 		if (timeStamp == null) {
 			if (other.timeStamp != null)
 				return false;
 		} else if (!timeStamp.equals(other.timeStamp))
-			return false;
-		if (visto == null) {
-			if (other.visto != null)
-				return false;
-		} else if (!visto.equals(other.visto))
 			return false;
 		return true;
 	}

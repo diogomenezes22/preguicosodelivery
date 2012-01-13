@@ -19,6 +19,8 @@ import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.server.entities.Pedido;
 import com.preguicoso.server.entities.Usuario;
+import com.preguicoso.shared.RegistroStatusPedido;
+import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
@@ -114,7 +116,7 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	public void setPedidoVisualizado(Long idPedido) {
 		PedidoDAO pdao = new PedidoDAO();
 		Pedido p = pdao.retrieve(idPedido);
-		p.setVisto(true);
+		p.setStatus(RegistroStatusPedido.visto);
 		pdao.update(p);
 	}
 
@@ -123,7 +125,7 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 		// TODO quando tiver histórico deve ser assim
 		PedidoDAO pdao = new PedidoDAO();
 		Pedido p = pdao.retrieve(idPedido);
-		p.setEnviado(true);
+		p.setStatus(RegistroStatusPedido.enviado);
 		pdao.update(p);
 	}
 
@@ -135,17 +137,17 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public Integer getStatus(Long idEstabelecimento) {
+	public RegistroStatusRestaurante getStatus(Long idEstabelecimento) {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		Estabelecimento e = edao.retrieve(idEstabelecimento);
 		return e.getStatus();
 	}
 
 	@Override
-	public void setStatus(Long idEstabelecimento, Integer status) {
+	public void setStatus(Long idEstabelecimento, int statusIndex) {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		Estabelecimento e = edao.retrieve(idEstabelecimento);
-		e.setStatus(status);
+		e.setStatus(RegistroStatusRestaurante.values()[statusIndex]);
 		edao.update(e);
 	}
 

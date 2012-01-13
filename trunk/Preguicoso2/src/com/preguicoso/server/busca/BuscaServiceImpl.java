@@ -32,30 +32,7 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 	public ArrayList<EstabelecimentoBean> getListaEstabelecimento() {
 		ArrayList<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
 
-		// Bairro bairro = new Bairro();
-		// bairro.setCep("12228-462");
-		// BairroDAO bairroDAO = new BairroDAO();
-		// bairroDAO.create(bairro);
-
-		// Endereco endereco = new Endereco();
-		// endereco.setBairro(bairro);
-		// endereco.setComplemento("Proximo a casa do Ze");
-		// endereco.setNumero(50);
-		// EnderecoDAO enderecoDAO = new EnderecoDAO();
-		// enderecoDAO.create(endereco);
-		//
-		// Estabelecimento estabelecimento2 = new Estabelecimento();
-		// estabelecimento2.setCNPJ("1231231231");
-		// estabelecimento2.setNome("Guerra");
-		// estabelecimento2.setRazaoSocial("No Social Reason");
-		// estabelecimento2.setEndereco(endereco);
-
-		// DbGenerator gerar = new DbGenerator();
-		// gerar.generateDatabase();
-		//
-		// EstabelecimentoBean eBean;
-		// UserService userService = UserServiceFactory.getUserService();
-		// String ownerEmail = userService.getCurrentUser().getEmail();
+		// DbGenerator.gerar();
 
 		for (Estabelecimento estabelecimento : (new EstabelecimentoDAO())
 				.listAll()) {
@@ -124,7 +101,7 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 		end.setNumero(bean.getEnderecoBean().getNumero());
 		end.setComplemento(bean.getEnderecoBean().getComplemento());
 
-		e.setCNPJ(bean.getCNPJ());
+		e.setCnpj(bean.getCNPJ());
 		e.setNome(bean.getNome());
 		e.setRazaoSocial(bean.getRazaoSocial());
 		e.setEndereco(end);

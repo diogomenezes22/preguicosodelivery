@@ -14,8 +14,8 @@ public class EstabelecimentoDAO extends DAOBase {
 
 	public void create(Estabelecimento e) {
 
-		if (this.retrieveByCnpj(e.getCNPJ()) != null) {
-			Estabelecimento est = this.retrieveByCnpj(e.getCNPJ());
+		if (this.retrieveByCnpj(e.getCnpj()) != null) {
+			Estabelecimento est = this.retrieveByCnpj(e.getCnpj());
 			est.setAreaAtendimento(e.getAreaAtendimento());
 			est.setCategoria(e.getCategoria());
 			est.setDataRegistro(e.getDataRegistro());
@@ -44,7 +44,7 @@ public class EstabelecimentoDAO extends DAOBase {
 		List<Estabelecimento> e = this.ofy().query(Estabelecimento.class)
 				.list();
 		for (Estabelecimento estabelecimento : e) {
-			if (estabelecimento.getCNPJ().equals(cnpj))
+			if (estabelecimento.getCnpj().equals(cnpj))
 				return estabelecimento;
 		}
 		return null;

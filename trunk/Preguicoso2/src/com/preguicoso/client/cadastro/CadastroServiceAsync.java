@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
@@ -36,9 +37,10 @@ public interface CadastroServiceAsync {
 
 	void setPedidoVisualizado(Long idPedido, AsyncCallback<Void> callback);
 
-	void getStatus(Long idEstabelecimento, AsyncCallback<Integer> callback);
+	void getStatus(Long idEstabelecimento,
+			AsyncCallback<RegistroStatusRestaurante> callback);
 
-	void setStatus(Long idEstabelecimento, Integer status,
+	void setStatus(Long idEstabelecimento, int statusIndex,
 			AsyncCallback<Void> callback);
 
 	void setPedidoEnviado(Long idPedido, AsyncCallback<Void> callback);

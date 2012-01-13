@@ -19,7 +19,8 @@ import com.preguicoso.shared.entities.EstabelecimentoBean;
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class EditarServiceImpl extends RemoteServiceServlet implements EditarService {
+public class EditarServiceImpl extends RemoteServiceServlet implements
+		EditarService {
 
 	@SuppressWarnings("null")
 	@Override
@@ -30,7 +31,8 @@ public class EditarServiceImpl extends RemoteServiceServlet implements EditarSer
 			return false;
 		}
 
-		WebServiceCep wsc = WebServiceCep.searchCep(bean.getEnderecoBean().getCep());
+		WebServiceCep wsc = WebServiceCep.searchCep(bean.getEnderecoBean()
+				.getCep());
 
 		if (wsc.isCepNotFound()) {
 			throw new NoResultException();
@@ -62,7 +64,7 @@ public class EditarServiceImpl extends RemoteServiceServlet implements EditarSer
 		end.setNumero(bean.getEnderecoBean().getNumero());
 		end.setComplemento(bean.getEnderecoBean().getComplemento());
 
-		e.setCNPJ(bean.getCNPJ());
+		e.setCnpj(bean.getCNPJ());
 		e.setNome(bean.getNome());
 		e.setRazaoSocial(bean.getRazaoSocial());
 		e.setEndereco(end);
