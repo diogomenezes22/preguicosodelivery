@@ -15,6 +15,8 @@ public interface CardapioServiceAsync {
 
 	void getCarrinho(AsyncCallback<ArrayList<ItemCardapioBean>> callback);
 
+	void carrinhoClean(AsyncCallback<Void> callback);
+
 	void removeItem(ItemCardapioBean i, AsyncCallback<Void> callback);
 
 	void getCategorias(Long id, AsyncCallback<ArrayList<CategoriaBean>> callback);

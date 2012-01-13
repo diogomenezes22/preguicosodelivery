@@ -51,7 +51,7 @@ public class ListaEstabelecimentoItem extends Composite {
 		RegistroStatus[] statusList = RegistroStatus.values();
 		if (statusList.length > e.getStatus()) {
 			this.status.setText(statusList[e.getStatus()].toString());
-			if (statusList[e.getStatus()].toString().equals("Offline")) {
+			if (!statusList[e.getStatus()].toString().equals("Aberto")) {
 				this.link.setVisible(false);
 			} else {
 				this.link.setTargetHistoryToken("Estabelecimento/" + e.getId());

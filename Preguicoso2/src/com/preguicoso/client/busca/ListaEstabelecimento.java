@@ -13,6 +13,8 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
+import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class ListaEstabelecimento extends Composite {
@@ -21,6 +23,8 @@ public class ListaEstabelecimento extends Composite {
 
 	private final BuscaServiceAsync buscaService = GWT
 			.create(BuscaService.class);
+	private final CardapioServiceAsync cardapioService = GWT
+			.create(CardapioService.class);
 	@UiField
 	Image loading;
 	@UiField
@@ -31,6 +35,23 @@ public class ListaEstabelecimento extends Composite {
 
 	public ListaEstabelecimento() {
 		this.initWidget(uiBinder.createAndBindUi(this));
+
+		// TODO @Osman gambiarra temporária para solucionar o problema da
+		// session do
+		// carrinho
+		cardapioService.carrinhoClean(new AsyncCallback<Void>() {
+
+			@Override
+			public void onSuccess(Void result) {
+
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Não foi possível zerar o carrinho.");
+			}
+		});
+
 		String[] token = History.getToken().split("/");
 		if (token.length > 1) {
 			this.buscaService.getListaEstabelecimentoPorCategoria(token[1],

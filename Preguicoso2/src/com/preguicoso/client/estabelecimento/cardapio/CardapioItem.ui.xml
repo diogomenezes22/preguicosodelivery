@@ -17,7 +17,7 @@
 				<g:Label text="" ui:field="preco"/>
 			</div>
 			<div class="grid_6_1 omega alpha">
-				<g:HTMLPanel ui:field="botao"/>
+				<g:HTMLPanel ui:field="botaoAdd"/>
 			</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -19,7 +19,7 @@ public class CardapioItem extends Composite {
 	@UiField
 	Label preco;
 	@UiField
-	HTMLPanel botao;
+	HTMLPanel botaoAdd;
 
 	interface CardapioItemUiBinder extends UiBinder<Widget, CardapioItem> {
 	}
@@ -34,6 +34,6 @@ public class CardapioItem extends Composite {
 		this.prato.setText(prato);
 		this.descricao.setText(descricao);
 		this.preco.setText(preco);
-		this.botao.add(botao);
+		this.botaoAdd.add(botao);
 	}
 }

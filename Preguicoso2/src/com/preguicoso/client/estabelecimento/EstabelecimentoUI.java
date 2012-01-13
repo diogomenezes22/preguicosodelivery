@@ -19,6 +19,8 @@ import com.preguicoso.client.checkout.Checkout;
 import com.preguicoso.client.editar.EditarService;
 import com.preguicoso.client.editar.EditarServiceAsync;
 import com.preguicoso.client.estabelecimento.cardapio.Cardapio;
+import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
+import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
 import com.preguicoso.client.estabelecimento.carrinho.CarrinhoPedidosUI;
 import com.preguicoso.client.estabelecimento.filtro.Filtro;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
@@ -51,6 +53,8 @@ public class EstabelecimentoUI extends Composite {
 			.create(BuscaService.class);
 	private final EditarServiceAsync editarService = GWT
 			.create(EditarService.class);
+	private final CardapioServiceAsync cardapioService = GWT
+			.create(CardapioService.class);
 
 	interface EstabelecimentoUIUiBinder extends
 			UiBinder<Widget, EstabelecimentoUI> {

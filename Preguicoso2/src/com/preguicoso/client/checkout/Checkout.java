@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -63,7 +64,7 @@ public class Checkout extends Composite {
 			public void onClick(ClickEvent event) {
 				cardapioService.enviarPedido("Sem Nome", endereco_rua.getText()
 						+ " " + endereco_numero.getText(),
-						endereco_bairro.getText(), dinheiro.getFormValue(),
+						endereco_bairro.getText(), dinheiro.getName(),
 						new AsyncCallback<Void>() {
 
 							@Override
@@ -73,9 +74,10 @@ public class Checkout extends Composite {
 
 							@Override
 							public void onFailure(Throwable caught) {
-								Window.alert("Erro no Envio do pedido.");
+								Window.alert("Erro no Envio do pedido. Tente novamente.");
 							}
 						});
+				History.newItem("index");
 			}
 		});
 	}

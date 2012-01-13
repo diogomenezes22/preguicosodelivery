@@ -576,11 +576,6 @@ body {
 	margin-right: 30px;
 }
 
-.container_barra img {
-	margin-right: 89%;
-	margin-top: 8px;
-}
-
 .container .imagem {
 	width: 139px;
 	height: 62px;
@@ -674,11 +669,11 @@ body {
 		margin-right:30px;
 	}
 	.container_barra img{
-		margin-right: 89%;
+/* 		margin-right: 89%; */
 		margin-top: 8px;
 		opacity: 0.4;
 		filter:alpha(opacity=40);
-		
+		float: left;
 	}
     .active{
 		margin-right: 89%;
@@ -843,13 +838,6 @@ body {
 
 .container {
 	margin-right: 30px;
-}
-
-.container_barra img {
-	margin-right: 89%;
-	margin-top: 8px;
-	opacity: 0.4;
-	filter: alpha(opacity =   40);
 }
 
 .active {

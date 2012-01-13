@@ -46,4 +46,6 @@ public interface CadastroServiceAsync {
 	void getPedidosNovos(Long idEstabelecimento, Date lastTime,
 			AsyncCallback<List<PedidoBean>> callback);
 
+	void removePedido(Long idPedido, AsyncCallback<Void> callback);
+
 }

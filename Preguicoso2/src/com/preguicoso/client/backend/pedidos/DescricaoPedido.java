@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
@@ -33,6 +32,8 @@ public class DescricaoPedido extends Composite {
 
 	@UiField
 	Image enviar;
+	@UiField
+	Image remove;
 	@UiField
 	InlineLabel endereco;
 	@UiField
@@ -64,9 +65,7 @@ public class DescricaoPedido extends Composite {
 
 							@Override
 							public void onSuccess(Void result) {
-								DescricaoPedido.this.removeFromParent();
-								pu.removeFromParent();
-								RootPanel.get("Ordem");
+								removeUi(pu);
 								Window.alert("Pedido enviado com sucesso.");
 							}
 
@@ -81,5 +80,35 @@ public class DescricaoPedido extends Composite {
 						});
 			}
 		});
+		remove.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				cadastroService.removePedido(pb.getId(),
+						new AsyncCallback<Void>() {
+
+							@Override
+							public void onFailure(Throwable caught) {
+								Window.alert("Não foi possível rejeitar o pedido do cliente "
+										+ pb.getNomeCliente()
+										+ ". Recarregue a página e tente novamente.");
+							}
+
+							@Override
+							public void onSuccess(Void result) {
+								removeUi(pu);
+								Window.alert("O pedido do cliente "
+										+ pb.getNomeCliente()
+										+ " foi rejeitado corretamente.");
+							}
+						});
+			}
+		});
+
+	}
+
+	private void removeUi(final PedidoUi pu) {
+		DescricaoPedido.this.removeFromParent();
+		pu.removeFromParent();
 	}
 }

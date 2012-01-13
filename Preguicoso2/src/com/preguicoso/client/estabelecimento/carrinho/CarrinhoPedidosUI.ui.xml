@@ -13,7 +13,7 @@
 				<g:Image ui:field="loading" styleName="loading"/>
 			</g:HTMLPanel>
 		<hr/>
-		<h3>Total: R$ <g:InlineLabel text="0,00" ui:field="total"/></h3>
+		<h3>Total: R$ <g:InlineLabel text="0.00" ui:field="total"/></h3>
 		<g:Button ui:field="pedir">Pedir</g:Button>
 	</g:HTMLPanel>
 </ui:UiBinder> 
