@@ -179,6 +179,35 @@ public class Cardapio extends Composite {
 		dialogVPanel.addStyleName("dialogVPanel");
 		dialogVPanel.add(new HTML("<b>Quantidade:</b>"));
 		final IntegerBox quantidade = new IntegerBox();
+
+		// TODO @Osman teste
+		// <teste>
+		final Button addItem = new Button("Add");
+		final Button removeItem = new Button("Remove");
+		quantidade.setEnabled(false);
+		quantidade.setValue(0);
+
+		addItem.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent arg0) {
+				quantidade.setValue(quantidade.getValue() + 1);
+			}
+		});
+
+		removeItem.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent arg0) {
+				if (quantidade.getValue() > 0) {
+					quantidade.setValue(quantidade.getValue() - 1);
+				} else {
+					Window.alert("Você não pode ter menos que zero itens.");
+				}
+			}
+		});
+		// </teste>
+
 		dialogVPanel.add(quantidade);
 		dialogVPanel.add(new HTML("<br><b>Observacao:</b>"));
 		final TextArea observacoes = new TextArea();
@@ -187,6 +216,13 @@ public class Cardapio extends Composite {
 		HorizontalPanel botoes = new HorizontalPanel();
 		Button adicionarNoCarrinho = new Button("Adicionar ao carrinho");
 		botoes.add(adicionarNoCarrinho);
+
+		// TODO @Osman teste
+		// <teste>
+		botoes.add(addItem);
+		botoes.add(removeItem);
+		// </teste>
+
 		botoes.add(closeButton);
 		dialogVPanel.add(botoes);
 		// Botão de adicionar pedido

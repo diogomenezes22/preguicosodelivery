@@ -39,6 +39,8 @@ public interface CadastroService extends RemoteService {
 
 	public void setPedidoEnviado(Long idPedido);
 
+	void removePedido(Long idPedido);
+
 	public Integer getStatus(Long idEstabelecimento);
 
 	void setStatus(Long idEstabelecimento, Integer status);

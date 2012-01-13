@@ -86,6 +86,7 @@ public class OrdemPedidos extends Composite {
 					@Override
 					public void onSuccess(List<PedidoBean> result) {
 						if (result != null) {
+							boolean todosEnviados = true;
 							if (!result.isEmpty()) {
 								PedidoUi pu;
 								BairroUi bu;
@@ -95,6 +96,7 @@ public class OrdemPedidos extends Composite {
 									// entidades
 									// separadas para Pedidos atuais e enviados
 									if (!pb.getEnviado()) {
+										todosEnviados = false;
 										if (!pb.getBairro().equals(bairroAtual)) {
 											bu = new BairroUi(pb.getBairro());
 											listaPanel.add(bu);
@@ -106,13 +108,19 @@ public class OrdemPedidos extends Composite {
 										listaPanel.add(pu);
 									}
 								}
+								if (todosEnviados) {
+									printPedidosEmpty();
+								}
 							} else {
-								BairroUi bu = new BairroUi(
-										"Sem pedidos no momento");
-								listaPanel.add(bu);
+								printPedidosEmpty();
 							}
 						}
 
+					}
+
+					private void printPedidosEmpty() {
+						BairroUi bu = new BairroUi("Sem pedidos no momento");
+						listaPanel.add(bu);
 					}
 
 				});

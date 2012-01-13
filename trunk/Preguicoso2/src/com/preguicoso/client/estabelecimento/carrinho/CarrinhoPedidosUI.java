@@ -49,6 +49,7 @@ public class CarrinhoPedidosUI extends Composite {
 
 	public void atualizarCarrinhoPedidos() {
 		loading.setVisible(true);
+		pedir.setEnabled(false);
 		cardapioService
 				.getCarrinho(new AsyncCallback<ArrayList<ItemCardapioBean>>() {
 
@@ -61,6 +62,7 @@ public class CarrinhoPedidosUI extends Composite {
 							pedidos.add(item);
 							total.setText("0.00");
 						} else {
+							pedir.setEnabled(true);
 							pedidos.clear();
 							float soma = 0;
 							for (ItemCardapioBean i : result) {
@@ -85,7 +87,6 @@ public class CarrinhoPedidosUI extends Composite {
 				if (!token.endsWith("/checkout")) {
 					History.newItem(token + "/checkout");
 				}
-
 			}
 		});
 	}

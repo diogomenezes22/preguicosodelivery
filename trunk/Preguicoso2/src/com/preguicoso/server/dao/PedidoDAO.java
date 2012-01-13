@@ -1,6 +1,5 @@
 package com.preguicoso.server.dao;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -45,16 +44,9 @@ public class PedidoDAO extends DAOBase {
 	}
 
 	public List<Pedido> retrieveAfter(Long idEstabelecimento, Date lastTime) {
-		// TODO @Osman colocar .filter no futuro
-		List<Pedido> listaCompleta = this.ofy().query(Pedido.class).list();
-		List<Pedido> lista = new ArrayList<Pedido>();
-		for (Pedido p : listaCompleta) {
-			if (p != null) {
-				if (p.getIdEstabelecimento().equals(idEstabelecimento)
-						&& p.getTimeStamp().compareTo(lastTime) > 0)
-					lista.add(p);
-			}
-		}
+		List<Pedido> lista = this.ofy().query(Pedido.class)
+				.filter("idEstabelecimento", idEstabelecimento)
+				.filter("timeStamp >", lastTime).list();
 		Collections.sort(lista, new Comparator<Pedido>() {
 
 			@Override
@@ -68,28 +60,8 @@ public class PedidoDAO extends DAOBase {
 	}
 
 	public List<Pedido> listByBairroTimeStamp(Long idEstabelecimento) {
-		// TODO @Osman: colocar .filter no futuro
-
-		// Query<Pedido> query = this.ofy().query(Pedido.class)
-		// .filter("visto", false);
-		// System.out.println("Tamanho da query: " + query.count() + " - em "
-		// + new Date());
-		//
-		// List<Pedido> lista = new ArrayList<Pedido>(query.list());
-
-		// ArrayList<Pedido> lista = new ArrayList<Pedido>(this.ofy()
-		// .query(Pedido.class)
-		// .filter("idEstabelecimento =", idEstabelecimento).list());
-
-		List<Pedido> listaCompleta = this.ofy().query(Pedido.class).list();
-
-		List<Pedido> lista = new ArrayList<Pedido>();
-		for (Pedido p : listaCompleta) {
-			if (p != null) {
-				if (p.getIdEstabelecimento().equals(idEstabelecimento))
-					lista.add(p);
-			}
-		}
+		List<Pedido> lista = this.ofy().query(Pedido.class)
+				.filter("idEstabelecimento", idEstabelecimento).list();
 
 		Collections.sort(lista, new Comparator<Pedido>() {
 
@@ -109,4 +81,5 @@ public class PedidoDAO extends DAOBase {
 
 		return lista;
 	}
+
 }

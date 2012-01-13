@@ -121,11 +121,14 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public void setPedidoEnviado(Long idPedido) {
 		// TODO quando tiver histórico deve ser assim
-		// PedidoDAO pdao = new PedidoDAO();
-		// Pedido p = pdao.retrieve(idPedido);
-		// p.setEnviado(true);
-		// pdao.update(p);
+		PedidoDAO pdao = new PedidoDAO();
+		Pedido p = pdao.retrieve(idPedido);
+		p.setEnviado(true);
+		pdao.update(p);
+	}
 
+	@Override
+	public void removePedido(Long idPedido) {
 		PedidoDAO pdao = new PedidoDAO();
 		Pedido p = pdao.retrieve(idPedido);
 		pdao.delete(p);

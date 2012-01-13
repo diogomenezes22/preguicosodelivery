@@ -131,7 +131,7 @@ public class LoginUI extends Composite {
 								+ cep.getText().replace("-", ""));
 						History.fireCurrentHistoryState();
 					} else {
-						Window.alert("Cep inv�lido");
+						Window.alert("Cep inválido");
 					}
 				}
 			}

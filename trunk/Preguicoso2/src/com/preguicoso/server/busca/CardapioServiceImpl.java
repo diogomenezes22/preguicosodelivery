@@ -94,6 +94,11 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
+	public void carrinhoClean() {
+		this.getThreadLocalRequest().getSession().setAttribute("pedido", null);
+	}
+
+	@Override
 	public void removeItem(ItemCardapioBean i) {
 		CarrinhoDeCompra carrinho;
 		UserService userservice = UserServiceFactory.getUserService();
@@ -149,4 +154,5 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		PedidoDAO pdao = new PedidoDAO();
 		pdao.create(p);
 	}
+
 }
