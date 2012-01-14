@@ -49,7 +49,7 @@ public class Busca extends Composite {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("Couldn't get required data");
+							Window.alert("Não foi possível carregar a lista de resteurantes. Recarregue a página.");
 						}
 
 						@Override
@@ -66,7 +66,7 @@ public class Busca extends Composite {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("Couldn't get required data");
+							Window.alert("Não foi possível carregar a lista de resteurantes. Recarregue a página.");
 						}
 
 						@Override

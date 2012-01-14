@@ -128,7 +128,7 @@ public class EditarCardapio extends Composite {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Houve algum problema");
+						Window.alert("Não foi possível recuperar os itens do cardápio. Recarregue a página.");
 
 					}
 				});

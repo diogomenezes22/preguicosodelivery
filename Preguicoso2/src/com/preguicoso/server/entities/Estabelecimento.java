@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 
 import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Indexed;
 import com.preguicoso.server.dao.BairroDAO;
 import com.preguicoso.server.dao.EnderecoDAO;
 import com.preguicoso.server.dao.UsuarioDAO;
@@ -26,17 +24,11 @@ public class Estabelecimento implements Serializable {
 
 	@Id
 	Long id;
-	@Column
 	String nome;
-	@Indexed
 	Long enderecoId;
-	@Column
 	String razaoSocial;
-	@Indexed
 	String cnpj;
-	@Column
 	String logoURL = "";
-	@Column
 	String categoria = "";
 	RegistroStatusRestaurante status;
 

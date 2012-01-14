@@ -12,11 +12,17 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.server.carrinho.CarrinhoDeCompra;
+import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.dao.ItemCardapioDAO;
 import com.preguicoso.server.dao.PedidoDAO;
+import com.preguicoso.server.entities.Bairro;
+import com.preguicoso.server.entities.Endereco;
+import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.server.entities.Pedido;
+import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.shared.RegistroStatusPedido;
+import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 
@@ -62,7 +68,6 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		carrinho.setPedido((HashMap) session.getAttribute("pedido"));
 		carrinho.addItem(dao.retrieve(i.getId()), quantidade, observacao);
 		session.setAttribute("pedido", carrinho.getPedido());
-
 	}
 
 	@Override
@@ -97,6 +102,27 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public void carrinhoClean() {
 		this.getThreadLocalRequest().getSession().setAttribute("pedido", null);
+
+		// TODO @Osman gera restaurante teste temporário
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		List<Estabelecimento> lista = edao.listAll();
+		if (lista != null) {
+			if (lista.isEmpty()) {
+				Estabelecimento e = new Estabelecimento();
+				e.setCnpj("123");
+				e.setNome("Teste");
+				e.setCategoria("Chinesa");
+				e.setAreaAtendimento(new ArrayList<Bairro>());
+				e.setDono(new Usuario());
+				e.setEmailDono("teste@teste.com");
+				e.setEndereco(new Endereco());
+				e.setId((long) 405);
+				e.setLogoURL("http://www.guiabh.com.br/imgs_cadastradas/China%20in%20Box%20logo.jpg");
+				e.setRazaoSocial("razao social");
+				e.setStatus(RegistroStatusRestaurante.Aberto);
+				edao.create(e);
+			}
+		}
 	}
 
 	@Override

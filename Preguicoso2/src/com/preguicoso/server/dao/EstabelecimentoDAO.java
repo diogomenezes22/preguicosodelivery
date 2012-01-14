@@ -41,12 +41,11 @@ public class EstabelecimentoDAO extends DAOBase {
 	}
 
 	public Estabelecimento retrieveByCnpj(String cnpj) {
-		List<Estabelecimento> e = this.ofy().query(Estabelecimento.class)
-				.list();
-		for (Estabelecimento estabelecimento : e) {
-			if (estabelecimento.getCnpj().equals(cnpj))
-				return estabelecimento;
-		}
+		// TODO @Osman trocar por get em breve
+		List<Estabelecimento> lista = this.ofy().query(Estabelecimento.class)
+				.filter("cnpj", cnpj).list();
+		if (!lista.isEmpty())
+			return lista.get(0);
 		return null;
 	}
 

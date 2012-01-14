@@ -102,7 +102,7 @@ public class Backend extends Composite {
 						status.getSelectedIndex(), new AsyncCallback<Void>() {
 
 							@Override
-							public void onFailure(Throwable arg0) {
+							public void onFailure(Throwable caught) {
 								Window.alert("Ocorreu um erro ao tentar mudar o seu status. Recarregue a página e tente novamente.");
 							}
 
