@@ -122,7 +122,6 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public void setPedidoEnviado(Long idPedido) {
-		// TODO quando tiver histórico deve ser assim
 		PedidoDAO pdao = new PedidoDAO();
 		Pedido p = pdao.retrieve(idPedido);
 		p.setStatus(RegistroStatusPedido.enviado);
