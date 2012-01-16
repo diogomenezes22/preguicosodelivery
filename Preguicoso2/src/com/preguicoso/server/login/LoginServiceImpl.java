@@ -6,8 +6,10 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.login.LoginService;
+import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.dao.UsuarioDAO;
 import com.preguicoso.server.entities.Usuario;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
 
 /**
@@ -101,14 +103,21 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public Boolean logarEstabelecimento(String login, String password) {
-		if(login.equals("admin") && password.equals("1234"))
+		if (login.equals("admin") && password.equals("1234"))
 			return true;
 		return false;
 	}
 
 	@Override
 	public Boolean isEstabelecimentoLogado() {
-		// TODO Auto-generated method stub
+		// TODO @Abraão implementar isso
 		return true;
+	}
+
+	@Override
+	public EstabelecimentoBean getEstabelecimentoLogado() {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		// TODO @Osman pegar da session no futuro
+		return edao.retrieve((long) 405).toBean();
 	}
 }

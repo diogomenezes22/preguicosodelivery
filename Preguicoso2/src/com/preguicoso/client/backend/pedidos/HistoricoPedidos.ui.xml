@@ -8,20 +8,16 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<div class="grid_6 coluna2 alpha omega">
-			<h1>Faturamento do Dia</h1>
+			<h1>Histórico de Pedidos</h1>
 			<div class="container_coluna2">
-				<div class="container">
-					a
+				<div class="coluna2_barra">
+					Pedidos Anteriores
+				</div>
+				<div class="container_ordem_pedidos">
+					<g:HTMLPanel ui:field="listaPanel" styleName="lista" />
 				</div>
 			</div>
 		</div>
-		<div class="grid_3 coluna3 alpha omega">
-			<h1>Faturamento Mensal</h1>
-			<div class="container_coluna3">
-				<div class="container">
-					as
-				</div>
-			</div>
-		</div>
+		<div id="editarItem"></div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

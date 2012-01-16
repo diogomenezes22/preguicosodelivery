@@ -110,7 +110,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 			if (lista.isEmpty()) {
 				Estabelecimento e = new Estabelecimento();
 				e.setCnpj("123");
-				e.setNome("Teste");
+				e.setNome("China In Box");
 				e.setCategoria("Chinesa");
 				e.setAreaAtendimento(new ArrayList<Bairro>());
 				e.setDono(new Usuario());

@@ -3,6 +3,7 @@ package com.preguicoso.client.login;
 import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
 
 /**
@@ -24,9 +25,10 @@ public interface LoginServiceAsync {
 
 	void getURLLogin(AsyncCallback<String> callback);
 
-
 	void isEstabelecimentoLogado(AsyncCallback<Boolean> callback);
 
 	void logarEstabelecimento(String login, String pass,
 			AsyncCallback<Boolean> callback);
+
+	void getEstabelecimentoLogado(AsyncCallback<EstabelecimentoBean> callback);
 }
