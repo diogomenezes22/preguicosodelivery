@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
+import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.PedidoBean;
 
 public class PedidoUi extends Composite {
@@ -44,8 +45,6 @@ public class PedidoUi extends Composite {
 	private PedidoBean pb;
 
 	public PedidoUi(PedidoBean pb) {
-		this.pb = pb;
-
 		initWidget(uiBinder.createAndBindUi(this));
 		this.pb = pb;
 		this.nomeCliente.setText(pb.getNomeCliente());
@@ -64,16 +63,16 @@ public class PedidoUi extends Composite {
 	@UiHandler("pedido")
 	void onPedidoClick(ClickEvent event) {
 		this.setStyleName("visualizada");
-		cadastroService.setPedidoVisualizado(pb.getId(),
+		cadastroService.setStatusPedido(pb.getId(), RegistroStatusPedido.visto,
 				new AsyncCallback<Void>() {
-
-					@Override
-					public void onSuccess(Void result) {
-					}
 
 					@Override
 					public void onFailure(Throwable caught) {
 						Window.alert("Ocorreu um erro inesperado. Por favor, recarregue a página.");
+					}
+
+					@Override
+					public void onSuccess(Void result) {
 					}
 				});
 	}

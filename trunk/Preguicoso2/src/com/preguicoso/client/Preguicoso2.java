@@ -8,36 +8,50 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.preguicoso.client.backend.Backend;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Preguicoso2 implements EntryPoint {
 	private final LoginServiceAsync loginService = GWT
-	.create(LoginService.class);
+			.create(LoginService.class);
+
 	public void onModuleLoad() {
-		
-			Backend backend = new Backend();
-			RootPanel.get("loading").setVisible(false);
-			RootPanel.get("content").add(backend);
-		
+		loginService
+				.getEstabelecimentoLogado(new AsyncCallback<EstabelecimentoBean>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Ocorreu um problema com o login. Tente se logar novamente.");
+					}
+
+					@Override
+					public void onSuccess(EstabelecimentoBean result) {
+						Backend backend = new Backend(result);
+						RootPanel.get("loading").setVisible(false);
+						RootPanel.get("content").add(backend);
+					}
+				});
 	}
+
 	Boolean isLogado = false;
+
 	private boolean isLogado() {
-		
+
 		loginService.isEstabelecimentoLogado(new AsyncCallback<Boolean>() {
-			
+
 			@Override
 			public void onSuccess(Boolean result) {
 				isLogado = result;
 				Window.alert("asdads");
-				
+
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 				isLogado = false;
-				
+
 			}
 		});
 		return isLogado;

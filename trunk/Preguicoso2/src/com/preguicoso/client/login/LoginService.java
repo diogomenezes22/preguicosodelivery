@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
 
 /**
@@ -24,8 +25,10 @@ public interface LoginService extends RemoteService {
 	String getURLLogout();
 
 	String getURLLogin();
-	
-	Boolean logarEstabelecimento(String login,String pass);
-	
+
+	Boolean logarEstabelecimento(String login, String pass);
+
 	Boolean isEstabelecimentoLogado();
+
+	EstabelecimentoBean getEstabelecimentoLogado();
 }

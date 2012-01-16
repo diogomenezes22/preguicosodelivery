@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
+import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 import com.preguicoso.shared.entities.PedidoBean;
 
@@ -60,14 +61,9 @@ public class DescricaoPedido extends Composite {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				cadastroService.setPedidoEnviado(pb.getId(),
+				cadastroService.setStatusPedido(pb.getId(),
+						RegistroStatusPedido.enviado,
 						new AsyncCallback<Void>() {
-
-							@Override
-							public void onSuccess(Void result) {
-								removeUi(pu);
-								Window.alert("Pedido enviado com sucesso.");
-							}
 
 							@Override
 							public void onFailure(Throwable caught) {
@@ -77,25 +73,33 @@ public class DescricaoPedido extends Composite {
 										+ "Caso ele continue na aba Ordem de Pedidos, "
 										+ "tente enviá-lo novamente.");
 							}
+
+							@Override
+							public void onSuccess(Void result) {
+								removeUi(pu);
+								Window.alert("Pedido enviado com sucesso.");
+							}
 						});
+
 			}
 		});
 		remove.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				cadastroService.removePedido(pb.getId(),
+				cadastroService.setStatusPedido(pb.getId(),
+						RegistroStatusPedido.recusado,
 						new AsyncCallback<Void>() {
 
 							@Override
-							public void onFailure(Throwable caught) {
+							public void onFailure(Throwable arg0) {
 								Window.alert("Não foi possível rejeitar o pedido do cliente "
 										+ pb.getNomeCliente()
 										+ ". Recarregue a página e tente novamente.");
 							}
 
 							@Override
-							public void onSuccess(Void result) {
+							public void onSuccess(Void arg0) {
 								removeUi(pu);
 								Window.alert("O pedido do cliente "
 										+ pb.getNomeCliente()

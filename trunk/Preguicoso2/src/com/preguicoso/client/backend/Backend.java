@@ -19,15 +19,14 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.backend.cardapio.EditarCardapio;
-import com.preguicoso.client.backend.pedidos.FecharBalanco;
+import com.preguicoso.client.backend.pedidos.HistoricoPedidos;
 import com.preguicoso.client.backend.pedidos.OrdemPedidos;
 import com.preguicoso.client.backend.restaurante.EditarInformacao;
 import com.preguicoso.client.backend.restaurante.Setup;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
-import com.preguicoso.client.login.LoginService;
-import com.preguicoso.client.login.LoginServiceAsync;
 import com.preguicoso.shared.RegistroStatusRestaurante;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class Backend extends Composite {
 
@@ -47,20 +46,18 @@ public class Backend extends Composite {
 	@UiField
 	ListBox status;
 
-	private final LoginServiceAsync loginService = GWT
-			.create(LoginService.class);
-
 	private final CadastroServiceAsync cadastroService = GWT
 			.create(CadastroService.class);
 
 	interface backendUiBinder extends UiBinder<Widget, Backend> {
 	}
 
-	public Backend() {
+	public Backend(EstabelecimentoBean e) {
 		initWidget(uiBinder.createAndBindUi(this));
 		if (History.getToken().equals(""))
 			History.newItem("pedidos/ordem");
 		createMenu();
+		nomeEstabelecimento.setText(e.getNome());
 		inicio();
 		routerHistory();
 	}
@@ -72,8 +69,8 @@ public class Backend extends Composite {
 		containerMenu.clear();
 		containerMenu.add(new InlineHyperlink("Ordem de Pedidos",
 				"pedidos/ordem"));
-		containerMenu.add(new InlineHyperlink("Fechar balanço",
-				"pedidos/balanco"));
+		containerMenu.add(new InlineHyperlink("Histórico de Pedidos",
+				"pedidos/historico_de_pedidos"));
 
 		for (RegistroStatusRestaurante rs : RegistroStatusRestaurante.values()) {
 			status.addItem(rs.name());
@@ -132,9 +129,9 @@ public class Backend extends Composite {
 		if (token.startsWith("pedidos/ordem")) {
 			container.clear();
 			container.add(new OrdemPedidos());
-		} else if (token.startsWith("pedidos/balanco")) {
+		} else if (token.startsWith("pedidos/historico_de_pedidos")) {
 			container.clear();
-			container.add(new FecharBalanco());
+			container.add(new HistoricoPedidos());
 		} else if (token.startsWith("cardapio/editar")) {
 			container.clear();
 			EditarCardapio editar = new EditarCardapio();
@@ -166,8 +163,8 @@ public class Backend extends Composite {
 				containerMenu.clear();
 				containerMenu.add(new InlineHyperlink("Ordem de Pedidos",
 						"pedidos/ordem"));
-				containerMenu.add(new InlineHyperlink("Fechar balanço",
-						"pedidos/balanco"));
+				containerMenu.add(new InlineHyperlink("Histórico de Pedidos",
+						"pedidos/historico_de_pedidos"));
 			}
 		});
 		cardapio.addClickHandler(new ClickHandler() {

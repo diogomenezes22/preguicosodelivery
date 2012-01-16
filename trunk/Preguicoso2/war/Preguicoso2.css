@@ -449,6 +449,10 @@ body {
 	background-color: #F4F0E0;
 }
 
+.lista .recusada {
+	background-color: #FFF2C6;
+}
+
 .lista small {
 	margin-left: -25px;
 	padding-bottom: 0px;

@@ -113,18 +113,10 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public void setPedidoVisualizado(Long idPedido) {
+	public void setStatusPedido(Long idPedido, RegistroStatusPedido status) {
 		PedidoDAO pdao = new PedidoDAO();
 		Pedido p = pdao.retrieve(idPedido);
-		p.setStatus(RegistroStatusPedido.visto);
-		pdao.update(p);
-	}
-
-	@Override
-	public void setPedidoEnviado(Long idPedido) {
-		PedidoDAO pdao = new PedidoDAO();
-		Pedido p = pdao.retrieve(idPedido);
-		p.setStatus(RegistroStatusPedido.enviado);
+		p.setStatus(status);
 		pdao.update(p);
 	}
 
@@ -159,5 +151,18 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 			lista.add(p.toBean());
 		}
 		return lista;
+	}
+
+	@Override
+	public List<PedidoBean> getListaHistoricoDePedidos(Long idEstabelecimento) {
+		List<Pedido> lista = (new PedidoDAO())
+				.listarHistorico(idEstabelecimento);
+		List<PedidoBean> listaBean = new ArrayList<PedidoBean>();
+		if (lista != null) {
+			for (Pedido p : lista) {
+				listaBean.add(p.toBean());
+			}
+		}
+		return listaBean;
 	}
 }

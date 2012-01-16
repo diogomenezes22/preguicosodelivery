@@ -98,10 +98,8 @@ public class OrdemPedidos extends Composite {
 								BairroUi bu;
 								String bairroAtual = "";
 								for (PedidoBean pb : result) {
-									// TODO @Osman talvez seja melhor criar
-									// entidades
-									// separadas para Pedidos atuais e enviados
-									if (pb.getStatus() != RegistroStatusPedido.enviado) {
+									if (pb.getStatus() == RegistroStatusPedido.esperando
+											|| pb.getStatus() == RegistroStatusPedido.visto) {
 										todosEnviados = false;
 										if (!pb.getBairro().equals(bairroAtual)) {
 											bu = new BairroUi(pb.getBairro());

@@ -8,6 +8,7 @@ import java.util.List;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
 import com.preguicoso.server.entities.Pedido;
+import com.preguicoso.shared.RegistroStatusPedido;
 
 public class PedidoDAO extends DAOBase {
 	static {
@@ -82,4 +83,30 @@ public class PedidoDAO extends DAOBase {
 		return lista;
 	}
 
+	// TODO @Osman usar .order para otimizar no futuro
+	public List<Pedido> listarHistorico(Long idEstabelecimento) {
+		RegistroStatusPedido[] listaStatus = { RegistroStatusPedido.enviado,
+				RegistroStatusPedido.recusado };
+		List<Pedido> lista = this.ofy().query(Pedido.class)
+				.filter("idEstabelecimento", idEstabelecimento)
+				.filter("status in", listaStatus).list();
+
+		Collections.sort(lista, new Comparator<Pedido>() {
+
+			@Override
+			public int compare(Pedido o1, Pedido o2) {
+				if (o1.getBairro().compareTo(o2.getBairro()) > 0) {
+					return 1;
+				} else if (o1.getBairro().equals(o2.getBairro())) {
+					if (o1.getTimeStamp().compareTo(o2.getTimeStamp()) > 0)
+						return -1;
+					return 1;
+				}
+				return -1;
+			}
+
+		});
+
+		return lista;
+	}
 }
