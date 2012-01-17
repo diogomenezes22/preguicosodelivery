@@ -42,20 +42,25 @@ public class DescricaoPedido extends Composite {
 	@UiField
 	InlineLabel numero;
 	@UiField
-	HTMLPanel pedidos;
+	HTMLPanel listaPedidos;
 
 	public DescricaoPedido() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
-
+	
 	public DescricaoPedido(final PedidoBean pb, final PedidoUi pu) {
 		initWidget(uiBinder.createAndBindUi(this));
+		int cont = 1;
 		endereco.setText(pb.getRua() + ", " + pb.getBairro());
 		formaPagamento.setText(pb.getFormaPagamento());
 		List<ItemCardapioBean> lista = pb.getListaItens();
 		if (lista != null)
 			for (ItemCardapioBean itemCardapioBean : lista) {
-				pedidos.add(new HTMLPanel(itemCardapioBean.getDescricao()));
+				ItemListaDescricaoPedido i = new ItemListaDescricaoPedido(itemCardapioBean);
+				if(cont%2==1)
+					i.setOdd();
+				listaPedidos.add(i);
+				cont++;
 			}
 		enviar.addClickHandler(new ClickHandler() {
 
