@@ -6,5 +6,10 @@
 			font-weight: bold;
 		}
 	</ui:style>
-	
+	<g:HTMLPanel styleName="tabela_iten" ui:field="campo">
+		<span style="width:30px"><g:InlineLabel text="New InlineLabel" ui:field="no"/>
+		</span><span style="width:120px"><g:InlineLabel text="New InlineLabel" ui:field="item"/></span>
+		<span style="width:165px" ><g:InlineLabel text="New InlineLabel" ui:field="observacao"/></span>
+		<span style="width:40px" ><g:InlineLabel text="New InlineLabel" ui:field="qtd"/></span>
+	</g:HTMLPanel>
 </ui:UiBinder> 

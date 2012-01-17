@@ -22,25 +22,13 @@
 					<g:InlineLabel ui:field="numero" />
 				</h4>
 				<h2>Lista de Pedidos</h2>
-				<g:HTMLPanel ui:field="pedidos">
-					<table>
-						<tr class="head">
-							<th>
-								No
-							</th>
-							<th>
-								Item
-							</th>
-							<th>
-								Observação
-							</th>
-							<th>
-								Qtd
-							</th>
-						</tr>
-
-					</table>
-				</g:HTMLPanel>
+				
+					<div class = "tabela">
+						<div class="tabela_header"><span style="width:30px">No</span><span style="width:120px">Item</span><span style="width:165px" >Observação</span><span style="width:40px" >Qtde</span> </div>
+						<g:HTMLPanel ui:field="listaPedidos">
+						</g:HTMLPanel>
+					</div>
+				
 				<h4>Endereço de Entrega:</h4>
 				<h3>
 					<g:InlineLabel ui:field="endereco" />
