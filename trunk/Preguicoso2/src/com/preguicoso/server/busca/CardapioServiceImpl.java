@@ -87,12 +87,12 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 			session.setAttribute("pedido", new HashMap());
 		}
 		carrinho.setPedido((HashMap) session.getAttribute("pedido"));
-		HashMap<ItemCardapio, Integer> pedido = carrinho.getPedido();
+		HashMap<ItemCardapioBean, Integer> pedido = carrinho.getPedido();
 
 		ArrayList<ItemCardapioBean> pedidoBean = new ArrayList<ItemCardapioBean>();
 
-		for (ItemCardapio e : pedido.keySet()) {
-			pedidoBean.add(e.toBean());
+		for (ItemCardapioBean e : pedido.keySet()) {
+			pedidoBean.add(e);
 		}
 
 		return pedidoBean;
