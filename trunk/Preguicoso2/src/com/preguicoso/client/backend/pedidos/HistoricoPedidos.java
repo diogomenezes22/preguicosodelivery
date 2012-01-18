@@ -30,10 +30,8 @@ public class HistoricoPedidos extends Composite {
 	private final CadastroServiceAsync cadastroService = GWT
 			.create(CadastroService.class);
 
-	public HistoricoPedidos() {
+	public HistoricoPedidos(Long idEstabelecimento) {
 		initWidget(uiBinder.createAndBindUi(this));
-
-		final Long idEstabelecimento = (long) 405;
 		carregaListaDePedidos(idEstabelecimento);
 	}
 

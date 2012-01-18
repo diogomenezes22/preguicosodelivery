@@ -31,10 +31,9 @@ public class OrdemPedidos extends Composite {
 	interface OrdemPedidosUiBinder extends UiBinder<Widget, OrdemPedidos> {
 	}
 
-	public OrdemPedidos() {
+	public OrdemPedidos(final Long idEstabelecimento) {
 		initWidget(uiBinder.createAndBindUi(this));
 
-		final Long idEstabelecimento = (long) 405;
 		carregaListaDePedidos(idEstabelecimento);
 		// TODO @Osman existe a possibilidade de o pedido não ser atualizado
 		// caso seja
