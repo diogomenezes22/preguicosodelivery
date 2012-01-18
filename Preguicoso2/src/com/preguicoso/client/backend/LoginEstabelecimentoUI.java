@@ -2,9 +2,9 @@ package com.preguicoso.client.backend;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -16,7 +16,7 @@ import com.preguicoso.client.Preguicoso2;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
 
-public class Login extends Composite {
+public class LoginEstabelecimentoUI extends Composite {
 
 	private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
 	@UiField
@@ -26,42 +26,38 @@ public class Login extends Composite {
 	@UiField
 	Button botao;
 
-	private Preguicoso2 p;
-
-	public void setP(Preguicoso2 p) {
-		this.p = p;
-	}
-
-	interface LoginUiBinder extends UiBinder<Widget, Login> {
-	}
-
-	public Login() {
-		initWidget(uiBinder.createAndBindUi(this));
+	interface LoginUiBinder extends UiBinder<Widget, LoginEstabelecimentoUI> {
 	}
 
 	private final LoginServiceAsync loginService = GWT
 			.create(LoginService.class);
 
-	@UiHandler("botao")
-	void onBotaoClick(ClickEvent event) {
-		loginService.logarEstabelecimento(login.getText(), password.getValue(),
-				new AsyncCallback<Boolean>() {
+	public LoginEstabelecimentoUI(final Preguicoso2 preguicoso2) {
+		initWidget(uiBinder.createAndBindUi(this));
+		botao.addClickHandler(new ClickHandler() {
 
-					@Override
-					public void onSuccess(Boolean result) {
-						if (result) {
-							Window.alert("Você está logado");
-							p.onModuleLoad();
-						} else {
-							Window.alert("Você não está logado");
-						}
+			@Override
+			public void onClick(ClickEvent event) {
+				loginService.logarUsuarioEstabelecimento(login.getText(),
+						password.getValue(), new AsyncCallback<String>() {
 
-					}
+							@Override
+							public void onSuccess(String result) {
+								if (result == null) {
+									LoginEstabelecimentoUI.this
+											.removeFromParent();
+									preguicoso2.openEstabelecimentoLogadoView();
+								} else {
+									Window.alert(result);
+								}
+							}
 
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Problema com login");
-					}
-				});
+							@Override
+							public void onFailure(Throwable caught) {
+								Window.alert("Ocorreu um problema com login.");
+							}
+						});
+			}
+		});
 	}
 }

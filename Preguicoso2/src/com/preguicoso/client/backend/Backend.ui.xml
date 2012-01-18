@@ -26,6 +26,7 @@
 					<div class="delivery_menu">
 						<div class="itens_menu">
 							<g:ListBox ui:field="status"/>
+							<g:Button ui:field="logout" text="Logout"/>
 						</div>
 					</div>
 					<div class="nome_menu">

@@ -27,8 +27,10 @@ public interface LoginServiceAsync {
 
 	void isEstabelecimentoLogado(AsyncCallback<Boolean> callback);
 
-	void logarEstabelecimento(String login, String pass,
-			AsyncCallback<Boolean> callback);
+	void logarUsuarioEstabelecimento(String login, String pass,
+			AsyncCallback<String> callback);
 
 	void getEstabelecimentoLogado(AsyncCallback<EstabelecimentoBean> callback);
+
+	void fazerLogoutUsuarioEstabelecimento(AsyncCallback<Void> callback);
 }

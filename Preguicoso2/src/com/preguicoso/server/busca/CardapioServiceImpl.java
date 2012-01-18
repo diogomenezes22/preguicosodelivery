@@ -109,6 +109,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		List<Estabelecimento> lista = edao.listAll();
 		if (lista != null) {
 			if (lista.isEmpty()) {
+				// Cria china in box
 				Estabelecimento e = new Estabelecimento();
 				e.setCnpj("123");
 				e.setNome("China In Box");
@@ -120,6 +121,21 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				e.setId((long) 405);
 				e.setLogoURL("http://www.guiabh.com.br/imgs_cadastradas/China%20in%20Box%20logo.jpg");
 				e.setRazaoSocial("razao social");
+				e.setStatus(RegistroStatusRestaurante.Aberto);
+				edao.create(e);
+
+				// Cria Real sucos
+				e = new Estabelecimento();
+				e.setCnpj("123456");
+				e.setNome("Real Sucos");
+				e.setCategoria("Sushi");
+				e.setAreaAtendimento(new ArrayList<Bairro>());
+				e.setDono(new Usuario());
+				e.setEmailDono("teste@teste.com");
+				e.setEndereco(new Endereco());
+				e.setId((long) 407);
+				e.setLogoURL("http://fabricadamidia.com.br/imagens/minis/fotos_album_203.jpg");
+				e.setRazaoSocial("razao social do real sucos");
 				e.setStatus(RegistroStatusRestaurante.Aberto);
 				edao.create(e);
 			}

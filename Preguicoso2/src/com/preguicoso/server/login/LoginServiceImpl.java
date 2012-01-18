@@ -1,6 +1,8 @@
 package com.preguicoso.server.login;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,7 +12,11 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.dao.UsuarioDAO;
+import com.preguicoso.server.dao.UsuarioEstabelecimentoDAO;
+import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.server.entities.Usuario;
+import com.preguicoso.server.entities.UsuarioEstabelecimento;
+import com.preguicoso.shared.CriptoUtils;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
 
@@ -104,28 +110,102 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public Boolean logarEstabelecimento(String login, String password) {
-		HttpSession session = this.getThreadLocalRequest().getSession();
-		session.setAttribute("login", login);
-		session.setAttribute("password", password);
-		return true;
+	public String logarUsuarioEstabelecimento(String login, String password) {
+		UsuarioEstabelecimentoDAO udao = new UsuarioEstabelecimentoDAO();
+
+		// TODO @Osman <temporario>
+		List<UsuarioEstabelecimento> lista = udao.getAll();
+		if (lista != null) {
+			if (lista.isEmpty()) {
+				// Criando o dono do id 405
+				UsuarioEstabelecimento u = new UsuarioEstabelecimento();
+				u.setEmail("admin@preguicoso.com.br");
+				u.setLogin("admin");
+				try {
+					String senhaCript = CriptoUtils
+							.byteArrayToHexString(CriptoUtils.digest(
+									"arrastao".getBytes(), "MD5"));
+					u.setPassword(senhaCript);
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				}
+				u.setNome("Administrador");
+				List<Long> listaId = new ArrayList<Long>();
+				listaId.add((long) 405);
+				u.setIdEstabelecimentoList(listaId);
+				udao.create(u);
+
+				// Criando o dono do id 407
+				UsuarioEstabelecimento u2 = new UsuarioEstabelecimento();
+				u2.setEmail("admin2@preguicoso.com.br");
+				u2.setLogin("admin2");
+				try {
+					String senhaCript = CriptoUtils
+							.byteArrayToHexString(CriptoUtils.digest(
+									"arrastao2".getBytes(), "MD5"));
+					u2.setPassword(senhaCript);
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				}
+				u2.setNome("Administrador2");
+				List<Long> listaId2 = new ArrayList<Long>();
+				listaId2.add((long) 407);
+				u2.setIdEstabelecimentoList(listaId2);
+				udao.create(u2);
+			}
+		}
+		// </temporario>
+		try {
+			String senhaCriptografada = CriptoUtils
+					.byteArrayToHexString(CriptoUtils.digest(
+							password.getBytes(), "MD5"));
+			UsuarioEstabelecimento user = udao.retrieve(login);
+			if (user != null) {
+				if (user.getPassword().equals(senhaCriptografada)) {
+					HttpSession session = this.getThreadLocalRequest()
+							.getSession();
+					session.setAttribute("usuarioEstabelecimento", user);
+					session.setAttribute("isLogado", true);
+					return null;
+				}
+				return "A senha está errada.";
+			}
+			return "O login não existe.";
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return "Ocorreu um erro. Tente se logar novamente.";
+		}
 	}
 
 	@Override
 	public Boolean isEstabelecimentoLogado() {
-
 		HttpSession session = this.getThreadLocalRequest().getSession();
-		String login = (String) session.getAttribute("login");
-		String password = (String) session.getAttribute("password");
-		if (login.equals("admin") && password.equals("test"))
-			return true;
+		Boolean isLogado = (Boolean) session.getAttribute("isLogado");
+		if (isLogado != null)
+			if (isLogado)
+				return true;
 		return false;
 	}
 
 	@Override
 	public EstabelecimentoBean getEstabelecimentoLogado() {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
-		// TODO @Osman pegar da session no futuro
-		return edao.retrieve((long) 405).toBean();
+		// TODO @Osman update para mais de um restaurante associado ao usuario
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		UsuarioEstabelecimento user = (UsuarioEstabelecimento) session
+				.getAttribute("usuarioEstabelecimento");
+		Estabelecimento e = edao.retrieve(user.getIdEstabelecimentoList()
+				.get(0));
+		if (e != null) {
+			return e.toBean();
+		}
+		return null;
+	}
+
+	@Override
+	public void fazerLogoutUsuarioEstabelecimento() {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		session.setAttribute("isLogado", null);
+		session.setAttribute("usuarioEstabelecimento", null);
 	}
 }

@@ -26,7 +26,9 @@ public interface LoginService extends RemoteService {
 
 	String getURLLogin();
 
-	Boolean logarEstabelecimento(String login, String pass);
+	String logarUsuarioEstabelecimento(String login, String pass);
+
+	void fazerLogoutUsuarioEstabelecimento();
 
 	Boolean isEstabelecimentoLogado();
 

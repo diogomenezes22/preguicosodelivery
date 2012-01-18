@@ -38,7 +38,7 @@ public class EditarCardapio extends Composite {
 	@UiField
 	Button atualizar;
 
-	final Long idEstabelecimento = (long) 405;
+	final Long idEstabelecimento;
 
 	interface EditarCardapioUiBinder extends UiBinder<Widget, EditarCardapio> {
 	}
@@ -52,15 +52,17 @@ public class EditarCardapio extends Composite {
 	ArrayList<CategoriaBean> categorias = new ArrayList<CategoriaBean>();
 	ArrayList<ItemCategoria> listaCategorias = new ArrayList<ItemCategoria>();
 
-	public EditarCardapio() {
+	public EditarCardapio(Long idEstabelecimento) {
 		initWidget(uiBinder.createAndBindUi(this));
+		this.idEstabelecimento = idEstabelecimento;
 		getItensCardapio();
 		itemButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				ItemCardapioBean novoItem = new ItemCardapioBean("Novo Item",
 						"", false, "Descrição do item", (double) 0,
-						new CategoriaBean("Sem Categoria"), idEstabelecimento);
+						new CategoriaBean("Sem Categoria"),
+						EditarCardapio.this.idEstabelecimento);
 				listaNovos.add(new ItemCardapioUI(novoItem, listaCategorias));
 			}
 		});

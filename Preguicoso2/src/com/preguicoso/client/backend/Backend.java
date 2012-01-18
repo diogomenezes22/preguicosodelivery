@@ -9,15 +9,19 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineHyperlink;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.client.Preguicoso2;
 import com.preguicoso.client.backend.cardapio.EditarCardapio;
 import com.preguicoso.client.backend.pedidos.HistoricoPedidos;
 import com.preguicoso.client.backend.pedidos.OrdemPedidos;
@@ -25,6 +29,8 @@ import com.preguicoso.client.backend.restaurante.EditarInformacao;
 import com.preguicoso.client.backend.restaurante.Setup;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
+import com.preguicoso.client.login.LoginService;
+import com.preguicoso.client.login.LoginServiceAsync;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
@@ -45,19 +51,28 @@ public class Backend extends Composite {
 	HTMLPanel container;
 	@UiField
 	ListBox status;
+	@UiField
+	Button logout;
 
 	private final CadastroServiceAsync cadastroService = GWT
 			.create(CadastroService.class);
+	private final LoginServiceAsync loginService = GWT
+			.create(LoginService.class);
 
 	interface backendUiBinder extends UiBinder<Widget, Backend> {
 	}
 
-	public Backend(EstabelecimentoBean e) {
+	EstabelecimentoBean eb;
+	Preguicoso2 p2;
+
+	public Backend(EstabelecimentoBean eb, Preguicoso2 p2) {
 		initWidget(uiBinder.createAndBindUi(this));
+		this.eb = eb;
+		this.p2 = p2;
 		if (History.getToken().equals(""))
 			History.newItem("pedidos/ordem");
 		createMenu();
-		nomeEstabelecimento.setText(e.getNome());
+		nomeEstabelecimento.setText(eb.getNome());
 		inicio();
 		routerHistory();
 	}
@@ -75,9 +90,7 @@ public class Backend extends Composite {
 		for (RegistroStatusRestaurante rs : RegistroStatusRestaurante.values()) {
 			status.addItem(rs.name());
 		}
-		// TODO @Osman pegar id do restaurante logado
-		final Long idRestauranteLogado = (long) 405;
-		cadastroService.getStatus(idRestauranteLogado,
+		cadastroService.getStatus(eb.getId(),
 				new AsyncCallback<RegistroStatusRestaurante>() {
 
 					@Override
@@ -95,7 +108,7 @@ public class Backend extends Composite {
 
 			@Override
 			public void onChange(ChangeEvent event) {
-				cadastroService.setStatus(idRestauranteLogado,
+				cadastroService.setStatus(eb.getId(),
 						status.getSelectedIndex(), new AsyncCallback<Void>() {
 
 							@Override
@@ -109,7 +122,6 @@ public class Backend extends Composite {
 						});
 			}
 		});
-
 	}
 
 	public void routerHistory() {
@@ -128,13 +140,13 @@ public class Backend extends Composite {
 	public void buildHomePage(String token) {
 		if (token.startsWith("pedidos/ordem")) {
 			container.clear();
-			container.add(new OrdemPedidos());
+			container.add(new OrdemPedidos(eb.getId()));
 		} else if (token.startsWith("pedidos/historico_de_pedidos")) {
 			container.clear();
-			container.add(new HistoricoPedidos());
+			container.add(new HistoricoPedidos(eb.getId()));
 		} else if (token.startsWith("cardapio/editar")) {
 			container.clear();
-			EditarCardapio editar = new EditarCardapio();
+			EditarCardapio editar = new EditarCardapio(eb.getId());
 			container.add(editar);
 
 		} else if (token.startsWith("restaurante/editar")) {
@@ -194,5 +206,23 @@ public class Backend extends Composite {
 
 			}
 		});
+	}
+
+	@UiHandler("logout")
+	void onLogoutClick(ClickEvent event) {
+		loginService
+				.fazerLogoutUsuarioEstabelecimento(new AsyncCallback<Void>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Não foi possível fazer o logout. Recarregue a página e tente novamente.");
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						RootPanel.get("content").clear();
+						p2.onModuleLoad();
+					}
+				});
 	}
 }
