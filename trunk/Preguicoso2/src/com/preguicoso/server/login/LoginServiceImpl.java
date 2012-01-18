@@ -2,6 +2,8 @@ package com.preguicoso.server.login;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -103,15 +105,21 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public Boolean logarEstabelecimento(String login, String password) {
-		if (login.equals("admin") && password.equals("1234"))
-			return true;
-		return false;
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		session.setAttribute("login", login);
+		session.setAttribute("password", password);
+		return true;
 	}
 
 	@Override
 	public Boolean isEstabelecimentoLogado() {
-		// TODO @Abraão implementar isso
-		return true;
+
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		String login = (String) session.getAttribute("login");
+		String password = (String) session.getAttribute("password");
+		if (login.equals("admin") && password.equals("test"))
+			return true;
+		return false;
 	}
 
 	@Override

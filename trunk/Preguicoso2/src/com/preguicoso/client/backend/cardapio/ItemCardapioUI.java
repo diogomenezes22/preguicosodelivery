@@ -42,7 +42,8 @@ public class ItemCardapioUI extends Composite {
 		});
 	}
 
-	public ItemCardapioUI(String numero, String nome, String preco, ArrayList<ItemCategoria> listaCategoria) {
+	public ItemCardapioUI(String numero, String nome, String preco,
+			ArrayList<ItemCategoria> listaCategoria) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.nome.setText(nome);
 		this.numero.setText(numero);
@@ -58,20 +59,23 @@ public class ItemCardapioUI extends Composite {
 		});
 	}
 
-	public ItemCardapioUI(final ItemCardapioBean i ,final ArrayList<ItemCategoria> listaCategoria) {
+	public ItemCardapioUI(final ItemCardapioBean i,
+			final ArrayList<ItemCategoria> listaCategoria) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.nome.setText(i.getNome());
-		if(i.getId()!=null)
-			this.numero.setText(i.getId().toString());
-		else
-			this.numero.setVisible(false);
+		// TODO @Osman apagar em breve
+		// if (i.getId() != null)
+		this.numero.setText(Integer.toString(i.getNumero()));
+		// else
+		// this.numero.setVisible(false);
 		this.preco.setText("R$ " + i.getPreco().toString());
 		item.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				RootPanel.get("editarItem").clear();
-				RootPanel.get("editarItem").add(new EditarItem(i,listaCategoria));
+				RootPanel.get("editarItem").add(
+						new EditarItem(i, listaCategoria));
 			}
 		});
 	}

@@ -55,19 +55,15 @@ public class HistoricoPedidos extends Composite {
 								BairroUi bu;
 								String bairroAtual = "";
 								for (PedidoBean pb : result) {
-									if (pb.getStatus() == RegistroStatusPedido.enviado
-											|| pb.getStatus() == RegistroStatusPedido.recusado) {
-										if (!pb.getBairro().equals(bairroAtual)) {
-											bu = new BairroUi(pb.getBairro());
-											listaPanel.add(bu);
-											bairroAtual = pb.getBairro();
-										}
-										pu = new PedidoAntigoUi(pb);
-										if (pb.getStatus() == RegistroStatusPedido.recusado)
-											// TODO @Osman boter css de recusado
-											pu.setStyleName("recusada");
-										listaPanel.add(pu);
+									if (!pb.getBairro().equals(bairroAtual)) {
+										bu = new BairroUi(pb.getBairro());
+										listaPanel.add(bu);
+										bairroAtual = pb.getBairro();
 									}
+									pu = new PedidoAntigoUi(pb);
+									if (pb.getStatus() == RegistroStatusPedido.recusado)
+										pu.setStyleName("recusada");
+									listaPanel.add(pu);
 								}
 							} else {
 								BairroUi bu = new BairroUi(

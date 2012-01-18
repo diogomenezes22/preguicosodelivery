@@ -88,6 +88,7 @@ public class DescricaoPedido extends Composite {
 
 			}
 		});
+		// TODO @Osman recusar deve ter o motivo registrado
 		remove.addClickHandler(new ClickHandler() {
 
 			@Override

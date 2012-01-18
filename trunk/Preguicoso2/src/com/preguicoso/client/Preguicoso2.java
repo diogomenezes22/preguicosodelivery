@@ -18,6 +18,19 @@ public class Preguicoso2 implements EntryPoint {
 			.create(LoginService.class);
 
 	public void onModuleLoad() {
+		getEstabelecimento();
+		// if (isLogado()) {
+		// getEstabelecimento();
+		// } else {
+		// Login login = new Login();
+		// login.setP(this);
+		// RootPanel.get("loading").setVisible(false);
+		// RootPanel.get("content").clear();
+		// RootPanel.get("content").add(login);
+		// }
+	}
+
+	private void getEstabelecimento() {
 		loginService
 				.getEstabelecimentoLogado(new AsyncCallback<EstabelecimentoBean>() {
 
@@ -44,14 +57,16 @@ public class Preguicoso2 implements EntryPoint {
 			@Override
 			public void onSuccess(Boolean result) {
 				isLogado = result;
-				Window.alert("asdads");
-
+				if (result) {
+					RootPanel.get("content").clear();
+					RootPanel.get("loading").setVisible(true);
+					onModuleLoad();
+				}
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
 				isLogado = false;
-
 			}
 		});
 		return isLogado;

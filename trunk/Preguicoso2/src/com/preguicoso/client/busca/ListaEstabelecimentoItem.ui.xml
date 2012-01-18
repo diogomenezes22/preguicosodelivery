@@ -29,10 +29,6 @@
 						<small></small>
 						<g:Label ui:field="endereco"/>
 					</div>
-					
-						Status:
-						<g:Label ui:field="status"/>
-					
 				</div>
 			</div>
 			

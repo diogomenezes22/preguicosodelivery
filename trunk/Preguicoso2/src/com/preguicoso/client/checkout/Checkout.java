@@ -64,7 +64,7 @@ public class Checkout extends Composite {
 			public void onClick(ClickEvent event) {
 				cardapioService.enviarPedido("Sem Nome", endereco_rua.getText()
 						+ " " + endereco_numero.getText(),
-						endereco_bairro.getText(), dinheiro.getName(),
+						endereco_bairro.getText(), "Dinheiro",
 						new AsyncCallback<Void>() {
 
 							@Override

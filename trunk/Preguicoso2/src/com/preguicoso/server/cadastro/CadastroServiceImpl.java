@@ -30,13 +30,17 @@ import com.preguicoso.shared.entities.UsuarioBean;
 /**
  * The server side implementation of the RPC service.
  */
-@SuppressWarnings("serial")
 public class CadastroServiceImpl extends RemoteServiceServlet implements
 		CadastroService {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6650028804777297689L;
+
 	@Override
 	public void salvarEstabelecimento(EstabelecimentoBean a) {
-		EstabelecimentoDAO banco = new EstabelecimentoDAO();
+		// EstabelecimentoDAO banco = new EstabelecimentoDAO();
 		Estabelecimento estabelecimento = new Estabelecimento(a);
 		UserService userservice = UserServiceFactory.getUserService();
 		UsuarioDAO bancoU = new UsuarioDAO();

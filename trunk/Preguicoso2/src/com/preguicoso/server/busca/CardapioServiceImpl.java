@@ -2,7 +2,6 @@ package com.preguicoso.server.busca;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -30,9 +29,13 @@ import com.preguicoso.shared.entities.ItemCardapioBean;
  * Author: Abraao Barros Lacerda The server side implementation of the RPC
  * service.
  */
-@SuppressWarnings("serial")
 public class CardapioServiceImpl extends RemoteServiceServlet implements
 		CardapioService {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6342485425372450637L;
 
 	@Override
 	public ArrayList<ItemCardapioBean> getItensCardapio(Long id) {
@@ -63,10 +66,14 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		ItemCardapioDAO dao = new ItemCardapioDAO();
 		HttpSession session = this.getThreadLocalRequest().getSession();
 		if (session.getAttribute("pedido") == null) {
-			session.setAttribute("pedido", new HashMap());
+			session.setAttribute("pedido", new ArrayList<ItemCardapioBean>());
 		}
-		carrinho.setPedido((HashMap) session.getAttribute("pedido"));
-		carrinho.addItem(dao.retrieve(i.getId()), quantidade, observacao);
+		carrinho.setPedido((ArrayList<ItemCardapioBean>) session
+				.getAttribute("pedido"));
+		ItemCardapioBean item = dao.retrieve(i.getId()).toBean();
+		item.setObservacao(observacao);
+		item.setQuantidade(quantidade);
+		carrinho.addItem(item);
 		session.setAttribute("pedido", carrinho.getPedido());
 	}
 
@@ -84,19 +91,13 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		HttpSession session = this.getThreadLocalRequest().getSession();
 		// TODO @Osman aqui tem erro na session
 		if (session.getAttribute("pedido") == null) {
-			session.setAttribute("pedido", new HashMap());
+			session.setAttribute("pedido", new ArrayList<ItemCardapioBean>());
 		}
-		carrinho.setPedido((HashMap) session.getAttribute("pedido"));
-		HashMap<ItemCardapioBean, Integer> pedido = carrinho.getPedido();
-
-		ArrayList<ItemCardapioBean> pedidoBean = new ArrayList<ItemCardapioBean>();
-
-		for (ItemCardapioBean e : pedido.keySet()) {
-			pedidoBean.add(e);
-		}
-
-		return pedidoBean;
-
+		carrinho.setPedido((ArrayList<ItemCardapioBean>) session
+				.getAttribute("pedido"));
+		ArrayList<ItemCardapioBean> pedido = (ArrayList<ItemCardapioBean>) carrinho
+				.getPedido();
+		return pedido;
 	}
 
 	@Override
@@ -138,12 +139,12 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		ItemCardapioDAO dao = new ItemCardapioDAO();
 		HttpSession session = this.getThreadLocalRequest().getSession();
 		if (session.getAttribute("pedido") == null) {
-			session.setAttribute("pedido", new HashMap());
+			session.setAttribute("pedido", new ArrayList<ItemCardapioBean>());
 		}
-		carrinho.setPedido((HashMap) session.getAttribute("pedido"));
-		carrinho.popItem(dao.retrieve(i.getId()));
+		carrinho.setPedido((ArrayList<ItemCardapioBean>) session
+				.getAttribute("pedido"));
+		carrinho.popItem(dao.retrieve(i.getId()).toBean());
 		session.setAttribute("pedido", carrinho.getPedido());
-
 	}
 
 	@Override
