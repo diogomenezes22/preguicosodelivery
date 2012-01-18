@@ -12,15 +12,25 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.client.Preguicoso2;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
 
-public class Login extends Composite{
+public class Login extends Composite {
 
 	private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
-	@UiField TextBox login;
-	@UiField PasswordTextBox password;
-	@UiField Button botao;
+	@UiField
+	TextBox login;
+	@UiField
+	PasswordTextBox password;
+	@UiField
+	Button botao;
+
+	private Preguicoso2 p;
+
+	public void setP(Preguicoso2 p) {
+		this.p = p;
+	}
 
 	interface LoginUiBinder extends UiBinder<Widget, Login> {
 	}
@@ -28,32 +38,30 @@ public class Login extends Composite{
 	public Login() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
-	
-	public Login(String firstName) {
-		initWidget(uiBinder.createAndBindUi(this));
-	}
 
 	private final LoginServiceAsync loginService = GWT
-	.create(LoginService.class);
+			.create(LoginService.class);
+
 	@UiHandler("botao")
 	void onBotaoClick(ClickEvent event) {
-		loginService.logarEstabelecimento(login.getText(),password.getValue(),new AsyncCallback<Boolean>() {
-			
-			@Override
-			public void onSuccess(Boolean result) {
-				if(result){
-					Window.alert("Você está logado");
-				}
-				else{
-					Window.alert("Você não está logado");
-				}
-				
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Pronto2");				
-			}
-		});
+		loginService.logarEstabelecimento(login.getText(), password.getValue(),
+				new AsyncCallback<Boolean>() {
+
+					@Override
+					public void onSuccess(Boolean result) {
+						if (result) {
+							Window.alert("Você está logado");
+							p.onModuleLoad();
+						} else {
+							Window.alert("Você não está logado");
+						}
+
+					}
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Problema com login");
+					}
+				});
 	}
 }

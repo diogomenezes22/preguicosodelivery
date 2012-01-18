@@ -45,8 +45,11 @@ public class PedidoDAO extends DAOBase {
 	}
 
 	public List<Pedido> retrieveAfter(Long idEstabelecimento, Date lastTime) {
+		RegistroStatusPedido[] listaStatus = { RegistroStatusPedido.esperando,
+				RegistroStatusPedido.visto };
 		List<Pedido> lista = this.ofy().query(Pedido.class)
 				.filter("idEstabelecimento", idEstabelecimento)
+				.filter("status in", listaStatus)
 				.filter("timeStamp >", lastTime).list();
 		Collections.sort(lista, new Comparator<Pedido>() {
 
@@ -61,8 +64,14 @@ public class PedidoDAO extends DAOBase {
 	}
 
 	public List<Pedido> listByBairroTimeStamp(Long idEstabelecimento) {
+		RegistroStatusPedido[] listaStatus = { RegistroStatusPedido.esperando,
+				RegistroStatusPedido.visto };
 		List<Pedido> lista = this.ofy().query(Pedido.class)
-				.filter("idEstabelecimento", idEstabelecimento).list();
+				.filter("idEstabelecimento", idEstabelecimento)
+				.filter("status in", listaStatus).list();
+
+		// List<Pedido> lista = this.ofy().query(Pedido.class)
+		// .filter("idEstabelecimento", idEstabelecimento).list();
 
 		Collections.sort(lista, new Comparator<Pedido>() {
 

@@ -91,7 +91,7 @@ public class EstabelecimentoUI extends Composite {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Erro - CadastroService.getEstabelecimento");
+						Window.alert("Conexão com problemas. Recarregue a página.");
 					}
 				});
 	}

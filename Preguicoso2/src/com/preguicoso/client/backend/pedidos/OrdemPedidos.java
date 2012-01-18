@@ -92,41 +92,29 @@ public class OrdemPedidos extends Composite {
 					@Override
 					public void onSuccess(List<PedidoBean> result) {
 						if (result != null) {
-							boolean todosEnviados = true;
 							if (!result.isEmpty()) {
 								PedidoUi pu;
 								BairroUi bu;
 								String bairroAtual = "";
 								for (PedidoBean pb : result) {
-									if (pb.getStatus() == RegistroStatusPedido.esperando
-											|| pb.getStatus() == RegistroStatusPedido.visto) {
-										todosEnviados = false;
-										if (!pb.getBairro().equals(bairroAtual)) {
-											bu = new BairroUi(pb.getBairro());
-											listaPanel.add(bu);
-											bairroAtual = pb.getBairro();
-										}
-										pu = new PedidoUi(pb);
-										if (pb.getStatus() == RegistroStatusPedido.visto)
-											pu.setStyleName("visualizada");
-										listaPanel.add(pu);
+									if (!pb.getBairro().equals(bairroAtual)) {
+										bu = new BairroUi(pb.getBairro());
+										listaPanel.add(bu);
+										bairroAtual = pb.getBairro();
 									}
-								}
-								if (todosEnviados) {
-									printPedidosEmpty();
+									pu = new PedidoUi(pb);
+									if (pb.getStatus() == RegistroStatusPedido.visto)
+										pu.setStyleName("visualizada");
+									listaPanel.add(pu);
 								}
 							} else {
-								printPedidosEmpty();
+								BairroUi bu = new BairroUi(
+										"Sem pedidos no momento");
+								listaPanel.add(bu);
 							}
 						}
 
 					}
-
-					private void printPedidosEmpty() {
-						BairroUi bu = new BairroUi("Sem pedidos no momento");
-						listaPanel.add(bu);
-					}
-
 				});
 	}
 }

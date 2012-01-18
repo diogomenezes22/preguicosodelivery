@@ -29,8 +29,6 @@ public class ListaEstabelecimentoItem extends Composite {
 	InlineHyperlink link;
 	@UiField
 	Image logo;
-	@UiField
-	Label status;
 
 	public ListaEstabelecimentoItem() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -47,9 +45,10 @@ public class ListaEstabelecimentoItem extends Composite {
 	public ListaEstabelecimentoItem(EstabelecimentoBean e) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.nome.setText(e.getNome());
-		this.status.setText(e.getStatus().name());
+		this.link.setText("Delivery " + e.getStatus().name());
 		if (!e.getStatus().name().equals("Aberto")) {
-			this.link.setVisible(false);
+			// TODO @Osman mudar para botão e ajeitar essa gambiarra
+			this.link.setTargetHistoryToken("index");
 		} else {
 			this.link.setTargetHistoryToken("Estabelecimento/" + e.getId());
 		}

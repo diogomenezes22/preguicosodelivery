@@ -4,17 +4,14 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 
 import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Indexed;
 import com.preguicoso.shared.entities.UsuarioBean;
 
 @Entity
 @Cached
-@Indexed
 public class Usuario implements Serializable {
 
 	/**
@@ -22,11 +19,12 @@ public class Usuario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id @Indexed String email;
-	@Column Date dataRegistro;
-	@Column Date ultimaAtualizacao;
-	@Column boolean cadastrado = false;
-	@Column String CEP;
+	@Id
+	String email;
+	Date dataRegistro;
+	Date ultimaAtualizacao;
+	boolean cadastrado = false;
+	String CEP;
 
 	public Usuario() {
 		this.email = "";

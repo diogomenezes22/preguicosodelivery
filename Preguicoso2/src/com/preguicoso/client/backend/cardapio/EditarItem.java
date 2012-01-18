@@ -64,9 +64,8 @@ public class EditarItem extends Composite {
 			final ArrayList<ItemCategoria> lista) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.i = i;
-		numero.setText("" + i.getId());
 		nome.setText(i.getNome());
-		numero.setText("0");
+		numero.setText(Integer.toString(i.getNumero()));
 		descricao.setText(i.getDescricao());
 		preco.setText("R$ " + i.getPreco());
 		for (ItemCategoria cat : lista) {
@@ -83,7 +82,7 @@ public class EditarItem extends Composite {
 							new AsyncCallback<Void>() {
 								@Override
 								public void onSuccess(Void result) {
-
+									Window.alert("Item Salvo com sucesso. Basta atualizar a lista");
 								}
 
 								@Override
@@ -93,7 +92,6 @@ public class EditarItem extends Composite {
 
 								}
 							});
-					Window.alert("Item Salvo com sucesso. Basta atualizar a lista");
 				}
 			}
 		});
@@ -102,6 +100,7 @@ public class EditarItem extends Composite {
 	@UiHandler("numero")
 	void onNumeroBlur(BlurEvent event) {
 		foiAlterado();
+		this.i.setNumero(Integer.parseInt(numero.getText()));
 	}
 
 	@UiHandler("nome")
