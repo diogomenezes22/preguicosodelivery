@@ -17,7 +17,7 @@ public final class CriptoUtils {
 	 * @throws NoSuchAlgorithmException
 	 *             - Caso o algoritmo fornecido não seja válido
 	 */
-	public static byte[] digest(byte[] input, String algoritmo)
+	private static byte[] digest(byte[] input, String algoritmo)
 			throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance(algoritmo);
 		md.reset();
@@ -31,7 +31,7 @@ public final class CriptoUtils {
 	 *            - O array de bytes a ser convertido.
 	 * @return Uma String com a representação hexa do array
 	 */
-	public static String byteArrayToHexString(byte[] b) {
+	private static String byteArrayToHexString(byte[] b) {
 		StringBuffer buf = new StringBuffer();
 
 		for (int i = 0; i < b.length; i++) {
@@ -52,7 +52,7 @@ public final class CriptoUtils {
 	 * @throws IllegalArgumentException
 	 *             - Caso a String não sej auma representação haxadecimal válida
 	 */
-	public static byte[] hexStringToByteArray(String hexa)
+	private static byte[] hexStringToByteArray(String hexa)
 			throws IllegalArgumentException {
 
 		// verifica se a String possui uma quantidade par de elementos
@@ -67,5 +67,36 @@ public final class CriptoUtils {
 					.indexOf(hexa.charAt(i + 1))));
 		}
 		return b;
+	}
+
+	/**
+	 * 
+	 * @param password
+	 *            é a senha que queremos converter para MD5
+	 * @return String MD5 da senha solicitada
+	 */
+	public static String parseMD5(String password) {
+		try {
+			return byteArrayToHexString(digest(password.getBytes(), "MD5"));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * @param password
+	 *            é a senha não criptografada
+	 * @param md5
+	 *            é o formato md5 esperado do password
+	 * @return true se password no formato md5 for correspondente ao parametro
+	 *         md5
+	 */
+	public static boolean equalsMD5(String password, String md5) {
+		String passwordMD5 = parseMD5(password);
+		if (passwordMD5.equals(md5))
+			return true;
+		return false;
 	}
 }

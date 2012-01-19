@@ -1,6 +1,5 @@
 package com.preguicoso.server.login;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,14 +120,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 				UsuarioEstabelecimento u = new UsuarioEstabelecimento();
 				u.setEmail("admin@preguicoso.com.br");
 				u.setLogin("admin");
-				try {
-					String senhaCript = CriptoUtils
-							.byteArrayToHexString(CriptoUtils.digest(
-									"arrastao".getBytes(), "MD5"));
-					u.setPassword(senhaCript);
-				} catch (NoSuchAlgorithmException e) {
-					e.printStackTrace();
-				}
+				u.setPassword("arrastao");
 				u.setNome("Administrador");
 				List<Long> listaId = new ArrayList<Long>();
 				listaId.add((long) 405);
@@ -139,14 +131,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 				UsuarioEstabelecimento u2 = new UsuarioEstabelecimento();
 				u2.setEmail("admin2@preguicoso.com.br");
 				u2.setLogin("admin2");
-				try {
-					String senhaCript = CriptoUtils
-							.byteArrayToHexString(CriptoUtils.digest(
-									"arrastao2".getBytes(), "MD5"));
-					u2.setPassword(senhaCript);
-				} catch (NoSuchAlgorithmException e) {
-					e.printStackTrace();
-				}
+				u2.setPassword("arrastao2");
 				u2.setNome("Administrador2");
 				List<Long> listaId2 = new ArrayList<Long>();
 				listaId2.add((long) 407);
@@ -155,26 +140,19 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 			}
 		}
 		// </temporario>
-		try {
-			String senhaCriptografada = CriptoUtils
-					.byteArrayToHexString(CriptoUtils.digest(
-							password.getBytes(), "MD5"));
-			UsuarioEstabelecimento user = udao.retrieve(login);
-			if (user != null) {
-				if (user.getPassword().equals(senhaCriptografada)) {
-					HttpSession session = this.getThreadLocalRequest()
-							.getSession();
-					session.setAttribute("usuarioEstabelecimento", user);
-					session.setAttribute("isLogado", true);
-					return null;
-				}
-				return "A senha está errada.";
+
+		UsuarioEstabelecimento user = udao.retrieve(login);
+		if (user != null) {
+			if (CriptoUtils.equalsMD5(password, user.getPassword())) {
+				HttpSession session = this.getThreadLocalRequest().getSession();
+				session.setAttribute("usuarioEstabelecimento", user);
+				// TODO @Osman isLogado não tem necessidade, mudar em breve
+				session.setAttribute("isLogado", true);
+				return null;
 			}
-			return "O login não existe.";
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			return "Ocorreu um erro. Tente se logar novamente.";
+			return "A senha está errada.";
 		}
+		return "O login não existe.";
 	}
 
 	@Override
@@ -208,4 +186,23 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 		session.setAttribute("isLogado", null);
 		session.setAttribute("usuarioEstabelecimento", null);
 	}
+
+	@Override
+	public String changePasswordUsuarioEstabelecimento(String passwordOld,
+			String passwordNew, String passwordNewCheck) {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		UsuarioEstabelecimento user = (UsuarioEstabelecimento) session
+				.getAttribute("usuarioEstabelecimento");
+		UsuarioEstabelecimentoDAO udao = new UsuarioEstabelecimentoDAO();
+		if (CriptoUtils.equalsMD5(passwordOld, user.getPassword())) {
+			if (passwordNew.equals(passwordNewCheck)) {
+				user.setPassword(passwordNew);
+				udao.update(user);
+				return "Senha modificada com sucesso.";
+			}
+			return "Os campos com a nova senha devem ser iguais.";
+		}
+		return "Você não digitou sua senha corretamente.";
+	}
+
 }

@@ -11,17 +11,21 @@
 			<h1>Configurações</h1>
 			<div class="container_coluna2">
 				<div class="container">
-					a
+					<h2>Alterar senha</h2><br />
+					Senha antiga:<g:PasswordTextBox ui:field="passwordOld"/><br />
+					Senha nova:<g:PasswordTextBox ui:field="passwordNew"/><br />
+					Senha nova:<g:PasswordTextBox ui:field="passwordNewCheck"/><br />
+					<g:Button ui:field="mudar" text="mudar" />
 				</div>
 			</div>
 		</div>
-		<div class="grid_3 coluna3 alpha omega">
-			<h1>Descrição do Pedidos</h1>
-			<div class="container_coluna3">
-				<div class="container">
-					as
-				</div>
-			</div>
-		</div>		
+<!-- 		<div class="grid_3 coluna3 alpha omega"> -->
+<!-- 			<h1>Detalhes</h1> -->
+<!-- 			<div class="container_coluna3"> -->
+<!-- 				<div class="container"> -->
+<!-- 					as -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div>		 -->
 	</g:HTMLPanel>
 </ui:UiBinder> 
