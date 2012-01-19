@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Id;
 
 import com.googlecode.objectify.annotation.Entity;
+import com.preguicoso.shared.CriptoUtils;
 import com.preguicoso.shared.entities.UsuarioEstabelecimentoBean;
 
 @Entity
@@ -39,8 +40,15 @@ public class UsuarioEstabelecimento {
 		return password;
 	}
 
+	/**
+	 * <p>
+	 * A senha será convertida para o modo MD5 e depois armazenada
+	 * </p>
+	 * 
+	 * @param password
+	 */
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = CriptoUtils.parseMD5(password);
 	}
 
 	public String getNome() {

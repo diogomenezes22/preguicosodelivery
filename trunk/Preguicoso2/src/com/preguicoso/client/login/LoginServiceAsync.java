@@ -33,4 +33,17 @@ public interface LoginServiceAsync {
 	void getEstabelecimentoLogado(AsyncCallback<EstabelecimentoBean> callback);
 
 	void fazerLogoutUsuarioEstabelecimento(AsyncCallback<Void> callback);
+
+	/**
+	 * @param passwordOld
+	 *            é o passowrd antigo
+	 * @param passwordNew
+	 *            é o password novo
+	 * @param passwordNewCheck
+	 *            é o password novo digitado novamente
+	 * @return String com a menssagem da operação.
+	 */
+	void changePasswordUsuarioEstabelecimento(String passwordOld,
+			String passwordNew, String passwordNewCheck,
+			AsyncCallback<String> callback);
 }

@@ -33,4 +33,7 @@ public interface LoginService extends RemoteService {
 	Boolean isEstabelecimentoLogado();
 
 	EstabelecimentoBean getEstabelecimentoLogado();
+
+	String changePasswordUsuarioEstabelecimento(String passwordOld,
+			String passwordNew, String passwordNewCheck);
 }

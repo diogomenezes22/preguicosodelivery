@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
-import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.server.entities.UsuarioEstabelecimento;
 
 public class UsuarioEstabelecimentoDAO extends DAOBase {
@@ -28,7 +27,7 @@ public class UsuarioEstabelecimentoDAO extends DAOBase {
 		return this.ofy().query(UsuarioEstabelecimento.class).list();
 	}
 
-	public void update(Usuario user) {
+	public void update(UsuarioEstabelecimento user) {
 		this.ofy().put(user);
 	}
 }
