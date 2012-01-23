@@ -2,49 +2,66 @@ package com.preguicoso.shared.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Id;
 
 public class BairroBean implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private String cep;
+	@Id long id;
 	private String nome;
-	private CidadeBean cidadeBean;
+	private String cidade;
+	private List<Long> restaurantes;
 	private Date dataRegistro;
 	private Date ultimaAtualizacao;
-
+	private static final long serialVersionUID = 1L;
+	
 	public BairroBean() {
-		this.cep = "";
-		this.nome = "";
-		this.cidadeBean = new CidadeBean();
+
 	}
 
-	public BairroBean(String cep, String nome, CidadeBean cidadeBean) {
-		this.cep = cep;
+	public BairroBean(String nome, String cidadeBean) {
 		this.nome = nome;
-		this.cidadeBean = cidadeBean;
+		this.cidade = cidade;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public CidadeBean getCidadeBean() {
-		return this.cidadeBean;
+	public String getCidade() {
+		return cidade;
 	}
 
-	public void setCidadeBean(CidadeBean cidadeBean) {
-		this.cidadeBean = cidadeBean;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public List<Long> getRestaurantes() {
+		return restaurantes;
+	}
+
+	public void setRestaurantes(List<Long> restaurantes) {
+		this.restaurantes = restaurantes;
 	}
 
 	public Date getDataRegistro() {
-		return this.dataRegistro;
+		return dataRegistro;
 	}
 
 	public void setDataRegistro(Date dataRegistro) {
@@ -52,19 +69,12 @@ public class BairroBean implements Serializable {
 	}
 
 	public Date getUltimaAtualizacao() {
-		return this.ultimaAtualizacao;
+		return ultimaAtualizacao;
 	}
 
 	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
 		this.ultimaAtualizacao = ultimaAtualizacao;
 	}
-
-	public String getCep() {
-		return this.cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
+	
+	
 }

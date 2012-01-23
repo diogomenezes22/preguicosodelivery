@@ -1,70 +1,69 @@
 package com.preguicoso.server.entities;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 
 import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Indexed;
-import com.googlecode.objectify.annotation.Unindexed;
-import com.preguicoso.server.dao.CidadeDAO;
 import com.preguicoso.shared.entities.BairroBean;
 
 @Entity
 @Cached
-@Unindexed
 public class Bairro {
 
-	@Id @Indexed String cep;
-	@Indexed String nome;
-	@Indexed String cidade;
-	@Column Date dataRegistro;
-	@Column Date ultimaAtualizacao;
-
-	public Bairro() {
-		this.cep = "";
-		this.nome = "";
-		this.cidade = "";
-	}
+	@Id long id;
+	String nome;
+	String cidade;
+	List<Long> restaurantes;
+	Date dataRegistro;
+	Date ultimaAtualizacao;
 
 	public BairroBean toBean() {
 		BairroBean bean = new BairroBean();
 		bean.setNome(this.nome);
-		bean.setCep(this.cep);
+		bean.setId(id);
 		bean.setDataRegistro(this.dataRegistro);
 		bean.setUltimaAtualizacao(this.ultimaAtualizacao);
-		bean.setCidadeBean(this.getCidade().toBean());
+		bean.setCidade(this.cidade);
 		return bean;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public Cidade getCidade() {
-		return (new CidadeDAO()).retrieve(this.cidade);
+	public String getCidade() {
+		return cidade;
 	}
 
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade.getNome();
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
-	public String getCep() {
-		return this.cep;
+	public List<Long> getRestaurantes() {
+		return restaurantes;
 	}
 
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setRestaurantes(List<Long> restaurantes) {
+		this.restaurantes = restaurantes;
 	}
 
 	public Date getDataRegistro() {
-		return this.dataRegistro;
+		return dataRegistro;
 	}
 
 	public void setDataRegistro(Date dataRegistro) {
@@ -72,11 +71,12 @@ public class Bairro {
 	}
 
 	public Date getUltimaAtualizacao() {
-		return this.ultimaAtualizacao;
+		return ultimaAtualizacao;
 	}
 
 	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
 		this.ultimaAtualizacao = ultimaAtualizacao;
 	}
+	
 
 }

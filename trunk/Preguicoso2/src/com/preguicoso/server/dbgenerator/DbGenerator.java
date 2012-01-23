@@ -41,12 +41,10 @@ public class DbGenerator {
 
 	public static void gerar() {
 		Bairro bairro = new Bairro();
-		bairro.setCep("12228-462");
 		BairroDAO bairroDAO = new BairroDAO();
 		bairroDAO.create(bairro);
 
 		Endereco endereco = new Endereco();
-		endereco.setBairro(bairro);
 		endereco.setComplemento("Proximo a casa do Ze");
 		endereco.setNumero(50);
 		EnderecoDAO enderecoDAO = new EnderecoDAO();
@@ -81,11 +79,9 @@ public class DbGenerator {
 
 	public void generateEstabelecimentos() {
 		Bairro bairro = new Bairro();
-		bairro.setCep("12228-462");
 		this.bairroDAO.create(bairro);
 
 		Endereco endereco = new Endereco();
-		endereco.setBairro(bairro);
 		endereco.setComplemento("Proximo a casa do Ze");
 		endereco.setNumero(50);
 		this.enderecoDAO.create(endereco);
@@ -104,7 +100,6 @@ public class DbGenerator {
 		this.estabelecimentoDAO.create(estabelecimento);
 
 		Estabelecimento estabelecimento2 = new Estabelecimento();
-		estabelecimento.setCnpj("12312331");
 		estabelecimento.setDono(this.usuario);
 		estabelecimento.setNome("Pizza Hut");
 		estabelecimento.setCategoria("pizza");

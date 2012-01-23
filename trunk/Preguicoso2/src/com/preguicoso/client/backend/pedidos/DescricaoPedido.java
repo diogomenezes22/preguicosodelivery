@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -43,6 +44,8 @@ public class DescricaoPedido extends Composite {
 	InlineLabel numero;
 	@UiField
 	HTMLPanel listaPedidos;
+	@UiField 
+	Image print;
 
 	public DescricaoPedido() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -120,5 +123,9 @@ public class DescricaoPedido extends Composite {
 	private void removeUi(final PedidoUi pu) {
 		DescricaoPedido.this.removeFromParent();
 		pu.removeFromParent();
+	}
+	@UiHandler("print")
+	void onPrintClick(ClickEvent event) {
+		Window.print();
 	}
 }

@@ -95,10 +95,6 @@ public class Endereco implements Serializable {
 		return bairro;
 	}
 
-	public void setBairro(Bairro bairro) {
-		this.cepBairro = bairro.getCep();
-	}
-
 	public Date getDataRegistro() {
 		return this.dataRegistro;
 	}

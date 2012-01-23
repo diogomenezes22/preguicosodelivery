@@ -3,8 +3,6 @@ package com.preguicoso.server.dao;
 import java.util.Calendar;
 import java.util.List;
 
-import org.lavieri.modelutil.cep.WebServiceCep;
-
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
 import com.preguicoso.server.entities.Endereco;
@@ -17,15 +15,6 @@ public class EnderecoDAO extends DAOBase {
 	public Endereco create(Endereco e) {
 		e.setUltimaAtualizacao(Calendar.getInstance().getTime());
 		e.setDataRegistro(Calendar.getInstance().getTime());
-
-		if (e.getRua().equals("") && e.getBairro() != null) {
-			WebServiceCep wscCep = WebServiceCep.searchCep(e.getBairro().getCep());
-			if (wscCep.isCepNotFound()) {
-				assert false;
-			}
-			e.setRua(wscCep.getLogradouroFull());
-		}
-
 		this.ofy().put(e);
 		assert e.getId() != null;
 

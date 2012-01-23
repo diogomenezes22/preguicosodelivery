@@ -32,7 +32,7 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 	public ArrayList<EstabelecimentoBean> getListaEstabelecimento() {
 		ArrayList<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
 
-		// DbGenerator.gerar();
+		 //DbGenerator.gerar();
 
 		for (Estabelecimento estabelecimento : (new EstabelecimentoDAO())
 				.listAll()) {
@@ -95,7 +95,6 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 
 		if (!wsc.isCepNotFound()) {
 			end.setRua(wsc.getLogradouroFull());
-			end.setBairro(bairro);
 		}
 
 		end.setNumero(bean.getEnderecoBean().getNumero());
