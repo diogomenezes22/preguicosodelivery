@@ -50,12 +50,10 @@ public class AddRestaurantServlet extends HttpServlet {
 
 		try {
 			Bairro bairro = new Bairro();
-			bairro.setCep(cep);
 			BairroDAO bairroDAO = new BairroDAO();
 			bairroDAO.create(bairro);
 
 			Endereco endereco = new Endereco();
-			endereco.setBairro(bairro);
 			endereco.setRua(rua);
 			EnderecoDAO enderecoDAO = new EnderecoDAO();
 			enderecoDAO.create(endereco);

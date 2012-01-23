@@ -90,7 +90,9 @@ public class Backend extends Composite {
 		for (RegistroStatusRestaurante rs : RegistroStatusRestaurante.values()) {
 			status.addItem(rs.name());
 		}
+
 		cadastroService.getStatus(eb.getId(),
+
 				new AsyncCallback<RegistroStatusRestaurante>() {
 
 					@Override

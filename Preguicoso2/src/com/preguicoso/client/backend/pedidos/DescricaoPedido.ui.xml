@@ -12,8 +12,10 @@
 			<!-- Ajeitar tamanho da imagem enviar.png no futuro -->
 			<g:Image ui:field="enviar" url="img/enviar.png" styleName="active" title="Avisar que o pedido já foi enviado." width="24px"/>
 			<g:Image ui:field="remove" url="img/remove.png" styleName="active" title="Recusar o pedido." width="24px"/>
+			<g:Image ui:field="print" url="img/enviar.png" styleName="active" title="Recusar o pedido." width="24px"/>
 			x
 		</div>
+		
 		<div class="container_coluna3">
 			<div class="container">
 				<h1>Descrição do pedido</h1>
@@ -24,7 +26,7 @@
 				<h2>Lista de Pedidos</h2>
 				
 					<div class = "tabela">
-						<div class="tabela_header"><span style="width:30px">No</span><span style="width:120px">Item</span><span style="width:165px" >Observação</span><span style="width:40px" >Qtde</span> </div>
+						<div class="tabela_header"><span style="width:10%">No</span><span style="width:30%">Item</span><span style="width:40%" >Observação</span><span style="width:20%" >Qtde</span> </div>
 						<g:HTMLPanel ui:field="listaPedidos">
 						</g:HTMLPanel>
 					</div>

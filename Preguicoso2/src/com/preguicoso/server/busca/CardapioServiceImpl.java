@@ -14,7 +14,6 @@ import com.preguicoso.server.carrinho.CarrinhoDeCompra;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.dao.ItemCardapioDAO;
 import com.preguicoso.server.dao.PedidoDAO;
-import com.preguicoso.server.entities.Bairro;
 import com.preguicoso.server.entities.Endereco;
 import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.server.entities.ItemCardapio;
@@ -114,7 +113,6 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				e.setCnpj("123");
 				e.setNome("China In Box");
 				e.setCategoria("Chinesa");
-				e.setAreaAtendimento(new ArrayList<Bairro>());
 				e.setDono(new Usuario());
 				e.setEmailDono("teste@teste.com");
 				e.setEndereco(new Endereco());
@@ -129,7 +127,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				e.setCnpj("123456");
 				e.setNome("Real Sucos");
 				e.setCategoria("Sushi");
-				e.setAreaAtendimento(new ArrayList<Bairro>());
+				//se.setAreaAtendimento(new ArrayList<Bairro>());
 				e.setDono(new Usuario());
 				e.setEmailDono("teste@teste.com");
 				e.setEndereco(new Endereco());

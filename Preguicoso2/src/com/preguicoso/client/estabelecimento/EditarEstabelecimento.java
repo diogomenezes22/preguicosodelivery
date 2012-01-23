@@ -95,13 +95,10 @@ public class EditarEstabelecimento extends Composite {
 				EditarEstabelecimento.this.cnpjTextbox.setText(result.getCNPJ());
 
 				EnderecoBean e = result.getEnderecoBean();
-				EditarEstabelecimento.this.cepTextbox.setText(e.getBairroBean().getCep());
 				EditarEstabelecimento.this.ruaTextbox.setText(e.getRua());
 				EditarEstabelecimento.this.numeroTextbox.setText(e.getNumero()==null?"":e.getNumero().toString());
 				EditarEstabelecimento.this.complementoTextbox.setText(e.getComplemento());
 				EditarEstabelecimento.this.bairroTextbox.setText(e.getBairroBean().getNome());
-				EditarEstabelecimento.this.cidadeTextbox.setText(e.getBairroBean().getCidadeBean().getNome());
-				EditarEstabelecimento.this.estadoTextbox.setText(e.getBairroBean().getCidadeBean().getEstadoBean().getNome());
 			}
 
 			@Override
@@ -187,8 +184,6 @@ public class EditarEstabelecimento extends Composite {
 			public void onSuccess(EnderecoBean result) {
 				EditarEstabelecimento.this.ruaTextbox.setText(result.getRua());
 				EditarEstabelecimento.this.bairroTextbox.setText(result.getBairroBean().getNome());
-				EditarEstabelecimento.this.cidadeTextbox.setText(result.getBairroBean().getCidadeBean().getNome());
-				EditarEstabelecimento.this.estadoTextbox.setText(result.getBairroBean().getCidadeBean().getEstadoBean().getNome());
 				EditarEstabelecimento.this.complementoTextbox.setText("");
 				EditarEstabelecimento.this.numeroTextbox.setText("");
 			}

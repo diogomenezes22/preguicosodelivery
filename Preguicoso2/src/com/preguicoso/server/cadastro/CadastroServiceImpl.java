@@ -135,15 +135,22 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	public RegistroStatusRestaurante getStatus(Long idEstabelecimento) {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		Estabelecimento e = edao.retrieve(idEstabelecimento);
-		return e.getStatus();
-	}
+		if(e!=null)
+			return e.getStatus();
+		else
+			return RegistroStatusRestaurante.values()[0];
+	}	
 
 	@Override
 	public void setStatus(Long idEstabelecimento, int statusIndex) {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
-		Estabelecimento e = edao.retrieve(idEstabelecimento);
-		e.setStatus(RegistroStatusRestaurante.values()[statusIndex]);
-		edao.update(e);
+		Estabelecimento e = edao.retrieve((long) 405);
+		if(e!=null){
+			e.setStatus(RegistroStatusRestaurante.values()[statusIndex]);
+			edao.update(e);
+		}else{
+			
+		}
 	}
 
 	@Override

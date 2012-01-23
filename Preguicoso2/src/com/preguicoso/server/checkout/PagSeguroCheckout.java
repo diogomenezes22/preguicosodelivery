@@ -25,10 +25,10 @@ public class PagSeguroCheckout {
 	}
 
 	public void setShippingAddress(EnderecoBean e) {
-		paymentRequest.setShippingAddress("BRA", e.getBairroBean()
-				.getCidadeBean().getEstadoBean().getNome(), e.getBairroBean()
-				.getCidadeBean().getNome(), e.getBairroBean().getNome(),
-				e.getCep(), e.getRua(), "" + e.getNumero(), e.getComplemento());
+//		paymentRequest.setShippingAddress("BRA", e.getBairroBean()
+//				.getCidadeBean().getEstadoBean().getNome(), e.getBairroBean()
+//				.getCidadeBean().getNome(), e.getBairroBean().getNome(),
+//				e.getCep(), e.getRua(), "" + e.getNumero(), e.getComplemento());
 	}
 
 	public URL finalizarCompra() {

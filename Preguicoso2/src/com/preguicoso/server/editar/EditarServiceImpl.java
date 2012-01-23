@@ -51,14 +51,11 @@ public class EditarServiceImpl extends RemoteServiceServlet implements
 
 			bairro = (new BairroDAO()).retrieveByCep(wsc.getCep());
 			if (bairro == null) {
-				bairro.setCep(wsc.getCep());
 				bairro.setNome(wsc.getBairro());
-				bairro.setCidade(cidade);
 				(new BairroDAO()).create(bairro);
 			}
 
 			end.setRua(wsc.getLogradouroFull());
-			end.setBairro(bairro);
 		}
 
 		end.setNumero(bean.getEnderecoBean().getNumero());

@@ -16,7 +16,6 @@ public class EstabelecimentoDAO extends DAOBase {
 
 		if (this.retrieveByCnpj(e.getCnpj()) != null) {
 			Estabelecimento est = this.retrieveByCnpj(e.getCnpj());
-			est.setAreaAtendimento(e.getAreaAtendimento());
 			est.setCategoria(e.getCategoria());
 			est.setDataRegistro(e.getDataRegistro());
 			est.setEndereco(e.getEndereco());

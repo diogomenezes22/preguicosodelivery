@@ -119,7 +119,6 @@ public class Estabelecimento implements Serializable {
 
 		try {
 			for (BairroBean b : a.getAreaAtendimento()) {
-				this.listaCep.add(b.getCep());
 				this.listaCep = new ArrayList<String>();
 				this.enderecoId = a.getEnderecoBean().getId();
 				this.emailDono = a.getDono().getEmail();
@@ -221,13 +220,6 @@ public class Estabelecimento implements Serializable {
 		return lista;
 	}
 
-	public void setAreaAtendimento(List<Bairro> lista) {
-		List<String> listaCep = new ArrayList<String>();
-		for (Bairro b : lista) {
-			listaCep.add(b.getCep());
-		}
-		this.listaCep = listaCep;
-	}
 
 	public Usuario getDono() {
 		Usuario dono = (new UsuarioDAO()).retrieve(this.emailDono);
