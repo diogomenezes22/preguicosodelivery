@@ -11,6 +11,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
@@ -31,7 +32,7 @@ public class OrdemPedidos extends Composite {
 	interface OrdemPedidosUiBinder extends UiBinder<Widget, OrdemPedidos> {
 	}
 
-	public OrdemPedidos(final Long idEstabelecimento) {
+	public OrdemPedidos(final Long idEstabelecimento, final InlineLabel conexao) {
 		initWidget(uiBinder.createAndBindUi(this));
 
 		carregaListaDePedidos(idEstabelecimento);
@@ -50,12 +51,14 @@ public class OrdemPedidos extends Composite {
 
 							@Override
 							public void onFailure(Throwable caught) {
-								Window.alert("Ocorreu um erro no processo de busca de pedidos remota. "
-										+ "Por favor, recarregue a página.");
+								conexao.setText("Nível da Conexão "
+										+ getStatusConexao(false));
 							}
 
 							@Override
 							public void onSuccess(List<PedidoBean> result) {
+								conexao.setText("Nível da Conexão "
+										+ getStatusConexao(true));
 								if (!result.isEmpty()) {
 									lastTimeStamp.setTime(result.get(0)
 											.getTimeStamp().getTime());
@@ -115,5 +118,23 @@ public class OrdemPedidos extends Composite {
 
 					}
 				});
+	}
+
+	private int successSaldo = 0;
+
+	private String getStatusConexao(boolean onSuccess) {
+		if (onSuccess)
+			successSaldo++;
+		else
+			successSaldo--;
+		if (successSaldo <= -2)
+			return "*....";
+		if (successSaldo <= -1)
+			return "**...";
+		if (successSaldo <= 0)
+			return "***..";
+		if (successSaldo <= 1)
+			return "****.";
+		return "*****";
 	}
 }
