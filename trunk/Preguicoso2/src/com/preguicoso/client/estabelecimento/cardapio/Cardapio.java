@@ -185,12 +185,12 @@ public class Cardapio extends Composite {
 		final Button addItem = new Button("Add");
 		final Button removeItem = new Button("Remove");
 		quantidade.setEnabled(false);
-		quantidade.setValue(0);
+		quantidade.setValue(1);
 
 		addItem.addClickHandler(new ClickHandler() {
 
 			@Override
-			public void onClick(ClickEvent arg0) {
+			public void onClick(ClickEvent event) {
 				quantidade.setValue(quantidade.getValue() + 1);
 			}
 		});
@@ -199,10 +199,8 @@ public class Cardapio extends Composite {
 
 			@Override
 			public void onClick(ClickEvent arg0) {
-				if (quantidade.getValue() > 0) {
+				if (quantidade.getValue() > 1) {
 					quantidade.setValue(quantidade.getValue() - 1);
-				} else {
-					Window.alert("Você não pode ter menos que zero itens.");
 				}
 			}
 		});
