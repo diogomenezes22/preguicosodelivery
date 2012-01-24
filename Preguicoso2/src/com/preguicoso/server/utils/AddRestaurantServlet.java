@@ -9,11 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.preguicoso.server.dao.BairroDAO;
-import com.preguicoso.server.dao.EnderecoDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
-import com.preguicoso.server.entities.Bairro;
-import com.preguicoso.server.entities.Endereco;
 import com.preguicoso.server.entities.Estabelecimento;
 
 public class AddRestaurantServlet extends HttpServlet {
@@ -49,21 +45,11 @@ public class AddRestaurantServlet extends HttpServlet {
 		out.println("data: " + dataRegistro);
 
 		try {
-			Bairro bairro = new Bairro();
-			BairroDAO bairroDAO = new BairroDAO();
-			bairroDAO.create(bairro);
-
-			Endereco endereco = new Endereco();
-			endereco.setRua(rua);
-			EnderecoDAO enderecoDAO = new EnderecoDAO();
-			enderecoDAO.create(endereco);
-
 			Estabelecimento estabelecimento = new Estabelecimento();
 			estabelecimento.setCnpj(CNPJ);
 			estabelecimento.setNome(nome);
 			estabelecimento.setRazaoSocial(razaoSocial);
 			estabelecimento.setLogoURL(logo);
-			estabelecimento.setEndereco(endereco);
 			EstabelecimentoDAO estabelecimentoDAO = new EstabelecimentoDAO();
 			estabelecimentoDAO.create(estabelecimento);
 

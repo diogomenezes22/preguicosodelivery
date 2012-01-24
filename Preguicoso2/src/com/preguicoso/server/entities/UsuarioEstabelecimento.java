@@ -1,5 +1,6 @@
 package com.preguicoso.server.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -9,8 +10,12 @@ import com.preguicoso.shared.CriptoUtils;
 import com.preguicoso.shared.entities.UsuarioEstabelecimentoBean;
 
 @Entity
-public class UsuarioEstabelecimento {
+public class UsuarioEstabelecimento implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5206607061710747182L;
 	@Id
 	String login;
 	String password;

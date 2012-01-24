@@ -15,7 +15,6 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.preguicoso.client.busca.Busca;
 import com.preguicoso.client.busca.ListaEstabelecimento;
-import com.preguicoso.client.cadastro.CadastroEstabelecimento;
 import com.preguicoso.client.estabelecimento.EstabelecimentoUI;
 
 public class RouterHistory {
@@ -49,13 +48,14 @@ public class RouterHistory {
 			$(".middle_rodape").as(Effects).slideDown(1000);
 			addSuggestBox();
 			addListEstabelecimento();
-		} else if (token.equals("cadastroEstabelecimento")) {
-			CadastroEstabelecimento cadastro = new CadastroEstabelecimento();
-			RootPanel.get("busca").add(cadastro);
-		} else if (token.equals("cadastroUsuario")) {
-			CadastroEstabelecimento cadastro = new CadastroEstabelecimento();
-			RootPanel.get("busca").add(cadastro);
-		} else if (token.equals("quem")) {
+		}
+		// else if (token.equals("cadastroEstabelecimento")) {
+		// CadastroEstabelecimento cadastro = new CadastroEstabelecimento();
+		// RootPanel.get("busca").add(cadastro);}
+		// else if (token.equals("cadastroUsuario")) {
+		// CadastroEstabelecimento cadastro = new CadastroEstabelecimento();
+		// RootPanel.get("busca").add(cadastro);}
+		else if (token.equals("quem")) {
 			animateBegin();
 			gerarHtml("quem");
 		} else if (token.equals("temos")) {

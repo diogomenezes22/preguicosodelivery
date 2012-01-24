@@ -16,7 +16,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.Entities;
-import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class Busca extends Composite {
@@ -61,28 +60,7 @@ public class Busca extends Composite {
 						}
 					});
 		} else if (e.equals(Entities.Cidade)) {
-			this.buscaService
-					.getListaCidade(new AsyncCallback<ArrayList<CidadeBean>>() {
-
-						@Override
-						public void onFailure(Throwable caught) {
-							Window.alert("Não foi possível carregar a lista de resteurantes. Recarregue a página.");
-						}
-
-						@Override
-						public void onSuccess(ArrayList<CidadeBean> result) {
-							for (CidadeBean value : result) {
-								Busca.this.oracle.add(value.getNome()
-										+ ", "
-										+ value.getEstadoBean().getSigla()
-										+ ", "
-										+ value.getEstadoBean().getPaisBean()
-												.getNome());
-							}
-						}
-					});
 		}
-
 		Busca.this.suggestBox = new SuggestBox(Busca.this.oracle);
 		this.suggestBox.getElement().setId("searchField");
 		Busca.this.suggestBox.addStyleName("busca");

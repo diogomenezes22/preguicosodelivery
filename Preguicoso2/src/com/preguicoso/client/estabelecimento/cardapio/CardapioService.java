@@ -1,6 +1,7 @@
 package com.preguicoso.client.estabelecimento.cardapio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -20,8 +21,11 @@ public interface CardapioService extends RemoteService {
 	ArrayList<CategoriaBean> getCategorias(Long Estabelecimento);
 
 	void enviarPedido(String nomeCliente, String rua, String bairro,
-			String formaPagamento);
+			String complemento, String formaPagamento);
 
 	void addItem(ItemCardapioBean i, int quantidade, String observacao);
 
+	String[] getEnderecoByCep(String cep);
+
+	List<String> getBairrosNome(Long idCidade);
 }

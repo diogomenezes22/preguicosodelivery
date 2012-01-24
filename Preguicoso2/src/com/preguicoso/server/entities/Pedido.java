@@ -33,6 +33,7 @@ public class Pedido implements Serializable {
 	String formaPagamento;
 	Date timeStamp;
 	String bairro;
+	String complemento;
 	RegistroStatusPedido status;
 
 	String listaItensJSON;
@@ -46,6 +47,7 @@ public class Pedido implements Serializable {
 		pb.setFormaPagamento(this.formaPagamento);
 		pb.setTimeStamp(this.timeStamp);
 		pb.setBairro(this.bairro);
+		pb.setComplemento(this.complemento);
 		pb.setStatus(this.status);
 
 		try {
@@ -156,11 +158,21 @@ public class Pedido implements Serializable {
 		this.status = status;
 	}
 
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
+		result = prime * result
+				+ ((complemento == null) ? 0 : complemento.hashCode());
 		result = prime * result
 				+ ((formaPagamento == null) ? 0 : formaPagamento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -192,6 +204,11 @@ public class Pedido implements Serializable {
 			if (other.bairro != null)
 				return false;
 		} else if (!bairro.equals(other.bairro))
+			return false;
+		if (complemento == null) {
+			if (other.complemento != null)
+				return false;
+		} else if (!complemento.equals(other.complemento))
 			return false;
 		if (formaPagamento == null) {
 			if (other.formaPagamento != null)

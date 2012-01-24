@@ -20,7 +20,16 @@ public class PedidoBean implements Serializable {
 	private List<ItemCardapioBean> listaItens;
 	private Date timeStamp;
 	private String bairro;
+	private String complemento;
 	private RegistroStatusPedido status;
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
 
 	public Long getId() {
 		return id;

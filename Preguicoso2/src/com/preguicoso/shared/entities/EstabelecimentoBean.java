@@ -1,10 +1,10 @@
 package com.preguicoso.shared.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 
 public class EstabelecimentoBean implements Serializable {
@@ -14,23 +14,77 @@ public class EstabelecimentoBean implements Serializable {
 	private Long id;
 	private String nome;
 	private String razaoSocial;
-	private String CNPJ;
+	private String cnpj;
 	private String logoURL;
-	private String categoria;
-	private EnderecoBean enderecoBean;
+	private RegistroCategoriaEstabelecimento categoria;
 	private Date dataRegistro;
 	private Date ultimaAtualizacao;
-	private UsuarioBean usuarioBean;
-	private List<BairroBean> areaAtendimento;
-	private boolean userIsOwner;
 	private RegistroStatusRestaurante status;
+	private List<Long> idBairroAtendimentoList;
+	private Long idCidade;
 
-	public UsuarioBean getUsuarioBean() {
-		return usuarioBean;
+	public Long getId() {
+		return id;
 	}
 
-	public void setUsuarioBean(UsuarioBean usuarioBean) {
-		this.usuarioBean = usuarioBean;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public String getLogoURL() {
+		return logoURL;
+	}
+
+	public void setLogoURL(String logoURL) {
+		this.logoURL = logoURL;
+	}
+
+	public RegistroCategoriaEstabelecimento getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(RegistroCategoriaEstabelecimento categoria) {
+		this.categoria = categoria;
+	}
+
+	public Date getDataRegistro() {
+		return dataRegistro;
+	}
+
+	public void setDataRegistro(Date dataRegistro) {
+		this.dataRegistro = dataRegistro;
+	}
+
+	public Date getUltimaAtualizacao() {
+		return ultimaAtualizacao;
+	}
+
+	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
+		this.ultimaAtualizacao = ultimaAtualizacao;
 	}
 
 	public RegistroStatusRestaurante getStatus() {
@@ -41,116 +95,20 @@ public class EstabelecimentoBean implements Serializable {
 		this.status = status;
 	}
 
-	public EstabelecimentoBean() {
-		this.nome = "";
-		this.razaoSocial = "";
-		this.CNPJ = "";
-		this.enderecoBean = new EnderecoBean();
-		this.usuarioBean = new UsuarioBean();
-		this.areaAtendimento = new ArrayList<BairroBean>();
-		this.userIsOwner = false;
+	public List<Long> getIdBairroAtendimentoList() {
+		return idBairroAtendimentoList;
 	}
 
-	public EstabelecimentoBean(String nome, String razaoSocial, String CNPJ) {
-		this.nome = nome;
-		this.razaoSocial = razaoSocial;
-		this.CNPJ = CNPJ;
+	public void setIdBairroAtendimentoList(List<Long> idBairroAtendimentoList) {
+		this.idBairroAtendimentoList = idBairroAtendimentoList;
 	}
 
-	public Long getId() {
-		return this.id;
+	public Long getIdCidade() {
+		return idCidade;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return this.nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public EnderecoBean getEnderecoBean() {
-		return this.enderecoBean;
-	}
-
-	public void setEnderecoBean(EnderecoBean enderecoBean) {
-		this.enderecoBean = enderecoBean;
-	}
-
-	public String getRazaoSocial() {
-		return this.razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
-
-	public String getCNPJ() {
-		return this.CNPJ;
-	}
-
-	public void setCNPJ(String cNPJ) {
-		this.CNPJ = cNPJ;
-	}
-
-	public UsuarioBean getDono() {
-		return this.usuarioBean;
-	}
-
-	public void setDono(UsuarioBean dono) {
-		this.usuarioBean = dono;
-	}
-
-	public Date getDataRegistro() {
-		return this.dataRegistro;
-	}
-
-	public void setDataRegistro(Date dataRegistro) {
-		this.dataRegistro = dataRegistro;
-	}
-
-	public Date getUltimaAtualizacao() {
-		return this.ultimaAtualizacao;
-	}
-
-	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
-		this.ultimaAtualizacao = ultimaAtualizacao;
-	}
-
-	public List<BairroBean> getAreaAtendimento() {
-		return this.areaAtendimento;
-	}
-
-	public void setAreaAtendimento(List<BairroBean> areaAtendimento) {
-		this.areaAtendimento = areaAtendimento;
-	}
-
-	public boolean isUserIsOwner() {
-		return this.userIsOwner;
-	}
-
-	public void setUserIsOwner(boolean userIsOwner) {
-		this.userIsOwner = userIsOwner;
-	}
-
-	public void setLogoURL(String logoURL) {
-		this.logoURL = logoURL;
-	}
-
-	public String getLogoURL() {
-		return logoURL;
-	}
-
-	public void setCategoria(String text) {
-		categoria = text;
-	}
-
-	public String getCategoria() {
-		return categoria;
+	public void setIdCidade(Long idCidade) {
+		this.idCidade = idCidade;
 	}
 
 }

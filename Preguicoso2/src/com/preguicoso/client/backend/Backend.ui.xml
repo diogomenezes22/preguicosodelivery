@@ -26,7 +26,8 @@
 					<div class="delivery_menu">
 						<div class="itens_menu">
 							<g:ListBox ui:field="status"/>
-							<g:Button ui:field="logout" text="Logout"/>
+							<g:Button ui:field="logout" text="Logout"/><br />
+							<g:InlineLabel text="Nível da Conexão ***.." ui:field="conexao" />
 						</div>
 					</div>
 					<div class="nome_menu">

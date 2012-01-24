@@ -3,22 +3,13 @@ package com.preguicoso.server.busca;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.NoResultException;
-
-import org.lavieri.modelutil.cep.WebServiceCep;
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.busca.BuscaService;
-import com.preguicoso.server.dao.BairroDAO;
 import com.preguicoso.server.dao.CidadeDAO;
-import com.preguicoso.server.dao.EnderecoDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
-import com.preguicoso.server.entities.Bairro;
 import com.preguicoso.server.entities.Cidade;
-import com.preguicoso.server.entities.Endereco;
 import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.shared.entities.CidadeBean;
-import com.preguicoso.shared.entities.EnderecoBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 /**
@@ -32,7 +23,7 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 	public ArrayList<EstabelecimentoBean> getListaEstabelecimento() {
 		ArrayList<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
 
-		 //DbGenerator.gerar();
+		// DbGenerator.gerar();
 
 		for (Estabelecimento estabelecimento : (new EstabelecimentoDAO())
 				.listAll()) {
@@ -55,58 +46,45 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public EnderecoBean getEnderecoByCep(String cep) {
-		WebServiceCep wsc = WebServiceCep.searchCep(cep);
-
-		if (wsc.isCepNotFound()) {
-			throw new NoResultException("getEnderecoByCep");
-		}
-
-		EnderecoBean end = (new EnderecoDAO()).retrieveByCep(cep).toBean();
-		end.setComplemento("");
-		end.setNumero(null);
-
-		return end;
-	}
-
-	@Override
 	public Boolean editarEstabelecimento(EstabelecimentoBean bean) {
 		Estabelecimento e = (new EstabelecimentoDAO()).retrieve(bean.getId());
 
-		if (e == null) {
-			return false;
-		}
-
-		WebServiceCep wsc = WebServiceCep.searchCep(bean.getEnderecoBean()
-				.getCep());
-
-		if (wsc.isCepNotFound()) {
-			throw new NoResultException("getEnderecoByCep");
-		}
-
-		Bairro bairro = (new BairroDAO()).retrieveByCep(bean.getEnderecoBean()
-				.getCep());
-
-		Endereco end = e.getEndereco();
-
-		if (end == null) {
-			end = new Endereco();
-		}
-
-		if (!wsc.isCepNotFound()) {
-			end.setRua(wsc.getLogradouroFull());
-		}
-
-		end.setNumero(bean.getEnderecoBean().getNumero());
-		end.setComplemento(bean.getEnderecoBean().getComplemento());
-
-		e.setCnpj(bean.getCNPJ());
-		e.setNome(bean.getNome());
-		e.setRazaoSocial(bean.getRazaoSocial());
-		e.setEndereco(end);
-
-		(new EstabelecimentoDAO()).update(e);
-
+		// if (e == null) {
+		// return false;
+		// }
+		//
+		// WebServiceCep wsc = WebServiceCep.searchCep(bean.getEnderecoBean()
+		// .getCep());
+		//
+		// if (wsc.isCepNotFound()) {
+		// throw new NoResultException("getEnderecoByCep");
+		// }
+		//
+		// Bairro bairro = (new
+		// BairroDAO()).retrieveByCep(bean.getEnderecoBean()
+		// .getCep());
+		//
+		// Endereco end = e.getEndereco();
+		//
+		// if (end == null) {
+		// end = new Endereco();
+		// }
+		//
+		// if (!wsc.isCepNotFound()) {
+		// end.setRua(wsc.getLogradouroFull());
+		// end.setBairro(bairro);
+		// }
+		//
+		// end.setNumero(bean.getEnderecoBean().getNumero());
+		// end.setComplemento(bean.getEnderecoBean().getComplemento());
+		//
+		// e.setCnpj(bean.getCNPJ());
+		// e.setNome(bean.getNome());
+		// e.setRazaoSocial(bean.getRazaoSocial());
+		// e.setEndereco(end);
+		//
+		// (new EstabelecimentoDAO()).update(e);
+		//
 		return true;
 	}
 
@@ -118,15 +96,15 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 
 		ArrayList<EstabelecimentoBean> list = new ArrayList<EstabelecimentoBean>();
 
-		for (Estabelecimento e : estabelecimentos) {
-			if (e.getEndereco() != null) {
-				if (e.getEndereco().getBairro() != null) {
-					if (e.getEndereco().getBairro().getNome().equals(bairro)) {
-						list.add(e.toBean());
-					}
-				}
-			}
-		}
+		// for (Estabelecimento e : estabelecimentos) {
+		// if (e.getEndereco() != null) {
+		// if (e.getEndereco().getBairro() != null) {
+		// if (e.getEndereco().getBairro().getNome().equals(bairro)) {
+		// list.add(e.toBean());
+		// }
+		// }
+		// }
+		// }
 
 		return list;
 	}
@@ -150,12 +128,12 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 			String categoria) {
 		List<Estabelecimento> lista = (new EstabelecimentoDAO()).listAll();
 		ArrayList<EstabelecimentoBean> listaRetorno = new ArrayList<EstabelecimentoBean>();
-		for (Estabelecimento estabelecimento : lista) {
-			if (estabelecimento.getCategoria().toLowerCase()
-					.contains(categoria.toLowerCase())) {
-				listaRetorno.add(estabelecimento.toBean());
-			}
-		}
+		// for (Estabelecimento estabelecimento : lista) {
+		// if (estabelecimento.getCategoria().toLowerCase()
+		// .contains(categoria.toLowerCase())) {
+		// listaRetorno.add(estabelecimento.toBean());
+		// }
+		// }
 		return listaRetorno;
 	}
 }

@@ -53,8 +53,6 @@ public class ListaEstabelecimentoItem extends Composite {
 			this.link.setTargetHistoryToken("Estabelecimento/" + e.getId());
 		}
 
-		this.endereco.setText(e.getEnderecoBean().getRua()
-				+ e.getEnderecoBean().getNumero());
 		this.descricao.setText(e.getRazaoSocial());
 		this.logo.setUrl(e.getLogoURL());
 	}

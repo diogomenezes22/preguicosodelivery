@@ -1,7 +1,10 @@
 package com.preguicoso.server.dao;
 
-import java.util.Calendar;
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
@@ -12,31 +15,16 @@ public class BairroDAO extends DAOBase {
 		ObjectifyService.register(Bairro.class);
 	}
 
-	public Bairro create(Bairro b) {
-		b.setDataRegistro(Calendar.getInstance().getTime());
-		b.setUltimaAtualizacao(Calendar.getInstance().getTime());
-
+	public void create(Bairro b) {
 		this.ofy().put(b);
-		return b;
 	}
 
-	public Bairro retrieveByName(String nome) {
-		List<Bairro> b = this.ofy().query(Bairro.class).filter("nome", nome).list();
-		if (b.isEmpty()) {
-			return null;
-		}
-		return b.get(0);
-	}
-	public Bairro retrieveByCep(String cep) {
-		try {
-			return this.ofy().get(Bairro.class, cep);
-		} catch (Exception e) {
-			return null;
-		}
+	public Bairro retrieveById(Long id) {
+		return this.ofy().query(Bairro.class).filter("id", id).get();
 	}
 
 	public void update(Bairro b) {
-		b.setUltimaAtualizacao(Calendar.getInstance().getTime());
+		this.ofy().put(b);
 	}
 
 	public void delete(Bairro b) {
@@ -45,5 +33,22 @@ public class BairroDAO extends DAOBase {
 
 	public List<Bairro> listAll() {
 		return this.ofy().query(Bairro.class).list();
+	}
+
+	public List<Bairro> listByCidade(Long idCidade) {
+		List<Bairro> lista = this.ofy().query(Bairro.class)
+				.filter("idCidade", idCidade).order("nome").list();
+		final Collator coll = Collator.getInstance(new Locale("pt", "BR"));
+		Collections.sort(lista, new Comparator<Bairro>() {
+
+			@Override
+			public int compare(Bairro o1, Bairro o2) {
+				if (coll.compare(o1.getNome(), o2.getNome()) > 0) {
+					return 1;
+				}
+				return -1;
+			}
+		});
+		return lista;
 	}
 }

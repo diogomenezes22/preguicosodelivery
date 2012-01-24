@@ -47,8 +47,6 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 		DbGenerator gerar = new DbGenerator();
 		gerar.generateDatabase();
 		Usuario user = bancoU.retrieve(userservice.getCurrentUser().getEmail());
-		estabelecimento.setDono(user);
-		// banco.create(estabelecimento);
 	}
 
 	@Override
