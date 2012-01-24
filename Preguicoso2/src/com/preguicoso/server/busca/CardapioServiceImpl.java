@@ -27,7 +27,10 @@ import com.preguicoso.server.entities.Pedido;
 import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.RegistroStatusRestaurante;
+import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CategoriaBean;
+import com.preguicoso.shared.entities.CidadeBean;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 
 /**
@@ -258,12 +261,61 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public List<String> getBairrosNome(Long idCidade) {
+	public List<BairroBean> getBairros(Long idCidade) {
 		BairroDAO bdao = new BairroDAO();
-		List<String> lista = new ArrayList<String>();
+		List<BairroBean> lista = new ArrayList<BairroBean>();
 		for (Bairro b : bdao.listByCidade(idCidade)) {
-			lista.add(b.getNome());
+			lista.add(b.toBean());
 		}
 		return lista;
+	}
+
+	@Override
+	public CidadeBean getCidade(Long idEstabelecimento) {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		CidadeDAO cdao = new CidadeDAO();
+		return cdao
+				.retrieveById(edao.retrieve(idEstabelecimento).getIdCidade())
+				.toBean();
+	}
+
+	@Override
+	public List<CidadeBean> getCidadesList() {
+		CidadeDAO cdao = new CidadeDAO();
+		List<CidadeBean> lista = new ArrayList<CidadeBean>();
+		for (Cidade c : cdao.listAll()) {
+			lista.add(c.toBean());
+		}
+		return lista;
+	}
+
+	@Override
+	public void setCidade(Long idEstabelecimento, CidadeBean cidadeBean) {
+		CidadeDAO cdao = new CidadeDAO();
+		cdao.update(new Cidade(cidadeBean));
+	}
+
+	@Override
+	public void salvarListaBairros(EstabelecimentoBean estabelecimentoBean,
+			List<String> listaBairros) {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		Estabelecimento e = new Estabelecimento(estabelecimentoBean);
+		BairroDAO bdao = new BairroDAO();
+		List<Long> idBairrosAtendidos = new ArrayList<Long>();
+		for (Bairro b : bdao.getBairrosByName(
+				estabelecimentoBean.getIdCidade(), listaBairros)) {
+			idBairrosAtendidos.add(b.getId());
+		}
+		e.setIdBairroAtendimentoList(idBairrosAtendidos);
+		edao.update(e);
+	}
+
+	@Override
+	public void updateEstabelecimento(EstabelecimentoBean eb,
+			List<Long> idBairrosAtendidos) {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		Estabelecimento e = new Estabelecimento(eb);
+		e.setIdBairroAtendimentoList(idBairrosAtendidos);
+		edao.update(e);
 	}
 }

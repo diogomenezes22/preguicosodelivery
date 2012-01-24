@@ -95,18 +95,18 @@ public class Backend extends Composite {
 
 		cadastroService.getStatus(eb.getId(),
 
-				new AsyncCallback<RegistroStatusRestaurante>() {
+		new AsyncCallback<RegistroStatusRestaurante>() {
 
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Ocorreu um erro ao tentar carregar o seu status. Recarregue a página e tente novamente.");
-					}
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Ocorreu um erro ao tentar carregar o seu status. Recarregue a página e tente novamente.");
+			}
 
-					@Override
-					public void onSuccess(RegistroStatusRestaurante result) {
-						status.setSelectedIndex(result.ordinal());
-					}
-				});
+			@Override
+			public void onSuccess(RegistroStatusRestaurante result) {
+				status.setSelectedIndex(result.ordinal());
+			}
+		});
 
 		status.addChangeHandler(new ChangeHandler() {
 
@@ -155,7 +155,7 @@ public class Backend extends Composite {
 
 		} else if (token.startsWith("restaurante/editar")) {
 			container.clear();
-			container.add(new EditarInformacao());
+			container.add(new EditarInformacao(eb));
 		} else if (token.startsWith("restaurante/setup")) {
 			container.clear();
 			container.add(new Setup());
