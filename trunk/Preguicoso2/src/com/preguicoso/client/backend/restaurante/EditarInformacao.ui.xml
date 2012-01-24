@@ -11,17 +11,22 @@
 			<h1>Editar Informações do restaurante</h1>
 			<div class="container_coluna2">
 				<div class="container">
-					a
+					<h5>Cidade de atuação</h5>
+					<g:ListBox ui:field="cidadeBox" />
+					<hr />
+					<h5>Bairros de atuação</h5>
+					<g:VerticalPanel ui:field="bairrosPanel" />
+					<g:Button ui:field="salvarBairros">Salvar</g:Button>
 				</div>
 			</div>
 		</div>
-		<div class="grid_3 coluna3 alpha omega">
-			<h1>Descrição do Pedidos</h1>
-			<div class="container_coluna3">
-				<div class="container">
-					as
-				</div>
-			</div>
-		</div>		
+	<!-- <div class="grid_3 coluna3 alpha omega"> -->
+	<!-- <h1>Descrição do Pedidos</h1> -->
+	<!-- <div class="container_coluna3"> -->
+	<!-- <div class="container"> -->
+	<!-- as -->
+	<!-- </div> -->
+	<!-- </div> -->
+	<!-- </div> -->
 	</g:HTMLPanel>
 </ui:UiBinder> 

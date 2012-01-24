@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
+import com.preguicoso.shared.entities.BairroBean;
 
 public class EnderecoBox extends Composite {
 
@@ -59,21 +60,36 @@ public class EnderecoBox extends Composite {
 		depoisDoCep.setVisible(false);
 		// TODO @Osman fazer pela cidade no futuro
 		Long idCidade = (long) 1;
-		cardapioService.getBairrosNome(idCidade,
-				new AsyncCallback<List<String>>() {
-
-					@Override
-					public void onSuccess(List<String> result) {
-						for (String nomeBairro : result) {
-							endereco_bairro.addItem(nomeBairro);
-						}
-					}
+		cardapioService.getBairros(idCidade,
+				new AsyncCallback<List<BairroBean>>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
 						Window.alert("Problemas de conexão, recarregue a página.");
 					}
+
+					@Override
+					public void onSuccess(List<BairroBean> result) {
+						for (BairroBean bb : result) {
+							endereco_bairro.addItem(bb.getNome());
+						}
+					}
 				});
+		// cardapioService.getBairros(idCidade,
+		// new AsyncCallback<List<String>>() {
+		//
+		// @Override
+		// public void onSuccess(List<String> result) {
+		// for (String nomeBairro : result) {
+		// endereco_bairro.addItem(nomeBairro);
+		// }
+		// }
+		//
+		// @Override
+		// public void onFailure(Throwable caught) {
+		// Window.alert("Problemas de conexão, recarregue a página.");
+		// }
+		// });
 	}
 
 	@UiHandler("pedir")

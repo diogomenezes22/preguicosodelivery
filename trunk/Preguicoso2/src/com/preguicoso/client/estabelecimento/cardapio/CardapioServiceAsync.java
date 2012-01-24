@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CategoriaBean;
+import com.preguicoso.shared.entities.CidadeBean;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 
 public interface CardapioServiceAsync {
@@ -28,6 +31,19 @@ public interface CardapioServiceAsync {
 
 	void getEnderecoByCep(String cep, AsyncCallback<String[]> callback);
 
-	void getBairrosNome(Long idCidade, AsyncCallback<List<String>> callback);
+	void getCidade(Long idEstabelecimento, AsyncCallback<CidadeBean> callback);
+
+	void setCidade(Long idEstabelecimento, CidadeBean cidadeBean,
+			AsyncCallback<Void> callback);
+
+	void getCidadesList(AsyncCallback<List<CidadeBean>> callback);
+
+	void getBairros(Long idCidade, AsyncCallback<List<BairroBean>> callback);
+
+	void salvarListaBairros(EstabelecimentoBean estabelecimentoBean,
+			List<String> listaBairros, AsyncCallback<Void> callback);
+
+	void updateEstabelecimento(EstabelecimentoBean eb,
+			List<Long> idBairrosAtendidos, AsyncCallback<Void> callback);
 
 }

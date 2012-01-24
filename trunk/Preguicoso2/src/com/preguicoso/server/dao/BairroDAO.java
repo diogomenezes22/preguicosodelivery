@@ -35,6 +35,11 @@ public class BairroDAO extends DAOBase {
 		return this.ofy().query(Bairro.class).list();
 	}
 
+	public List<Bairro> getBairrosByName(Long idCidade, List<String> names) {
+		return this.ofy().query(Bairro.class).filter("idCidade", idCidade)
+				.filter("nome in", names).list();
+	}
+
 	public List<Bairro> listByCidade(Long idCidade) {
 		List<Bairro> lista = this.ofy().query(Bairro.class)
 				.filter("idCidade", idCidade).order("nome").list();

@@ -18,6 +18,15 @@ public class Cidade implements Serializable {
 	Long id;
 	String nome;
 
+	public Cidade() {
+
+	}
+
+	public Cidade(CidadeBean cidadeBean) {
+		this.id = cidadeBean.getId();
+		this.nome = cidadeBean.getNome();
+	}
+
 	public CidadeBean toBean() {
 		CidadeBean cb = new CidadeBean();
 		cb.setId(this.id);
