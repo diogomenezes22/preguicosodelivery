@@ -1,56 +1,30 @@
 package com.preguicoso.shared.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class CidadeBean implements Serializable {
 
-	private static final long serialVersionUID = 1921334149005836325L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8990859460300638059L;
+	Long id;
+	String nome;
 
-	private String nome;
-	private EstadoBean estadoBean;
-	private Date dataRegistro;
-	private Date ultimaAtualizacao;
-
-	public CidadeBean() {
-		this.nome = "";
-		this.estadoBean = new EstadoBean();
+	public Long getId() {
+		return id;
 	}
 
-	public CidadeBean(String nome, EstadoBean estadoBean) {
-		this.nome = nome;
-		this.estadoBean = estadoBean;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public EstadoBean getEstadoBean() {
-		return this.estadoBean;
-	}
-
-	public void setEstadoBean(EstadoBean estadoBean) {
-		this.estadoBean = estadoBean;
-	}
-
-	public Date getUltimaAtualizacao() {
-		return this.ultimaAtualizacao;
-	}
-
-	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
-		this.ultimaAtualizacao = ultimaAtualizacao;
-	}
-
-	public Date getDataRegistro() {
-		return this.dataRegistro;
-	}
-
-	public void setDataRegistro(Date dataRegistro) {
-		this.dataRegistro = dataRegistro;
-	}
 }

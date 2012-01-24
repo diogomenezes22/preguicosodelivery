@@ -1,13 +1,10 @@
 package com.preguicoso.server.listar;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.listar.ListaService;
-import com.preguicoso.server.dao.BairroDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
-import com.preguicoso.server.entities.Bairro;
 import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
@@ -15,17 +12,19 @@ import com.preguicoso.shared.entities.EstabelecimentoBean;
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class ListaServiceImpl extends RemoteServiceServlet implements ListaService {
+public class ListaServiceImpl extends RemoteServiceServlet implements
+		ListaService {
 
 	@Override
 	public ArrayList<EstabelecimentoBean> getListaEstabelecimento() {
 		/*
-		Estabelecimento novo = new Estabelecimento("AbraaoViad�o", "Abra�o", "123132123");
-		(new EstabelecimentoDAO()).create(novo);
+		 * Estabelecimento novo = new Estabelecimento("AbraaoViad�o", "Abra�o",
+		 * "123132123"); (new EstabelecimentoDAO()).create(novo);
 		 */
 		ArrayList<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
 
-		for (Estabelecimento estabelecimento : (new EstabelecimentoDAO()).listAll()) {
+		for (Estabelecimento estabelecimento : (new EstabelecimentoDAO())
+				.listAll()) {
 			lista.add(estabelecimento.toBean());
 		}
 
@@ -33,23 +32,10 @@ public class ListaServiceImpl extends RemoteServiceServlet implements ListaServi
 	}
 
 	@Override
-	public ArrayList<EstabelecimentoBean> getEstabelecimentoPorCep(String cep) throws IllegalArgumentException {
-
-		Bairro bairro = (new BairroDAO()).retrieveByCep(cep);
-
-		List<Estabelecimento> estabelecimentos = (new EstabelecimentoDAO()).listAll();
+	public ArrayList<EstabelecimentoBean> getEstabelecimentoPorCep(String cep)
+			throws IllegalArgumentException {
 
 		ArrayList<EstabelecimentoBean> list = new ArrayList<EstabelecimentoBean>();
-
-		if (bairro == null) {
-			return list;
-		}
-
-		for (Estabelecimento e : estabelecimentos) {
-			if (e.getAreaAtendimento().contains(bairro)) {
-				list.add(e.toBean());
-			}
-		}
 
 		return list;
 	}

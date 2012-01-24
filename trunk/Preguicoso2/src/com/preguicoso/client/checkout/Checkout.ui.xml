@@ -12,82 +12,71 @@
 			<div>
 				<h2>Checkout</h2>
 			</div>
-		<div>
-				<h3>Formas de Pagamento:</h3>
-				<hr/>
-			 <table border='0'>  
-				<tr>
-				<td width='30'><g:RadioButton name="pagamento" ui:field="dinheiro"/></td>
-				<td width='20'><img src='http://hungroo.com/system/images/1/medium/cash.gif?1305664073'/></td>
-				<td width='120'>Dinheiro</td>
-				</tr>
-				<tr>
-					<td width='30'><g:RadioButton name="pagamento" ui:field="pagseguro"/></td>
-					<th COLSPAN="2"><img src='http://www.reidoepi.com.br/site/modules/showparcelamento/tmp/pagseguro.jpg'/>
-					</th>
-				</tr>
-			</table>
-		</div>
 			<div>
-				<hr/>
-				<h3>Endereço de Entrega:</h3>
-				<table border='0' id='endereco_user'>  
+				<h3>Formas de Pagamento:</h3>
+				<hr />
+				<table border='0'>
 					<tr>
-					    <td width='220'><g:RadioButton name="entrega" text="Nunca pedi no Preguicoso" ui:field="endereco"/></td>
-						<td width='220'><g:RadioButton name="entrega" text="Já pedi no Preguicoso" ui:field="login"/></td>
+						<td width='30'>
+							<g:RadioButton name="pagamento" ui:field="dinheiro" />
+						</td>
+						<td width='20'>
+							<img
+								src='http://hungroo.com/system/images/1/medium/cash.gif?1305664073' />
+						</td>
+						<td width='120'>Dinheiro</td>
+					</tr>
+					<tr>
+						<td width='30'>
+							<g:RadioButton name="pagamento" ui:field="pagseguro" />
+						</td>
+						<th COLSPAN="2">
+							<img
+								src='http://www.reidoepi.com.br/site/modules/showparcelamento/tmp/pagseguro.jpg' />
+						</th>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<hr />
+				<h3>Endereço de Entrega:</h3>
+				<table border='0' id='endereco_user'>
+					<tr>
+						<td width='220'>
+							<g:RadioButton name="entrega" text="Nunca pedi no Preguicoso"
+								ui:field="endereco" />
+						</td>
+						<td width='220'>
+							<g:RadioButton name="entrega" text="Já pedi no Preguicoso"
+								ui:field="login" />
+						</td>
 					</tr>
 					<tr>
 						<th COLSPAN="2">
-							<g:HTMLPanel ui:field="enderecoBox">
-								<table border='0' class='endereco'> 
-									<tr>
-										<th COLSPAN="3"><g:TextBox ui:field="endereco_rua" width="355px" text="Logradouro"/></th>
-										<td width='50'><g:TextBox ui:field="endereco_numero" width="100px" text="Número"/></td>
-									</tr>
-									<tr class='legenda_endereco'>
-										<th COLSPAN="4">Informe o nome da avenida, rua, praça, travessa, etc.</th>
-									</tr>
-									<tr>
-										<th COLSPAN="2"><g:TextBox ui:field="endereco_complemento" text="Complemento"/></th>
-										<th COLSPAN="2"><g:TextBox ui:field="endereco_bairro" text="Bairro"/>	</th>
-									</tr>
-									<tr class='legenda_endereco'>
-										<th COLSPAN="4">Exemplo: Apto. 31.</th>
-									</tr>
-									<tr>
-										<td width='30'>
-											<select class='font-size-1 valid' id='address_city_id' name='address[city_id]'>
-												<option value='1'>Santos / SP</option>
-												<option value='2'>São Vicente / SP</option>
-												<option value='6'>Praia Grande / SP</option>
-												<option value='7'>Cubatão / SP</option>
-											</select>
-										</td>
-									</tr>
-									<tr class='legenda_endereco'>
-										<th COLSPAN="4">Apenas as cidades que o estabelecimento atende.</th>
-									</tr>
-								</table>
-							</g:HTMLPanel>
+							<g:HTMLPanel ui:field="enderecoBox"></g:HTMLPanel>
 							<g:HTMLPanel ui:field="loginBox">
-								<table border='0' class='endereco'> 
+								<table border='0' class='endereco'>
 									<tr>
-										<th COLSPAN="3"><a href='nada'>Login</a></th>
+										<th COLSPAN="3">
+											<a href='nada'>Login</a>
+										</th>
 									</tr>
 								</table>
 							</g:HTMLPanel>
 						</th>
 					</tr>
-					<tr>
-						<th COLSPAN="2"><g:Button ui:field="pedir">Pedir</g:Button></th>
-					</tr>
-					
+					<!-- <tr> -->
+					<!-- <th COLSPAN="2"> -->
+					<!-- <g:Button ui:field="pedir">Pedir</g:Button> -->
+					<!-- </th> -->
+					<!-- </tr> -->
+
 				</table>
 			</div>
 		</div>
-		
-		
-		
-		
+
+
+
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -53,6 +53,8 @@ public class Backend extends Composite {
 	ListBox status;
 	@UiField
 	Button logout;
+	@UiField
+	InlineLabel conexao;
 
 	private final CadastroServiceAsync cadastroService = GWT
 			.create(CadastroService.class);
@@ -142,7 +144,7 @@ public class Backend extends Composite {
 	public void buildHomePage(String token) {
 		if (token.startsWith("pedidos/ordem")) {
 			container.clear();
-			container.add(new OrdemPedidos(eb.getId()));
+			container.add(new OrdemPedidos(eb.getId(), conexao));
 		} else if (token.startsWith("pedidos/historico_de_pedidos")) {
 			container.clear();
 			container.add(new HistoricoPedidos(eb.getId()));

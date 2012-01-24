@@ -1,6 +1,7 @@
 package com.preguicoso.client.estabelecimento.cardapio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.preguicoso.shared.entities.CategoriaBean;
@@ -22,6 +23,11 @@ public interface CardapioServiceAsync {
 	void getCategorias(Long id, AsyncCallback<ArrayList<CategoriaBean>> callback);
 
 	void enviarPedido(String nomeCliente, String rua, String bairro,
-			String formaPagamento, AsyncCallback<Void> callback);
+			String complemento, String formaPagamento,
+			AsyncCallback<Void> callback);
+
+	void getEnderecoByCep(String cep, AsyncCallback<String[]> callback);
+
+	void getBairrosNome(Long idCidade, AsyncCallback<List<String>> callback);
 
 }

@@ -1,6 +1,7 @@
 package com.preguicoso.server.dao;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import com.googlecode.objectify.ObjectifyService;
@@ -13,30 +14,13 @@ public class EstabelecimentoDAO extends DAOBase {
 	}
 
 	public void create(Estabelecimento e) {
-
-		if (this.retrieveByCnpj(e.getCnpj()) != null) {
-			Estabelecimento est = this.retrieveByCnpj(e.getCnpj());
-			est.setCategoria(e.getCategoria());
-			est.setDataRegistro(e.getDataRegistro());
-			est.setEndereco(e.getEndereco());
-			est.setLogoURL(e.getLogoURL());
-			est.setNome(e.getNome());
-			est.setRazaoSocial(e.getRazaoSocial());
-			est.setUltimaAtualizacao(e.getUltimaAtualizacao());
-			e = est;
-		}
-		e.setUltimaAtualizacao(Calendar.getInstance().getTime());
-		e.setDataRegistro(Calendar.getInstance().getTime());
+		e.setDataRegistro(new Date());
 		this.ofy().put(e);
 	}
 
-	public Estabelecimento retrieveByName(String estabelecimento) {
-		List<Estabelecimento> e = this.ofy().query(Estabelecimento.class)
-				.filter("nome", estabelecimento).list();
-		if (e.isEmpty()) {
-			return null;
-		}
-		return e.get(0);
+	public Estabelecimento retrieveByName(String nome) {
+		return this.ofy().query(Estabelecimento.class).filter("nome", nome)
+				.get();
 	}
 
 	public Estabelecimento retrieveByCnpj(String cnpj) {
@@ -49,11 +33,7 @@ public class EstabelecimentoDAO extends DAOBase {
 	}
 
 	public Estabelecimento retrieve(Long id) {
-		try {
-			return this.ofy().get(Estabelecimento.class, id);
-		} catch (Exception e) {
-			return null;
-		}
+		return this.ofy().query(Estabelecimento.class).filter("id", id).get();
 	}
 
 	public void update(Estabelecimento e) {

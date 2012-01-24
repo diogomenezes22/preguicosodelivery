@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.preguicoso.shared.entities.CidadeBean;
-import com.preguicoso.shared.entities.EnderecoBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 /**
@@ -12,8 +11,6 @@ import com.preguicoso.shared.entities.EstabelecimentoBean;
  */
 public interface BuscaServiceAsync {
 	void getListaCidade(AsyncCallback<ArrayList<CidadeBean>> callback);
-
-	void getEnderecoByCep(String cep, AsyncCallback<EnderecoBean> callback);
 
 	void editarEstabelecimento(EstabelecimentoBean bean,
 			AsyncCallback<Boolean> callback);

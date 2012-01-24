@@ -6,19 +6,25 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.lavieri.modelutil.cep.WebServiceCep;
+
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.server.carrinho.CarrinhoDeCompra;
+import com.preguicoso.server.dao.BairroDAO;
+import com.preguicoso.server.dao.CidadeDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.dao.ItemCardapioDAO;
 import com.preguicoso.server.dao.PedidoDAO;
-import com.preguicoso.server.entities.Endereco;
+import com.preguicoso.server.dbgenerator.BairroGenerator;
+import com.preguicoso.server.entities.Bairro;
+import com.preguicoso.server.entities.Cidade;
 import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.server.entities.Pedido;
-import com.preguicoso.server.entities.Usuario;
+import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.CategoriaBean;
@@ -103,7 +109,36 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 	public void carrinhoClean() {
 		this.getThreadLocalRequest().getSession().setAttribute("pedido", null);
 
-		// TODO @Osman gera restaurante teste temporário
+		// TODO @Osman gera cidades - temporário
+		CidadeDAO cdao = new CidadeDAO();
+		List<Cidade> listac = cdao.listAll();
+		if (listac != null) {
+			if (listac.isEmpty()) {
+				Cidade c = new Cidade();
+				c.setId((long) 1);
+				c.setNome("Fortaleza");
+				cdao.create(c);
+			}
+		}
+
+		// TODO @Osman gera bairros - temporário
+		BairroDAO bdao = new BairroDAO();
+		List<Bairro> listab = bdao.listAll();
+		if (listab != null) {
+			if (listab.isEmpty()) {
+				String[] bfort = BairroGenerator.bairrosFortaleza();
+				Bairro b;
+				for (int i = 0; i < bfort.length; i++) {
+					b = new Bairro();
+					b.setId((long) i + 1);
+					b.setIdCidade((long) 1);
+					b.setNome(bfort[i]);
+					bdao.create(b);
+				}
+			}
+		}
+
+		// TODO @Osman gera restaurantes - temporário
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		List<Estabelecimento> lista = edao.listAll();
 		if (lista != null) {
@@ -112,29 +147,40 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				Estabelecimento e = new Estabelecimento();
 				e.setCnpj("123");
 				e.setNome("China In Box");
-				e.setCategoria("Chinesa");
-				e.setDono(new Usuario());
-				e.setEmailDono("teste@teste.com");
-				e.setEndereco(new Endereco());
+				e.setCategoria(RegistroCategoriaEstabelecimento.Oriental);
 				e.setId((long) 405);
 				e.setLogoURL("http://www.guiabh.com.br/imgs_cadastradas/China%20in%20Box%20logo.jpg");
 				e.setRazaoSocial("razao social");
 				e.setStatus(RegistroStatusRestaurante.Aberto);
+				List<Long> idBairroAtendimentoList = new ArrayList<Long>();
+				idBairroAtendimentoList.add((long) 1);
+				idBairroAtendimentoList.add((long) 5);
+				idBairroAtendimentoList.add((long) 15);
+				idBairroAtendimentoList.add((long) 20);
+				idBairroAtendimentoList.add((long) 25);
+				idBairroAtendimentoList.add((long) 30);
+				e.setIdBairroAtendimentoList(idBairroAtendimentoList);
+				e.setIdCidade((long) 1);
 				edao.create(e);
 
 				// Cria Real sucos
 				e = new Estabelecimento();
 				e.setCnpj("123456");
 				e.setNome("Real Sucos");
-				e.setCategoria("Sushi");
-				//se.setAreaAtendimento(new ArrayList<Bairro>());
-				e.setDono(new Usuario());
-				e.setEmailDono("teste@teste.com");
-				e.setEndereco(new Endereco());
+				e.setCategoria(RegistroCategoriaEstabelecimento.Pizzaria);
 				e.setId((long) 407);
 				e.setLogoURL("http://fabricadamidia.com.br/imagens/minis/fotos_album_203.jpg");
 				e.setRazaoSocial("razao social do real sucos");
 				e.setStatus(RegistroStatusRestaurante.Aberto);
+				idBairroAtendimentoList = new ArrayList<Long>();
+				idBairroAtendimentoList.add((long) 35);
+				idBairroAtendimentoList.add((long) 40);
+				idBairroAtendimentoList.add((long) 45);
+				idBairroAtendimentoList.add((long) 50);
+				idBairroAtendimentoList.add((long) 55);
+				idBairroAtendimentoList.add((long) 60);
+				e.setIdBairroAtendimentoList(idBairroAtendimentoList);
+				e.setIdCidade((long) 1);
 				edao.create(e);
 			}
 		}
@@ -180,7 +226,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public void enviarPedido(String nomeCliente, String rua, String bairro,
-			String formaPagamento) {
+			String complemento, String formaPagamento) {
 		Pedido p = new Pedido();
 		p.setFormaPagamento(formaPagamento);
 		ArrayList<ItemCardapioBean> listaItens = getCarrinho();
@@ -196,4 +242,28 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		pdao.create(p);
 	}
 
+	@Override
+	public String[] getEnderecoByCep(String cep) {
+		String[] endereco = new String[2];
+		WebServiceCep ws = WebServiceCep.searchCep(cep);
+		if (!ws.hasException()) {
+			if (!ws.isCepNotFound()) {
+				endereco[0] = ws.getLogradouroFull();
+				endereco[1] = ws.getBairro();
+				return endereco;
+			}
+		}
+		return null;
+
+	}
+
+	@Override
+	public List<String> getBairrosNome(Long idCidade) {
+		BairroDAO bdao = new BairroDAO();
+		List<String> lista = new ArrayList<String>();
+		for (Bairro b : bdao.listByCidade(idCidade)) {
+			lista.add(b.getNome());
+		}
+		return lista;
+	}
 }

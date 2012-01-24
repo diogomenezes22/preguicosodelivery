@@ -1,7 +1,6 @@
 package com.preguicoso.server.entities;
 
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.Id;
 
@@ -11,30 +10,34 @@ import com.preguicoso.shared.entities.BairroBean;
 
 @Entity
 @Cached
-public class Bairro {
+public class Bairro implements Serializable {
 
-	@Id long id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6955923465734579707L;
+
+	@Id
+	Long id;
 	String nome;
-	String cidade;
-	List<Long> restaurantes;
-	Date dataRegistro;
-	Date ultimaAtualizacao;
+	Long idCidade;
 
-	public BairroBean toBean() {
-		BairroBean bean = new BairroBean();
-		bean.setNome(this.nome);
-		bean.setId(id);
-		bean.setDataRegistro(this.dataRegistro);
-		bean.setUltimaAtualizacao(this.ultimaAtualizacao);
-		bean.setCidade(this.cidade);
-		return bean;
+	public Bairro() {
 	}
 
-	public long getId() {
+	public BairroBean toBean() {
+		BairroBean bb = new BairroBean();
+		bb.setId(this.id);
+		bb.setNome(this.nome);
+		bb.setIdCidade(this.idCidade);
+		return bb;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -46,37 +49,12 @@ public class Bairro {
 		this.nome = nome;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public Long getIdCidade() {
+		return idCidade;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setIdCidade(Long idCidade) {
+		this.idCidade = idCidade;
 	}
-
-	public List<Long> getRestaurantes() {
-		return restaurantes;
-	}
-
-	public void setRestaurantes(List<Long> restaurantes) {
-		this.restaurantes = restaurantes;
-	}
-
-	public Date getDataRegistro() {
-		return dataRegistro;
-	}
-
-	public void setDataRegistro(Date dataRegistro) {
-		this.dataRegistro = dataRegistro;
-	}
-
-	public Date getUltimaAtualizacao() {
-		return ultimaAtualizacao;
-	}
-
-	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
-		this.ultimaAtualizacao = ultimaAtualizacao;
-	}
-	
 
 }
