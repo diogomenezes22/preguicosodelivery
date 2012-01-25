@@ -1,9 +1,11 @@
 package com.preguicoso.client.busca;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
@@ -25,4 +27,6 @@ public interface BuscaService extends RemoteService {
 	ArrayList<CidadeBean> getListaCidade() throws IllegalArgumentException;
 
 	Boolean editarEstabelecimento(EstabelecimentoBean bean);
+
+	List<EstabelecimentoBean> getListaEstabelecimentoByBairro(BairroBean bb);
 }

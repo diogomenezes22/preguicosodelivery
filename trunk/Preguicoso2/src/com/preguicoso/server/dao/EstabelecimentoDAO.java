@@ -1,5 +1,6 @@
 package com.preguicoso.server.dao;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.List;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
 import com.preguicoso.server.entities.Estabelecimento;
+import com.preguicoso.shared.entities.BairroBean;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class EstabelecimentoDAO extends DAOBase {
 	static {
@@ -48,5 +51,16 @@ public class EstabelecimentoDAO extends DAOBase {
 
 	public List<Estabelecimento> listAll() {
 		return this.ofy().query(Estabelecimento.class).list();
+	}
+
+	public List<EstabelecimentoBean> getListByBairro(BairroBean bb) {
+		List<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
+		for (Estabelecimento e : this.ofy().query(Estabelecimento.class)
+				.filter("idCidade", bb.getIdCidade()).list()) {
+			if (e.getIdBairroAtendimentoList().contains(bb.getId())) {
+				lista.add(e.toBean());
+			}
+		}
+		return lista;
 	}
 }

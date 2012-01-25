@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
+import com.preguicoso.shared.RegistroErros;
 import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
@@ -61,7 +62,7 @@ public class EditarInformacao extends Composite {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Problema de conexão. Recarregue a página.");
+						Window.alert(RegistroErros.CONEXAO);
 					}
 
 					@Override
@@ -99,15 +100,22 @@ public class EditarInformacao extends Composite {
 	}
 
 	private void listarCidades() {
+		CidadeBean fortaleza = new CidadeBean();
+		fortaleza.setId((long) 1);
+		fortaleza.setNome("Fortaleza");
+		cidadesList = new ArrayList<CidadeBean>();
+		cidadesList.add(fortaleza);
+		cidadeBox.addItem(fortaleza.getNome());
 		cardapioService.getCidadesList(new AsyncCallback<List<CidadeBean>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Problema de conexão. Recarregue a página.");
+				Window.alert(RegistroErros.CONEXAO);
 			}
 
 			@Override
 			public void onSuccess(List<CidadeBean> result) {
+				cidadeBox.clear();
 				cidadesList = new ArrayList<CidadeBean>(result);
 				for (CidadeBean cb : cidadesList) {
 					cidadeBox.addItem(cb.getNome());
@@ -133,8 +141,8 @@ public class EditarInformacao extends Composite {
 				});
 	}
 
-	private void listarBairros(CidadeBean result) {
-		cardapioService.getBairros(result.getId(),
+	private void listarBairros(CidadeBean cb) {
+		cardapioService.getBairros(cb.getId(),
 				new AsyncCallback<List<BairroBean>>() {
 
 					@Override
@@ -144,6 +152,7 @@ public class EditarInformacao extends Composite {
 
 					@Override
 					public void onSuccess(List<BairroBean> result) {
+						bairrosPanel.clear();
 						List<Long> idBairrosAtendidos = eb
 								.getIdBairroAtendimentoList();
 						bairrosList = new ArrayList<BairroBean>(result);

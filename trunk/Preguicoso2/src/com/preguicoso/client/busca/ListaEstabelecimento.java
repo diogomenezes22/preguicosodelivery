@@ -1,6 +1,7 @@
 package com.preguicoso.client.busca;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -15,6 +16,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
+import com.preguicoso.shared.RegistroErros;
+import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class ListaEstabelecimento extends Composite {
@@ -163,4 +166,31 @@ public class ListaEstabelecimento extends Composite {
 
 	}
 
+	public ListaEstabelecimento(BairroBean bb) {
+		this.initWidget(uiBinder.createAndBindUi(this));
+		buscaService.getListaEstabelecimentoByBairro(bb,
+				new AsyncCallback<List<EstabelecimentoBean>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO @Osman erro errado, mudar depois
+						Window.alert(RegistroErros.CONEXAO);
+					}
+
+					@Override
+					public void onSuccess(List<EstabelecimentoBean> result) {
+						if (!result.isEmpty()) {
+							for (EstabelecimentoBean eb : result) {
+								ListaEstabelecimento.this.listaEstabelecimento
+										.add(new ListaEstabelecimentoItem(eb));
+							}
+						} else {
+							ListaEstabelecimento.this.listaEstabelecimento
+									.add(new Label(
+											"Nenhum resultado foi encontrado."));
+						}
+						loading.setVisible(false);
+					}
+				});
+	}
 }
