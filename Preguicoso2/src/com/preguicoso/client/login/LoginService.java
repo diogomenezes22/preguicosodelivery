@@ -36,4 +36,5 @@ public interface LoginService extends RemoteService {
 
 	String changePasswordUsuarioEstabelecimento(String passwordOld,
 			String passwordNew, String passwordNewCheck);
+
 }

@@ -58,7 +58,8 @@ public class EnderecoBox extends Composite {
 	public EnderecoBox() {
 		initWidget(uiBinder.createAndBindUi(this));
 		depoisDoCep.setVisible(false);
-		// TODO @Osman fazer pela cidade no futuro
+		// TODO @Osman fazer pela cidade no futuro e lista somente os bairros
+		// que o restaurante atende
 		Long idCidade = (long) 1;
 		cardapioService.getBairros(idCidade,
 				new AsyncCallback<List<BairroBean>>() {
@@ -75,21 +76,6 @@ public class EnderecoBox extends Composite {
 						}
 					}
 				});
-		// cardapioService.getBairros(idCidade,
-		// new AsyncCallback<List<String>>() {
-		//
-		// @Override
-		// public void onSuccess(List<String> result) {
-		// for (String nomeBairro : result) {
-		// endereco_bairro.addItem(nomeBairro);
-		// }
-		// }
-		//
-		// @Override
-		// public void onFailure(Throwable caught) {
-		// Window.alert("Problemas de conexão, recarregue a página.");
-		// }
-		// });
 	}
 
 	@UiHandler("pedir")
@@ -137,13 +123,13 @@ public class EnderecoBox extends Composite {
 							Window.alert("Digite seu cep.");
 						} else {
 							if (result != null) {
-								endereco_rua.setText(result[0]);
 								List<String> lista = new ArrayList<String>();
 								for (int i = 0; i < endereco_bairro
 										.getItemCount(); i++) {
 									lista.add(endereco_bairro.getValue(i));
 								}
 								if (lista.contains(result[1])) {
+									endereco_rua.setText(result[0]);
 									endereco_bairro.setSelectedIndex(lista
 											.indexOf(result[1]));
 									enderecoCep.setEnabled(false);
