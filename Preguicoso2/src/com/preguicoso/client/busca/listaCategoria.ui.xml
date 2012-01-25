@@ -7,6 +7,9 @@
 		}
 	</ui:style>
 	<g:HTMLPanel styleName=".grid_3">
+		<h1>Local de Entrega</h1>
+		<g:ListBox ui:field="cidadeBox" /><br />
+		<g:ListBox ui:field="bairroBox" />
 		<h1>Categorias</h1>
 		<g:InlineHyperlink text="Pizzaria" targetHistoryToken="index/pizza" ui:field="pizza" styleName="categoria"/>
 		<g:InlineHyperlink text="Sushi" targetHistoryToken="index/sushi" ui:field="sushi" styleName="categoria"/>

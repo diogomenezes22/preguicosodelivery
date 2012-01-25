@@ -1,8 +1,10 @@
 package com.preguicoso.client.busca;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
@@ -26,4 +28,7 @@ public interface BuscaServiceAsync {
 
 	void getListaEstabelecimentoPorCategoria(String categoria,
 			AsyncCallback<ArrayList<EstabelecimentoBean>> callback);
+
+	void getListaEstabelecimentoByBairro(BairroBean bb,
+			AsyncCallback<List<EstabelecimentoBean>> callback);
 }

@@ -9,6 +9,7 @@ import com.preguicoso.server.dao.CidadeDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.entities.Cidade;
 import com.preguicoso.server.entities.Estabelecimento;
+import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
@@ -135,5 +136,12 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 		// }
 		// }
 		return listaRetorno;
+	}
+
+	@Override
+	public List<EstabelecimentoBean> getListaEstabelecimentoByBairro(
+			BairroBean bb) {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		return edao.getListByBairro(bb);
 	}
 }
