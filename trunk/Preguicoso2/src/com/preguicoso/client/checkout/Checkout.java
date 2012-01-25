@@ -69,6 +69,8 @@ public class Checkout extends Composite {
 
 	@UiHandler("endereco")
 	void onEnderecoClick(ClickEvent event) {
+		enderecoBox.clear();
+		enderecoBox.setVisible(true);
 		enderecoBox.add(new EnderecoBox());
 		loginBox.setVisible(false);
 		// testarEnvio();
