@@ -175,8 +175,7 @@ public class listaCategoria extends Composite {
 				if (result == null) {
 					cidadeBox.setSelectedIndex(0);
 				} else {
-					cidadeBox.setSelectedIndex(cidadesList.indexOf(result
-							.getNome()));
+					cidadeBox.setSelectedIndex(cidadesList.indexOf(result));
 				}
 				listarBairros(cidadesList.get(cidadeBox.getSelectedIndex()));
 			}
