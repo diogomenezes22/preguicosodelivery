@@ -16,6 +16,8 @@ import com.preguicoso.shared.entities.EstabelecimentoBean;
 public interface BuscaService extends RemoteService {
 	ArrayList<EstabelecimentoBean> getListaEstabelecimento();
 
+	List<EstabelecimentoBean> getListaEstabelecimentoBySession();
+
 	ArrayList<EstabelecimentoBean> getListaEstabelecimentoPorNome(String nome);
 
 	ArrayList<EstabelecimentoBean> getListaEstabelecimentoPorCategoria(
@@ -29,4 +31,16 @@ public interface BuscaService extends RemoteService {
 	Boolean editarEstabelecimento(EstabelecimentoBean bean);
 
 	List<EstabelecimentoBean> getListaEstabelecimentoByBairro(BairroBean bb);
+
+	List<EstabelecimentoBean> getListaEstabelecimentoByCidade(Long idCidade);
+
+	List<EstabelecimentoBean> getListaEstabelecimentoBySession(String categoria);
+
+	CidadeBean getCidadeBeanSession();
+
+	BairroBean getBairroBeanSession();
+
+	void setCidadeBeanSession(CidadeBean cb);
+
+	void setBairroBeanSession(BairroBean bb);
 }

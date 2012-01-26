@@ -8,13 +8,13 @@
 	</ui:style>
 	<g:HTMLPanel styleName=".grid_3">
 		<h1>Local de Entrega</h1>
-		<g:ListBox ui:field="cidadeBox" /><br />
+		<g:ListBox ui:field="cidadeBox" />
+		<br />
 		<g:ListBox ui:field="bairroBox" />
 		<h1>Categorias</h1>
-		<g:InlineHyperlink text="Pizzaria" targetHistoryToken="index/pizza" ui:field="pizza" styleName="categoria"/>
-		<g:InlineHyperlink text="Sushi" targetHistoryToken="index/sushi" ui:field="sushi" styleName="categoria"/>
-		<g:InlineHyperlink text="Italiana" targetHistoryToken="index/italiano" ui:field="italiano" styleName="categoria"/>
-		<g:InlineHyperlink text="Chinesa" targetHistoryToken="index/chines" ui:field="chines" styleName="categoria"/>
-		
+		<g:HTMLPanel ui:field="categoriasPanel"></g:HTMLPanel>
+		<!-- <g:InlineHyperlink text="Sushi" targetHistoryToken="index/sushi" ui:field="sushi" 
+			styleName="categoria"/> -->
+
 	</g:HTMLPanel>
 </ui:UiBinder> 

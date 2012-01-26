@@ -8,6 +8,7 @@ import java.util.List;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
 import com.preguicoso.server.entities.Estabelecimento;
+import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
 import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
@@ -53,10 +54,59 @@ public class EstabelecimentoDAO extends DAOBase {
 		return this.ofy().query(Estabelecimento.class).list();
 	}
 
+	public List<EstabelecimentoBean> getList() {
+		List<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
+		for (Estabelecimento e : this.ofy().query(Estabelecimento.class).list()) {
+			lista.add(e.toBean());
+		}
+		return lista;
+	}
+
 	public List<EstabelecimentoBean> getListByBairro(BairroBean bb) {
 		List<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
 		for (Estabelecimento e : this.ofy().query(Estabelecimento.class)
 				.filter("idCidade", bb.getIdCidade()).list()) {
+			if (e.getIdBairroAtendimentoList().contains(bb.getId())) {
+				lista.add(e.toBean());
+			}
+		}
+		return lista;
+	}
+
+	public List<EstabelecimentoBean> getListByCidade(Long idCidade) {
+		List<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
+		for (Estabelecimento e : this.ofy().query(Estabelecimento.class)
+				.filter("idCidade", idCidade).list()) {
+			lista.add(e.toBean());
+		}
+		return lista;
+	}
+
+	public List<EstabelecimentoBean> getListByCidade(Long idCidade,
+			String categoria) {
+		List<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
+		for (Estabelecimento e : this
+				.ofy()
+				.query(Estabelecimento.class)
+				.filter("idCidade", idCidade)
+				.filter("categoria",
+						RegistroCategoriaEstabelecimento.valueOf(categoria))
+				.list()) {
+			lista.add(e.toBean());
+		}
+		return lista;
+	}
+
+	public List<EstabelecimentoBean> getListByBairro(BairroBean bb,
+			String categoria) {
+		List<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
+		for (Estabelecimento e : this
+				.ofy()
+				.query(Estabelecimento.class)
+				.filter("idCidade", bb.getIdCidade())
+				.filter("categoria",
+						RegistroCategoriaEstabelecimento.valueOf(categoria))
+				.list()) {
 			if (e.getIdBairroAtendimentoList().contains(bb.getId())) {
 				lista.add(e.toBean());
 			}
