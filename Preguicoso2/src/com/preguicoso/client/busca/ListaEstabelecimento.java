@@ -36,6 +36,9 @@ public class ListaEstabelecimento extends Composite {
 	interface ListaUiBinder extends UiBinder<Widget, ListaEstabelecimento> {
 	}
 
+	/**
+	 * Cria a lista baseado na cidade presente na session
+	 */
 	public ListaEstabelecimento() {
 		this.initWidget(uiBinder.createAndBindUi(this));
 
@@ -56,36 +59,23 @@ public class ListaEstabelecimento extends Composite {
 		});
 
 		String[] token = History.getToken().split("/");
-		if (token.length > 1) {
-			this.buscaService.getListaEstabelecimentoPorCategoria(token[1],
-					new AsyncCallback<ArrayList<EstabelecimentoBean>>() {
-
-						@Override
-						public void onSuccess(
-								ArrayList<EstabelecimentoBean> result) {
-							if (!result.isEmpty()) {
-								for (EstabelecimentoBean est : result) {
-									ListaEstabelecimento.this.listaEstabelecimento
-											.add(new ListaEstabelecimentoItem(
-													est));
-								}
-							} else {
-								ListaEstabelecimento.this.listaEstabelecimento
-										.add(new Label(
-												"Nenhum resultado foi encontrado."));
-							}
-							loading.setVisible(false);
-						}
+		if (token.length == 2) {
+			buscaService.getListaEstabelecimentoBySession(token[1],
+					new AsyncCallback<List<EstabelecimentoBean>>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
 							Window.alert("Não foi possível carregar a lista de restaurantes.");
+						}
 
+						@Override
+						public void onSuccess(List<EstabelecimentoBean> result) {
+							carregarListaEstabelecimento(result);
 						}
 					});
 		} else {
-			this.buscaService
-					.getListaEstabelecimento(new AsyncCallback<ArrayList<EstabelecimentoBean>>() {
+			buscaService
+					.getListaEstabelecimentoBySession(new AsyncCallback<List<EstabelecimentoBean>>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
@@ -93,17 +83,11 @@ public class ListaEstabelecimento extends Composite {
 						}
 
 						@Override
-						public void onSuccess(
-								ArrayList<EstabelecimentoBean> result) {
-							for (EstabelecimentoBean e : result) {
-								ListaEstabelecimento.this.listaEstabelecimento
-										.add(new ListaEstabelecimentoItem(e));
-							}
-							loading.setVisible(false);
+						public void onSuccess(List<EstabelecimentoBean> result) {
+							carregarListaEstabelecimento(result);
 						}
 					});
 		}
-		loading.setVisible(true);
 	}
 
 	public ListaEstabelecimento(String... nome) {
@@ -132,7 +116,6 @@ public class ListaEstabelecimento extends Composite {
 						@Override
 						public void onFailure(Throwable caught) {
 							Window.alert("Não foi possível carregar a lista de restaurantes.");
-
 						}
 					});
 		} else if (nome.length == 2) {
@@ -173,24 +156,44 @@ public class ListaEstabelecimento extends Composite {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						// TODO @Osman erro errado, mudar depois
-						Window.alert(RegistroErros.CONEXAO);
+						Window.alert(RegistroErros.ESTABELECIMENTO_NOT_FOUND);
 					}
 
 					@Override
 					public void onSuccess(List<EstabelecimentoBean> result) {
-						if (!result.isEmpty()) {
-							for (EstabelecimentoBean eb : result) {
-								ListaEstabelecimento.this.listaEstabelecimento
-										.add(new ListaEstabelecimentoItem(eb));
-							}
-						} else {
-							ListaEstabelecimento.this.listaEstabelecimento
-									.add(new Label(
-											"Nenhum resultado foi encontrado."));
-						}
-						loading.setVisible(false);
+						carregarListaEstabelecimento(result);
 					}
 				});
+	}
+
+	public ListaEstabelecimento(Long idCidade) {
+		this.initWidget(uiBinder.createAndBindUi(this));
+		buscaService.getListaEstabelecimentoByCidade(idCidade,
+				new AsyncCallback<List<EstabelecimentoBean>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert(RegistroErros.ESTABELECIMENTO_NOT_FOUND);
+					}
+
+					@Override
+					public void onSuccess(List<EstabelecimentoBean> result) {
+						carregarListaEstabelecimento(result);
+					}
+
+				});
+	}
+
+	private void carregarListaEstabelecimento(List<EstabelecimentoBean> lista) {
+		if (!lista.isEmpty()) {
+			for (EstabelecimentoBean eb : lista) {
+				ListaEstabelecimento.this.listaEstabelecimento
+						.add(new ListaEstabelecimentoItem(eb));
+			}
+		} else {
+			ListaEstabelecimento.this.listaEstabelecimento.add(new Label(
+					"Nenhum resultado foi encontrado."));
+		}
+		loading.setVisible(false);
 	}
 }

@@ -48,14 +48,7 @@ public class RouterHistory {
 			$(".middle_rodape").as(Effects).slideDown(1000);
 			addSuggestBox();
 			addListEstabelecimento();
-		}
-		// else if (token.equals("cadastroEstabelecimento")) {
-		// CadastroEstabelecimento cadastro = new CadastroEstabelecimento();
-		// RootPanel.get("busca").add(cadastro);}
-		// else if (token.equals("cadastroUsuario")) {
-		// CadastroEstabelecimento cadastro = new CadastroEstabelecimento();
-		// RootPanel.get("busca").add(cadastro);}
-		else if (token.equals("quem")) {
+		} else if (token.equals("quem")) {
 			animateBegin();
 			gerarHtml("quem");
 		} else if (token.equals("temos")) {
@@ -105,8 +98,7 @@ public class RouterHistory {
 	}
 
 	public void addListEstabelecimento() {
-		ListaEstabelecimento listaEstabelecimento = new ListaEstabelecimento();
-		RootPanel.get("busca").add(listaEstabelecimento);
+		RootPanel.get("busca").add(new ListaEstabelecimento());
 	}
 
 	public void addSuggestBox() {

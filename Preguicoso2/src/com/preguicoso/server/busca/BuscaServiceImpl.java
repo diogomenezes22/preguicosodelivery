@@ -3,12 +3,15 @@ package com.preguicoso.server.busca;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.busca.BuscaService;
 import com.preguicoso.server.dao.CidadeDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.entities.Cidade;
 import com.preguicoso.server.entities.Estabelecimento;
+import com.preguicoso.shared.AtributosSession;
 import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
@@ -143,5 +146,74 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 			BairroBean bb) {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		return edao.getListByBairro(bb);
+	}
+
+	@Override
+	public List<EstabelecimentoBean> getListaEstabelecimentoByCidade(
+			Long idCidade) {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		return edao.getListByCidade(idCidade);
+	}
+
+	@Override
+	public List<EstabelecimentoBean> getListaEstabelecimentoBySession() {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		CidadeBean cidadeBeanAtual = (CidadeBean) session
+				.getAttribute(AtributosSession.cidadeBeanSession);
+		BairroBean bairroBeanAtual = (BairroBean) session
+				.getAttribute(AtributosSession.bairroBeanSession);
+		if (cidadeBeanAtual == null) {
+			return edao.getListByCidade((long) 1);
+		}
+		if (bairroBeanAtual == null)
+			return edao.getListByCidade(cidadeBeanAtual.getId());
+		return edao.getListByBairro(bairroBeanAtual);
+	}
+
+	@Override
+	public List<EstabelecimentoBean> getListaEstabelecimentoBySession(
+			String categoria) {
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		CidadeBean CidadeBeanAtual = (CidadeBean) session
+				.getAttribute(AtributosSession.cidadeBeanSession);
+		BairroBean bairroBeanAtual = (BairroBean) session
+				.getAttribute(AtributosSession.bairroBeanSession);
+		if (CidadeBeanAtual == null) {
+			return edao.getListByCidade((long) 1, categoria);
+		}
+		if (bairroBeanAtual == null) {
+			return edao.getListByCidade(CidadeBeanAtual.getId(), categoria);
+		}
+		return edao.getListByBairro(bairroBeanAtual, categoria);
+	}
+
+	@Override
+	public CidadeBean getCidadeBeanSession() {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		return (CidadeBean) session
+				.getAttribute(AtributosSession.cidadeBeanSession);
+	}
+
+	@Override
+	public BairroBean getBairroBeanSession() {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		return (BairroBean) session
+				.getAttribute(AtributosSession.bairroBeanSession);
+	}
+
+	@Override
+	public void setCidadeBeanSession(CidadeBean cb) {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		session.setAttribute(AtributosSession.cidadeBeanSession, cb);
+	}
+
+	@Override
+	public void setBairroBeanSession(BairroBean bb) {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		session.setAttribute(AtributosSession.cidadeBeanSession,
+				(new CidadeDAO()).retrieveById(bb.getIdCidade()).toBean());
+		session.setAttribute(AtributosSession.bairroBeanSession, bb);
 	}
 }

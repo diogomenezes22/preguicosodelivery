@@ -63,11 +63,7 @@ public class ItemCardapioUI extends Composite {
 			final ArrayList<ItemCategoria> listaCategoria) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.nome.setText(i.getNome());
-		// TODO @Osman apagar em breve
-		// if (i.getId() != null)
 		this.numero.setText(Integer.toString(i.getNumero()));
-		// else
-		// this.numero.setVisible(false);
 		this.preco.setText("R$ " + i.getPreco().toString());
 		item.addClickHandler(new ClickHandler() {
 
