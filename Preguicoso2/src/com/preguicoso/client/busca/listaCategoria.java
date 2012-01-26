@@ -51,17 +51,7 @@ public class listaCategoria extends Composite {
 	public listaCategoria() {
 		initWidget(uiBinder.createAndBindUi(this));
 		listarCidades();
-		// cidadeBox.setSelectedIndex(0);
-		// listarBairros(cidadesList.get(cidadeBox.getSelectedIndex()));
 		gerarCategorias();
-
-		// History.addValueChangeHandler(new ValueChangeHandler<String>() {
-		//
-		// @Override
-		// public void onValueChange(ValueChangeEvent<String> event) {
-		//
-		// }
-		// });
 	}
 
 	private void gerarCategorias() {
@@ -203,7 +193,11 @@ public class listaCategoria extends Composite {
 
 			@Override
 			public void onSuccess(BairroBean result) {
-				bairroBox.setSelectedIndex(bairrosList.indexOf(result) + 1);
+				if (result == null) {
+					bairroBox.setSelectedIndex(0);
+				} else {
+					bairroBox.setSelectedIndex(bairrosList.indexOf(result) + 1);
+				}
 			}
 		});
 	}
@@ -225,7 +219,6 @@ public class listaCategoria extends Composite {
 						for (BairroBean bb : result) {
 							bairroBox.addItem(bb.getNome());
 						}
-						bairroBox.setSelectedIndex(0);
 						setBairroBoxSelectedIndex();
 					}
 				});
