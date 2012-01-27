@@ -24,6 +24,7 @@ import com.preguicoso.server.entities.Cidade;
 import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.server.entities.Pedido;
+import com.preguicoso.shared.AtributosSession;
 import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
 import com.preguicoso.shared.RegistroFormaPagamento;
 import com.preguicoso.shared.RegistroStatusPedido;
@@ -252,7 +253,10 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		p.setStatus(RegistroStatusPedido.esperando);
 
 		PedidoDAO pdao = new PedidoDAO();
-		pdao.create(p);
+		// Guarda a key<Pedido> do pedido na sessão e cria o pedido
+		// TODO @Osman verificar veracidade
+		this.getThreadLocalRequest().getSession()
+				.setAttribute(AtributosSession.keyPedido, pdao.create(p));
 	}
 
 	@Override

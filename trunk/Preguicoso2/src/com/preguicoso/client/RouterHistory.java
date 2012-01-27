@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.preguicoso.client.busca.Busca;
 import com.preguicoso.client.busca.ListaEstabelecimento;
 import com.preguicoso.client.estabelecimento.EstabelecimentoUI;
+import com.preguicoso.client.user.StatusPedido;
 
 public class RouterHistory {
 
@@ -68,6 +69,9 @@ public class RouterHistory {
 			RootPanel.get("cadastroEstabelecimento").setVisible(false);
 			animateBegin();
 			printEstabelicimento(token);
+		} else if (token.equals("pedido")) {
+			RootPanel.get("content").clear();
+			RootPanel.get("content").add(new StatusPedido());
 		}
 	}
 

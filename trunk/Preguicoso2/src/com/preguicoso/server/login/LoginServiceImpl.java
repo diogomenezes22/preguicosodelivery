@@ -8,15 +8,20 @@ import javax.servlet.http.HttpSession;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.googlecode.objectify.Key;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
+import com.preguicoso.server.dao.PedidoDAO;
 import com.preguicoso.server.dao.UsuarioDAO;
 import com.preguicoso.server.dao.UsuarioEstabelecimentoDAO;
 import com.preguicoso.server.entities.Estabelecimento;
+import com.preguicoso.server.entities.Pedido;
 import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.server.entities.UsuarioEstabelecimento;
+import com.preguicoso.shared.AtributosSession;
 import com.preguicoso.shared.CriptoUtils;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
+import com.preguicoso.shared.entities.PedidoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
 
 /**
@@ -203,6 +208,13 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 			return "Os campos com a nova senha devem ser iguais.";
 		}
 		return "Você não digitou sua senha corretamente.";
+	}
+
+	@Override
+	public PedidoBean getPedidoAtualBySession() {
+		PedidoDAO pdao = new PedidoDAO();
+		return pdao.getByKey((Key<Pedido>) this.getThreadLocalRequest()
+				.getSession().getAttribute(AtributosSession.keyPedido));
 	}
 
 }
