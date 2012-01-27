@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
+import com.preguicoso.shared.RegistroFormaPagamento;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 
 public class EstabelecimentoBean implements Serializable {
@@ -20,8 +21,17 @@ public class EstabelecimentoBean implements Serializable {
 	private Date dataRegistro;
 	private Date ultimaAtualizacao;
 	private RegistroStatusRestaurante status;
-	private List<Long> idBairroAtendimentoList;
+	private List<Long> listaIdBairrosAtendidos;
+	private List<Double> listaFretes;
 	private Long idCidade;
+	private String telefone;
+	private String endereco;
+	private RegistroFormaPagamento[] formasPagamento;
+	private String[] horariosFuncionamento;
+
+	public Double getFreteByIdBairro(int idBairro) {
+		return listaFretes.get(listaIdBairrosAtendidos.indexOf(idBairro));
+	}
 
 	public Long getId() {
 		return id;
@@ -95,12 +105,12 @@ public class EstabelecimentoBean implements Serializable {
 		this.status = status;
 	}
 
-	public List<Long> getIdBairroAtendimentoList() {
-		return idBairroAtendimentoList;
+	public String[] getHorariosFuncionamento() {
+		return horariosFuncionamento;
 	}
 
-	public void setIdBairroAtendimentoList(List<Long> idBairroAtendimentoList) {
-		this.idBairroAtendimentoList = idBairroAtendimentoList;
+	public void setHorariosFuncionamento(String[] horariosFuncionamento) {
+		this.horariosFuncionamento = horariosFuncionamento;
 	}
 
 	public Long getIdCidade() {
@@ -109,6 +119,46 @@ public class EstabelecimentoBean implements Serializable {
 
 	public void setIdCidade(Long idCidade) {
 		this.idCidade = idCidade;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public List<Long> getListaIdBairrosAtendidos() {
+		return listaIdBairrosAtendidos;
+	}
+
+	public void setListaIdBairrosAtendidos(List<Long> listaIdBairrosAtendidos) {
+		this.listaIdBairrosAtendidos = listaIdBairrosAtendidos;
+	}
+
+	public List<Double> getListaFretes() {
+		return listaFretes;
+	}
+
+	public void setListaFretes(List<Double> listaFretes) {
+		this.listaFretes = listaFretes;
+	}
+
+	public RegistroFormaPagamento[] getFormasPagamento() {
+		return formasPagamento;
+	}
+
+	public void setFormasPagamento(RegistroFormaPagamento[] formasPagamento) {
+		this.formasPagamento = formasPagamento;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 }
