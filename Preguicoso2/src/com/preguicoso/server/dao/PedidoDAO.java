@@ -5,22 +5,37 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.NotFoundException;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
 import com.preguicoso.server.entities.Pedido;
 import com.preguicoso.shared.RegistroStatusPedido;
+import com.preguicoso.shared.entities.PedidoBean;
 
 public class PedidoDAO extends DAOBase {
 	static {
 		ObjectifyService.register(Pedido.class);
 	}
 
-	public void create(Pedido p) {
-		this.ofy().put(p);
+	public Key<Pedido> create(Pedido p) {
+		return this.ofy().put(p);
 	}
 
 	public void update(Pedido p) {
 		this.ofy().put(p);
+	}
+
+	public PedidoBean getByKey(Key<Pedido> key) {
+		if (key != null) {
+			try {
+				Pedido p = this.ofy().get(key);
+				return p.toBean();
+			} catch (NotFoundException e) {
+				return null;
+			}
+		}
+		return null;
 	}
 
 	public Pedido retrieve(Long idPedido) {

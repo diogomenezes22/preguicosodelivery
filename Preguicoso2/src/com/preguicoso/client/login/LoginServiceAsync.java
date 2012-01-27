@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
+import com.preguicoso.shared.entities.PedidoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
 
 /**
@@ -46,4 +47,7 @@ public interface LoginServiceAsync {
 	void changePasswordUsuarioEstabelecimento(String passwordOld,
 			String passwordNew, String passwordNewCheck,
 			AsyncCallback<String> callback);
+
+	void getPedidoAtualBySession(AsyncCallback<PedidoBean> callback);
+
 }

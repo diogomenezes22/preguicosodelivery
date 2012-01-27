@@ -10,14 +10,12 @@ import javax.persistence.Id;
 import com.google.appengine.repackaged.org.json.JSONArray;
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
-import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 import com.preguicoso.shared.entities.PedidoBean;
 
 @Entity
-@Cached
 public class Pedido implements Serializable {
 
 	/**

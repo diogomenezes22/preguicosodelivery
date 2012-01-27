@@ -96,14 +96,15 @@ public class EnderecoBox extends Composite {
 						@Override
 						public void onSuccess(Void result) {
 							Window.alert("Pedido enviado com sucesso!");
+							History.newItem("pedido");
 						}
 
 						@Override
 						public void onFailure(Throwable caught) {
 							Window.alert("Erro no Envio do pedido. Tente novamente.");
+							History.newItem("index");
 						}
 					});
-			History.newItem("index");
 		}
 	}
 
