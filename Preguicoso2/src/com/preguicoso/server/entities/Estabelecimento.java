@@ -1,19 +1,19 @@
 package com.preguicoso.server.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Id;
 
-import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
 import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
+import com.preguicoso.shared.RegistroFormaPagamento;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 @Entity
-@Cached
 public class Estabelecimento implements Serializable {
 
 	/**
@@ -30,10 +30,26 @@ public class Estabelecimento implements Serializable {
 	Date dataRegistro;
 	Date ultimaAtualizacao;
 	RegistroStatusRestaurante status;
-	List<Long> idBairroAtendimentoList;
+	List<Long> listaIdBairrosAtendidos;
+	List<Double> listaFretes;
 	Long idCidade;
+	String telefone;
+	String endereco;
+	RegistroFormaPagamento[] formasPagamento;
+	String[] horariosFuncionamento;
+
+	public Double getFreteByIdBairro(int idBairro) {
+		return listaFretes.get(listaIdBairrosAtendidos.indexOf(idBairro));
+	}
+
+	public void putBairroFrete(Long idBairro, Double frete) {
+		listaIdBairrosAtendidos.add(idBairro);
+		listaFretes.add(frete);
+	}
 
 	public Estabelecimento() {
+		listaIdBairrosAtendidos = new ArrayList<Long>();
+		listaFretes = new ArrayList<Double>();
 	};
 
 	public Estabelecimento(EstabelecimentoBean eb) {
@@ -46,8 +62,13 @@ public class Estabelecimento implements Serializable {
 		this.setDataRegistro(eb.getDataRegistro());
 		this.setUltimaAtualizacao(eb.getUltimaAtualizacao());
 		this.setStatus(eb.getStatus());
-		this.setIdBairroAtendimentoList(eb.getIdBairroAtendimentoList());
+		this.setListaIdBairrosAtendidos(eb.getListaIdBairrosAtendidos());
+		this.setListaFretes(eb.getListaFretes());
 		this.setIdCidade(eb.getIdCidade());
+		this.setTelefone(eb.getTelefone());
+		this.setEndereco(eb.getEndereco());
+		this.setFormasPagamento(eb.getFormasPagamento());
+		this.setHorariosFuncionamento(eb.getHorariosFuncionamento());
 	}
 
 	public EstabelecimentoBean toBean() {
@@ -61,8 +82,13 @@ public class Estabelecimento implements Serializable {
 		eb.setDataRegistro(this.dataRegistro);
 		eb.setUltimaAtualizacao(this.ultimaAtualizacao);
 		eb.setStatus(this.status);
-		eb.setIdBairroAtendimentoList(this.idBairroAtendimentoList);
-		eb.setIdCidade(idCidade);
+		eb.setListaIdBairrosAtendidos(this.listaIdBairrosAtendidos);
+		eb.setListaFretes(this.listaFretes);
+		eb.setIdCidade(this.idCidade);
+		eb.setTelefone(this.telefone);
+		eb.setEndereco(this.endereco);
+		eb.setFormasPagamento(this.formasPagamento);
+		eb.setHorariosFuncionamento(this.horariosFuncionamento);
 		return eb;
 	}
 
@@ -138,12 +164,28 @@ public class Estabelecimento implements Serializable {
 		this.status = status;
 	}
 
-	public List<Long> getIdBairroAtendimentoList() {
-		return idBairroAtendimentoList;
+	public List<Long> getListaIdBairrosAtendidos() {
+		return listaIdBairrosAtendidos;
 	}
 
-	public void setIdBairroAtendimentoList(List<Long> idBairroAtendimentoList) {
-		this.idBairroAtendimentoList = idBairroAtendimentoList;
+	public void setListaIdBairrosAtendidos(List<Long> listaIdBairrosAtendidos) {
+		this.listaIdBairrosAtendidos = listaIdBairrosAtendidos;
+	}
+
+	public List<Double> getListaFretes() {
+		return listaFretes;
+	}
+
+	public void setListaFretes(List<Double> listaFretes) {
+		this.listaFretes = listaFretes;
+	}
+
+	public String[] getHorariosFuncionamento() {
+		return horariosFuncionamento;
+	}
+
+	public void setHorariosFuncionamento(String[] horariosFuncionamento) {
+		this.horariosFuncionamento = horariosFuncionamento;
 	}
 
 	public Long getIdCidade() {
@@ -152,6 +194,30 @@ public class Estabelecimento implements Serializable {
 
 	public void setIdCidade(Long idCidade) {
 		this.idCidade = idCidade;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public RegistroFormaPagamento[] getFormasPagamento() {
+		return formasPagamento;
+	}
+
+	public void setFormasPagamento(RegistroFormaPagamento[] formasPagamento) {
+		this.formasPagamento = formasPagamento;
 	}
 
 }

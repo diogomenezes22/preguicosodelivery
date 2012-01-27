@@ -66,7 +66,7 @@ public class EstabelecimentoDAO extends DAOBase {
 		List<EstabelecimentoBean> lista = new ArrayList<EstabelecimentoBean>();
 		for (Estabelecimento e : this.ofy().query(Estabelecimento.class)
 				.filter("idCidade", bb.getIdCidade()).list()) {
-			if (e.getIdBairroAtendimentoList().contains(bb.getId())) {
+			if (e.getListaIdBairrosAtendidos().contains(bb.getId())) {
 				lista.add(e.toBean());
 			}
 		}
@@ -107,7 +107,7 @@ public class EstabelecimentoDAO extends DAOBase {
 				.filter("categoria",
 						RegistroCategoriaEstabelecimento.valueOf(categoria))
 				.list()) {
-			if (e.getIdBairroAtendimentoList().contains(bb.getId())) {
+			if (e.getListaIdBairrosAtendidos().contains(bb.getId())) {
 				lista.add(e.toBean());
 			}
 		}

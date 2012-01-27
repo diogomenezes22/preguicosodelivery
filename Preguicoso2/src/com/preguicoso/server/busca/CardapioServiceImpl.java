@@ -25,6 +25,7 @@ import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.server.entities.Pedido;
 import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
+import com.preguicoso.shared.RegistroFormaPagamento;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.BairroBean;
@@ -155,15 +156,19 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				e.setLogoURL("http://www.guiabh.com.br/imgs_cadastradas/China%20in%20Box%20logo.jpg");
 				e.setRazaoSocial("razao social");
 				e.setStatus(RegistroStatusRestaurante.Aberto);
-				List<Long> idBairroAtendimentoList = new ArrayList<Long>();
-				idBairroAtendimentoList.add((long) 1);
-				idBairroAtendimentoList.add((long) 5);
-				idBairroAtendimentoList.add((long) 15);
-				idBairroAtendimentoList.add((long) 20);
-				idBairroAtendimentoList.add((long) 25);
-				idBairroAtendimentoList.add((long) 30);
-				e.setIdBairroAtendimentoList(idBairroAtendimentoList);
+				e.putBairroFrete((long) 1, 1.2);
+				e.putBairroFrete((long) 15, 1.25);
+				e.putBairroFrete((long) 20, 1.1);
+				e.putBairroFrete((long) 25, 1.0);
+				e.putBairroFrete((long) 30, 1.5);
 				e.setIdCidade((long) 1);
+				e.setTelefone("32221313");
+				e.setEndereco("Rua x 123, Aldeota");
+				e.setFormasPagamento(RegistroFormaPagamento.values());
+				String[] horariosFuncionamento = { "08:00 às 00:00",
+						"08:00 às 23:00", "08:00 às 23:00", "08:00 às 23:00",
+						"08:00 às 23:00", "09:00 às 23:00", "08:00 às 23:00" };
+				e.setHorariosFuncionamento(horariosFuncionamento);
 				edao.create(e);
 
 				// Cria Real sucos
@@ -175,15 +180,20 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				e.setLogoURL("http://fabricadamidia.com.br/imagens/minis/fotos_album_203.jpg");
 				e.setRazaoSocial("razao social do real sucos");
 				e.setStatus(RegistroStatusRestaurante.Aberto);
-				idBairroAtendimentoList = new ArrayList<Long>();
-				idBairroAtendimentoList.add((long) 35);
-				idBairroAtendimentoList.add((long) 40);
-				idBairroAtendimentoList.add((long) 45);
-				idBairroAtendimentoList.add((long) 50);
-				idBairroAtendimentoList.add((long) 55);
-				idBairroAtendimentoList.add((long) 60);
-				e.setIdBairroAtendimentoList(idBairroAtendimentoList);
+				e.putBairroFrete((long) 0, 1.2);
+				e.putBairroFrete((long) 15, 1.25);
+				e.putBairroFrete((long) 20, 1.1);
+				e.putBairroFrete((long) 25, 1.0);
+				e.putBairroFrete((long) 30, 1.5);
+				e.setFormasPagamento(RegistroFormaPagamento.values());
 				e.setIdCidade((long) 1);
+				e.setTelefone("31154444");
+				e.setEndereco("Rua y 1234, Mucuripe");
+				e.setFormasPagamento(RegistroFormaPagamento.values());
+				String[] horariosFuncionamento2 = { "10:00 às 00:00",
+						"08:00 às 23:00", "08:00 às 23:00", "08:00 às 23:00",
+						"10:00 às 23:00", "10:00 às 23:00", "10:00 às 23:00" };
+				e.setHorariosFuncionamento(horariosFuncionamento2);
 				edao.create(e);
 			}
 		}
@@ -301,12 +311,10 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		Estabelecimento e = new Estabelecimento(estabelecimentoBean);
 		BairroDAO bdao = new BairroDAO();
-		List<Long> idBairrosAtendidos = new ArrayList<Long>();
 		for (Bairro b : bdao.getBairrosByName(
 				estabelecimentoBean.getIdCidade(), listaBairros)) {
-			idBairrosAtendidos.add(b.getId());
+			e.putBairroFrete(b.getId(), 1.0);
 		}
-		e.setIdBairroAtendimentoList(idBairrosAtendidos);
 		edao.update(e);
 	}
 
@@ -315,7 +323,11 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 			List<Long> idBairrosAtendidos) {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		Estabelecimento e = new Estabelecimento(eb);
-		e.setIdBairroAtendimentoList(idBairrosAtendidos);
+		e.setListaIdBairrosAtendidos(new ArrayList<Long>());
+		e.setListaFretes(new ArrayList<Double>());
+		for (Long bId : idBairrosAtendidos) {
+			e.putBairroFrete(bId, 1.0);
+		}
 		edao.update(e);
 	}
 }

@@ -154,7 +154,7 @@ public class EditarInformacao extends Composite {
 					public void onSuccess(List<BairroBean> result) {
 						bairrosPanel.clear();
 						List<Long> idBairrosAtendidos = eb
-								.getIdBairroAtendimentoList();
+								.getListaIdBairrosAtendidos();
 						bairrosList = new ArrayList<BairroBean>(result);
 						CheckBox bairroCheckBox;
 						for (BairroBean bb : result) {
