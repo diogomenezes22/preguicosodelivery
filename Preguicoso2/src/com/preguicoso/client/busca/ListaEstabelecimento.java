@@ -17,7 +17,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
 import com.preguicoso.shared.RegistroErros;
-import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class ListaEstabelecimento extends Composite {
@@ -147,23 +146,6 @@ public class ListaEstabelecimento extends Composite {
 		this.initWidget(uiBinder.createAndBindUi(this));
 		loading.setVisible(true);
 
-	}
-
-	public ListaEstabelecimento(BairroBean bb) {
-		this.initWidget(uiBinder.createAndBindUi(this));
-		buscaService.getListaEstabelecimentoByBairro(bb,
-				new AsyncCallback<List<EstabelecimentoBean>>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert(RegistroErros.ESTABELECIMENTO_NOT_FOUND);
-					}
-
-					@Override
-					public void onSuccess(List<EstabelecimentoBean> result) {
-						carregarListaEstabelecimento(result);
-					}
-				});
 	}
 
 	public ListaEstabelecimento(Long idCidade) {

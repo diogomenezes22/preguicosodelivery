@@ -12,9 +12,9 @@
 		<br />
 		<g:ListBox ui:field="bairroBox" />
 		<h1>Categorias</h1>
+		<g:InlineHyperlink text="Todas" targetHistoryToken="index" ui:field="todas"
+			styleName="categoria" />
 		<g:HTMLPanel ui:field="categoriasPanel"></g:HTMLPanel>
-		<!-- <g:InlineHyperlink text="Sushi" targetHistoryToken="index/sushi" ui:field="sushi" 
-			styleName="categoria"/> -->
 
 	</g:HTMLPanel>
 </ui:UiBinder> 
