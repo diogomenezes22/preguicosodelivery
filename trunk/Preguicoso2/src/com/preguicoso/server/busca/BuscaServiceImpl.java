@@ -212,8 +212,10 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public void setBairroBeanSession(BairroBean bb) {
 		HttpSession session = this.getThreadLocalRequest().getSession();
-		session.setAttribute(AtributosSession.cidadeBeanSession,
-				(new CidadeDAO()).retrieveById(bb.getIdCidade()).toBean());
+		if (bb != null) {
+			session.setAttribute(AtributosSession.cidadeBeanSession,
+					(new CidadeDAO()).retrieveById(bb.getIdCidade()).toBean());
+		}
 		session.setAttribute(AtributosSession.bairroBeanSession, bb);
 	}
 }

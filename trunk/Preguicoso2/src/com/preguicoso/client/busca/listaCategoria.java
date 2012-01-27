@@ -42,6 +42,8 @@ public class listaCategoria extends Composite {
 	ListBox bairroBox;
 	@UiField
 	HTMLPanel categoriasPanel;
+	@UiField
+	InlineHyperlink todas;
 
 	List<CidadeBean> cidadesList;
 	List<BairroBean> bairrosList;
@@ -54,6 +56,15 @@ public class listaCategoria extends Composite {
 		gerarCategorias();
 	}
 
+	@UiHandler("todas")
+	void onTodasClick(ClickEvent event) {
+		for (int i = 0; i < categoriasPanel.getWidgetCount(); i++) {
+			((InlineHyperlink) categoriasPanel.getWidget(i))
+					.setStyleName("categoria");
+		}
+		todas.addStyleName("categoriaAtiva");
+	}
+
 	private void gerarCategorias() {
 		for (RegistroCategoriaEstabelecimento cat : RegistroCategoriaEstabelecimento
 				.values()) {
@@ -64,6 +75,7 @@ public class listaCategoria extends Composite {
 
 				@Override
 				public void onClick(ClickEvent event) {
+					todas.setStyleName("categoria");
 					for (int i = 0; i < categoriasPanel.getWidgetCount(); i++) {
 						((InlineHyperlink) categoriasPanel.getWidget(i))
 								.setStyleName("categoria");
@@ -79,10 +91,10 @@ public class listaCategoria extends Composite {
 	void onCidadeBoxChange(ChangeEvent event) {
 		CidadeBean cbSelected = cidadesList.get(cidadeBox.getSelectedIndex());
 		listarBairros(cbSelected);
-		RootPanel.get("busca").clear();
-		RootPanel.get("busca").add(
-				new ListaEstabelecimento(cidadesList.get(
-						cidadeBox.getSelectedIndex()).getId()));
+		setCidadeBeanSelected(cbSelected);
+	}
+
+	private void setCidadeBeanSelected(CidadeBean cbSelected) {
 		buscaService.setCidadeBeanSession(cbSelected,
 				new AsyncCallback<Void>() {
 
@@ -92,25 +104,14 @@ public class listaCategoria extends Composite {
 
 					@Override
 					public void onSuccess(Void result) {
+						RootPanel.get("busca").clear();
+						RootPanel.get("busca").add(new ListaEstabelecimento());
 					}
 				});
 	}
 
 	@UiHandler("bairroBox")
 	void onBairroBoxChange(ChangeEvent event) {
-		// RootPanel.get("busca").clear();
-		// String[] token = History.getToken().split("/");
-		// if (bairroBox.getSelectedIndex() != 0) {
-		// BairroBean bbSelected = bairrosList.get(bairroBox
-		// .getSelectedIndex() - 1);
-		// RootPanel.get("busca").add(new ListaEstabelecimento(bbSelected));
-		// setBairroBeanSelected(bbSelected);
-		// } else {
-		// RootPanel.get("busca").add(
-		// new ListaEstabelecimento(cidadesList.get(
-		// cidadeBox.getSelectedIndex()).getId()));
-		// setBairroBeanSelected(null);
-		// }
 		if (bairroBox.getSelectedIndex() != 0) {
 			BairroBean bbSelected = bairrosList.get(bairroBox
 					.getSelectedIndex() - 1);
@@ -131,12 +132,6 @@ public class listaCategoria extends Composite {
 					@Override
 					public void onSuccess(Void result) {
 						RootPanel.get("busca").clear();
-						// if (bbSelected != null) {
-						//
-						// } else {
-						// RootPanel.get("busca").add(
-						// new ListaEstabelecimento());
-						// }
 						RootPanel.get("busca").add(new ListaEstabelecimento());
 					}
 				});
