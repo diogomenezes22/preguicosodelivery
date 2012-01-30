@@ -74,7 +74,7 @@ public class OrdemPedidos extends Composite {
 						});
 			}
 		};
-		t.scheduleRepeating(30000);
+		t.scheduleRepeating(5000);
 	}
 
 	private void carregaListaDePedidos(final Long idEstabelecimento) {

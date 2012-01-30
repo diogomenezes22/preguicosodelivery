@@ -70,8 +70,9 @@ public class RouterHistory {
 			animateBegin();
 			printEstabelicimento(token);
 		} else if (token.equals("pedido")) {
-			RootPanel.get("content").clear();
-			RootPanel.get("content").add(new StatusPedido());
+			RootPanel.get("cadastroEstabelecimento").setVisible(false);
+			animateBegin();
+			printStatus(token);
 		}
 	}
 
@@ -91,6 +92,13 @@ public class RouterHistory {
 		}
 
 		EstabelecimentoUI page = new EstabelecimentoUI(id);
+		// RootPanel.get("content").clear();
+		RootPanel.get("content").add(page);
+	}
+	public void printStatus(String token) {
+		
+
+		StatusPedido page = new StatusPedido();
 		// RootPanel.get("content").clear();
 		RootPanel.get("content").add(page);
 	}
