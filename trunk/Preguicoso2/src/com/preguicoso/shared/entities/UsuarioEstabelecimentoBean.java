@@ -1,9 +1,14 @@
 package com.preguicoso.shared.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class UsuarioEstabelecimentoBean {
+public class UsuarioEstabelecimentoBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6277899292151369415L;
 	String login;
 	String password;
 	String nome;

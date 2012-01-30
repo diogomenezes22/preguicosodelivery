@@ -7,6 +7,90 @@
 		}
 	</ui:style>
 	<g:HTMLPanel>
-		<g:InlineLabel ui:field="status" text="status"/>	
+<style>
+.anuncio {
+	background-color: #F7F4F2;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 5px;
+	font-family: Arial;
+	font-size: 14px;
+	border: #CDC2BA solid thin;
+	margin-bottom: 10px;
+	-webkit-transition: all .5s ease-out,color .5s ease-out;
+	border-image: initial;
+	height:100px;
+	clear:both;
+	text-align:center;
+	padding-top:100px;
+}
+.status_1 {
+	background-color: #F7F4F2;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 5px;
+	font-family: Arial;
+	font-size: 14px;
+	border: #CDC2BA solid thin;
+	margin-bottom: 10px;
+	margin-right:10px;
+	-webkit-transition: all .5s ease-out,color .5s ease-out;
+	border-image: initial;
+	clear:both;
+	text-align:center;
+	width:20%;
+	display:inline-block;
+}
+.status_1:hover{
+	background-color: #B8A99C;
+	
+}
+.active{
+	background-color: #B8A99C;
+	
+}
+</style>	
+			<div class="container_12">
+				<div class="grid_4" style="overflow:hidden">
+					<div class="anuncio">Anuncie aqui</div>
+					<div class="anuncio">Anuncie aqui</div>
+					<div class="anuncio">Anuncie aqui</div>
+				</div>
+				<div class="grid_3" style="overflow:hidden">	
+					<div class="pedido">
+						<h2>Status</h2> 
+						<hr/> 
+						<div>
+							<div class="status_1" id="status_esperando"><img src="img/Panela.png"/></div>
+							<div class="status_1" id="status_entrega"><img width="40px" src="img/moto.png"/></div>
+							<div class="status_1" id="status_enviado"><img width="40px" src="img/house.png"/></div>
+						</div> 
+						<hr/>
+						<div class="item_pedido">
+						<g:InlineLabel text="New InlineLabel" ui:field="mensagem"/>	
+						</div>
+						<hr/>
+						<img width="40px" src="img/watch.png" style="padding-top: 10px;margin-bottom: -16px;"/> Tempo de espera: 44min
+					</div>
+					
+					<div class="pedido">
+						<h2>Seu Pedido</h2> 
+						<hr/> 
+						<div>
+							<div class="item_pedido">Carrinho vazio</div>
+						</div> 
+					</div>
+					<div class="anuncio" style="margin-top:40px">Anuncie aqui</div>
+				</div>
+				<div class="grid_4" style="overflow:hidden">
+					<div class="anuncio">Anuncie aqui</div>
+					<div class="anuncio">Anuncie aqui</div>
+					<div class="anuncio" style="">Anuncie aqui</div>
+				</div>
+			<div style="clear:both"></div>
+		</div>
+			
 	</g:HTMLPanel>
 </ui:UiBinder> 
