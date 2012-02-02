@@ -20,8 +20,6 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
-import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
@@ -35,10 +33,10 @@ public class EnderecoBox extends Composite {
 	interface EnderecoBoxUiBinder extends UiBinder<Widget, EnderecoBox> {
 	}
 
-	private final CardapioServiceAsync cardapioService = GWT
-			.create(CardapioService.class);
 	private final LoginServiceAsync loginService = GWT
 			.create(LoginService.class);
+	private final CheckoutServiceAsync checkoutService = GWT
+			.create(CheckoutService.class);
 
 	@UiField
 	TextBox nome;
@@ -77,7 +75,8 @@ public class EnderecoBox extends Composite {
 
 	// TODO @Osman Usuario pode desativar o javascript, fazer validação no
 	// servidor também
-	public EnderecoBox(EstabelecimentoBean eb, List<String> listaBairros) {
+	public EnderecoBox(EstabelecimentoBean eb, List<String> listaBairros,
+			Checkout ch) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.eb = eb;
 		depoisDoCep.setVisible(false);
@@ -98,7 +97,7 @@ public class EnderecoBox extends Composite {
 			String complemento = endereco_complemento.getText();
 			if (complemento.equals("Complemento"))
 				complemento = "";
-			cardapioService.enviarPedido(nome.getText(), endereco_rua.getText()
+			checkoutService.enviarPedido(nome.getText(), endereco_rua.getText()
 					+ " " + endereco_numero.getText(), endereco_bairro
 					.getValue(endereco_bairro.getSelectedIndex()), complemento,
 					"Dinheiro", new AsyncCallback<Void>() {
@@ -143,7 +142,7 @@ public class EnderecoBox extends Composite {
 
 	@UiHandler("verificarCep")
 	void onVerificarCepClick(ClickEvent event) {
-		cardapioService.getEnderecoByCep(enderecoCep.getText(),
+		checkoutService.getEnderecoByCep(enderecoCep.getText(),
 				new AsyncCallback<String[]>() {
 
 					@Override
@@ -312,9 +311,8 @@ public class EnderecoBox extends Composite {
 	void onEndereco_ruaBlur(BlurEvent event) {
 		if (endereco_rua.getText().equals(""))
 			endereco_rua.setText("Logradouro");
-		else if (!endereco_rua.getText().startsWith("Rua")
-				&& !endereco_rua.getText().startsWith("Avenida")) {
-			Window.alert("Logradouro deve começar com Rua ou Avenida.");
+		else if (!FormValidatorClient.isLogradouroValid(endereco_rua.getText())) {
+			Window.alert("Logradouro inválido.");
 			endereco_rua.setText("Logradouro");
 		}
 	}

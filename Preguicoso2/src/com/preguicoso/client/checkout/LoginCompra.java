@@ -60,10 +60,12 @@ public class LoginCompra extends Composite {
 	Button pedir;
 
 	List<String> listaBairros;
+	Checkout ch;
 
-	public LoginCompra(List<String> listaBairros) {
+	public LoginCompra(List<String> listaBairros, Checkout ch) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.listaBairros = listaBairros;
+		this.ch = ch;
 		depoisLogin.setVisible(false);
 		for (String s : listaBairros) {
 			bairro.addItem(s);
@@ -124,29 +126,34 @@ public class LoginCompra extends Composite {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				if (FormValidatorClient.isFormValid(logradouro.getText(),
-						numero.getText())) {
-					String complementoText = complemento.getText();
-					if (complementoText.equals("Complemento"))
-						complementoText = "";
-					checkoutService.enviarPedido(ub.getNome(),
-							logradouro.getText(),
-							bairro.getValue(bairro.getSelectedIndex()),
-							complemento.getText(), "Dinheiro",
-							new AsyncCallback<Void>() {
+				if (ch.isPagamentoChecked()) {
+					if (FormValidatorClient.isFormValid(logradouro.getText(),
+							numero.getText())) {
+						String complementoText = complemento.getText();
+						if (complementoText.equals("Complemento"))
+							complementoText = "";
+						checkoutService.enviarPedido(ub.getNome(),
+								logradouro.getText() + " " + numero.getText(),
+								bairro.getValue(bairro.getSelectedIndex()),
+								complemento.getText(),
+								ch.getPagamentoChecked(),
+								new AsyncCallback<Void>() {
 
-								@Override
-								public void onFailure(Throwable caught) {
-									Window.alert("Erro no Envio do pedido. Tente novamente.");
-									History.newItem("index");
-								}
+									@Override
+									public void onFailure(Throwable caught) {
+										Window.alert("Erro no Envio do pedido. Tente novamente.");
+										History.newItem("index");
+									}
 
-								@Override
-								public void onSuccess(Void result) {
-									Window.alert("Pedido enviado com sucesso!");
-									History.newItem("pedido");
-								}
-							});
+									@Override
+									public void onSuccess(Void result) {
+										Window.alert("Pedido enviado com sucesso!");
+										History.newItem("pedido");
+									}
+								});
+					}
+				} else {
+					Window.alert("Escolha a forma de pagamento.");
 				}
 			}
 		});
@@ -186,9 +193,8 @@ public class LoginCompra extends Composite {
 	void onEndereco_ruaBlur(BlurEvent event) {
 		if (logradouro.getText().equals(""))
 			logradouro.setText("Logradouro");
-		else if (!logradouro.getText().startsWith("Rua")
-				&& !logradouro.getText().startsWith("Avenida")) {
-			Window.alert("Logradouro deve começar com Rua ou Avenida.");
+		else if (!FormValidatorClient.isLogradouroValid(logradouro.getText())) {
+			Window.alert("Logradouro inválido.");
 			logradouro.setText("Logradouro");
 		}
 	}

@@ -1,5 +1,6 @@
 package com.preguicoso.client.checkout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -7,12 +8,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.shared.RegistroFormaPagamento;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class Checkout extends Composite {
@@ -24,9 +25,7 @@ public class Checkout extends Composite {
 	@UiField
 	RadioButton endereco;
 	@UiField
-	RadioButton dinheiro;
-	@UiField
-	RadioButton pagseguro;
+	HTMLPanel formasPagamento;
 	@UiField
 	HTMLPanel enderecoBox;
 	@UiField
@@ -39,10 +38,12 @@ public class Checkout extends Composite {
 	}
 
 	EstabelecimentoBean eb;
+	List<RadioButton> listaPagamento;
 
 	public Checkout(EstabelecimentoBean eb) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.eb = eb;
+		carregarFormasDePagamento(eb);
 		checkoutService.getBairrosAtendidos(eb,
 				new AsyncCallback<List<String>>() {
 
@@ -59,6 +60,16 @@ public class Checkout extends Composite {
 				});
 	}
 
+	private void carregarFormasDePagamento(EstabelecimentoBean eb) {
+		listaPagamento = new ArrayList<RadioButton>();
+		RadioButton radioForma;
+		for (RegistroFormaPagamento forma : eb.getFormasPagamento()) {
+			radioForma = new RadioButton("forma_pagamento", forma.name());
+			listaPagamento.add(radioForma);
+			formasPagamento.add(radioForma);
+		}
+	}
+
 	private void loginAtivado(final List<String> listaBairros) {
 		login.addClickHandler(new ClickHandler() {
 
@@ -67,7 +78,7 @@ public class Checkout extends Composite {
 				loginBox.clear();
 				enderecoBox.clear();
 				loginBox.setVisible(true);
-				loginBox.add(new LoginCompra(listaBairros));
+				loginBox.add(new LoginCompra(listaBairros, Checkout.this));
 				enderecoBox.setVisible(false);
 			}
 		});
@@ -81,14 +92,28 @@ public class Checkout extends Composite {
 				enderecoBox.clear();
 				loginBox.clear();
 				enderecoBox.setVisible(true);
-				enderecoBox.add(new EnderecoBox(eb, listaBairros));
+				enderecoBox
+						.add(new EnderecoBox(eb, listaBairros, Checkout.this));
 				loginBox.setVisible(false);
 			}
 		});
 	}
 
-	@UiHandler("dinheiro")
-	void onDinheiroClick(ClickEvent event) {
+	public boolean isPagamentoChecked() {
+		for (RadioButton radio : listaPagamento) {
+			if (radio.getValue()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
+	public String getPagamentoChecked() {
+		for (RadioButton radio : listaPagamento) {
+			if (radio.getValue()) {
+				return radio.getText();
+			}
+		}
+		return null;
+	}
 }

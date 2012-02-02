@@ -29,8 +29,6 @@ public interface CardapioServiceAsync {
 			String complemento, String formaPagamento,
 			AsyncCallback<Void> callback);
 
-	void getEnderecoByCep(String cep, AsyncCallback<String[]> callback);
-
 	void getCidade(Long idEstabelecimento, AsyncCallback<CidadeBean> callback);
 
 	void setCidade(Long idEstabelecimento, CidadeBean cidadeBean,

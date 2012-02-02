@@ -1,24 +1,24 @@
 package com.preguicoso.client.checkout;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.gwt.user.client.Window;
 
 public class FormValidatorClient {
 
-	public static String[] tiposValidosLogradouro = { "AEROPORTO", "AER",
-			"ALAMEDA", "AL", "APARTAMENTO", "AP", "AVENIDA", "AV", " BECO",
-			"BC", "BLOCO", "BL", "CAMINHO", "CAM ", "ESCADINHA", "ESCD",
-			"ESTAÇÃO", "EST", "ESTRADA", "ETR", "FAZENDA ", "FAZ", "FORTALEZA",
-			"FORT", "GALERIA ", "GL", "LADEIRA", "LD", "LARGO", "LGO", "PRAÇA",
-			"PÇA", "PARQUE", "PRQ", "PRAIA", "PR ", "QUADRA", "QD",
-			"QUILÔMETRO", "KM", "QUINTA", "QTA ", "RODOVIA", "ROD", "RUA", "R",
-			"SUPER", "QUADRA", "SQD", "TRAVESSA", "TRV ", "VIADUTO", "VD",
-			"VILA", "VL" };
-
 	public static boolean isLogradouroValid(String logradouro) {
-		List<String> logradourosType = new ArrayList<String>();
+		Matcher m = Pattern
+				.compile(
+						"^AEROPORTO |^AER |^ALAMEDA |^AL |^APARTAMENTO |^AP |^AVENIDA |^AV |^BECO |^BC "
+								+ "|^BLOCO |^BL |^CAMINHO |^CAM |^ESCADINHA |^ESCD |^ESTAÇÃO |^EST |^ESTRADA "
+								+ "|^ETR |^FAZENDA |^FAZ |^FORTALEZA |^FORT |^GALERIA |^GL |^LADEIRA |^LD "
+								+ "|^LARGO |^LGO |^PRAÇA |^PÇA |^PARQUE |^PRQ |^PRAIA |^PR |^QUADRA |^QD "
+								+ "|^QUILÔMETRO |^KM |^QUINTA |^QTA |^RODOVIA |^ROD |^RUA |^R |^SUPER "
+								+ "|^QUADRA |^SQD |^TRAVESSA |^TRV |^VIADUTO |^VD |^VILA |^VL ",
+						Pattern.CASE_INSENSITIVE).matcher(logradouro);
+		if (m.find())
+			return true;
 		return false;
 	}
 
@@ -41,6 +41,15 @@ public class FormValidatorClient {
 		for (int i = 0; i < string.length(); i++) {
 			letra = string.charAt(i);
 			if (letra < '0' || '9' < letra) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean hasLetterOnly(String string) {
+		for (int i = 0; i < string.length(); i++) {
+			if (!Character.isLetter(string.charAt(i))) {
 				return false;
 			}
 		}

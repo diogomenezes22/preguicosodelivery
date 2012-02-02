@@ -28,8 +28,6 @@ public interface CardapioService extends RemoteService {
 
 	void addItem(ItemCardapioBean i, int quantidade, String observacao);
 
-	String[] getEnderecoByCep(String cep);
-
 	List<BairroBean> getBairros(Long idCidade);
 
 	CidadeBean getCidade(Long idEstabelecimento);
