@@ -1,9 +1,11 @@
 package com.preguicoso.server.dao;
 
+import java.text.Collator;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.NotFoundException;
@@ -88,13 +90,14 @@ public class PedidoDAO extends DAOBase {
 		// List<Pedido> lista = this.ofy().query(Pedido.class)
 		// .filter("idEstabelecimento", idEstabelecimento).list();
 
+		final Collator coll = Collator.getInstance(new Locale("pt", "BR"));
 		Collections.sort(lista, new Comparator<Pedido>() {
 
 			@Override
 			public int compare(Pedido o1, Pedido o2) {
-				if (o1.getBairro().compareTo(o2.getBairro()) > 0) {
+				if (coll.compare(o1.getBairro(), o2.getBairro()) > 0) {
 					return 1;
-				} else if (o1.getBairro().equals(o2.getBairro())) {
+				} else if (coll.compare(o1.getBairro(), o2.getBairro()) == 0) {
 					if (o1.getTimeStamp().compareTo(o2.getTimeStamp()) > 0)
 						return -1;
 					return 1;

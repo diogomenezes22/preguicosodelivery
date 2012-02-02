@@ -84,7 +84,7 @@ public class EstabelecimentoUI extends Composite {
 							filtro.add(new Filtro(id));
 
 						} else {
-							coluna1.add(new Checkout());
+							coluna1.add(new Checkout(result));
 						}
 						EstabelecimentoUI.this.coluna3.add(carrinho);
 					}

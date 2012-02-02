@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.Preguicoso2;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
+import com.preguicoso.shared.RegistroErros;
 
 public class LoginEstabelecimentoUI extends Composite {
 
@@ -55,9 +56,7 @@ public class LoginEstabelecimentoUI extends Composite {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Ocorreu um problema com login. Erro: "
-								+ caught.getMessage() + " causa: "
-								+ caught.getCause());
+						Window.alert(RegistroErros.LOGIN);
 					}
 				});
 	}

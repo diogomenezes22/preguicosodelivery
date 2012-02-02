@@ -1,7 +1,5 @@
 package com.preguicoso.client.login;
 
-import java.util.ArrayList;
-
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
@@ -13,15 +11,21 @@ import com.preguicoso.shared.entities.UsuarioBean;
  */
 @RemoteServiceRelativePath("login")
 public interface LoginService extends RemoteService {
-	String getEmailUser(String name) throws IllegalArgumentException;
 
-	Boolean save(UsuarioBean Usuario);
+	void cadastrarUsuario(UsuarioBean ub);
 
-	UsuarioBean isLogado();
+	Boolean hasAlreadyEmail(String email);
 
-	ArrayList<UsuarioBean> listAll();
+	String logarUsuario(String login, String pass);
 
-	Boolean isAdmin();
+	void fazerLogoutUsuario();
+
+	Boolean isUsuarioLogado();
+
+	UsuarioBean getUsuarioLogado();
+
+	String changePasswordUsuario(String passwordOld, String passwordNew,
+			String passwordNewCheck);
 
 	String getURLLogout();
 
@@ -39,4 +43,5 @@ public interface LoginService extends RemoteService {
 			String passwordNew, String passwordNewCheck);
 
 	PedidoBean getPedidoAtualBySession();
+
 }

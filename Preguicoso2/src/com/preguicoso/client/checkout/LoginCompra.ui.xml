@@ -7,37 +7,25 @@
 		}
 	</ui:style>
 	<g:HTMLPanel>
+		<g:HTMLPanel ui:field="antesLogin">
 		<table border='0' class='endereco'>
 			<tr>
 				<th COLSPAN="3">
-					<g:TextBox ui:field="nome" text="Nome Completo" />
-					<g:TextBox ui:field="email" text="E-mail" />
-					<g:PasswordTextBox ui:field="senha" text="Senha" />
-					<g:PasswordTextBox ui:field="senhaCheck" text="Senha" />
-					<g:TextBox ui:field="telefone" text="Telefone Residencial" />
-					<g:TextBox ui:field="celular" text="Celular" />
+					Login<g:TextBox ui:field="email" text="E-mail"/><br />
+					Senha<g:PasswordTextBox ui:field="senha" text="Senha"/><br />
+					<g:Button ui:field="loginButton">Login</g:Button>
 				</th>
 			</tr>
 		</table>
-		<g:HTMLPanel ui:field="antesDoCep">
-			<table border='0' class='endereco'>
-				<tr>
-					<th COLSPAN="3">
-						<g:TextBox ui:field="enderecoCep" text="CEP" />
-						<g:Button ui:field="verificarCep" text="Verificar CEP" />
-						<g:Button ui:field="pularCep" text="Não usar CEP" />
-					</th>
-				</tr>
-			</table>
 		</g:HTMLPanel>
-		<g:HTMLPanel ui:field="depoisDoCep">
+		<g:HTMLPanel ui:field="depoisLogin">
 			<table border='0' class='endereco'>
 				<tr>
 					<th COLSPAN="3">
-						<g:TextBox ui:field="endereco_rua" width="355px" text="Logradouro" />
+						<g:TextBox ui:field="logradouro" width="355px" text="Logradouro" />
 					</th>
 					<td width='50'>
-						<g:TextBox ui:field="endereco_numero" width="100px"
+						<g:TextBox ui:field="numero" width="100px"
 							text="Número" />
 					</td>
 				</tr>
@@ -47,10 +35,10 @@
 				</tr>
 				<tr>
 					<th COLSPAN="2">
-						<g:TextBox ui:field="endereco_complemento" text="Complemento" />
+						<g:TextBox ui:field="complemento" text="Complemento" />
 					</th>
 					<th COLSPAN="2">
-						<g:ListBox ui:field="endereco_bairro" />
+						<g:ListBox ui:field="bairro" />
 					</th>
 				</tr>
 				<tr class='legenda_endereco'>

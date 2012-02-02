@@ -95,8 +95,8 @@ public class RouterHistory {
 		// RootPanel.get("content").clear();
 		RootPanel.get("content").add(page);
 	}
+
 	public void printStatus(String token) {
-		
 
 		StatusPedido page = new StatusPedido();
 		// RootPanel.get("content").clear();
