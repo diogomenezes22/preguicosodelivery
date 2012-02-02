@@ -15,27 +15,30 @@
 			<div>
 				<h3>Formas de Pagamento:</h3>
 				<hr />
-				<table border='0'>
-					<tr>
-						<td width='30'>
-							<g:RadioButton name="pagamento" ui:field="dinheiro" />
-						</td>
-						<td width='20'>
-							<img
-								src='http://hungroo.com/system/images/1/medium/cash.gif?1305664073' />
-						</td>
-						<td width='120'>Dinheiro</td>
-					</tr>
-					<tr>
-						<td width='30'>
-							<g:RadioButton name="pagamento" ui:field="pagseguro" />
-						</td>
-						<th COLSPAN="2">
-							<img
-								src='http://www.reidoepi.com.br/site/modules/showparcelamento/tmp/pagseguro.jpg' />
-						</th>
-					</tr>
-				</table>
+				<g:HTMLPanel ui:field="formasPagamento" />
+				<!-- <table border='0'> -->
+				<!-- <tr> -->
+				<!-- <td width='30'> -->
+				<!-- <g:RadioButton name="pagamento" ui:field="dinheiro" /> -->
+				<!-- </td> -->
+				<!-- <td width='20'> -->
+				<!-- <img -->
+				<!-- src='http://hungroo.com/system/images/1/medium/cash.gif?1305664073' 
+					/> -->
+				<!-- </td> -->
+				<!-- <td width='120'>Dinheiro</td> -->
+				<!-- </tr> -->
+				<!-- <tr> -->
+				<!-- <td width='30'> -->
+				<!-- <g:RadioButton name="pagamento" ui:field="pagseguro" /> -->
+				<!-- </td> -->
+				<!-- <th COLSPAN="2"> -->
+				<!-- <img -->
+				<!-- src='http://www.reidoepi.com.br/site/modules/showparcelamento/tmp/pagseguro.jpg' 
+					/> -->
+				<!-- </th> -->
+				<!-- </tr> -->
+				<!-- </table> -->
 			</div>
 			<div>
 				<hr />

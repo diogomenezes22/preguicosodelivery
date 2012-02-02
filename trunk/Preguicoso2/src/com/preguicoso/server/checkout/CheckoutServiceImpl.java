@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.lavieri.modelutil.cep.WebServiceCep;
+
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -79,6 +81,20 @@ public class CheckoutServiceImpl extends RemoteServiceServlet implements
 		ArrayList<ItemCardapioBean> pedido = (ArrayList<ItemCardapioBean>) carrinho
 				.getPedido();
 		return pedido;
+	}
+
+	@Override
+	public String[] getEnderecoByCep(String cep) {
+		String[] endereco = new String[2];
+		WebServiceCep ws = WebServiceCep.searchCep(cep);
+		if (!ws.hasException()) {
+			if (!ws.isCepNotFound()) {
+				endereco[0] = ws.getLogradouroFull();
+				endereco[1] = ws.getBairro();
+				return endereco;
+			}
+		}
+		return null;
 	}
 
 }

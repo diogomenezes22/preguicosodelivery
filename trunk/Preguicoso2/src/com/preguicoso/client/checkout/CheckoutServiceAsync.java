@@ -17,4 +17,6 @@ public interface CheckoutServiceAsync {
 
 	void getCarrinho(AsyncCallback<List<ItemCardapioBean>> callback);
 
+	void getEnderecoByCep(String cep, AsyncCallback<String[]> callback);
+
 }

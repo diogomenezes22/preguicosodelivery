@@ -15,5 +15,9 @@ public interface CheckoutService extends RemoteService {
 	void enviarPedido(String nomeCliente, String rua, String bairro,
 			String complemento, String formaPagamento);
 
+	// TODO @Osman deletar métodos inúteis em cardaprioService
 	List<ItemCardapioBean> getCarrinho();
+
+	String[] getEnderecoByCep(String cep);
+
 }
