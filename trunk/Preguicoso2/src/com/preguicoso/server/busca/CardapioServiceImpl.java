@@ -244,6 +244,8 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		Pedido p = new Pedido();
 		p.setFormaPagamento(formaPagamento);
 		ArrayList<ItemCardapioBean> listaItens = getCarrinho();
+		// TODO @Osman melhor não ficar dependente do carrinho para determinar o
+		// id
 		p.setIdEstabelecimento(listaItens.get(0).getEstabelecimentoBean());
 		p.setListaItensJSON(listaItens);
 		p.setNomeCliente(nomeCliente);
@@ -254,7 +256,6 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 
 		PedidoDAO pdao = new PedidoDAO();
 		// Guarda a key<Pedido> do pedido na sessão e cria o pedido
-		// TODO @Osman verificar veracidade
 		this.getThreadLocalRequest().getSession()
 				.setAttribute(AtributosSession.keyPedido, pdao.create(p));
 	}

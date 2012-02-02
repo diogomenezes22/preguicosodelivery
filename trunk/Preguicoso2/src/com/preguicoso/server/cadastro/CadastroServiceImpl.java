@@ -4,28 +4,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.server.dao.CategoriaDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.dao.ItemCardapioDAO;
 import com.preguicoso.server.dao.PedidoDAO;
-import com.preguicoso.server.dao.UsuarioDAO;
-import com.preguicoso.server.dbgenerator.DbGenerator;
 import com.preguicoso.server.entities.Categoria;
 import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.server.entities.Pedido;
-import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 import com.preguicoso.shared.entities.PedidoBean;
-import com.preguicoso.shared.entities.UsuarioBean;
 
 /**
  * The server side implementation of the RPC service.
@@ -39,42 +33,10 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	private static final long serialVersionUID = -6650028804777297689L;
 
 	@Override
-	public void salvarEstabelecimento(EstabelecimentoBean a) {
-		// EstabelecimentoDAO banco = new EstabelecimentoDAO();
-		Estabelecimento estabelecimento = new Estabelecimento(a);
-		UserService userservice = UserServiceFactory.getUserService();
-		UsuarioDAO bancoU = new UsuarioDAO();
-		DbGenerator gerar = new DbGenerator();
-		gerar.generateDatabase();
-		Usuario user = bancoU.retrieve(userservice.getCurrentUser().getEmail());
-	}
-
-	@Override
 	public EstabelecimentoBean getEstabelecimento(long id) {
-		EstabelecimentoDAO banco = new EstabelecimentoDAO();
-		Estabelecimento a = banco.retrieve(id);
-		return a.toBean();
-	}
-
-	@Override
-	public void salvarUsuario(UsuarioBean a) {
-		UsuarioDAO banco = new UsuarioDAO();
-		Usuario e = new Usuario(a);
-		banco.create(e);
-	}
-
-	@Override
-	public UsuarioBean getUsuario(String email) {
-		UsuarioDAO banco = new UsuarioDAO();
-		Usuario a = banco.retrieve(email);
-		return a.toBean();
-	}
-
-	@Override
-	public void updateUsuario(UsuarioBean a) {
-		UsuarioDAO banco = new UsuarioDAO();
-		Usuario e = new Usuario(a);
-		banco.update(e);
+		EstabelecimentoDAO edao = new EstabelecimentoDAO();
+		Estabelecimento e = edao.retrieve(id);
+		return e.toBean();
 	}
 
 	@Override
@@ -133,21 +95,21 @@ public class CadastroServiceImpl extends RemoteServiceServlet implements
 	public RegistroStatusRestaurante getStatus(Long idEstabelecimento) {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		Estabelecimento e = edao.retrieve(idEstabelecimento);
-		if(e!=null)
+		if (e != null)
 			return e.getStatus();
 		else
 			return RegistroStatusRestaurante.values()[0];
-	}	
+	}
 
 	@Override
 	public void setStatus(Long idEstabelecimento, int statusIndex) {
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		Estabelecimento e = edao.retrieve((long) 405);
-		if(e!=null){
+		if (e != null) {
 			e.setStatus(RegistroStatusRestaurante.values()[statusIndex]);
 			edao.update(e);
-		}else{
-			
+		} else {
+
 		}
 	}
 

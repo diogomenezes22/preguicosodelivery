@@ -54,29 +54,11 @@
 					<tr>
 						<th COLSPAN="2">
 							<g:HTMLPanel ui:field="enderecoBox"></g:HTMLPanel>
-							<g:HTMLPanel ui:field="loginBox">
-								<table border='0' class='endereco'>
-									<tr>
-										<th COLSPAN="3">
-											<a href='nada'>Login</a>
-										</th>
-									</tr>
-								</table>
-							</g:HTMLPanel>
+							<g:HTMLPanel ui:field="loginBox"></g:HTMLPanel>
 						</th>
 					</tr>
-					<!-- <tr> -->
-					<!-- <th COLSPAN="2"> -->
-					<!-- <g:Button ui:field="pedir">Pedir</g:Button> -->
-					<!-- </th> -->
-					<!-- </tr> -->
-
 				</table>
 			</div>
 		</div>
-
-
-
-
 	</g:HTMLPanel>
 </ui:UiBinder> 

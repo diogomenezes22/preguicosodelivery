@@ -17,11 +17,15 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
-import com.preguicoso.shared.entities.BairroBean;
+import com.preguicoso.client.login.LoginService;
+import com.preguicoso.client.login.LoginServiceAsync;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
+import com.preguicoso.shared.entities.UsuarioBean;
 
 public class EnderecoBox extends Composite {
 
@@ -33,7 +37,21 @@ public class EnderecoBox extends Composite {
 
 	private final CardapioServiceAsync cardapioService = GWT
 			.create(CardapioService.class);
+	private final LoginServiceAsync loginService = GWT
+			.create(LoginService.class);
 
+	@UiField
+	TextBox nome;
+	@UiField
+	TextBox email;
+	@UiField
+	PasswordTextBox senha;
+	@UiField
+	PasswordTextBox senhaCheck;
+	@UiField
+	TextBox telefone;
+	@UiField
+	TextBox celular;
 	@UiField
 	HTMLPanel antesDoCep;
 	@UiField
@@ -55,27 +73,19 @@ public class EnderecoBox extends Composite {
 	@UiField
 	ListBox endereco_bairro;
 
-	public EnderecoBox() {
+	EstabelecimentoBean eb;
+
+	// TODO @Osman Usuario pode desativar o javascript, fazer validação no
+	// servidor também
+	public EnderecoBox(EstabelecimentoBean eb, List<String> listaBairros) {
 		initWidget(uiBinder.createAndBindUi(this));
+		this.eb = eb;
 		depoisDoCep.setVisible(false);
-		// TODO @Osman fazer pela cidade no futuro e lista somente os bairros
+		// TODO @Osman fazer pela cidade no futuro e listar somente os bairros
 		// que o restaurante atende
-		Long idCidade = (long) 1;
-		cardapioService.getBairros(idCidade,
-				new AsyncCallback<List<BairroBean>>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Problemas de conexão, recarregue a página.");
-					}
-
-					@Override
-					public void onSuccess(List<BairroBean> result) {
-						for (BairroBean bb : result) {
-							endereco_bairro.addItem(bb.getNome());
-						}
-					}
-				});
+		for (String s : listaBairros) {
+			endereco_bairro.addItem(s);
+		}
 	}
 
 	@UiHandler("pedir")
@@ -88,7 +98,7 @@ public class EnderecoBox extends Composite {
 			String complemento = endereco_complemento.getText();
 			if (complemento.equals("Complemento"))
 				complemento = "";
-			cardapioService.enviarPedido("Sem Nome", endereco_rua.getText()
+			cardapioService.enviarPedido(nome.getText(), endereco_rua.getText()
 					+ " " + endereco_numero.getText(), endereco_bairro
 					.getValue(endereco_bairro.getSelectedIndex()), complemento,
 					"Dinheiro", new AsyncCallback<Void>() {
@@ -105,6 +115,29 @@ public class EnderecoBox extends Composite {
 							History.newItem("index");
 						}
 					});
+			// Cadastrar usuario
+			UsuarioBean ub = new UsuarioBean();
+			ub.setNome(nome.getText());
+			ub.setEmail(email.getText());
+			ub.setPassword(senha.getText());
+			ub.setTelefoneResidencial(telefone.getText());
+			ub.setTelefoneCelular(celular.getText());
+			ub.setIdCidade(eb.getIdCidade());
+			ub.setLogradouro(endereco_rua.getText());
+			ub.setNumero(endereco_numero.getText());
+			ub.setComplemento(endereco_complemento.getText());
+			ub.setBairro(endereco_bairro.getItemText(endereco_bairro
+					.getSelectedIndex()));
+			loginService.cadastrarUsuario(ub, new AsyncCallback<Void>() {
+
+				@Override
+				public void onSuccess(Void result) {
+				}
+
+				@Override
+				public void onFailure(Throwable caught) {
+				}
+			});
 		}
 	}
 
@@ -159,6 +192,100 @@ public class EnderecoBox extends Composite {
 		endereco_bairro.setEnabled(true);
 	}
 
+	// TODO @Osman validar novos campos no futuro
+	@UiHandler("nome")
+	void onNomeFocus(FocusEvent event) {
+		if (nome.getText().equals("Nome Completo"))
+			nome.setText("");
+	}
+
+	@UiHandler("nome")
+	void onNomeBlur(BlurEvent event) {
+		if (nome.getText().equals(""))
+			nome.setText("Nome Completo");
+	}
+
+	@UiHandler("email")
+	void onEmailFocus(FocusEvent event) {
+		if (email.getText().equals("E-mail"))
+			email.setText("");
+	}
+
+	@UiHandler("email")
+	void onEmailBlur(BlurEvent event) {
+		if (email.getText().equals("")) {
+			email.setText("E-mail");
+		} else {
+			loginService.hasAlreadyEmail(email.getText(),
+					new AsyncCallback<Boolean>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+						}
+
+						@Override
+						public void onSuccess(Boolean result) {
+							if (result) {
+								Window.alert("O email já existe.");
+								email.setText("E-mail");
+								email.setStyleName("falseField");
+							} else {
+								email.setStyleName("trueField");
+							}
+						}
+					});
+		}
+	}
+
+	@UiHandler("senha")
+	void onSenhaFocus(FocusEvent event) {
+		if (senha.getText().equals("Senha"))
+			senha.setText("");
+	}
+
+	@UiHandler("senha")
+	void onSenhaBlur(BlurEvent event) {
+		if (senha.getText().equals(""))
+			senha.setText("Senha");
+	}
+
+	@UiHandler("senhaCheck")
+	void onSenhaCheckFocus(FocusEvent event) {
+		if (senhaCheck.getText().equals("Senha"))
+			senhaCheck.setText("");
+	}
+
+	@UiHandler("senhaCheck")
+	void onSenhaCheckBlur(BlurEvent event) {
+		if (senhaCheck.getText().equals(""))
+			senhaCheck.setText("Senha");
+	}
+
+	// TODO @Osman fazer telefone no autocomplete
+	@UiHandler("telefone")
+	void onTelefoneFocus(FocusEvent event) {
+		if (telefone.getText().equals("Telefone Residencial"))
+			telefone.setText("");
+	}
+
+	@UiHandler("telefone")
+	void onTelefoneBlur(BlurEvent event) {
+		if (telefone.getText().equals(""))
+			telefone.setText("Telefone Residencial");
+	}
+
+	@UiHandler("celular")
+	void onCelularFocus(FocusEvent event) {
+		if (celular.getText().equals("Celular"))
+			celular.setText("");
+	}
+
+	@UiHandler("celular")
+	void onCelularBlur(BlurEvent event) {
+		if (celular.getText().equals(""))
+			celular.setText("Celular");
+	}
+
 	@UiHandler("enderecoCep")
 	void onEnderecoCepFocus(FocusEvent event) {
 		if (enderecoCep.getText().equals("CEP"))
@@ -169,7 +296,7 @@ public class EnderecoBox extends Composite {
 	void onEnderecoCepBlur(BlurEvent event) {
 		if (enderecoCep.getText().equals(""))
 			enderecoCep.setText("CEP");
-		else if (!hasNumberOnly(enderecoCep.getText())) {
+		else if (!FormValidatorClient.hasNumberOnly(enderecoCep.getText())) {
 			enderecoCep.setText("CEP");
 			Window.alert("Esse campo só pode ter números.");
 		}
@@ -202,7 +329,8 @@ public class EnderecoBox extends Composite {
 	void onEndereco_numeroBlur(BlurEvent event) {
 		if (endereco_numero.getText().equals("")) {
 			endereco_numero.setText("Número");
-		} else if (!hasNumberOnly(endereco_numero.getText())) {
+		} else if (!FormValidatorClient
+				.hasNumberOnly(endereco_numero.getText())) {
 			endereco_numero.setText("Número");
 			Window.alert("Esse campo só pode ter números.");
 		}
@@ -220,14 +348,4 @@ public class EnderecoBox extends Composite {
 			endereco_complemento.setText("Complemento");
 	}
 
-	private boolean hasNumberOnly(String string) {
-		char letra;
-		for (int i = 0; i < string.length(); i++) {
-			letra = string.charAt(i);
-			if (letra < '0' || '9' < letra) {
-				return false;
-			}
-		}
-		return true;
-	}
 }

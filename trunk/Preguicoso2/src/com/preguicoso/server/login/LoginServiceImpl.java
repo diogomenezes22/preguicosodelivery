@@ -1,6 +1,7 @@
 package com.preguicoso.server.login;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -30,13 +31,6 @@ import com.preguicoso.shared.entities.UsuarioBean;
 @SuppressWarnings("serial")
 public class LoginServiceImpl extends RemoteServiceServlet implements
 		LoginService {
-	@Override
-	public String getEmailUser(String input) throws IllegalArgumentException {
-		UserService userservice = UserServiceFactory.getUserService();
-		String email = userservice.getCurrentUser().getEmail();
-		return email;
-	}
-
 	/**
 	 * Escape an html string. Escaping data received from the client helps to
 	 * prevent cross-site script vulnerabilities.
@@ -54,29 +48,29 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 				.replaceAll(">", "&gt;");
 	}
 
-	@Override
-	public UsuarioBean isLogado() {
-		UserService userservice = UserServiceFactory.getUserService();
-		UsuarioBean a;
-		a = new UsuarioBean();
-		if (userservice.isUserLoggedIn()) {
-			UsuarioDAO banco = new UsuarioDAO();
-			Usuario usuario = banco.retrieve(userservice.getCurrentUser()
-					.getEmail());
-			if (usuario == null) {
-				a.setEmail(userservice.getCurrentUser().getEmail());
-				usuario = new Usuario(a);
-				banco.create(usuario);
-			} else {
-				a = usuario.toBean();
-			}
-			a.setUrl(userservice.createLogoutURL(""));
-			return a;
-		}
-		a.setUrl(userservice
-				.createLoginURL("http://5.preguicosotest.appspot.com"));
-		return a;
-	}
+	// @Override
+	// public UsuarioBean isLogado() {
+	// UserService userservice = UserServiceFactory.getUserService();
+	// UsuarioBean a;
+	// a = new UsuarioBean();
+	// if (userservice.isUserLoggedIn()) {
+	// UsuarioDAO banco = new UsuarioDAO();
+	// Usuario usuario = banco.retrieve(userservice.getCurrentUser()
+	// .getEmail());
+	// if (usuario == null) {
+	// a.setEmail(userservice.getCurrentUser().getEmail());
+	// usuario = new Usuario(a);
+	// banco.create(usuario);
+	// } else {
+	// a = usuario.toBean();
+	// }
+	// a.setUrl(userservice.createLogoutURL(""));
+	// return a;
+	// }
+	// a.setUrl(userservice
+	// .createLoginURL("http://5.preguicosotest.appspot.com"));
+	// return a;
+	// }
 
 	@Override
 	public String getURLLogin() {
@@ -90,27 +84,6 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 		UserService userservice = UserServiceFactory.getUserService();
 		return userservice
 				.createLogoutURL("http://5.preguicosotest.appspot.com");
-	}
-
-	@Override
-	public Boolean isAdmin() {
-		UserService userservice = UserServiceFactory.getUserService();
-		return userservice.isUserAdmin();
-	}
-
-	@Override
-	public ArrayList<UsuarioBean> listAll() {
-		UsuarioDAO usuarios = new UsuarioDAO();
-		ArrayList<UsuarioBean> usuariosBeans = new ArrayList<UsuarioBean>();
-		for (Usuario usuario : usuarios.listAll()) {
-			usuariosBeans.add(usuario.toBean());
-		}
-		return usuariosBeans;
-	}
-
-	@Override
-	public Boolean save(UsuarioBean Usuario) {
-		return null;
 	}
 
 	@Override
@@ -217,4 +190,75 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 				.getSession().getAttribute(AtributosSession.keyPedido));
 	}
 
+	@Override
+	public void cadastrarUsuario(UsuarioBean ub) {
+		UsuarioDAO udao = new UsuarioDAO();
+		ub.setDataRegistro(new Date());
+		udao.create(new Usuario(ub));
+	}
+
+	@Override
+	public Boolean hasAlreadyEmail(String email) {
+		UsuarioDAO udao = new UsuarioDAO();
+		if (udao.retrieve(email) == null)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String logarUsuario(String login, String password) {
+		UsuarioDAO udao = new UsuarioDAO();
+
+		Usuario user = udao.retrieve(login);
+		if (user != null) {
+			if (CriptoUtils.equalsMD5(password, user.getPassword())) {
+				HttpSession session = this.getThreadLocalRequest().getSession();
+				session.setAttribute(AtributosSession.usuarioLogado, user);
+				return null;
+			}
+			return "A senha está errada.";
+		}
+		return "O login não existe.";
+	}
+
+	@Override
+	public void fazerLogoutUsuario() {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		session.setAttribute(AtributosSession.usuarioLogado, null);
+	}
+
+	@Override
+	public Boolean isUsuarioLogado() {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		Usuario userLogado = (Usuario) session
+				.getAttribute(AtributosSession.usuarioLogado);
+		if (userLogado != null)
+			return true;
+		return false;
+	}
+
+	@Override
+	public UsuarioBean getUsuarioLogado() {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		return ((Usuario) session.getAttribute(AtributosSession.usuarioLogado))
+				.toBean();
+	}
+
+	@Override
+	public String changePasswordUsuario(String passwordOld, String passwordNew,
+			String passwordNewCheck) {
+		HttpSession session = this.getThreadLocalRequest().getSession();
+		Usuario user = (Usuario) session
+				.getAttribute(AtributosSession.usuarioLogado);
+		UsuarioDAO udao = new UsuarioDAO();
+		if (CriptoUtils.equalsMD5(passwordOld, user.getPassword())) {
+			if (passwordNew.equals(passwordNewCheck)) {
+				user.setPassword(passwordNew);
+				udao.update(user);
+				return "Senha modificada com sucesso.";
+			}
+			return "Os campos com a nova senha devem ser iguais.";
+		}
+		return "Você não digitou sua senha corretamente.";
+	}
 }

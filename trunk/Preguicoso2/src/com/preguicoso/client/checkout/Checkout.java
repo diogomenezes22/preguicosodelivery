@@ -1,16 +1,19 @@
 package com.preguicoso.client.checkout;
 
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
-import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
-import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
+import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class Checkout extends Composite {
 
@@ -23,62 +26,69 @@ public class Checkout extends Composite {
 	@UiField
 	RadioButton dinheiro;
 	@UiField
+	RadioButton pagseguro;
+	@UiField
 	HTMLPanel enderecoBox;
 	@UiField
 	HTMLPanel loginBox;
-	@UiField
-	RadioButton pagseguro;
 
-	private final CardapioServiceAsync cardapioService = GWT
-			.create(CardapioService.class);
+	private final CheckoutServiceAsync checkoutService = GWT
+			.create(CheckoutService.class);
 
 	interface CheckoutUiBinder extends UiBinder<Widget, Checkout> {
 	}
 
-	public Checkout() {
+	EstabelecimentoBean eb;
+
+	public Checkout(EstabelecimentoBean eb) {
 		initWidget(uiBinder.createAndBindUi(this));
-		// enderecoBox.setVisible(false);
-		loginBox.setVisible(false);
-		// endereco.addClickHandler(new ClickHandler() {
-		//
-		// @Override
-		// public void onClick(ClickEvent event) {
-		// enderecoBox.add(new EnderecoBox());
-		// }
-		// });
+		this.eb = eb;
+		checkoutService.getBairrosAtendidos(eb,
+				new AsyncCallback<List<String>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+					}
+
+					@Override
+					public void onSuccess(List<String> result) {
+						loginAtivado(result);
+						enderecoAtivado(result);
+					}
+
+				});
 	}
 
-	public void testarEnvio() {
-		// if ((pagseguro.getValue() || dinheiro.getValue())
-		// && (login.getValue() || endereco.getValue()))
-		// if (enderecoValido())
-		// pedir.setEnabled(true);
+	private void loginAtivado(final List<String> listaBairros) {
+		login.addClickHandler(new ClickHandler() {
 
+			@Override
+			public void onClick(ClickEvent event) {
+				loginBox.clear();
+				enderecoBox.clear();
+				loginBox.setVisible(true);
+				loginBox.add(new LoginCompra(listaBairros));
+				enderecoBox.setVisible(false);
+			}
+		});
 	}
 
-	private boolean enderecoValido() {
-		return false;
-	}
+	private void enderecoAtivado(final List<String> listaBairros) {
+		endereco.addClickHandler(new ClickHandler() {
 
-	@UiHandler("login")
-	void onLoginClick(ClickEvent event) {
-		enderecoBox.setVisible(false);
-		loginBox.setVisible(true);
-		testarEnvio();
-	}
-
-	@UiHandler("endereco")
-	void onEnderecoClick(ClickEvent event) {
-		enderecoBox.clear();
-		enderecoBox.setVisible(true);
-		enderecoBox.add(new EnderecoBox());
-		loginBox.setVisible(false);
-		// testarEnvio();
+			@Override
+			public void onClick(ClickEvent event) {
+				enderecoBox.clear();
+				loginBox.clear();
+				enderecoBox.setVisible(true);
+				enderecoBox.add(new EnderecoBox(eb, listaBairros));
+				loginBox.setVisible(false);
+			}
+		});
 	}
 
 	@UiHandler("dinheiro")
 	void onDinheiroClick(ClickEvent event) {
-		testarEnvio();
 	}
 
 }

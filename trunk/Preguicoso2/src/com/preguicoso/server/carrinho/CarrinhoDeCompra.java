@@ -3,12 +3,10 @@ package com.preguicoso.server.carrinho;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.preguicoso.server.dao.UsuarioDAO;
-import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 
 public class CarrinhoDeCompra {
-	private Usuario usuario;
+	// private Usuario usuario;
 
 	private List<ItemCardapioBean> listaPedido = new ArrayList<ItemCardapioBean>();
 
@@ -23,8 +21,8 @@ public class CarrinhoDeCompra {
 	private double frete;
 
 	public CarrinhoDeCompra(String email) {
-		UsuarioDAO banco = new UsuarioDAO();
-		usuario = banco.retrieve(email);
+		// UsuarioDAO banco = new UsuarioDAO();
+		// usuario = banco.retrieve(email);
 	}
 
 	public boolean isEmpty() {
