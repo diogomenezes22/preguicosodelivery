@@ -172,7 +172,6 @@ public class Cardapio extends Composite {
 		dialogBox.setWidth("300px");
 		// dialogBox.setAnimationEnabled(true);
 		final Button closeButton = new Button("Close");
-		final Label textToServerLabel = new Label();
 		final HTML serverResponseLabel = new HTML();
 		VerticalPanel dialogVPanel = new VerticalPanel();
 		dialogVPanel.setWidth("300px");

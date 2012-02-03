@@ -23,9 +23,6 @@ public interface CardapioService extends RemoteService {
 
 	ArrayList<CategoriaBean> getCategorias(Long Estabelecimento);
 
-	void enviarPedido(String nomeCliente, String rua, String bairro,
-			String complemento, String formaPagamento);
-
 	void addItem(ItemCardapioBean i, int quantidade, String observacao);
 
 	List<BairroBean> getBairros(Long idCidade);

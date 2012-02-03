@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
+import com.preguicoso.shared.FormValidatorShared;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
 
@@ -72,6 +73,7 @@ public class EnderecoBox extends Composite {
 	ListBox endereco_bairro;
 
 	EstabelecimentoBean eb;
+	Checkout ch;
 
 	// TODO @Osman Usuario pode desativar o javascript, fazer validação no
 	// servidor também
@@ -79,9 +81,8 @@ public class EnderecoBox extends Composite {
 			Checkout ch) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.eb = eb;
+		this.ch = ch;
 		depoisDoCep.setVisible(false);
-		// TODO @Osman fazer pela cidade no futuro e listar somente os bairros
-		// que o restaurante atende
 		for (String s : listaBairros) {
 			endereco_bairro.addItem(s);
 		}
@@ -89,55 +90,77 @@ public class EnderecoBox extends Composite {
 
 	@UiHandler("pedir")
 	void onPedirClick(ClickEvent event) {
-		if (endereco_rua.getText().equals("Logradouro")) {
-			Window.alert("Digite o logradouro.");
-		} else if (endereco_numero.getText().equals("Número")) {
-			Window.alert("Digite o número.");
+		if (ch.isPagamentoChecked()) {
+			if (FormValidatorClient.isFormValid(endereco_rua.getText(),
+					endereco_numero.getText())) {
+				// Cadastrar usuario
+				final UsuarioBean ub = new UsuarioBean();
+				ub.setNome(nome.getText());
+				ub.setEmail(email.getText());
+				ub.setPassword(senha.getText());
+				ub.setTelefoneResidencial(telefone.getText());
+				ub.setTelefoneCelular(celular.getText());
+				ub.setIdCidade(eb.getIdCidade());
+				ub.setLogradouro(endereco_rua.getText());
+				ub.setNumero(endereco_numero.getText());
+				ub.setComplemento(endereco_complemento.getText());
+				ub.setBairro(endereco_bairro.getItemText(endereco_bairro
+						.getSelectedIndex()));
+				loginService.cadastrarUsuario(ub, new AsyncCallback<Void>() {
+
+					@Override
+					public void onSuccess(Void result) {
+						String complementoText = endereco_complemento.getText();
+						if (complementoText.equals("Complemento"))
+							complementoText = "";
+						logarUsuario(complementoText, ub);
+					}
+
+					@Override
+					public void onFailure(Throwable caught) {
+					}
+				});
+			}
 		} else {
-			String complemento = endereco_complemento.getText();
-			if (complemento.equals("Complemento"))
-				complemento = "";
-			checkoutService.enviarPedido(nome.getText(), endereco_rua.getText()
-					+ " " + endereco_numero.getText(), endereco_bairro
-					.getValue(endereco_bairro.getSelectedIndex()), complemento,
-					"Dinheiro", new AsyncCallback<Void>() {
-
-						@Override
-						public void onSuccess(Void result) {
-							Window.alert("Pedido enviado com sucesso!");
-							History.newItem("pedido");
-						}
-
-						@Override
-						public void onFailure(Throwable caught) {
-							Window.alert("Erro no Envio do pedido. Tente novamente.");
-							History.newItem("index");
-						}
-					});
-			// Cadastrar usuario
-			UsuarioBean ub = new UsuarioBean();
-			ub.setNome(nome.getText());
-			ub.setEmail(email.getText());
-			ub.setPassword(senha.getText());
-			ub.setTelefoneResidencial(telefone.getText());
-			ub.setTelefoneCelular(celular.getText());
-			ub.setIdCidade(eb.getIdCidade());
-			ub.setLogradouro(endereco_rua.getText());
-			ub.setNumero(endereco_numero.getText());
-			ub.setComplemento(endereco_complemento.getText());
-			ub.setBairro(endereco_bairro.getItemText(endereco_bairro
-					.getSelectedIndex()));
-			loginService.cadastrarUsuario(ub, new AsyncCallback<Void>() {
-
-				@Override
-				public void onSuccess(Void result) {
-				}
-
-				@Override
-				public void onFailure(Throwable caught) {
-				}
-			});
+			Window.alert("Escolha a forma de pagamento.");
 		}
+	}
+
+	private void logarUsuario(final String complementoText, final UsuarioBean ub) {
+		loginService.logarUsuario(ub.getEmail(), ub.getPassword(),
+				new AsyncCallback<String>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+					}
+
+					@Override
+					public void onSuccess(String result) {
+						enviarPedido(complementoText);
+					}
+
+				});
+	}
+
+	private void enviarPedido(String complementoText) {
+		checkoutService.enviarPedido(nome.getText(), endereco_rua.getText()
+				+ " " + endereco_numero.getText(),
+				endereco_bairro.getValue(endereco_bairro.getSelectedIndex()),
+				complementoText, ch.getPagamentoChecked(),
+				new AsyncCallback<Void>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Erro no Envio do pedido. Tente novamente.");
+						History.newItem("index");
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						Window.alert("Pedido enviado com sucesso!");
+						History.newItem("pedido");
+					}
+				});
 	}
 
 	@UiHandler("verificarCep")
@@ -170,7 +193,7 @@ public class EnderecoBox extends Composite {
 									endereco_rua.setEnabled(false);
 									endereco_bairro.setEnabled(false);
 								} else {
-									Window.alert("Não foi possível encontrar seu cep. Digite seu endereço manualmente.");
+									Window.alert("O restaurante não atua nessa área. Digite seu endereço manualmente.");
 									antesDoCep.setVisible(false);
 								}
 							} else {
@@ -295,7 +318,7 @@ public class EnderecoBox extends Composite {
 	void onEnderecoCepBlur(BlurEvent event) {
 		if (enderecoCep.getText().equals(""))
 			enderecoCep.setText("CEP");
-		else if (!FormValidatorClient.hasNumberOnly(enderecoCep.getText())) {
+		else if (!FormValidatorShared.hasNumberOnly(enderecoCep.getText())) {
 			enderecoCep.setText("CEP");
 			Window.alert("Esse campo só pode ter números.");
 		}
@@ -311,9 +334,10 @@ public class EnderecoBox extends Composite {
 	void onEndereco_ruaBlur(BlurEvent event) {
 		if (endereco_rua.getText().equals(""))
 			endereco_rua.setText("Logradouro");
-		else if (!FormValidatorClient.isLogradouroValid(endereco_rua.getText())) {
-			Window.alert("Logradouro inválido.");
-			endereco_rua.setText("Logradouro");
+		else {
+			FormValidatorClient validator = new FormValidatorClient(
+					checkoutService);
+			validator.verifyLogradouroValid(endereco_rua);
 		}
 	}
 
@@ -327,7 +351,7 @@ public class EnderecoBox extends Composite {
 	void onEndereco_numeroBlur(BlurEvent event) {
 		if (endereco_numero.getText().equals("")) {
 			endereco_numero.setText("Número");
-		} else if (!FormValidatorClient
+		} else if (!FormValidatorShared
 				.hasNumberOnly(endereco_numero.getText())) {
 			endereco_numero.setText("Número");
 			Window.alert("Esse campo só pode ter números.");

@@ -69,7 +69,8 @@
 						</div> 
 						<hr/>
 						<div class="item_pedido">
-						<g:InlineLabel ui:field="mensagem"/>	
+						<g:Label ui:field="mensagem"/>
+						<g:InlineLabel ui:field="motivo"/>	
 						</div>
 						<hr/>
 						<img width="40px" src="img/watch.png" style="padding-top: 10px;margin-bottom: -16px;"/> Tempo de espera: 44min

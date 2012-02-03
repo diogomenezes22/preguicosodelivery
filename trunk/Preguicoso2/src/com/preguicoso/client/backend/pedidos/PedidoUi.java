@@ -6,7 +6,6 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
@@ -50,25 +49,21 @@ public class PedidoUi extends Composite {
 		this.nomeCliente.setText(pb.getNomeCliente());
 		this.rua.setText(pb.getRua());
 
+		// TODO @Osman e o horário de verão? Como fica?
 		DateTimeFormat dtf = DateTimeFormat.getFormat("HH:mm - dd/MM/yyyy");
 		this.timestamp.setText(dtf.format(pb.getTimeStamp()));
 	}
 
 	@UiHandler("pedido")
-	void onItemClick(ClickEvent event) {
+	void onPedidoClick(ClickEvent event) {
 		RootPanel.get("editarItem").clear();
 		RootPanel.get("editarItem").add(new DescricaoPedido(pb, this));
-	}
-
-	@UiHandler("pedido")
-	void onPedidoClick(ClickEvent event) {
 		this.setStyleName("visualizada");
 		cadastroService.setStatusPedido(pb.getId(), RegistroStatusPedido.visto,
 				new AsyncCallback<Void>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Ocorreu um erro inesperado. Por favor, recarregue a página.");
 					}
 
 					@Override

@@ -1,7 +1,6 @@
 package com.preguicoso.server.busca;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,17 +14,13 @@ import com.preguicoso.server.dao.BairroDAO;
 import com.preguicoso.server.dao.CidadeDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.dao.ItemCardapioDAO;
-import com.preguicoso.server.dao.PedidoDAO;
 import com.preguicoso.server.dbgenerator.BairroGenerator;
 import com.preguicoso.server.entities.Bairro;
 import com.preguicoso.server.entities.Cidade;
 import com.preguicoso.server.entities.Estabelecimento;
 import com.preguicoso.server.entities.ItemCardapio;
-import com.preguicoso.server.entities.Pedido;
-import com.preguicoso.shared.AtributosSession;
 import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
 import com.preguicoso.shared.RegistroFormaPagamento;
-import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CategoriaBean;
@@ -234,28 +229,6 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		}
 		return categorias;
 
-	}
-
-	@Override
-	public void enviarPedido(String nomeCliente, String rua, String bairro,
-			String complemento, String formaPagamento) {
-		Pedido p = new Pedido();
-		p.setFormaPagamento(formaPagamento);
-		ArrayList<ItemCardapioBean> listaItens = getCarrinho();
-		// TODO @Osman melhor não ficar dependente do carrinho para determinar o
-		// id
-		p.setIdEstabelecimento(listaItens.get(0).getEstabelecimentoBean());
-		p.setListaItensJSON(listaItens);
-		p.setNomeCliente(nomeCliente);
-		p.setRua(rua);
-		p.setBairro(bairro);
-		p.setTimeStamp(new Date());
-		p.setStatus(RegistroStatusPedido.esperando);
-
-		PedidoDAO pdao = new PedidoDAO();
-		// Guarda a key<Pedido> do pedido na sessão e cria o pedido
-		this.getThreadLocalRequest().getSession()
-				.setAttribute(AtributosSession.keyPedido, pdao.create(p));
 	}
 
 	@Override

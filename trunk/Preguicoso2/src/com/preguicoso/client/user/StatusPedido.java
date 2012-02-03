@@ -7,6 +7,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.login.LoginService;
@@ -26,7 +27,9 @@ public class StatusPedido extends Composite {
 			.create(LoginService.class);
 
 	@UiField
-	InlineLabel mensagem;
+	Label mensagem;
+	@UiField
+	InlineLabel motivo;
 
 	public StatusPedido() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -38,11 +41,11 @@ public class StatusPedido extends Composite {
 			}
 
 		};
-		t.scheduleRepeating(1000);
+		t.scheduleRepeating(10000);
 	}
 
 	private void printStatus() {
-		loginService.getPedidoAtualBySession(new AsyncCallback<PedidoBean>() {
+		loginService.getPedidoAtualByUser(new AsyncCallback<PedidoBean>() {
 
 			@Override
 			public void onSuccess(PedidoBean result) {
@@ -67,7 +70,8 @@ public class StatusPedido extends Composite {
 						mensagem.setText("Seu pedido já está a caminho");
 					} else if (result.getStatus().equals(
 							RegistroStatusPedido.recusado)) {
-						mensagem.setText("Seu pedido foi recusado pelo restaurante.");
+						mensagem.setText("Pedido recusado.");
+						motivo.setText("Motivo: " + result.getMotivo());
 					}
 				} else {
 					mensagem.setText("Seu pedido já está a caminho");

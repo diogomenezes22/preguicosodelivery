@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
+import com.preguicoso.shared.FormValidatorShared;
 import com.preguicoso.shared.RegistroErros;
 import com.preguicoso.shared.entities.UsuarioBean;
 
@@ -135,13 +136,12 @@ public class LoginCompra extends Composite {
 						checkoutService.enviarPedido(ub.getNome(),
 								logradouro.getText() + " " + numero.getText(),
 								bairro.getValue(bairro.getSelectedIndex()),
-								complemento.getText(),
-								ch.getPagamentoChecked(),
+								complementoText, ch.getPagamentoChecked(),
 								new AsyncCallback<Void>() {
 
 									@Override
 									public void onFailure(Throwable caught) {
-										Window.alert("Erro no Envio do pedido. Tente novamente.");
+										Window.alert("Erro no Envio do pedido. Tente comprar novamente.");
 										History.newItem("index");
 									}
 
@@ -193,9 +193,10 @@ public class LoginCompra extends Composite {
 	void onEndereco_ruaBlur(BlurEvent event) {
 		if (logradouro.getText().equals(""))
 			logradouro.setText("Logradouro");
-		else if (!FormValidatorClient.isLogradouroValid(logradouro.getText())) {
-			Window.alert("Logradouro inválido.");
-			logradouro.setText("Logradouro");
+		else {
+			FormValidatorClient validator = new FormValidatorClient(
+					checkoutService);
+			validator.verifyLogradouroValid(logradouro);
 		}
 	}
 
@@ -209,7 +210,7 @@ public class LoginCompra extends Composite {
 	void onEndereco_numeroBlur(BlurEvent event) {
 		if (numero.getText().equals("")) {
 			numero.setText("Número");
-		} else if (!FormValidatorClient.hasNumberOnly(numero.getText())) {
+		} else if (!FormValidatorShared.hasNumberOnly(numero.getText())) {
 			numero.setText("Número");
 			Window.alert("Esse campo só pode ter números.");
 		}

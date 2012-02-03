@@ -20,4 +20,6 @@ public interface CheckoutService extends RemoteService {
 
 	String[] getEnderecoByCep(String cep);
 
+	boolean isLogradouroTypeValid(String logradouro);
+
 }

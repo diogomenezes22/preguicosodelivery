@@ -19,4 +19,6 @@ public interface CheckoutServiceAsync {
 
 	void getEnderecoByCep(String cep, AsyncCallback<String[]> callback);
 
+	void isLogradouroTypeValid(String logradouro, AsyncCallback<Boolean> callback);
+
 }
