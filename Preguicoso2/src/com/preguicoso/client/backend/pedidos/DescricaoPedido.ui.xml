@@ -12,8 +12,7 @@
 			<!-- Ajeitar tamanho da imagem enviar.png no futuro -->
 			<g:Image ui:field="enviar" url="img/enviar.png" styleName="active" title="Avisar que o pedido já foi enviado." width="24px"/>
 			<g:Image ui:field="remove" url="img/remove.png" styleName="active" title="Recusar o pedido." width="24px"/>
-			<g:Image ui:field="print" url="img/enviar.png" styleName="active" title="Imprimir pedido." width="24px"/>
-			x
+			<g:Image ui:field="print" url="img/printer.png" styleName="active" title="Imprimir pedido." width="24px"/>
 		</div>
 		
 		<div class="container_coluna3">

@@ -62,6 +62,15 @@
 		<url-pattern>/preguicoso/checkout</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>PedidoService</servlet-name>
+		<servlet-class>com.preguicoso.server.backend.pedidos.PedidoServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PedidoService</servlet-name>
+		<url-pattern>/preguicoso2/pedido</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>AddRestaurantServlet</servlet-name>

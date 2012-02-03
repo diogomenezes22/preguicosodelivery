@@ -25,10 +25,6 @@ public interface CardapioServiceAsync {
 
 	void getCategorias(Long id, AsyncCallback<ArrayList<CategoriaBean>> callback);
 
-	void enviarPedido(String nomeCliente, String rua, String bairro,
-			String complemento, String formaPagamento,
-			AsyncCallback<Void> callback);
-
 	void getCidade(Long idEstabelecimento, AsyncCallback<CidadeBean> callback);
 
 	void setCidade(Long idEstabelecimento, CidadeBean cidadeBean,

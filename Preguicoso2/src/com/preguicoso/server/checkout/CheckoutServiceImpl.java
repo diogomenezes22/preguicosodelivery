@@ -17,6 +17,7 @@ import com.preguicoso.server.dao.BairroDAO;
 import com.preguicoso.server.dao.PedidoDAO;
 import com.preguicoso.server.entities.Bairro;
 import com.preguicoso.server.entities.Pedido;
+import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.shared.AtributosSession;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
@@ -55,10 +56,13 @@ public class CheckoutServiceImpl extends RemoteServiceServlet implements
 		p.setTimeStamp(new Date());
 		p.setStatus(RegistroStatusPedido.esperando);
 
-		PedidoDAO pdao = new PedidoDAO();
-		// Guarda a key<Pedido> do pedido na sessão e cria o pedido
-		this.getThreadLocalRequest().getSession()
-				.setAttribute(AtributosSession.keyPedido, pdao.create(p));
+		Usuario userLogado = (Usuario) this.getThreadLocalRequest()
+				.getSession().getAttribute(AtributosSession.usuarioLogado);
+		if (userLogado != null) {
+			p.setEmailUsuario(userLogado.getEmail());
+			PedidoDAO pdao = new PedidoDAO();
+			pdao.create(p);
+		}
 	}
 
 	@Override
@@ -95,6 +99,11 @@ public class CheckoutServiceImpl extends RemoteServiceServlet implements
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isLogradouroTypeValid(String logradouro) {
+		return FormValidatorServer.isLogradouroTypeValid(logradouro);
 	}
 
 }

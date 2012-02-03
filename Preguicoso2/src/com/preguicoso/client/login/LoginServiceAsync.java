@@ -51,6 +51,6 @@ public interface LoginServiceAsync {
 			String passwordNew, String passwordNewCheck,
 			AsyncCallback<String> callback);
 
-	void getPedidoAtualBySession(AsyncCallback<PedidoBean> callback);
+	void getPedidoAtualByUser(AsyncCallback<PedidoBean> callback);
 
 }

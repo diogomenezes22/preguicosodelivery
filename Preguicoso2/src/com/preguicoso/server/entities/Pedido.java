@@ -26,6 +26,7 @@ public class Pedido implements Serializable {
 	@Id
 	Long id;
 	Long idEstabelecimento;
+	String emailUsuario;
 	String nomeCliente;
 	String rua;
 	String formaPagamento;
@@ -33,13 +34,34 @@ public class Pedido implements Serializable {
 	String bairro;
 	String complemento;
 	RegistroStatusPedido status;
+	String motivo;
 
 	String listaItensJSON;
+
+	public Pedido() {
+
+	}
+
+	public Pedido(PedidoBean pb) {
+		this.setId(pb.getId());
+		this.setIdEstabelecimento(pb.getIdEstabelecimento());
+		this.setEmailUsuario(pb.getEmailUsuario());
+		this.setNomeCliente(pb.getNomeCliente());
+		this.setRua(pb.getRua());
+		this.setFormaPagamento(pb.getFormaPagamento());
+		this.setTimeStamp(pb.getTimeStamp());
+		this.setBairro(pb.getBairro());
+		this.setComplemento(pb.getComplemento());
+		this.setStatus(pb.getStatus());
+		this.setMotivo(pb.getMotivo());
+		this.setListaItensJSON(pb.getListaItens());
+	}
 
 	public PedidoBean toBean() {
 		PedidoBean pb = new PedidoBean();
 		pb.setId(this.id);
 		pb.setIdEstabelecimento(this.idEstabelecimento);
+		pb.setEmailUsuario(this.emailUsuario);
 		pb.setNomeCliente(this.nomeCliente);
 		pb.setRua(this.rua);
 		pb.setFormaPagamento(this.formaPagamento);
@@ -47,6 +69,7 @@ public class Pedido implements Serializable {
 		pb.setBairro(this.bairro);
 		pb.setComplemento(this.complemento);
 		pb.setStatus(this.status);
+		pb.setMotivo(this.motivo);
 
 		try {
 			if (listaItensJSON != null) {
@@ -69,6 +92,14 @@ public class Pedido implements Serializable {
 			e.printStackTrace();
 		}
 		return pb;
+	}
+
+	public String getEmailUsuario() {
+		return emailUsuario;
+	}
+
+	public void setEmailUsuario(String emailUsuario) {
+		this.emailUsuario = emailUsuario;
 	}
 
 	public String getListaItensJSON() {
@@ -164,6 +195,14 @@ public class Pedido implements Serializable {
 		this.complemento = complemento;
 	}
 
+	public String getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -171,6 +210,8 @@ public class Pedido implements Serializable {
 		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
 		result = prime * result
 				+ ((complemento == null) ? 0 : complemento.hashCode());
+		result = prime * result
+				+ ((emailUsuario == null) ? 0 : emailUsuario.hashCode());
 		result = prime * result
 				+ ((formaPagamento == null) ? 0 : formaPagamento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -180,6 +221,7 @@ public class Pedido implements Serializable {
 						.hashCode());
 		result = prime * result
 				+ ((listaItensJSON == null) ? 0 : listaItensJSON.hashCode());
+		result = prime * result + ((motivo == null) ? 0 : motivo.hashCode());
 		result = prime * result
 				+ ((nomeCliente == null) ? 0 : nomeCliente.hashCode());
 		result = prime * result + ((rua == null) ? 0 : rua.hashCode());
@@ -208,6 +250,11 @@ public class Pedido implements Serializable {
 				return false;
 		} else if (!complemento.equals(other.complemento))
 			return false;
+		if (emailUsuario == null) {
+			if (other.emailUsuario != null)
+				return false;
+		} else if (!emailUsuario.equals(other.emailUsuario))
+			return false;
 		if (formaPagamento == null) {
 			if (other.formaPagamento != null)
 				return false;
@@ -227,6 +274,11 @@ public class Pedido implements Serializable {
 			if (other.listaItensJSON != null)
 				return false;
 		} else if (!listaItensJSON.equals(other.listaItensJSON))
+			return false;
+		if (motivo == null) {
+			if (other.motivo != null)
+				return false;
+		} else if (!motivo.equals(other.motivo))
 			return false;
 		if (nomeCliente == null) {
 			if (other.nomeCliente != null)

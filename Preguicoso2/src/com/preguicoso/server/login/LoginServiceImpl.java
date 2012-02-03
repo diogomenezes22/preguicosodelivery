@@ -9,14 +9,12 @@ import javax.servlet.http.HttpSession;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.googlecode.objectify.Key;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.dao.PedidoDAO;
 import com.preguicoso.server.dao.UsuarioDAO;
 import com.preguicoso.server.dao.UsuarioEstabelecimentoDAO;
 import com.preguicoso.server.entities.Estabelecimento;
-import com.preguicoso.server.entities.Pedido;
 import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.server.entities.UsuarioEstabelecimento;
 import com.preguicoso.shared.AtributosSession;
@@ -47,30 +45,6 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
 	}
-
-	// @Override
-	// public UsuarioBean isLogado() {
-	// UserService userservice = UserServiceFactory.getUserService();
-	// UsuarioBean a;
-	// a = new UsuarioBean();
-	// if (userservice.isUserLoggedIn()) {
-	// UsuarioDAO banco = new UsuarioDAO();
-	// Usuario usuario = banco.retrieve(userservice.getCurrentUser()
-	// .getEmail());
-	// if (usuario == null) {
-	// a.setEmail(userservice.getCurrentUser().getEmail());
-	// usuario = new Usuario(a);
-	// banco.create(usuario);
-	// } else {
-	// a = usuario.toBean();
-	// }
-	// a.setUrl(userservice.createLogoutURL(""));
-	// return a;
-	// }
-	// a.setUrl(userservice
-	// .createLoginURL("http://5.preguicosotest.appspot.com"));
-	// return a;
-	// }
 
 	@Override
 	public String getURLLogin() {
@@ -184,10 +158,14 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public PedidoBean getPedidoAtualBySession() {
+	public PedidoBean getPedidoAtualByUser() {
 		PedidoDAO pdao = new PedidoDAO();
-		return pdao.getByKey((Key<Pedido>) this.getThreadLocalRequest()
-				.getSession().getAttribute(AtributosSession.keyPedido));
+		Usuario user = (Usuario) this.getThreadLocalRequest().getSession()
+				.getAttribute(AtributosSession.usuarioLogado);
+		if (user != null) {
+			return pdao.retrieveLastPedidoByUser(user.getEmail()).toBean();
+		}
+		return null;
 	}
 
 	@Override
