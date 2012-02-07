@@ -140,19 +140,9 @@ public class PedidoDAO extends DAOBase {
 	public Pedido retrieveLastPedidoByUser(String email) {
 		RegistroStatusPedido[] listaStatus = { RegistroStatusPedido.esperando,
 				RegistroStatusPedido.visto };
-		// TODO @Osman verificar se o order tá funcionando
 		List<Pedido> lista = this.ofy().query(Pedido.class)
-				.filter("emailUsuario", email).order("timeStamp").list();
+				.filter("emailUsuario", email).order("-timeStamp").list();
 
-		// Collections.sort(lista, new Comparator<Pedido>() {
-		//
-		// @Override
-		// public int compare(Pedido o1, Pedido o2) {
-		// if (o1.getTimeStamp().compareTo(o2.getTimeStamp()) > 0)
-		// return -1;
-		// return 1;
-		// }
-		// });
-		return lista.get(lista.size() - 1);
+		return lista.get(0);
 	}
 }

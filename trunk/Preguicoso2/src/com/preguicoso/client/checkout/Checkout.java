@@ -13,6 +13,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.client.login.LoginService;
+import com.preguicoso.client.login.LoginServiceAsync;
 import com.preguicoso.shared.RegistroFormaPagamento;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
@@ -30,9 +32,13 @@ public class Checkout extends Composite {
 	HTMLPanel enderecoBox;
 	@UiField
 	HTMLPanel loginBox;
+	@UiField
+	HTMLPanel enderecoEntrega;
 
 	private final CheckoutServiceAsync checkoutService = GWT
 			.create(CheckoutService.class);
+	private final LoginServiceAsync loginService = GWT
+			.create(LoginService.class);
 
 	interface CheckoutUiBinder extends UiBinder<Widget, Checkout> {
 	}
@@ -43,6 +49,7 @@ public class Checkout extends Composite {
 	public Checkout(EstabelecimentoBean eb) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.eb = eb;
+		enderecoEntrega.setVisible(false);
 		carregarFormasDePagamento(eb);
 		checkoutService.getBairrosAtendidos(eb,
 				new AsyncCallback<List<String>>() {
@@ -53,11 +60,31 @@ public class Checkout extends Composite {
 
 					@Override
 					public void onSuccess(List<String> result) {
+						verificarLogado(result);
 						loginAtivado(result);
 						enderecoAtivado(result);
 					}
 
 				});
+	}
+
+	private void verificarLogado(final List<String> listaBairros) {
+		loginService.isUsuarioLogado(new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onFailure(Throwable caght) {
+			}
+
+			@Override
+			public void onSuccess(Boolean result) {
+				if (result) {
+					loginBox.add(new LoginCompra(listaBairros, Checkout.this,
+							true));
+				} else {
+					enderecoEntrega.setVisible(true);
+				}
+			}
+		});
 	}
 
 	private void carregarFormasDePagamento(EstabelecimentoBean eb) {
@@ -78,7 +105,7 @@ public class Checkout extends Composite {
 				loginBox.clear();
 				enderecoBox.clear();
 				loginBox.setVisible(true);
-				loginBox.add(new LoginCompra(listaBairros, Checkout.this));
+				loginBox.add(new LoginCompra(listaBairros, Checkout.this, false));
 				enderecoBox.setVisible(false);
 			}
 		});

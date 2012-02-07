@@ -6,7 +6,9 @@
 			font-weight: bold;
 		}
 	</ui:style>
-	<g:HTMLPanel ui:field="painel" width="" height="">
-		
+	<g:HTMLPanel>
+		<g:InlineLabel ui:field="email" />
+		<g:MenuBar ui:field="menu"></g:MenuBar>
+		<g:Button ui:field="login">Fazer Login</g:Button>
 	</g:HTMLPanel>
 </ui:UiBinder> 
