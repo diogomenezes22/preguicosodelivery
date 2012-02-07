@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
+import com.preguicoso.client.login.LoginUI;
 import com.preguicoso.shared.FormValidatorShared;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
@@ -136,6 +137,7 @@ public class EnderecoBox extends Composite {
 
 					@Override
 					public void onSuccess(String result) {
+						LoginUI.getInstance().setLogado();
 						enviarPedido(complementoText);
 					}
 

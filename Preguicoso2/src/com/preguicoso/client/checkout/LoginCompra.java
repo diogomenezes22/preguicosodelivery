@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
+import com.preguicoso.client.login.LoginUI;
 import com.preguicoso.shared.FormValidatorShared;
 import com.preguicoso.shared.RegistroErros;
 import com.preguicoso.shared.entities.UsuarioBean;
@@ -63,11 +64,16 @@ public class LoginCompra extends Composite {
 	List<String> listaBairros;
 	Checkout ch;
 
-	public LoginCompra(List<String> listaBairros, Checkout ch) {
+	public LoginCompra(List<String> listaBairros, Checkout ch, boolean isLogado) {
 		initWidget(uiBinder.createAndBindUi(this));
+		if (isLogado) {
+			antesLogin.setVisible(false);
+			setFormByUser();
+		} else {
+			depoisLogin.setVisible(false);
+		}
 		this.listaBairros = listaBairros;
 		this.ch = ch;
-		depoisLogin.setVisible(false);
 		for (String s : listaBairros) {
 			bairro.addItem(s);
 		}
@@ -81,6 +87,7 @@ public class LoginCompra extends Composite {
 					@Override
 					public void onSuccess(String result) {
 						if (result == null) {
+							LoginUI.getInstance().setLogado();
 							depoisLogin.setVisible(true);
 							antesLogin.setVisible(false);
 							setFormByUser();

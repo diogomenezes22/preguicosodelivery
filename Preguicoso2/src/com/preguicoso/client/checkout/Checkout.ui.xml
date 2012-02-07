@@ -44,6 +44,7 @@
 				<hr />
 				<h3>Endereço de Entrega:</h3>
 				<table border='0' id='endereco_user'>
+					<g:HTMLPanel ui:field="enderecoEntrega">
 					<tr>
 						<td width='220'>
 							<g:RadioButton name="entrega" text="Nunca pedi no Preguicoso"
@@ -54,6 +55,7 @@
 								ui:field="login" />
 						</td>
 					</tr>
+					</g:HTMLPanel>
 					<tr>
 						<th COLSPAN="2">
 							<g:HTMLPanel ui:field="enderecoBox"></g:HTMLPanel>
