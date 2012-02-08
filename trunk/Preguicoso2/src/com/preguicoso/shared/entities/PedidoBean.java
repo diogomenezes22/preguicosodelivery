@@ -24,6 +24,16 @@ public class PedidoBean implements Serializable {
 	private String complemento;
 	private RegistroStatusPedido status;
 	private String motivo;
+	// TODO @Osman <<URGENTE>> trabalhar com padrão Money
+	private Integer troco;
+
+	public Integer getTroco() {
+		return troco;
+	}
+
+	public void setTroco(Integer troco) {
+		this.troco = troco;
+	}
 
 	public String getMotivo() {
 		return motivo;
@@ -146,6 +156,7 @@ public class PedidoBean implements Serializable {
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((timeStamp == null) ? 0 : timeStamp.hashCode());
+		result = prime * result + ((troco == null) ? 0 : troco.hashCode());
 		return result;
 	}
 
@@ -214,6 +225,11 @@ public class PedidoBean implements Serializable {
 			if (other.timeStamp != null)
 				return false;
 		} else if (!timeStamp.equals(other.timeStamp))
+			return false;
+		if (troco == null) {
+			if (other.troco != null)
+				return false;
+		} else if (!troco.equals(other.troco))
 			return false;
 		return true;
 	}

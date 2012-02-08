@@ -54,6 +54,10 @@ public class DescricaoPedido extends Composite {
 	InlineLabel numero;
 	@UiField
 	HTMLPanel listaPedidos;
+	@UiField
+	HTMLPanel trocoPanel;
+	@UiField
+	InlineLabel troco;
 
 	PedidoBean pb;
 	PedidoUi pu;
@@ -65,6 +69,7 @@ public class DescricaoPedido extends Composite {
 		int cont = 1;
 		endereco.setText(pb.getRua() + ", " + pb.getBairro());
 		formaPagamento.setText(pb.getFormaPagamento());
+		verificaTroco(pb);
 		List<ItemCardapioBean> lista = pb.getListaItens();
 		if (lista != null)
 			for (ItemCardapioBean itemCardapioBean : lista) {
@@ -101,6 +106,14 @@ public class DescricaoPedido extends Composite {
 
 			}
 		});
+	}
+
+	private void verificaTroco(final PedidoBean pb) {
+		if (pb.getTroco() == null) {
+			trocoPanel.setVisible(false);
+		} else {
+			troco.setText(pb.getTroco().toString());
+		}
 	}
 
 	// TODO @Osman limitar o tamanho escrito no textarea e em outros campos de

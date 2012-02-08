@@ -38,6 +38,9 @@
 				<h3>
 					<g:InlineLabel ui:field="formaPagamento" />
 				</h3>
+				<g:HTMLPanel ui:field="trocoPanel">
+					<h3>Troco para:	R$ <g:InlineLabel ui:field="troco" /></h3>
+				</g:HTMLPanel>
 
 			</div>
 		</div>

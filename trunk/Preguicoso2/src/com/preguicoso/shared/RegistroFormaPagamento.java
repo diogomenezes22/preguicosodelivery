@@ -18,4 +18,5 @@ public enum RegistroFormaPagamento {
 				+ "http://www.itau.com.br/seguranca/img/nav/nav_sb_03_00.gif"
 				+ "\" />" + "Cartão/Crédito<br />";
 	}
+
 }

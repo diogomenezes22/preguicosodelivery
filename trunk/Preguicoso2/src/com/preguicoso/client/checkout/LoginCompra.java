@@ -137,40 +137,62 @@ public class LoginCompra extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				if (ch.isPagamentoChecked()) {
-					if (FormValidatorClient.isFormValid(logradouro.getText(),
-							numero.getText())) {
-						if (!jaPediu) {
-							jaPediu = true;
-							String complementoText = complemento.getText();
-							if (complementoText.equals("Complemento"))
-								complementoText = "";
-							checkoutService.enviarPedido(
-									ub.getNome(),
-									logradouro.getText() + " "
-											+ numero.getText(),
-									bairro.getValue(bairro.getSelectedIndex()),
-									complementoText, ch.getPagamentoChecked(),
-									new AsyncCallback<Void>() {
-
-										@Override
-										public void onFailure(Throwable caught) {
-											Window.alert("Erro no Envio do pedido. Tente comprar novamente.");
-											History.newItem("index");
-										}
-
-										@Override
-										public void onSuccess(Void result) {
-											Window.alert("Pedido enviado com sucesso!");
-											History.newItem("pedido");
-										}
-									});
+					if (ch.isDinheiroChecked()) {
+						if (ch.isTrocoFull()) {
+							analisaEnvio(ub);
+						} else {
+							Window.alert("Campo \"Troco para\" deve ser preenchido.");
 						}
+					} else {
+						analisaEnvio(ub);
 					}
 				} else {
 					Window.alert("Escolha a forma de pagamento.");
 				}
 			}
+
 		});
+	}
+
+	private void analisaEnvio(final UsuarioBean ub) {
+		if (FormValidatorClient.isFormValid(logradouro.getText(),
+				numero.getText())) {
+			if (!jaPediu) {
+				jaPediu = true;
+				String complementoText = complemento.getText();
+				if (complementoText.equals("Complemento"))
+					complementoText = "";
+				enviarPedido(ub, complementoText);
+			}
+		}
+	}
+
+	private void enviarPedido(final UsuarioBean ub, String complementoText) {
+		Integer troco = null;
+		if (ch.isDinheiroChecked() && ch.isTrocoFull()) {
+			try {
+				troco = Integer.parseInt(ch.trocoBox.getText());
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		checkoutService.enviarPedido(ub.getNome(), logradouro.getText() + " "
+				+ numero.getText(), bairro.getValue(bairro.getSelectedIndex()),
+				complementoText, ch.getPagamentoChecked(), troco,
+				new AsyncCallback<Void>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Erro no Envio do pedido. Tente comprar novamente.");
+						History.newItem("index");
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						Window.alert("Pedido enviado com sucesso!");
+						History.newItem("pedido");
+					}
+				});
 	}
 
 	@UiHandler("email")
