@@ -11,7 +11,8 @@
 		<table border='0' class='endereco'>
 			<tr>
 				<th COLSPAN="3">
-					Login<g:TextBox ui:field="email" text="E-mail"/><br />
+					<h3>Login</h3>
+					E-mail<g:TextBox ui:field="email" text="E-mail"/><br />
 					Senha<g:PasswordTextBox ui:field="senha" text="Senha"/><br />
 					<g:Button ui:field="loginButton">Login</g:Button>
 				</th>

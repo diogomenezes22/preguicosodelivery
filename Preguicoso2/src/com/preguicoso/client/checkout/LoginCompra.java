@@ -129,6 +129,8 @@ public class LoginCompra extends Composite {
 		});
 	}
 
+	private boolean jaPediu = false;
+
 	private void addPedirClick(final UsuarioBean ub) {
 		pedir.addClickHandler(new ClickHandler() {
 
@@ -137,27 +139,32 @@ public class LoginCompra extends Composite {
 				if (ch.isPagamentoChecked()) {
 					if (FormValidatorClient.isFormValid(logradouro.getText(),
 							numero.getText())) {
-						String complementoText = complemento.getText();
-						if (complementoText.equals("Complemento"))
-							complementoText = "";
-						checkoutService.enviarPedido(ub.getNome(),
-								logradouro.getText() + " " + numero.getText(),
-								bairro.getValue(bairro.getSelectedIndex()),
-								complementoText, ch.getPagamentoChecked(),
-								new AsyncCallback<Void>() {
+						if (!jaPediu) {
+							jaPediu = true;
+							String complementoText = complemento.getText();
+							if (complementoText.equals("Complemento"))
+								complementoText = "";
+							checkoutService.enviarPedido(
+									ub.getNome(),
+									logradouro.getText() + " "
+											+ numero.getText(),
+									bairro.getValue(bairro.getSelectedIndex()),
+									complementoText, ch.getPagamentoChecked(),
+									new AsyncCallback<Void>() {
 
-									@Override
-									public void onFailure(Throwable caught) {
-										Window.alert("Erro no Envio do pedido. Tente comprar novamente.");
-										History.newItem("index");
-									}
+										@Override
+										public void onFailure(Throwable caught) {
+											Window.alert("Erro no Envio do pedido. Tente comprar novamente.");
+											History.newItem("index");
+										}
 
-									@Override
-									public void onSuccess(Void result) {
-										Window.alert("Pedido enviado com sucesso!");
-										History.newItem("pedido");
-									}
-								});
+										@Override
+										public void onSuccess(Void result) {
+											Window.alert("Pedido enviado com sucesso!");
+											History.newItem("pedido");
+										}
+									});
+						}
 					}
 				} else {
 					Window.alert("Escolha a forma de pagamento.");

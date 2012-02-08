@@ -3,6 +3,7 @@ package com.preguicoso.client.user;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -10,6 +11,7 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.client.RegistroToken;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
 import com.preguicoso.shared.RegistroStatusPedido;
@@ -74,7 +76,7 @@ public class StatusPedido extends Composite {
 						motivo.setText("Motivo: " + result.getMotivo());
 					}
 				} else {
-					mensagem.setText("Seu pedido já está a caminho");
+					History.newItem(RegistroToken.index);
 				}
 			}
 

@@ -91,7 +91,8 @@ public class Checkout extends Composite {
 		listaPagamento = new ArrayList<RadioButton>();
 		RadioButton radioForma;
 		for (RegistroFormaPagamento forma : eb.getFormasPagamento()) {
-			radioForma = new RadioButton("forma_pagamento", forma.name());
+			radioForma = new RadioButton("forma_pagamento", forma.asHTML(),
+					true);
 			listaPagamento.add(radioForma);
 			formasPagamento.add(radioForma);
 		}

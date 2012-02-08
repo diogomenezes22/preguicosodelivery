@@ -89,38 +89,45 @@ public class EnderecoBox extends Composite {
 		}
 	}
 
+	private boolean jaPediu = false;
+
 	@UiHandler("pedir")
 	void onPedirClick(ClickEvent event) {
 		if (ch.isPagamentoChecked()) {
 			if (FormValidatorClient.isFormValid(endereco_rua.getText(),
 					endereco_numero.getText())) {
-				// Cadastrar usuario
-				final UsuarioBean ub = new UsuarioBean();
-				ub.setNome(nome.getText());
-				ub.setEmail(email.getText());
-				ub.setPassword(senha.getText());
-				ub.setTelefoneResidencial(telefone.getText());
-				ub.setTelefoneCelular(celular.getText());
-				ub.setIdCidade(eb.getIdCidade());
-				ub.setLogradouro(endereco_rua.getText());
-				ub.setNumero(endereco_numero.getText());
-				ub.setComplemento(endereco_complemento.getText());
-				ub.setBairro(endereco_bairro.getItemText(endereco_bairro
-						.getSelectedIndex()));
-				loginService.cadastrarUsuario(ub, new AsyncCallback<Void>() {
+				if (!jaPediu) {
+					jaPediu = true;
+					// Cadastrar usuario
+					final UsuarioBean ub = new UsuarioBean();
+					ub.setNome(nome.getText());
+					ub.setEmail(email.getText());
+					ub.setPassword(senha.getText());
+					ub.setTelefoneResidencial(telefone.getText());
+					ub.setTelefoneCelular(celular.getText());
+					ub.setIdCidade(eb.getIdCidade());
+					ub.setLogradouro(endereco_rua.getText());
+					ub.setNumero(endereco_numero.getText());
+					ub.setComplemento(endereco_complemento.getText());
+					ub.setBairro(endereco_bairro.getItemText(endereco_bairro
+							.getSelectedIndex()));
+					loginService.cadastrarUsuario(ub,
+							new AsyncCallback<Void>() {
 
-					@Override
-					public void onSuccess(Void result) {
-						String complementoText = endereco_complemento.getText();
-						if (complementoText.equals("Complemento"))
-							complementoText = "";
-						logarUsuario(complementoText, ub);
-					}
+								@Override
+								public void onSuccess(Void result) {
+									String complementoText = endereco_complemento
+											.getText();
+									if (complementoText.equals("Complemento"))
+										complementoText = "";
+									logarUsuario(complementoText, ub);
+								}
 
-					@Override
-					public void onFailure(Throwable caught) {
-					}
-				});
+								@Override
+								public void onFailure(Throwable caught) {
+								}
+							});
+				}
 			}
 		} else {
 			Window.alert("Escolha a forma de pagamento.");
