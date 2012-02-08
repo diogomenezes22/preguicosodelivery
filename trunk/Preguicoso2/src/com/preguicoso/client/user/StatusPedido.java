@@ -19,6 +19,16 @@ import com.preguicoso.shared.entities.PedidoBean;
 
 public class StatusPedido extends Composite {
 
+	// TODO @Osman ||StatusPedido|| gambiarra do Singleton
+	private static StatusPedido instance = null;
+
+	public static StatusPedido getInstance() {
+		if (instance == null) {
+			instance = new StatusPedido();
+		}
+		return instance;
+	}
+
 	private static StatusPedidoUiBinder uiBinder = GWT
 			.create(StatusPedidoUiBinder.class);
 
@@ -33,13 +43,14 @@ public class StatusPedido extends Composite {
 	@UiField
 	InlineLabel motivo;
 
-	public StatusPedido() {
+	private StatusPedido() {
 		initWidget(uiBinder.createAndBindUi(this));
 		printStatus();
 		Timer t = new Timer() {
 			@Override
 			public void run() {
-				printStatus();
+				if (History.getToken().equals(RegistroToken.statusPedido))
+					printStatus();
 			}
 
 		};
@@ -82,7 +93,6 @@ public class StatusPedido extends Composite {
 
 			@Override
 			public void onFailure(Throwable caught) {
-
 			}
 		});
 	}
