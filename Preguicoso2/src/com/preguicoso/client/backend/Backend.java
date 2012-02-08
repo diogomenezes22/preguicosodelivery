@@ -144,7 +144,7 @@ public class Backend extends Composite {
 	public void buildHomePage(String token) {
 		if (token.startsWith("pedidos/ordem")) {
 			container.clear();
-			container.add(new OrdemPedidos(eb.getId(), conexao));
+			container.add(OrdemPedidos.getInstance(eb.getId(), conexao));
 		} else if (token.startsWith("pedidos/historico_de_pedidos")) {
 			container.clear();
 			container.add(new HistoricoPedidos(eb.getId()));

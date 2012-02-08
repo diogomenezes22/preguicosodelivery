@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -13,12 +14,31 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
+import com.preguicoso.client.RegistroToken;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.PedidoBean;
 
 public class OrdemPedidos extends Composite {
+
+	// TODO @Osman ||OrdemPedidos|| gambiarra do Singleton
+	private static OrdemPedidos instance = null;
+	private static Long idEstabelecimento = null;
+	private static InlineLabel conexao = null;
+
+	public static OrdemPedidos getInstance(final Long idEstabelecimento,
+			final InlineLabel conexao) {
+		if (instance == null) {
+			if (!idEstabelecimento.equals(OrdemPedidos.idEstabelecimento)
+					|| !conexao.equals(OrdemPedidos.conexao)) {
+				OrdemPedidos.idEstabelecimento = idEstabelecimento;
+				OrdemPedidos.conexao = conexao;
+				instance = new OrdemPedidos(idEstabelecimento, conexao);
+			}
+		}
+		return instance;
+	}
 
 	private static OrdemPedidosUiBinder uiBinder = GWT
 			.create(OrdemPedidosUiBinder.class);
@@ -32,7 +52,7 @@ public class OrdemPedidos extends Composite {
 	interface OrdemPedidosUiBinder extends UiBinder<Widget, OrdemPedidos> {
 	}
 
-	public OrdemPedidos(final Long idEstabelecimento, final InlineLabel conexao) {
+	private OrdemPedidos(final Long idEstabelecimento, final InlineLabel conexao) {
 		initWidget(uiBinder.createAndBindUi(this));
 
 		carregaListaDePedidos(idEstabelecimento);
@@ -46,32 +66,35 @@ public class OrdemPedidos extends Composite {
 
 			@Override
 			public void run() {
-				cadastroService.getPedidosNovos(idEstabelecimento,
-						lastTimeStamp, new AsyncCallback<List<PedidoBean>>() {
+				if (History.getToken().equals(RegistroToken.ordemPedidos)) {
+					cadastroService.getPedidosNovos(idEstabelecimento,
+							lastTimeStamp,
+							new AsyncCallback<List<PedidoBean>>() {
 
-							@Override
-							public void onFailure(Throwable caught) {
-								conexao.setText("Nível da Conexão "
-										+ getStatusConexao(false));
-							}
-
-							@Override
-							public void onSuccess(List<PedidoBean> result) {
-								conexao.setText("Nível da Conexão "
-										+ getStatusConexao(true));
-								if (!result.isEmpty()) {
-									lastTimeStamp.setTime(result.get(0)
-											.getTimeStamp().getTime());
-									if (result.size() == 1)
-										Window.alert("Acaba de chegar um novo pedido!");
-									else
-										Window.alert("Acabam de chegar "
-												+ result.size()
-												+ " novos pedidos!");
-									carregaListaDePedidos(idEstabelecimento);
+								@Override
+								public void onFailure(Throwable caught) {
+									conexao.setText("Nível da Conexão "
+											+ getStatusConexao(false));
 								}
-							}
-						});
+
+								@Override
+								public void onSuccess(List<PedidoBean> result) {
+									conexao.setText("Nível da Conexão "
+											+ getStatusConexao(true));
+									if (!result.isEmpty()) {
+										lastTimeStamp.setTime(result.get(0)
+												.getTimeStamp().getTime());
+										if (result.size() == 1)
+											Window.alert("Acaba de chegar um novo pedido!");
+										else
+											Window.alert("Acabam de chegar "
+													+ result.size()
+													+ " novos pedidos!");
+										carregaListaDePedidos(idEstabelecimento);
+									}
+								}
+							});
+				}
 			}
 		};
 		t.scheduleRepeating(5000);
