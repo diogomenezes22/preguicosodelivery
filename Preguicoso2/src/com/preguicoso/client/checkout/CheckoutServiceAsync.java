@@ -12,13 +12,14 @@ public interface CheckoutServiceAsync {
 			AsyncCallback<List<String>> callback);
 
 	void enviarPedido(String nomeCliente, String rua, String bairro,
-			String complemento, String formaPagamento,
+			String complemento, String formaPagamento, Integer troco,
 			AsyncCallback<Void> callback);
 
 	void getCarrinho(AsyncCallback<List<ItemCardapioBean>> callback);
 
 	void getEnderecoByCep(String cep, AsyncCallback<String[]> callback);
 
-	void isLogradouroTypeValid(String logradouro, AsyncCallback<Boolean> callback);
+	void isLogradouroTypeValid(String logradouro,
+			AsyncCallback<Boolean> callback);
 
 }

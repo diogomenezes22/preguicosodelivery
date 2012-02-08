@@ -16,6 +16,9 @@
 				<h3>Formas de Pagamento:</h3>
 				<hr />
 				<g:HTMLPanel ui:field="formasPagamento" />
+				<g:HTMLPanel ui:field="trocoPanel">
+					Troco para: R$<g:IntegerBox ui:field="trocoBox" />
+				</g:HTMLPanel>
 				<!-- <table border='0'> -->
 				<!-- <tr> -->
 				<!-- <td width='30'> -->

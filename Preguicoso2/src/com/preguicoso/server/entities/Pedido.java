@@ -35,6 +35,7 @@ public class Pedido implements Serializable {
 	String complemento;
 	RegistroStatusPedido status;
 	String motivo;
+	Integer troco;
 
 	String listaItensJSON;
 
@@ -55,6 +56,7 @@ public class Pedido implements Serializable {
 		this.setStatus(pb.getStatus());
 		this.setMotivo(pb.getMotivo());
 		this.setListaItensJSON(pb.getListaItens());
+		this.setTroco(pb.getTroco());
 	}
 
 	public PedidoBean toBean() {
@@ -70,6 +72,7 @@ public class Pedido implements Serializable {
 		pb.setComplemento(this.complemento);
 		pb.setStatus(this.status);
 		pb.setMotivo(this.motivo);
+		pb.setTroco(this.troco);
 
 		try {
 			if (listaItensJSON != null) {
@@ -203,6 +206,14 @@ public class Pedido implements Serializable {
 		this.motivo = motivo;
 	}
 
+	public Integer getTroco() {
+		return troco;
+	}
+
+	public void setTroco(Integer troco) {
+		this.troco = troco;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -228,6 +239,7 @@ public class Pedido implements Serializable {
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((timeStamp == null) ? 0 : timeStamp.hashCode());
+		result = prime * result + ((troco == null) ? 0 : troco.hashCode());
 		return result;
 	}
 
@@ -296,6 +308,11 @@ public class Pedido implements Serializable {
 			if (other.timeStamp != null)
 				return false;
 		} else if (!timeStamp.equals(other.timeStamp))
+			return false;
+		if (troco == null) {
+			if (other.troco != null)
+				return false;
+		} else if (!troco.equals(other.troco))
 			return false;
 		return true;
 	}

@@ -11,6 +11,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.login.LoginService;
@@ -34,6 +35,10 @@ public class Checkout extends Composite {
 	HTMLPanel loginBox;
 	@UiField
 	HTMLPanel enderecoEntrega;
+	@UiField
+	HTMLPanel trocoPanel;
+	@UiField
+	IntegerBox trocoBox;
 
 	private final CheckoutServiceAsync checkoutService = GWT
 			.create(CheckoutService.class);
@@ -49,6 +54,7 @@ public class Checkout extends Composite {
 	public Checkout(EstabelecimentoBean eb) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.eb = eb;
+		trocoPanel.setVisible(false);
 		enderecoEntrega.setVisible(false);
 		carregarFormasDePagamento(eb);
 		checkoutService.getBairrosAtendidos(eb,
@@ -90,9 +96,20 @@ public class Checkout extends Composite {
 	private void carregarFormasDePagamento(EstabelecimentoBean eb) {
 		listaPagamento = new ArrayList<RadioButton>();
 		RadioButton radioForma;
-		for (RegistroFormaPagamento forma : eb.getFormasPagamento()) {
+		for (final RegistroFormaPagamento forma : eb.getFormasPagamento()) {
 			radioForma = new RadioButton("forma_pagamento", forma.asHTML(),
 					true);
+			radioForma.addClickHandler(new ClickHandler() {
+
+				@Override
+				public void onClick(ClickEvent event) {
+					if (forma.equals(RegistroFormaPagamento.dinheiro)) {
+						trocoPanel.setVisible(true);
+					} else {
+						trocoPanel.setVisible(false);
+					}
+				}
+			});
 			listaPagamento.add(radioForma);
 			formasPagamento.add(radioForma);
 		}
@@ -143,5 +160,18 @@ public class Checkout extends Composite {
 			}
 		}
 		return null;
+	}
+
+	public boolean isDinheiroChecked() {
+		if (trocoPanel.isVisible()) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isTrocoFull() {
+		if (trocoBox.getText().length() != 0)
+			return true;
+		return false;
 	}
 }

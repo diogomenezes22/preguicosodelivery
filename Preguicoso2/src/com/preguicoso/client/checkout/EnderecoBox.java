@@ -94,43 +94,53 @@ public class EnderecoBox extends Composite {
 	@UiHandler("pedir")
 	void onPedirClick(ClickEvent event) {
 		if (ch.isPagamentoChecked()) {
-			if (FormValidatorClient.isFormValid(endereco_rua.getText(),
-					endereco_numero.getText())) {
-				if (!jaPediu) {
-					jaPediu = true;
-					// Cadastrar usuario
-					final UsuarioBean ub = new UsuarioBean();
-					ub.setNome(nome.getText());
-					ub.setEmail(email.getText());
-					ub.setPassword(senha.getText());
-					ub.setTelefoneResidencial(telefone.getText());
-					ub.setTelefoneCelular(celular.getText());
-					ub.setIdCidade(eb.getIdCidade());
-					ub.setLogradouro(endereco_rua.getText());
-					ub.setNumero(endereco_numero.getText());
-					ub.setComplemento(endereco_complemento.getText());
-					ub.setBairro(endereco_bairro.getItemText(endereco_bairro
-							.getSelectedIndex()));
-					loginService.cadastrarUsuario(ub,
-							new AsyncCallback<Void>() {
-
-								@Override
-								public void onSuccess(Void result) {
-									String complementoText = endereco_complemento
-											.getText();
-									if (complementoText.equals("Complemento"))
-										complementoText = "";
-									logarUsuario(complementoText, ub);
-								}
-
-								@Override
-								public void onFailure(Throwable caught) {
-								}
-							});
+			if (ch.isDinheiroChecked()) {
+				if (ch.isTrocoFull()) {
+					analisaEnvio();
+				} else {
+					Window.alert("Campo \"Troco para\" deve ser preenchido.");
 				}
+			} else {
+				analisaEnvio();
 			}
 		} else {
 			Window.alert("Escolha a forma de pagamento.");
+		}
+	}
+
+	private void analisaEnvio() {
+		if (FormValidatorClient.isFormValid(endereco_rua.getText(),
+				endereco_numero.getText())) {
+			if (!jaPediu) {
+				jaPediu = true;
+				// Cadastrar usuario
+				final UsuarioBean ub = new UsuarioBean();
+				ub.setNome(nome.getText());
+				ub.setEmail(email.getText());
+				ub.setPassword(senha.getText());
+				ub.setTelefoneResidencial(telefone.getText());
+				ub.setTelefoneCelular(celular.getText());
+				ub.setIdCidade(eb.getIdCidade());
+				ub.setLogradouro(endereco_rua.getText());
+				ub.setNumero(endereco_numero.getText());
+				ub.setComplemento(endereco_complemento.getText());
+				ub.setBairro(endereco_bairro.getItemText(endereco_bairro
+						.getSelectedIndex()));
+				loginService.cadastrarUsuario(ub, new AsyncCallback<Void>() {
+
+					@Override
+					public void onSuccess(Void result) {
+						String complementoText = endereco_complemento.getText();
+						if (complementoText.equals("Complemento"))
+							complementoText = "";
+						logarUsuario(complementoText, ub);
+					}
+
+					@Override
+					public void onFailure(Throwable caught) {
+					}
+				});
+			}
 		}
 	}
 
@@ -152,10 +162,18 @@ public class EnderecoBox extends Composite {
 	}
 
 	private void enviarPedido(String complementoText) {
+		Integer troco = null;
+		if (ch.isDinheiroChecked() && ch.isTrocoFull()) {
+			try {
+				troco = Integer.parseInt(ch.trocoBox.getText());
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
 		checkoutService.enviarPedido(nome.getText(), endereco_rua.getText()
 				+ " " + endereco_numero.getText(),
 				endereco_bairro.getValue(endereco_bairro.getSelectedIndex()),
-				complementoText, ch.getPagamentoChecked(),
+				complementoText, ch.getPagamentoChecked(), troco,
 				new AsyncCallback<Void>() {
 
 					@Override
