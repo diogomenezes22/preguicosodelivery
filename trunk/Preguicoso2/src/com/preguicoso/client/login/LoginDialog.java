@@ -1,12 +1,8 @@
 package com.preguicoso.client.login;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.BlurEvent;
-import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.FocusEvent;
-import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -28,10 +24,10 @@ public class LoginDialog extends DialogBox {
 		setText("Fazer login");
 		setPopupPosition(caller.getAbsoluteLeft(), caller.getAbsoluteTop());
 		VerticalPanel content = new VerticalPanel();
-		InlineLabel loginLabel = new InlineLabel("Login");
+		InlineLabel loginLabel = new InlineLabel("E-mail");
 		content.add(loginLabel);
 		final TextBox loginTB = new TextBox();
-		loginTB.setText("E-mail");
+		// loginTB.setText("E-mail");
 		content.add(loginTB);
 		InlineLabel passwordLabel = new InlineLabel("Senha");
 		content.add(passwordLabel);
@@ -77,21 +73,21 @@ public class LoginDialog extends DialogBox {
 				hide();
 			}
 		});
-		loginTB.addFocusHandler(new FocusHandler() {
-
-			@Override
-			public void onFocus(FocusEvent event) {
-				if (loginTB.getText().equals("E-mail"))
-					loginTB.setText("");
-			}
-		});
-		loginTB.addBlurHandler(new BlurHandler() {
-
-			@Override
-			public void onBlur(BlurEvent event) {
-				if (loginTB.getText().equals(""))
-					loginTB.setText("E-mail");
-			}
-		});
+		// loginTB.addFocusHandler(new FocusHandler() {
+		//
+		// @Override
+		// public void onFocus(FocusEvent event) {
+		// if (loginTB.getText().equals("E-mail"))
+		// loginTB.setText("");
+		// }
+		// });
+		// loginTB.addBlurHandler(new BlurHandler() {
+		//
+		// @Override
+		// public void onBlur(BlurEvent event) {
+		// if (loginTB.getText().equals(""))
+		// loginTB.setText("E-mail");
+		// }
+		// });
 	}
 }
