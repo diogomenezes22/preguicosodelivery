@@ -26,6 +26,7 @@ import com.preguicoso.client.cadastro.CadastroServiceAsync;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 import com.preguicoso.shared.entities.PedidoBean;
+import com.preguicoso.shared.utils.MoneyUtils;
 
 public class DescricaoPedido extends Composite {
 
@@ -112,7 +113,7 @@ public class DescricaoPedido extends Composite {
 		if (pb.getTroco() == null) {
 			trocoPanel.setVisible(false);
 		} else {
-			troco.setText(pb.getTroco().toString());
+			troco.setText(MoneyUtils.parseString(pb.getTroco() * 100));
 		}
 	}
 

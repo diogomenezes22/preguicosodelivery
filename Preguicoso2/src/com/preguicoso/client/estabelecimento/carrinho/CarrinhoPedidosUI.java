@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -79,15 +79,13 @@ public class CarrinhoPedidosUI extends Composite {
 
 					}
 				});
-		pedir.addClickHandler(new ClickHandler() {
+	}
 
-			@Override
-			public void onClick(ClickEvent event) {
-				String token = History.getToken();
-				if (!token.endsWith("/checkout")) {
-					History.newItem(token + "/checkout");
-				}
-			}
-		});
+	@UiHandler("pedir")
+	void onPedirClick(ClickEvent event) {
+		String token = History.getToken();
+		if (!token.endsWith("/checkout")) {
+			History.newItem(token + "/checkout");
+		}
 	}
 }

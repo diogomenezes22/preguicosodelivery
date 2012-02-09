@@ -23,6 +23,7 @@ import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
 import com.preguicoso.client.estabelecimento.carrinho.CarrinhoPedidosUI;
 import com.preguicoso.client.estabelecimento.filtro.Filtro;
+import com.preguicoso.shared.RegistroErros;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 
 public class EstabelecimentoUI extends Composite {
@@ -60,10 +61,6 @@ public class EstabelecimentoUI extends Composite {
 			UiBinder<Widget, EstabelecimentoUI> {
 	}
 
-	public EstabelecimentoUI() {
-		this.initWidget(uiBinder.createAndBindUi(this));
-	}
-
 	public EstabelecimentoUI(final Long id) {
 		this.estabelecimentoId = id;
 		this.initWidget(uiBinder.createAndBindUi(this));
@@ -82,7 +79,6 @@ public class EstabelecimentoUI extends Composite {
 							Cardapio cardapio = new Cardapio(id, carrinho);
 							EstabelecimentoUI.this.coluna2.add(cardapio);
 							filtro.add(new Filtro(id));
-
 						} else {
 							coluna1.add(new Checkout(result));
 						}
@@ -91,7 +87,7 @@ public class EstabelecimentoUI extends Composite {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Conexão com problemas. Recarregue a página.");
+						Window.alert(RegistroErros.CONEXAO);
 					}
 				});
 	}

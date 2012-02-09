@@ -5,6 +5,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -14,6 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.RegistroToken;
 import com.preguicoso.client.login.LoginService;
 import com.preguicoso.client.login.LoginServiceAsync;
+import com.preguicoso.shared.RegistroErros;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.PedidoBean;
 
@@ -88,6 +90,7 @@ public class StatusPedido extends Composite {
 					}
 				} else {
 					History.newItem(RegistroToken.index);
+					Window.alert(RegistroErros.semPedido);
 				}
 			}
 

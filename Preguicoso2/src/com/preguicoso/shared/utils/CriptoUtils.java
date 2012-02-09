@@ -1,4 +1,4 @@
-package com.preguicoso.shared;
+package com.preguicoso.shared.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

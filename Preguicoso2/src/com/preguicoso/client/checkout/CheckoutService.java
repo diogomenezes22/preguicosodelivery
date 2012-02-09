@@ -13,7 +13,7 @@ public interface CheckoutService extends RemoteService {
 	List<String> getBairrosAtendidos(EstabelecimentoBean eb);
 
 	void enviarPedido(String nomeCliente, String rua, String bairro,
-			String complemento, String formaPagamento, Integer troco);
+			String complemento, String formaPagamento, Long troco);
 
 	// TODO @Osman deletar métodos inúteis em cardaprioService
 	List<ItemCardapioBean> getCarrinho();

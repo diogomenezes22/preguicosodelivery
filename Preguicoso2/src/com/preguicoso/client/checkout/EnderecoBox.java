@@ -162,12 +162,12 @@ public class EnderecoBox extends Composite {
 	}
 
 	private void enviarPedido(String complementoText) {
-		Integer troco = null;
+		Long troco = null;
 		if (ch.isDinheiroChecked() && ch.isTrocoFull()) {
-			try {
-				troco = Integer.parseInt(ch.trocoBox.getText());
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
+			if (FormValidatorShared.hasNumberOnly(ch.trocoBox.getText())) {
+				troco = ch.trocoBox.getValue().longValue();
+			} else {
+				Window.alert("O campo \"Troco para\" só pode ter números.");
 			}
 		}
 		checkoutService.enviarPedido(nome.getText(), endereco_rua.getText()

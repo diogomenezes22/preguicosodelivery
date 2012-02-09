@@ -92,7 +92,6 @@ public class RouterHistory {
 		}
 
 		EstabelecimentoUI page = new EstabelecimentoUI(id);
-		// RootPanel.get("content").clear();
 		RootPanel.get("content").add(page);
 	}
 
