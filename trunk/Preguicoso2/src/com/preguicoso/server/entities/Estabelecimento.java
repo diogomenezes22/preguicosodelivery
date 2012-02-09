@@ -31,25 +31,25 @@ public class Estabelecimento implements Serializable {
 	Date ultimaAtualizacao;
 	RegistroStatusRestaurante status;
 	List<Long> listaIdBairrosAtendidos;
-	List<Double> listaFretes;
+	List<Long> listaFretes;
 	Long idCidade;
 	String telefone;
 	String endereco;
 	RegistroFormaPagamento[] formasPagamento;
 	String[] horariosFuncionamento;
 
-	public Double getFreteByIdBairro(int idBairro) {
+	public Long getFreteByIdBairro(int idBairro) {
 		return listaFretes.get(listaIdBairrosAtendidos.indexOf(idBairro));
 	}
 
-	public void putBairroFrete(Long idBairro, Double frete) {
+	public void putBairroFrete(Long idBairro, Long frete) {
 		listaIdBairrosAtendidos.add(idBairro);
 		listaFretes.add(frete);
 	}
 
 	public Estabelecimento() {
 		listaIdBairrosAtendidos = new ArrayList<Long>();
-		listaFretes = new ArrayList<Double>();
+		listaFretes = new ArrayList<Long>();
 	};
 
 	public Estabelecimento(EstabelecimentoBean eb) {
@@ -172,11 +172,11 @@ public class Estabelecimento implements Serializable {
 		this.listaIdBairrosAtendidos = listaIdBairrosAtendidos;
 	}
 
-	public List<Double> getListaFretes() {
+	public List<Long> getListaFretes() {
 		return listaFretes;
 	}
 
-	public void setListaFretes(List<Double> listaFretes) {
+	public void setListaFretes(List<Long> listaFretes) {
 		this.listaFretes = listaFretes;
 	}
 

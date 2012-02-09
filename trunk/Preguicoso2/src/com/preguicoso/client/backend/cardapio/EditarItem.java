@@ -132,7 +132,7 @@ public class EditarItem extends Composite {
 	void onPrecoBlur(BlurEvent event) {
 		foiAlterado();
 		String p = preco.getText().substring(3);
-		this.i.setPreco(new Double(p));
+		this.i.setPreco(new Long(p));
 	}
 
 	private void foiAlterado() {

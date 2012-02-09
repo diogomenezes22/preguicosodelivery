@@ -168,12 +168,12 @@ public class LoginCompra extends Composite {
 	}
 
 	private void enviarPedido(final UsuarioBean ub, String complementoText) {
-		Integer troco = null;
+		Long troco = null;
 		if (ch.isDinheiroChecked() && ch.isTrocoFull()) {
-			try {
-				troco = Integer.parseInt(ch.trocoBox.getText());
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
+			if (FormValidatorShared.hasNumberOnly(ch.trocoBox.getText())) {
+				troco = ch.trocoBox.getValue().longValue();
+			} else {
+				Window.alert("O campo \"Troco para\" só pode ter números.");
 			}
 		}
 		checkoutService.enviarPedido(ub.getNome(), logradouro.getText() + " "

@@ -6,8 +6,8 @@ import java.util.List;
 import javax.persistence.Id;
 
 import com.googlecode.objectify.annotation.Entity;
-import com.preguicoso.shared.CriptoUtils;
 import com.preguicoso.shared.entities.UsuarioEstabelecimentoBean;
+import com.preguicoso.shared.utils.CriptoUtils;
 
 @Entity
 public class UsuarioEstabelecimento implements Serializable {

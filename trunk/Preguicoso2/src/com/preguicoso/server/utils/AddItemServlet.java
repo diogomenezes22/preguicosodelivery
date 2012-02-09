@@ -68,7 +68,7 @@ public class AddItemServlet extends HttpServlet {
 					.retrieveByCnpj(CNPJ));
 			item.setNome(nome);
 			item.setObservacao(observacao);
-			item.setPreco(Double.parseDouble(preco));
+			item.setPreco(Long.parseLong(preco));
 			item.setTipo(tipo);
 			item.setUltimaAtualizacao(item.getDataRegistro());
 			(new ItemCardapioDAO()).create(item);

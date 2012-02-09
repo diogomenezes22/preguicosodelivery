@@ -17,7 +17,7 @@
 				<hr />
 				<g:HTMLPanel ui:field="formasPagamento" />
 				<g:HTMLPanel ui:field="trocoPanel">
-					Troco para: R$<g:IntegerBox ui:field="trocoBox" />
+					Troco para: R$<g:IntegerBox ui:field="trocoBox" visibleLength="3" maxLength="3"/>,00
 				</g:HTMLPanel>
 				<!-- <table border='0'> -->
 				<!-- <tr> -->

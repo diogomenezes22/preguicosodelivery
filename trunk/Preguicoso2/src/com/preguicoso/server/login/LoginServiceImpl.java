@@ -15,13 +15,14 @@ import com.preguicoso.server.dao.PedidoDAO;
 import com.preguicoso.server.dao.UsuarioDAO;
 import com.preguicoso.server.dao.UsuarioEstabelecimentoDAO;
 import com.preguicoso.server.entities.Estabelecimento;
+import com.preguicoso.server.entities.Pedido;
 import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.server.entities.UsuarioEstabelecimento;
 import com.preguicoso.shared.AtributosSession;
-import com.preguicoso.shared.CriptoUtils;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
 import com.preguicoso.shared.entities.PedidoBean;
 import com.preguicoso.shared.entities.UsuarioBean;
+import com.preguicoso.shared.utils.CriptoUtils;
 
 /**
  * The server side implementation of the RPC service.
@@ -163,7 +164,10 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 		Usuario user = (Usuario) this.getThreadLocalRequest().getSession()
 				.getAttribute(AtributosSession.usuarioLogado);
 		if (user != null) {
-			return pdao.retrieveLastPedidoByUser(user.getEmail()).toBean();
+			Pedido pLast = pdao.retrieveLastPedidoByUser(user.getEmail());
+			if (pLast != null) {
+				return pLast.toBean();
+			}
 		}
 		return null;
 	}

@@ -2,47 +2,29 @@ package com.preguicoso.server.entities;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 
-import com.googlecode.objectify.annotation.Cached;
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Indexed;
-import com.googlecode.objectify.annotation.Unindexed;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.ItemCardapioBean;
 
 @Entity
-@Cached
-@Unindexed
 public class ItemCardapio {
 	@Id
 	Long id;
-	@Indexed
 	Long estabelecimentoId;
-	@Column
 	int numero;
-	@Indexed
 	String categoria;
-	@Indexed
 	String nome;
-	@Column
 	String tipo;
-	@Column
 	Boolean disponivel;
-	@Column
 	String descricao;
-	@Column
-	Double preco;
-	@Column
+	Long preco;
 	Date dataRegistro;
-	@Column
 	Date ultimaAtualizacao;
 
-	@Unindexed
 	private String observacao;
-	@Unindexed
 	private int quantidade;
 
 	public ItemCardapio() {
@@ -50,7 +32,7 @@ public class ItemCardapio {
 		this.tipo = "";
 		this.disponivel = false;
 		this.descricao = "";
-		this.preco = 0.0;
+		this.preco = (long) 0;
 	}
 
 	public Long getEstabelecimentoId() {
@@ -62,7 +44,7 @@ public class ItemCardapio {
 	}
 
 	public ItemCardapio(String nome, String tipo, Boolean disponivel,
-			String descricao, Double preco, Estabelecimento estabelecimento,
+			String descricao, Long preco, Estabelecimento estabelecimento,
 			Categoria categoria) {
 		this.nome = nome;
 		this.tipo = tipo;
@@ -142,11 +124,11 @@ public class ItemCardapio {
 		this.descricao = descricao;
 	}
 
-	public Double getPreco() {
-		return this.preco;
+	public Long getPreco() {
+		return preco;
 	}
 
-	public void setPreco(Double preco) {
+	public void setPreco(Long preco) {
 		this.preco = preco;
 	}
 

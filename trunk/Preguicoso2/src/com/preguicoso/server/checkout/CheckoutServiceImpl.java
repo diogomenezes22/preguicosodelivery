@@ -42,7 +42,7 @@ public class CheckoutServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public void enviarPedido(String nomeCliente, String rua, String bairro,
-			String complemento, String formaPagamento, Integer troco) {
+			String complemento, String formaPagamento, Long troco) {
 		Pedido p = new Pedido();
 		p.setFormaPagamento(formaPagamento);
 		List<ItemCardapioBean> listaItens = getCarrinho();

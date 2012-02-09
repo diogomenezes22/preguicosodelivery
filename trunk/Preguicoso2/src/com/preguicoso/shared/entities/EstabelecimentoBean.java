@@ -22,14 +22,14 @@ public class EstabelecimentoBean implements Serializable {
 	private Date ultimaAtualizacao;
 	private RegistroStatusRestaurante status;
 	private List<Long> listaIdBairrosAtendidos;
-	private List<Double> listaFretes;
+	private List<Long> listaFretes;
 	private Long idCidade;
 	private String telefone;
 	private String endereco;
 	private RegistroFormaPagamento[] formasPagamento;
 	private String[] horariosFuncionamento;
 
-	public Double getFreteByIdBairro(int idBairro) {
+	public Long getFreteByIdBairro(int idBairro) {
 		return listaFretes.get(listaIdBairrosAtendidos.indexOf(idBairro));
 	}
 
@@ -141,11 +141,11 @@ public class EstabelecimentoBean implements Serializable {
 		this.listaIdBairrosAtendidos = listaIdBairrosAtendidos;
 	}
 
-	public List<Double> getListaFretes() {
+	public List<Long> getListaFretes() {
 		return listaFretes;
 	}
 
-	public void setListaFretes(List<Double> listaFretes) {
+	public void setListaFretes(List<Long> listaFretes) {
 		this.listaFretes = listaFretes;
 	}
 

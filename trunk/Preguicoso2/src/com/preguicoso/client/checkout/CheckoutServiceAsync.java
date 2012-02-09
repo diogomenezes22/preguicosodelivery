@@ -12,7 +12,7 @@ public interface CheckoutServiceAsync {
 			AsyncCallback<List<String>> callback);
 
 	void enviarPedido(String nomeCliente, String rua, String bairro,
-			String complemento, String formaPagamento, Integer troco,
+			String complemento, String formaPagamento, Long troco,
 			AsyncCallback<Void> callback);
 
 	void getCarrinho(AsyncCallback<List<ItemCardapioBean>> callback);

@@ -150,11 +150,11 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				e.setLogoURL("http://www.guiabh.com.br/imgs_cadastradas/China%20in%20Box%20logo.jpg");
 				e.setRazaoSocial("razao social");
 				e.setStatus(RegistroStatusRestaurante.Aberto);
-				e.putBairroFrete((long) 1, 1.2);
-				e.putBairroFrete((long) 15, 1.25);
-				e.putBairroFrete((long) 20, 1.1);
-				e.putBairroFrete((long) 25, 1.0);
-				e.putBairroFrete((long) 30, 1.5);
+				e.putBairroFrete((long) 1, (long) 120);
+				e.putBairroFrete((long) 15, (long) 125);
+				e.putBairroFrete((long) 20, (long) 110);
+				e.putBairroFrete((long) 25, (long) 100);
+				e.putBairroFrete((long) 30, (long) 150);
 				e.setIdCidade((long) 1);
 				e.setTelefone("32221313");
 				e.setEndereco("Rua x 123, Aldeota");
@@ -174,11 +174,11 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				e.setLogoURL("http://fabricadamidia.com.br/imagens/minis/fotos_album_203.jpg");
 				e.setRazaoSocial("razao social do real sucos");
 				e.setStatus(RegistroStatusRestaurante.Aberto);
-				e.putBairroFrete((long) 0, 1.2);
-				e.putBairroFrete((long) 15, 1.25);
-				e.putBairroFrete((long) 20, 1.1);
-				e.putBairroFrete((long) 25, 1.0);
-				e.putBairroFrete((long) 30, 1.5);
+				e.putBairroFrete((long) 0, (long) 120);
+				e.putBairroFrete((long) 15, (long) 125);
+				e.putBairroFrete((long) 20, (long) 110);
+				e.putBairroFrete((long) 25, (long) 100);
+				e.putBairroFrete((long) 30, (long) 150);
 				e.setFormasPagamento(RegistroFormaPagamento.values());
 				e.setIdCidade((long) 1);
 				e.setTelefone("31154444");
@@ -274,7 +274,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		BairroDAO bdao = new BairroDAO();
 		for (Bairro b : bdao.getBairrosByName(
 				estabelecimentoBean.getIdCidade(), listaBairros)) {
-			e.putBairroFrete(b.getId(), 1.0);
+			e.putBairroFrete(b.getId(), (long) 100);
 		}
 		edao.update(e);
 	}
@@ -285,9 +285,9 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		Estabelecimento e = new Estabelecimento(eb);
 		e.setListaIdBairrosAtendidos(new ArrayList<Long>());
-		e.setListaFretes(new ArrayList<Double>());
+		e.setListaFretes(new ArrayList<Long>());
 		for (Long bId : idBairrosAtendidos) {
-			e.putBairroFrete(bId, 1.0);
+			e.putBairroFrete(bId, (long) 100);
 		}
 		edao.update(e);
 	}

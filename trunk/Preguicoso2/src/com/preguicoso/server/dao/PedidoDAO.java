@@ -138,11 +138,10 @@ public class PedidoDAO extends DAOBase {
 	}
 
 	public Pedido retrieveLastPedidoByUser(String email) {
-		RegistroStatusPedido[] listaStatus = { RegistroStatusPedido.esperando,
-				RegistroStatusPedido.visto };
 		List<Pedido> lista = this.ofy().query(Pedido.class)
 				.filter("emailUsuario", email).order("-timeStamp").list();
-
-		return lista.get(0);
+		if (lista.size() != 0)
+			return lista.get(0);
+		return null;
 	}
 }

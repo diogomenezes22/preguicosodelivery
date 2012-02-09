@@ -35,7 +35,7 @@ public class Pedido implements Serializable {
 	String complemento;
 	RegistroStatusPedido status;
 	String motivo;
-	Integer troco;
+	Long troco;
 
 	String listaItensJSON;
 
@@ -206,11 +206,11 @@ public class Pedido implements Serializable {
 		this.motivo = motivo;
 	}
 
-	public Integer getTroco() {
+	public Long getTroco() {
 		return troco;
 	}
 
-	public void setTroco(Integer troco) {
+	public void setTroco(Long troco) {
 		this.troco = troco;
 	}
 

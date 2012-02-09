@@ -60,7 +60,7 @@ public class EditarCardapio extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				ItemCardapioBean novoItem = new ItemCardapioBean("Novo Item",
-						"", false, "Descrição do item", (double) 0,
+						"", false, "Descrição do item", (long) 0,
 						new CategoriaBean("Sem Categoria"),
 						EditarCardapio.this.idEstabelecimento);
 				listaNovos.add(new ItemCardapioUI(novoItem, listaCategorias));

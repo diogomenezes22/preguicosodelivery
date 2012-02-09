@@ -24,14 +24,13 @@ public class PedidoBean implements Serializable {
 	private String complemento;
 	private RegistroStatusPedido status;
 	private String motivo;
-	// TODO @Osman <<URGENTE>> trabalhar com padrão Money
-	private Integer troco;
+	private Long troco;
 
-	public Integer getTroco() {
+	public Long getTroco() {
 		return troco;
 	}
 
-	public void setTroco(Integer troco) {
+	public void setTroco(Long troco) {
 		this.troco = troco;
 	}
 
