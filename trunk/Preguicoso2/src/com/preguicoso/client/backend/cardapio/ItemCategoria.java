@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.preguicoso.shared.entities.CategoriaBean;
+import com.preguicoso.shared.entities.cardapio.CategoriaBean;
 
 public class ItemCategoria extends Composite {
 

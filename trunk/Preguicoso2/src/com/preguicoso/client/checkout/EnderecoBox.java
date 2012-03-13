@@ -166,28 +166,30 @@ public class EnderecoBox extends Composite {
 		if (ch.isDinheiroChecked() && ch.isTrocoFull()) {
 			if (FormValidatorShared.hasNumberOnly(ch.trocoBox.getText())) {
 				troco = ch.trocoBox.getValue().longValue();
+				checkoutService.enviarPedido(
+						nome.getText(),
+						endereco_rua.getText() + " "
+								+ endereco_numero.getText(), endereco_bairro
+								.getValue(endereco_bairro.getSelectedIndex()),
+						complementoText, ch.getPagamentoChecked(), troco,
+						new AsyncCallback<Void>() {
+
+							@Override
+							public void onFailure(Throwable caught) {
+								Window.alert("Erro no Envio do pedido. Tente novamente.");
+								History.newItem("index");
+							}
+
+							@Override
+							public void onSuccess(Void result) {
+								Window.alert("Pedido enviado com sucesso!");
+								History.newItem("pedido");
+							}
+						});
 			} else {
 				Window.alert("O campo \"Troco para\" só pode ter números.");
 			}
 		}
-		checkoutService.enviarPedido(nome.getText(), endereco_rua.getText()
-				+ " " + endereco_numero.getText(),
-				endereco_bairro.getValue(endereco_bairro.getSelectedIndex()),
-				complementoText, ch.getPagamentoChecked(), troco,
-				new AsyncCallback<Void>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("Erro no Envio do pedido. Tente novamente.");
-						History.newItem("index");
-					}
-
-					@Override
-					public void onSuccess(Void result) {
-						Window.alert("Pedido enviado com sucesso!");
-						History.newItem("pedido");
-					}
-				});
 	}
 
 	@UiHandler("verificarCep")

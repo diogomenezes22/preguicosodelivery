@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.preguicoso.server.dao.CategoriaDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
-import com.preguicoso.server.dao.ItemCardapioDAO;
-import com.preguicoso.server.entities.Categoria;
-import com.preguicoso.server.entities.ItemCardapio;
+import com.preguicoso.server.dao.cardapio.ItemCardapioDAO;
+import com.preguicoso.server.entities.cardapio.ItemCardapio;
 
 public class AddItemServlet extends HttpServlet {
 
@@ -50,17 +48,16 @@ public class AddItemServlet extends HttpServlet {
 		out.println("quantidade: " + quantidade);
 
 		try {
-			Categoria cat = (new CategoriaDAO()).retrieve(categoria);
-			if (cat == null) {
-				cat = new Categoria();
-				cat.setNome(categoria);
-				cat.setDataRegistro(Calendar.getInstance().getTime());
-				cat.setUltimaAtualizacao(cat.getDataRegistro());
-				(new CategoriaDAO()).create(cat);
-			}
+			// TODO @Osman mudar sistema de categorias
+			// Categoria cat = (new CategoriaDAO()).retrieve(categoria);
+			// if (cat == null) {
+			// cat = new Categoria();
+			// cat.setNome(categoria);
+			// (new CategoriaDAO()).create(cat);
+			// }
 
 			ItemCardapio item = new ItemCardapio();
-			item.setCategoria(cat);
+			// item.setCategoria(cat);
 			item.setDataRegistro(Calendar.getInstance().getTime());
 			item.setDescricao(descricao);
 			item.setDisponivel(Boolean.parseBoolean(disponivel));

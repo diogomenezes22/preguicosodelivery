@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 public interface CheckoutServiceAsync {
 

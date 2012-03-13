@@ -20,8 +20,8 @@ import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
-import com.preguicoso.shared.entities.CategoriaBean;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.CategoriaBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 public class EditarCardapio extends Composite {
 

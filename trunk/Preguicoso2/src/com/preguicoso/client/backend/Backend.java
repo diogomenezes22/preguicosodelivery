@@ -4,7 +4,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -23,6 +22,9 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.Preguicoso2;
 import com.preguicoso.client.backend.cardapio.EditarCardapio;
+import com.preguicoso.client.backend.cardapio.EditarGrupos;
+import com.preguicoso.client.backend.cardapio.ingredientes.EditarIngredientes;
+import com.preguicoso.client.backend.cardapio.opcoes.EditarOpcoes;
 import com.preguicoso.client.backend.pedidos.HistoricoPedidos;
 import com.preguicoso.client.backend.pedidos.OrdemPedidos;
 import com.preguicoso.client.backend.restaurante.EditarInformacao;
@@ -64,16 +66,19 @@ public class Backend extends Composite {
 	interface backendUiBinder extends UiBinder<Widget, Backend> {
 	}
 
-	EstabelecimentoBean eb;
+	private static EstabelecimentoBean eb;
 	Preguicoso2 p2;
 
-	public Backend(EstabelecimentoBean eb, Preguicoso2 p2) {
+	public static EstabelecimentoBean getEstabalecimentoBean() {
+		return eb;
+	}
+
+	public Backend(EstabelecimentoBean eBean, Preguicoso2 p2) {
 		initWidget(uiBinder.createAndBindUi(this));
-		this.eb = eb;
 		this.p2 = p2;
+		eb = eBean;
 		if (History.getToken().equals(""))
 			History.newItem("pedidos/ordem");
-		createMenu();
 		nomeEstabelecimento.setText(eb.getNome());
 		inicio();
 		routerHistory();
@@ -94,19 +99,18 @@ public class Backend extends Composite {
 		}
 
 		cadastroService.getStatus(eb.getId(),
+				new AsyncCallback<RegistroStatusRestaurante>() {
 
-		new AsyncCallback<RegistroStatusRestaurante>() {
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Ocorreu um erro ao tentar carregar o seu status. Recarregue a página e tente novamente.");
+					}
 
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Ocorreu um erro ao tentar carregar o seu status. Recarregue a página e tente novamente.");
-			}
-
-			@Override
-			public void onSuccess(RegistroStatusRestaurante result) {
-				status.setSelectedIndex(result.ordinal());
-			}
-		});
+					@Override
+					public void onSuccess(RegistroStatusRestaurante result) {
+						status.setSelectedIndex(result.ordinal());
+					}
+				});
 
 		status.addChangeHandler(new ChangeHandler() {
 
@@ -148,11 +152,21 @@ public class Backend extends Composite {
 		} else if (token.startsWith("pedidos/historico_de_pedidos")) {
 			container.clear();
 			container.add(new HistoricoPedidos(eb.getId()));
-		} else if (token.startsWith("cardapio/editar")) {
-			container.clear();
-			EditarCardapio editar = new EditarCardapio(eb.getId());
-			container.add(editar);
-
+		} else if (token.startsWith("cardapio/")) {
+			if (token.endsWith("editar")) {
+				container.clear();
+				EditarCardapio editar = new EditarCardapio(eb.getId());
+				container.add(editar);
+			} else if (token.endsWith("opcoes")) {
+				container.clear();
+				container.add(new EditarOpcoes());
+			} else if (token.endsWith("ingredientes")) {
+				container.clear();
+				container.add(new EditarIngredientes());
+			} else if (token.endsWith("grupos")) {
+				container.clear();
+				container.add(new EditarGrupos());
+			}
 		} else if (token.startsWith("restaurante/editar")) {
 			container.clear();
 			container.add(new EditarInformacao(eb));
@@ -168,48 +182,41 @@ public class Backend extends Composite {
 		// RootPanel.get("content").clear();
 	}
 
-	private void createMenu() {
-		pedidos.addClickHandler(new ClickHandler() {
+	@UiHandler("pedidos")
+	void onPedidosClick(ClickEvent event) {
+		pedidos.addStyleName("active");
+		cardapio.setStyleName("menuItem");
+		restaurante.setStyleName("menuItem");
+		containerMenu.clear();
+		containerMenu.add(new InlineHyperlink("Ordem de Pedidos",
+				"pedidos/ordem"));
+		containerMenu.add(new InlineHyperlink("Histórico de Pedidos",
+				"pedidos/historico_de_pedidos"));
+	}
 
-			@Override
-			public void onClick(ClickEvent event) {
-				pedidos.addStyleName("active");
-				cardapio.setStyleName("menuItem");
-				restaurante.setStyleName("menuItem");
-				containerMenu.clear();
-				containerMenu.add(new InlineHyperlink("Ordem de Pedidos",
-						"pedidos/ordem"));
-				containerMenu.add(new InlineHyperlink("Histórico de Pedidos",
-						"pedidos/historico_de_pedidos"));
-			}
-		});
-		cardapio.addClickHandler(new ClickHandler() {
+	@UiHandler("cardapio")
+	void onCardapioClick(ClickEvent event) {
+		cardapio.addStyleName("active");
+		pedidos.setStyleName("menuItem");
+		restaurante.setStyleName("menuItem");
+		containerMenu.clear();
+		containerMenu.add(new InlineHyperlink("Editar", "cardapio/editar"));
+		containerMenu.add(new InlineHyperlink("Opções", "cardapio/opcoes"));
+		containerMenu.add(new InlineHyperlink("Ingredientes",
+				"cardapio/ingredientes"));
+		containerMenu.add(new InlineHyperlink("Grupos", "cardapio/grupos"));
+	}
 
-			@Override
-			public void onClick(ClickEvent event) {
-				cardapio.addStyleName("active");
-				pedidos.setStyleName("menuItem");
-				restaurante.setStyleName("menuItem");
-				containerMenu.clear();
-				containerMenu.add(new InlineHyperlink("Editar",
-						"cardapio/editar"));
-			}
-		});
-		restaurante.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				restaurante.addStyleName("active");
-				cardapio.setStyleName("menuItem");
-				pedidos.setStyleName("menuItem");
-				containerMenu.clear();
-				containerMenu.add(new InlineHyperlink("Editar Informações",
-						"restaurante/editar"));
-				containerMenu.add(new InlineHyperlink("Configurações",
-						"restaurante/setup"));
-
-			}
-		});
+	@UiHandler("restaurante")
+	void onRestauranteClick(ClickEvent event) {
+		restaurante.addStyleName("active");
+		cardapio.setStyleName("menuItem");
+		pedidos.setStyleName("menuItem");
+		containerMenu.clear();
+		containerMenu.add(new InlineHyperlink("Editar Informações",
+				"restaurante/editar"));
+		containerMenu.add(new InlineHyperlink("Configurações",
+				"restaurante/setup"));
 	}
 
 	@UiHandler("logout")

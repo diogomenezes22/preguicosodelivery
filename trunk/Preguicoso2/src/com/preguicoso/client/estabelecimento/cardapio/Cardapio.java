@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.carrinho.CarrinhoPedidosUI;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 public class Cardapio extends Composite {
 	private static CardapioUiBinder uiBinder = GWT

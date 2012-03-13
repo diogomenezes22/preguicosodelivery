@@ -21,7 +21,7 @@ import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.shared.AtributosSession;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 public class CheckoutServiceImpl extends RemoteServiceServlet implements
 		CheckoutService {

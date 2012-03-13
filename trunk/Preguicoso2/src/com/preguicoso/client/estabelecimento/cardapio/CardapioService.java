@@ -6,10 +6,12 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.preguicoso.shared.entities.BairroBean;
-import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.CategoriaBean;
+import com.preguicoso.shared.entities.cardapio.IngredienteBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.OpcoesBean;
 
 @RemoteServiceRelativePath("cardapio")
 public interface CardapioService extends RemoteService {
@@ -38,5 +40,26 @@ public interface CardapioService extends RemoteService {
 
 	void updateEstabelecimento(EstabelecimentoBean eb,
 			List<Long> idBairrosAtendidos);
+
+	// TODO @Osman <colocar em outro Servlet>
+	OpcoesBean criarCategoriaOpcao(String categoria, Long idEstabelecimento);
+
+	List<OpcoesBean> getListaOpcoes(Long idEstabelecimento);
+
+	void updateOpcoes(OpcoesBean ob);
+
+	void removeOpcoes(OpcoesBean ob);
+
+	// TODO @Osman </colocar em outro Servlet>
+
+	// TODO @Osman <colocar em outro Servlet>
+	IngredienteBean criarIngrediente(String nome, Long preco,
+			Long idEstabelecimento);
+
+	List<IngredienteBean> getListaIngredientes(Long idEstabelecimento);
+
+	void removeIngrediente(IngredienteBean ib);
+
+	// TODO @Osman </colocar em outro Servlet>
 
 }

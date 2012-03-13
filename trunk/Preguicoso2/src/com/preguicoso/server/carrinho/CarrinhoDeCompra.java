@@ -3,7 +3,7 @@ package com.preguicoso.server.carrinho;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 public class CarrinhoDeCompra {
 	// private Usuario usuario;

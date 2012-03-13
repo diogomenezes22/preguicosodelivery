@@ -24,8 +24,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.cadastro.CadastroService;
 import com.preguicoso.client.cadastro.CadastroServiceAsync;
 import com.preguicoso.shared.RegistroStatusPedido;
-import com.preguicoso.shared.entities.ItemCardapioBean;
 import com.preguicoso.shared.entities.PedidoBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 import com.preguicoso.shared.utils.MoneyUtils;
 
 public class DescricaoPedido extends Composite {
