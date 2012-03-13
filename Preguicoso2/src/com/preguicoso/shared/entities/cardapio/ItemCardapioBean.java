@@ -1,4 +1,4 @@
-package com.preguicoso.shared.entities;
+package com.preguicoso.shared.entities.cardapio;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,6 +22,7 @@ public class ItemCardapioBean implements Serializable {
 	private Date dataRegistro;
 	private Date ultimaAtualizacao;
 	private String observacao;
+	private Long idModelo;
 
 	private int quantidade;
 
@@ -32,7 +33,6 @@ public class ItemCardapioBean implements Serializable {
 		this.disponivel = false;
 		this.descricao = "";
 		this.preco = (long) 0;
-		this.categoriaBean = new CategoriaBean();
 	}
 
 	public ItemCardapioBean(String nome, String tipo, boolean disponivel,
@@ -162,4 +162,13 @@ public class ItemCardapioBean implements Serializable {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
+
+	public Long getIdModelo() {
+		return idModelo;
+	}
+
+	public void setIdModelo(Long idModelo) {
+		this.idModelo = idModelo;
+	}
+
 }

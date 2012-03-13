@@ -6,20 +6,20 @@ import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.cadastro.CadastroService;
-import com.preguicoso.server.dao.CategoriaDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
-import com.preguicoso.server.dao.ItemCardapioDAO;
 import com.preguicoso.server.dao.PedidoDAO;
-import com.preguicoso.server.entities.Categoria;
+import com.preguicoso.server.dao.cardapio.CategoriaDAO;
+import com.preguicoso.server.dao.cardapio.ItemCardapioDAO;
 import com.preguicoso.server.entities.Estabelecimento;
-import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.server.entities.Pedido;
+import com.preguicoso.server.entities.cardapio.Categoria;
+import com.preguicoso.server.entities.cardapio.ItemCardapio;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.RegistroStatusRestaurante;
-import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
-import com.preguicoso.shared.entities.ItemCardapioBean;
 import com.preguicoso.shared.entities.PedidoBean;
+import com.preguicoso.shared.entities.cardapio.CategoriaBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 /**
  * The server side implementation of the RPC service.

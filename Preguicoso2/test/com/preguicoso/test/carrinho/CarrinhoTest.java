@@ -10,11 +10,11 @@ import org.junit.Test;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.preguicoso.server.carrinho.CarrinhoDeCompra;
-import com.preguicoso.server.dao.CategoriaDAO;
-import com.preguicoso.server.entities.Categoria;
+import com.preguicoso.server.dao.cardapio.CategoriaDAO;
 import com.preguicoso.server.entities.Estabelecimento;
-import com.preguicoso.server.entities.ItemCardapio;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.server.entities.cardapio.Categoria;
+import com.preguicoso.server.entities.cardapio.ItemCardapio;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 public class CarrinhoTest {
 	private final LocalServiceTestHelper helper = new LocalServiceTestHelper(

@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -57,15 +58,19 @@ public class Checkout extends Composite {
 		trocoPanel.setVisible(false);
 		enderecoEntrega.setVisible(false);
 		carregarFormasDePagamento(eb);
+		Window.alert("bla");
 		checkoutService.getBairrosAtendidos(eb,
 				new AsyncCallback<List<String>>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
+						Window.alert("não getBairrosAtendidos");
+						Window.alert(caught.getMessage());
 					}
 
 					@Override
 					public void onSuccess(List<String> result) {
+						Window.alert("getBairrosAtendidos");
 						verificarLogado(result);
 						loginAtivado(result);
 						enderecoAtivado(result);
@@ -74,19 +79,25 @@ public class Checkout extends Composite {
 				});
 	}
 
+	// TODO xxxxxxxxxxxxxxx
 	private void verificarLogado(final List<String> listaBairros) {
+		Window.alert("testando 123");
 		loginService.isUsuarioLogado(new AsyncCallback<Boolean>() {
 
 			@Override
 			public void onFailure(Throwable caght) {
+				Window.alert("onFailure brod");
 			}
 
 			@Override
 			public void onSuccess(Boolean result) {
+				Window.alert("onSuccess");
 				if (result) {
+					Window.alert("tá logado");
 					loginBox.add(new LoginCompra(listaBairros, Checkout.this,
 							true));
 				} else {
+					Window.alert("Não tá logado");
 					enderecoEntrega.setVisible(true);
 				}
 			}

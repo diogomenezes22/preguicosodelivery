@@ -8,7 +8,7 @@ import br.com.uol.pagseguro.domain.Currency;
 import br.com.uol.pagseguro.domain.PaymentRequest;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 
-import com.preguicoso.server.entities.ItemCardapio;
+import com.preguicoso.server.entities.cardapio.ItemCardapio;
 
 public class PagSeguroCheckout {
 	PaymentRequest paymentRequest = new PaymentRequest();

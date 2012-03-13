@@ -6,11 +6,11 @@
 			font-weight: bold;
 		}
 	</ui:style>
-	<g:FocusPanel ui:field="pedido">
-		<g:HTMLPanel styleName="listaItems">
-			<g:InlineLabel ui:field="nomeCliente" styleName="lista_nome_cliente" />
-			<g:InlineLabel ui:field="rua" styleName="lista_rua" />
-			<g:InlineLabel ui:field="timestamp" styleName="lista_timestamp" />
+	<g:FocusPanel ui:field="focus">
+		<g:HTMLPanel>
+			<g:InlineLabel ui:field="valueOpcao" />
+			<g:Image ui:field="remove" url="img/remove.png" title="Remover" width="24px" />
+			<br />
 		</g:HTMLPanel>
 	</g:FocusPanel>
 </ui:UiBinder> 

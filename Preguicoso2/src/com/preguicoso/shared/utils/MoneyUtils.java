@@ -17,5 +17,4 @@ public class MoneyUtils {
 		s = s.replace('.', ',');
 		return s;
 	}
-
 }

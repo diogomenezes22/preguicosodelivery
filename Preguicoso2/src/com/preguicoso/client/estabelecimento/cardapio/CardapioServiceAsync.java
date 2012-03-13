@@ -5,10 +5,12 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.preguicoso.shared.entities.BairroBean;
-import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.CategoriaBean;
+import com.preguicoso.shared.entities.cardapio.IngredienteBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.OpcoesBean;
 
 public interface CardapioServiceAsync {
 	void getItensCardapio(Long id,
@@ -39,5 +41,23 @@ public interface CardapioServiceAsync {
 
 	void updateEstabelecimento(EstabelecimentoBean eb,
 			List<Long> idBairrosAtendidos, AsyncCallback<Void> callback);
+
+	void criarCategoriaOpcao(String categoria, Long idEstabelecimento,
+			AsyncCallback<OpcoesBean> callback);
+
+	void getListaOpcoes(Long idEstabelecimento,
+			AsyncCallback<List<OpcoesBean>> callback);
+
+	void updateOpcoes(OpcoesBean ob, AsyncCallback<Void> callback);
+
+	void removeOpcoes(OpcoesBean ob, AsyncCallback<Void> callback);
+
+	void criarIngrediente(String nome, Long preco, Long idEstabelecimento,
+			AsyncCallback<IngredienteBean> callback);
+
+	void getListaIngredientes(Long idEstabelecimento,
+			AsyncCallback<List<IngredienteBean>> callback);
+
+	void removeIngrediente(IngredienteBean ib, AsyncCallback<Void> callback);
 
 }

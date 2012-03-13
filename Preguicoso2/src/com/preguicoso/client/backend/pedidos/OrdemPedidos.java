@@ -56,10 +56,6 @@ public class OrdemPedidos extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 
 		carregaListaDePedidos(idEstabelecimento);
-		// TODO @Osman existe a possibilidade de o pedido não ser atualizado
-		// caso seja
-		// enviado um pedido no instante em que o cara abriu a aba Ordem de
-		// Pedidos
 		final Date lastTimeStamp = new Date();
 
 		Timer t = new Timer() {
@@ -97,7 +93,7 @@ public class OrdemPedidos extends Composite {
 				}
 			}
 		};
-		t.scheduleRepeating(5000);
+		t.scheduleRepeating(10000);
 	}
 
 	private void carregaListaDePedidos(final Long idEstabelecimento) {

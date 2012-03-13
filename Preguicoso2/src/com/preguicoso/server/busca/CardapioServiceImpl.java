@@ -13,20 +13,26 @@ import com.preguicoso.server.carrinho.CarrinhoDeCompra;
 import com.preguicoso.server.dao.BairroDAO;
 import com.preguicoso.server.dao.CidadeDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
-import com.preguicoso.server.dao.ItemCardapioDAO;
+import com.preguicoso.server.dao.cardapio.IngredienteDAO;
+import com.preguicoso.server.dao.cardapio.ItemCardapioDAO;
+import com.preguicoso.server.dao.cardapio.OpcoesDAO;
 import com.preguicoso.server.dbgenerator.BairroGenerator;
 import com.preguicoso.server.entities.Bairro;
 import com.preguicoso.server.entities.Cidade;
 import com.preguicoso.server.entities.Estabelecimento;
-import com.preguicoso.server.entities.ItemCardapio;
+import com.preguicoso.server.entities.cardapio.Ingrediente;
+import com.preguicoso.server.entities.cardapio.ItemCardapio;
+import com.preguicoso.server.entities.cardapio.Opcoes;
 import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
 import com.preguicoso.shared.RegistroFormaPagamento;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.BairroBean;
-import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.CategoriaBean;
+import com.preguicoso.shared.entities.cardapio.IngredienteBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.OpcoesBean;
 
 /**
  * Author: Abraao Barros Lacerda The server side implementation of the RPC
@@ -290,5 +296,57 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 			e.putBairroFrete(bId, (long) 100);
 		}
 		edao.update(e);
+	}
+
+	@Override
+	public OpcoesBean criarCategoriaOpcao(String categoria,
+			Long idEstabelecimento) {
+		OpcoesDAO odao = new OpcoesDAO();
+		Opcoes o = new Opcoes();
+		o.setNome(categoria);
+		o.setListaOpcoes(new ArrayList<String>());
+		o.setIdEstabelecimento(idEstabelecimento);
+		odao.create(o);
+		return o.toBean();
+	}
+
+	@Override
+	public List<OpcoesBean> getListaOpcoes(Long idEstabelecimento) {
+		OpcoesDAO odao = new OpcoesDAO();
+		return odao.listByIdEstabelecimento(idEstabelecimento);
+	}
+
+	@Override
+	public void updateOpcoes(OpcoesBean ob) {
+		OpcoesDAO odao = new OpcoesDAO();
+		odao.update(new Opcoes(ob));
+	}
+
+	@Override
+	public void removeOpcoes(OpcoesBean ob) {
+		OpcoesDAO odao = new OpcoesDAO();
+		odao.delete(new Opcoes(ob));
+	}
+
+	@Override
+	public IngredienteBean criarIngrediente(String nome, Long preco,
+			Long idEstabelecimento) {
+		IngredienteDAO idao = new IngredienteDAO();
+		Ingrediente i = new Ingrediente();
+		i.setIdEstabelecimento(idEstabelecimento);
+		i.setNome(nome);
+		i.setPreco(preco);
+		idao.create(i);
+		return i.toBean();
+	}
+
+	@Override
+	public List<IngredienteBean> getListaIngredientes(Long idEstabelecimento) {
+		return new IngredienteDAO().listByIdEstabelecimento(idEstabelecimento);
+	}
+
+	@Override
+	public void removeIngrediente(IngredienteBean ib) {
+		new IngredienteDAO().delete(new Ingrediente(ib));
 	}
 }

@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 public class ItemListaDescricaoPedido extends Composite  {
 

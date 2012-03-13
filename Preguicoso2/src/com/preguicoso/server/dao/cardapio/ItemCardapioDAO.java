@@ -1,4 +1,4 @@
-package com.preguicoso.server.dao;
+package com.preguicoso.server.dao.cardapio;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -6,8 +6,9 @@ import java.util.List;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
+import com.preguicoso.server.dao.EstabelecimentoDAO;
 import com.preguicoso.server.entities.Estabelecimento;
-import com.preguicoso.server.entities.ItemCardapio;
+import com.preguicoso.server.entities.cardapio.ItemCardapio;
 
 public class ItemCardapioDAO extends DAOBase{
 

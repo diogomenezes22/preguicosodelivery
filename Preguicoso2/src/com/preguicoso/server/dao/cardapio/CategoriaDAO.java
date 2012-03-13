@@ -1,11 +1,10 @@
-package com.preguicoso.server.dao;
+package com.preguicoso.server.dao.cardapio;
 
-import java.util.Calendar;
 import java.util.List;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
-import com.preguicoso.server.entities.Categoria;
+import com.preguicoso.server.entities.cardapio.Categoria;
 
 public class CategoriaDAO extends DAOBase {
 	static {
@@ -13,24 +12,15 @@ public class CategoriaDAO extends DAOBase {
 	}
 
 	public void create(Categoria c) {
-		if (this.retrieve(c.getNome()) != null) {
-			assert false;
-		}
-
-		c.setUltimaAtualizacao(Calendar.getInstance().getTime());
-		c.setDataRegistro(Calendar.getInstance().getTime());
-		this.ofy().put(c);	
+		this.ofy().put(c);
 	}
 
-	public Categoria retrieve(String nome) {
-		try {
-			return this.ofy().get(Categoria.class, nome);
-		} catch (Exception e) {
-			return null;
-		}
+	public Categoria retrieve(Long id) {
+		return this.ofy().query(Categoria.class).filter("id", id).get();
 	}
 
 	public void update(Categoria c) {
+		this.ofy().put(c);
 	}
 
 	public void delete(Categoria c) {

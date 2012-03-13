@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 public class CarrinhoPedidosUI extends Composite {
 

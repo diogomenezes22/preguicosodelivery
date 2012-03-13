@@ -1,4 +1,4 @@
-package com.preguicoso.server.entities;
+package com.preguicoso.server.entities.cardapio;
 
 import java.util.Date;
 
@@ -6,8 +6,9 @@ import javax.persistence.Id;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
-import com.preguicoso.shared.entities.CategoriaBean;
-import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.server.entities.Estabelecimento;
+import com.preguicoso.shared.entities.cardapio.CategoriaBean;
+import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 @Entity
 public class ItemCardapio {
@@ -23,9 +24,10 @@ public class ItemCardapio {
 	Long preco;
 	Date dataRegistro;
 	Date ultimaAtualizacao;
+	Long idModelo;
 
-	private String observacao;
-	private int quantidade;
+	String observacao;
+	int quantidade;
 
 	public ItemCardapio() {
 		this.nome = "";
@@ -43,28 +45,21 @@ public class ItemCardapio {
 		this.estabelecimentoId = estabelecimentoId;
 	}
 
-	public ItemCardapio(String nome, String tipo, Boolean disponivel,
-			String descricao, Long preco, Estabelecimento estabelecimento,
-			Categoria categoria) {
-		this.nome = nome;
-		this.tipo = tipo;
-		this.disponivel = disponivel;
-		this.descricao = descricao;
-		this.preco = preco;
-		this.estabelecimentoId = estabelecimento.getId();
-		this.categoria = categoria.getNome();
-	}
-
-	public ItemCardapio(ItemCardapioBean i) {
-		if (i.getId() != null)
-			this.id = i.getId();
-		this.nome = i.getNome();
-		this.tipo = i.getTipo();
-		this.disponivel = i.isDisponivel();
-		this.descricao = i.getDescricao();
-		this.preco = i.getPreco();
-		this.estabelecimentoId = i.getEstabelecimentoBean();
-		this.categoria = i.getCategoriaBean().getNome();
+	public ItemCardapio(ItemCardapioBean ib) {
+		this.nome = ib.getNome();
+		this.tipo = ib.getTipo();
+		this.disponivel = ib.isDisponivel();
+		this.descricao = ib.getDescricao();
+		this.preco = ib.getPreco();
+		this.estabelecimentoId = ib.getEstabelecimentoBean();
+		this.categoria = ib.getCategoriaBean().getNome();
+		this.dataRegistro = ib.getDataRegistro();
+		this.id = ib.getId();
+		this.idModelo = ib.getIdModelo();
+		this.numero = ib.getNumero();
+		this.observacao = ib.getObservacao();
+		this.quantidade = ib.getQuantidade();
+		this.ultimaAtualizacao = ib.getUltimaAtualizacao();
 	}
 
 	public ItemCardapioBean toBean() {
@@ -81,7 +76,16 @@ public class ItemCardapio {
 		bean.setUltimaAtualizacao(this.ultimaAtualizacao);
 		bean.setObservacao(this.observacao);
 		bean.setQuantidade(this.quantidade);
+		bean.setIdModelo(this.idModelo);
 		return bean;
+	}
+
+	public Long getIdModelo() {
+		return idModelo;
+	}
+
+	public void setIdModelo(Long idModelo) {
+		this.idModelo = idModelo;
 	}
 
 	public Long getId() {
