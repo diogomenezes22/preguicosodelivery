@@ -1,0 +1,56 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<g:HTMLPanel ui:field="antesLogin">
+		<table border='0' class='endereco'>
+			<tr>
+				<th COLSPAN="3">
+					<h3>Login</h3>
+					E-mail<g:TextBox ui:field="email" text="E-mail"/><br />
+					Senha<g:PasswordTextBox ui:field="senha" text="Senha"/><br />
+					<g:Button ui:field="loginButton">Login</g:Button>
+				</th>
+			</tr>
+		</table>
+		</g:HTMLPanel>
+		<g:HTMLPanel ui:field="depoisLogin">
+			<table border='0' class='endereco'>
+				<tr>
+					<th COLSPAN="3">
+						<g:TextBox ui:field="logradouro" width="355px" text="Logradouro" />
+					</th>
+					<td width='50'>
+						<g:TextBox ui:field="numero" width="100px"
+							text="Número" />
+					</td>
+				</tr>
+				<tr class='legenda_endereco'>
+					<th COLSPAN="4">Informe o nome da avenida, rua, praça,
+						travessa, etc.</th>
+				</tr>
+				<tr>
+					<th COLSPAN="2">
+						<g:TextBox ui:field="complemento" text="Complemento" />
+					</th>
+					<th COLSPAN="2">
+						<g:ListBox ui:field="bairro" />
+					</th>
+				</tr>
+				<tr class='legenda_endereco'>
+					<th COLSPAN="4">Exemplo: Apto. 31.</th>
+				</tr>
+			</table>
+			<tr>
+				<th COLSPAN="2">
+					<g:Button ui:field="pedir">Pedir</g:Button>
+				</th>
+			</tr>
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

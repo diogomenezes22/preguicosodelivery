@@ -1,0 +1,2 @@
+serviceClass: com.preguicoso.client.cardapio.CardapioService
+path: 8BCC1C39D0F47C68B881CABE268B1CD8.gwt.rpc

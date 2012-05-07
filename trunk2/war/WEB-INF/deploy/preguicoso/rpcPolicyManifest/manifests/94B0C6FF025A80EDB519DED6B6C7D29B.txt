@@ -1,0 +1,2 @@
+serviceClass: com.preguicoso.client.editar.EditarService
+path: 3478EA841E073BCF1D11C967181A53F2.gwt.rpc

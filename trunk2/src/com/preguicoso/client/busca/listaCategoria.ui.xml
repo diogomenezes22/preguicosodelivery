@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName=".grid_3">
+		<h1>Local de Entrega</h1>
+		<g:ListBox ui:field="cidadeBox" />
+		<br />
+		<g:ListBox ui:field="bairroBox" />
+		<h1>Categorias</h1>
+		<g:InlineHyperlink text="Todas" targetHistoryToken="index" ui:field="todas"
+			styleName="categoria" />
+		<g:HTMLPanel ui:field="categoriasPanel"></g:HTMLPanel>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

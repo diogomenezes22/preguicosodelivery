@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.preguicoso.server.login.LoginServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/preguicoso/login</url-pattern>
+		<url-pattern>/preguicoso2/login</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>buscaServlet</servlet-name>
+		<servlet-class>com.preguicoso.server.busca.BuscaServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>buscaServlet</servlet-name>
+		<url-pattern>/preguicoso/busca</url-pattern>
+		<url-pattern>/preguicoso2/busca</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>cadastroServlet</servlet-name>
+		<servlet-class>com.preguicoso.server.cadastro.CadastroServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>cadastroServlet</servlet-name>
+		<url-pattern>/preguicoso/cadastro</url-pattern>
+		<url-pattern>/preguicoso2/cadastro</url-pattern>
+
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>cardapioServlet</servlet-name>
+		<servlet-class>com.preguicoso.server.busca.CardapioServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>cardapioServlet</servlet-name>
+		<url-pattern>/preguicoso/cardapio</url-pattern>
+		<url-pattern>/preguicoso2/cardapio</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CheckoutService</servlet-name>
+		<servlet-class>com.preguicoso.server.checkout.CheckoutServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CheckoutService</servlet-name>
+		<url-pattern>/preguicoso/checkout</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PedidoService</servlet-name>
+		<servlet-class>com.preguicoso.server.backend.pedidos.PedidoServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PedidoService</servlet-name>
+		<url-pattern>/preguicoso2/pedido</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddRestaurantServlet</servlet-name>
+		<servlet-class>com.preguicoso.server.utils.AddRestaurantServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AddRestaurantServlet</servlet-name>
+		<url-pattern>/preguicoso/db</url-pattern>
+		<url-pattern>/preguicoso2/db</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddItemServlet</servlet-name>
+		<servlet-class>com.preguicoso.server.utils.AddItemServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AddItemServlet</servlet-name>
+		<url-pattern>/preguicoso/additem</url-pattern>
+		<url-pattern>/preguicoso2/additem</url-pattern>
+	</servlet-mapping>
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>Preguicoso.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

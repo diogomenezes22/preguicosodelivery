@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:FocusPanel ui:field="item">
+		<g:HTMLPanel styleName="listaItems"	>
+				<small><g:InlineLabel text="numero" ui:field="numero" /></small>
+				<g:Image/>
+				<g:InlineLabel text="nome" ui:field="nome" styleName="lista_texto"/>
+				<g:InlineLabel text="preco" ui:field="preco" styleName="lista_preco"/>
+		</g:HTMLPanel>
+	</g:FocusPanel>
+</ui:UiBinder> 

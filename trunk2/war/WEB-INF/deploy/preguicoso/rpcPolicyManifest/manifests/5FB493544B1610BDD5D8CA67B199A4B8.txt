@@ -1,0 +1,2 @@
+serviceClass: com.preguicoso.client.login.LoginService
+path: 8D916DC53C28F9DA1D0AED8144DDA3F0.gwt.rpc

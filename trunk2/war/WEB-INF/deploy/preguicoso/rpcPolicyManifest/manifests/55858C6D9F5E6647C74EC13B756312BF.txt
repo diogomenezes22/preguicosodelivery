@@ -1,0 +1,2 @@
+serviceClass: com.preguicoso.client.cadastro.CadastroService
+path: 167B87A529139A66F2545239A2309F54.gwt.rpc

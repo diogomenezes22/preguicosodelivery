@@ -1,0 +1,23 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<div class="grid_6 coluna2 alpha omega">
+			<h1>Ordem de Pedidos</h1>
+			<div class="container_coluna2">
+				<div class="coluna2_barra">
+					Pedidos Atuais
+				</div>
+				<div class="container_ordem_pedidos">
+					<g:HTMLPanel ui:field="listaPanel" styleName="lista" />
+				</div>
+			</div>
+		</div>
+		<div id="editarItem"></div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

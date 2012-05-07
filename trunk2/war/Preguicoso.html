@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--                                                               -->
+<!-- Consider inlining CSS to reduce the number of requested files -->
+<!--                                                               -->
+
+<link type="text/css" rel="stylesheet" href="960.css">
+<link type="text/css" rel="stylesheet" href="Preguicoso.css">
+
+<!-- Adicionando o menu de navegação do usuário  -->
+
+<link rel="stylesheet" href="css3-buttons.css" type="text/css"
+	media="screen">
+
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+		// Toggle the dropdown menu's
+		$(".dropdown .menuButton, .dropdown menuButton").click(function() {
+			$(this).parent().find('.dropdown-slider').slideToggle('fast');
+			$(this).find('span.toggle').toggleClass('active');
+			return false;
+		});
+	}); // END document.ready
+
+	// Close open dropdown slider/s by clicking elsewhwere on page
+	$(document).bind('click', function(e) {
+		if (e.target.id != $('.dropdown').attr('class')) {
+			$('.dropdown-slider').slideUp();
+			$('span.toggle').removeClass('active');
+		}
+	}); // END document.bind
+</script>
+
+<!-- Navegação do usuario - FIM  -->
+
+
+<title>Preguiçoso</title>
+
+<!--                                           -->
+<!-- This script loads your compiled module.   -->
+<!-- If you add any GWT meta tags, they must   -->
+<!-- be added before this line.                -->
+<!--                                           -->
+<script type="text/javascript" language="javascript"
+	src="preguicoso/preguicoso.nocache.js"></script>
+</head>
+
+<!--                                           -->
+<!-- The body can have arbitrary html, or      -->
+<!-- you can leave the body empty if you want  -->
+<!-- to create a completely dynamic UI.        -->
+<!--                                           -->
+<body style="margin: 0px">
+
+	<!-- OPTIONAL: include this if you want history support -->
+	<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1'
+		style="position: absolute; width: 0; height: 0; border: 0"></iframe>
+
+	<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+	<noscript>
+		<div
+			style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+			Você precisa habilitar o uso de Javascript para ter acesso à esta
+			página.</div>
+	</noscript>
+
+	<div id="loginConteiner">
+		<!--                  Parte superior do HTML Com login e Usuario                      -->
+		<div class="container_12">
+
+			<div class="grid_4">
+				<a href="#index"><img src="img/logotipo.png" /></a>
+			</div>
+			<div id="header" class="grid_8">
+
+				<!-- Navegação do usuário  -->
+				<div id="userDropdownMenu" class="displayNone push_2">
+					<div class="dropdown">
+						<a href="#" class="menuButton"><span class="icon icon191">&nbsp;</span><span
+							class="label"> Ver minha Conta </span><span class="icon icon62">&nbsp;</span></a>
+						<div class="dropdown-slider">
+							<a href="#" class="ddm"><span class="icon icon51">&nbsp;</span><span
+								class="label">Meus Pedidos</span></a>
+							<!--                                 <a href="#" class="ddm"><span class="icon icon33">&nbsp;</span><span class="label">Histórico</span></a> -->
+							<!--                                 <a href="#" class="ddm"><span class="icon icon51">&nbsp;</span><span class="label">Carrinho de Compras</span></a> -->
+							<!--                                 <a href="#" class="ddm"><span class="icon icon116">&nbsp;</span><span class="label">Configurações</span></a> -->
+						</div>
+						<!-- /.dropdown-slider -->
+					</div>
+					<!-- /.dropdown -->
+				</div>
+
+				<!-- Login pelo Facebook -->
+
+				<!-- 				<div id="fb-root"></div> -->
+				<!-- 				<script> -->
+				<!-- 				// window.fbAsyncInit = function() { // FB.init({ // appId : -->
+				<!-- 				'358827450794984', // status : true, // cookie : true, // xfbml : -->
+				<!-- 				true, // oauth : true, // }); // }; // (function(d) { // var js, id -->
+				<!-- 				= 'facebook-jssdk'; // if (d.getElementById(id)) { // return; // } -->
+				<!-- 				// js = d.createElement('script'); // js.id = id; // js.async = -->
+				<!-- 				true; // js.src = "//connect.facebook.net/en_US/all.js"; // -->
+				<!-- 				d.getElementsByTagName('head')[0].appendChild(js); // }(document)); -->
+				<!-- 				</script> -->
+				<!-- 				<div class="login-fb"> -->
+				<!-- 					<div class="fb-login-button" data-scope="email,user_location">Login -->
+				<!-- 						pelo Facebook</div> -->
+				<!-- 				</div> -->
+
+
+				<!-- 				<div class="fb-registration" -->
+				<!-- 					data-fields="[{'name':'name'}, {'name':'email'}, {'name':'favorite_car','description':'What is your favorite car?','type':'text'}]" -->
+				<!-- 					data-redirect-uri="http://1.preguicosotest.appspot.com/#index"></div> -->
+
+				<!-- Login pelo Preguicoso -->
+				<div class="grid_2" id="login"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div id="explainConteiner">
+		<div class="container_12">
+			<div class="grid_6 mascote">
+				<img src="img/mascote.png" />
+			</div>
+
+			<div class="grid_6 howitwork">
+				<div id="receba">
+					<p>
+						Receba o pedido <br>em casa
+					</p>
+				</div>
+				<div id="cep">
+					<p>Coloque seu CEP</p>
+				</div>
+				<div id="local">
+					<p>
+						Escolha o local<br>e o pedido que quer fazer
+					</p>
+				</div>
+				<div id="pagamento">
+					<p>
+						Escolha a forma <br>de Pagamento
+					</p>
+				</div>
+				<a href="http://vimeo.com/33243727"><div id="video"></div></a>
+			</div>
+		</div>
+	</div>
+	<div class="middle_rodape">
+		<div id="botao_toggle"></div>
+	</div>
+	</div>
+	<div class="clear"></div>
+	<div class="main">
+		<div class="container_12 main" id="content">
+
+			<div class="grid_3" id="cadastroEstabelecimento"></div>
+
+			<div class="grid_9" id="mainConteiner">
+				<div class="grid_9 filtro" id="searchFieldDiv"></div>
+				<div class="grid_9 filtro" id="busca"></div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="rodape">
+		<div class="container_12 rodape_midia">
+			<div id="titulo">
+				<h2>PREGUIÇOSO NA MIDIA</h2>
+			</div>
+		</div>
+		<div class="container_12 rodape_quem_Somos">
+			<div class="grid_3">
+				<a href="#index"><img src="img/logotipo_rodape.png" /></a>
+			</div>
+			<div class="grid_2">
+				<a href="#quem"><h3>Quem Somos</h3></a>
+			</div>
+			<div class="grid_2">
+				<a href="#temos"><h3>Termos de uso</h3></a>
+			</div>
+			<div class="grid_1">
+				<a href="#ajuda"><h3>Ajuda</h3></a>
+			</div>
+			<div class="grid_2">
+				<a href="#filie"><h3>Filie-se</h3></a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

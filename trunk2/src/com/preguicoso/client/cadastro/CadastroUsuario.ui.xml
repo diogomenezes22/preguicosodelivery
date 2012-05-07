@@ -1,0 +1,74 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<div class="container_12">
+		<div class="grid_9" style="overflow:hidden">	
+			<div class="grid_9 restaurante_header" style="width: 658px;">
+				<div class="grid_3 alpha omega">
+					<img src="http://www.ifood.com.br/imagens/ce/logosgde/logo_burdega.gif"/>
+				</div>
+				<div class="grid_4 alpha omega">
+					<h3>Burdega</h3>
+				</div>
+				<div class="grid_1 alpha omega">
+					<a href="#" id="estabelecimentoDeliveryButton">Delivery Online</a>
+				</div>
+				<div class="grid_6 alpha omega" style="width: 438px;">
+					<h4>Horário de Funcionamento: 16:00 as 22:00</h4>
+				</div>
+				<div class="grid_6 alpha omega" style="width: 438px;">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam placerat, magna eget imperdiet viverra, nulla velit blandit erat. </p>
+				</div>
+			</div>
+			<div class="grid_3 omega alpha filtros">
+				<h3>Busca Rápida</h3>
+				<input type="text" class="busca"/>
+				<h3>Filtros:</h3>
+				<label> <input type="checkbox" class="checkbox"/> Comida Japonesa</label> 
+			</div>
+			<div class="grid_6" style="margin-left: -26px;">
+				<div class="grid_6 restaurante_cardapio">
+					<h3>Pizza Salgada</h3>
+					<hr/>
+					<div class="restaurante_cardapio_item	">
+						<div class="grid_6_3">
+							Calabrezza
+						</div>
+						<div class="grid_6_6 omega alpha">
+							Alface, tomate, cebola, ervilhas, cenoura, batata, chuchu, salada russa, queijo, presunto e palmito
+						</div>
+						<div class="grid_6_2 omega alpha">
+							
+		<g:Label text="New Label" ui:field="cardapio"/>
+						</div>
+						<div class="grid_6_1 omega alpha">
+							<img src="http://127.0.0.1:8888/img/addButtonMouseOver.png"/>
+						</div>
+					</div>
+					<div class="restaurante_cardapio_item restaurante_cardapio_item2">
+						<div class="grid_6_3">
+							<g:Label text="New Label" ui:field="nome"/>
+						</div>
+						<div class="grid_6_6 omega alpha">
+							Alface, tomate, cebola, ervilhas, cenoura, batata, chuchu, salada russa, queijo, presunto e palmito
+						</div>
+						<div class="grid_6_2 omega alpha">
+							R$ 150,00
+						</div>
+						<div class="grid_6_1 omega alpha">
+							<img src="http://127.0.0.1:8888/img/addButtonMouseOver.png"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

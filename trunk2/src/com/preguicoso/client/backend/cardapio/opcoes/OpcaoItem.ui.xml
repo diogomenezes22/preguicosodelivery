@@ -1,0 +1,16 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:FocusPanel ui:field="focus">
+		<g:HTMLPanel>
+			<g:InlineLabel ui:field="valueOpcao" />
+			<g:Image ui:field="remove" url="img/remove.png" title="Remover" width="24px" />
+			<br />
+		</g:HTMLPanel>
+	</g:FocusPanel>
+</ui:UiBinder> 

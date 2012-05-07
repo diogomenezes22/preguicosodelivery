@@ -1,0 +1,15 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="tabela_iten" ui:field="campo">
+		<span style="width:10%"><g:InlineLabel text="New InlineLabel" ui:field="no"/>
+		</span><span style="width:30%"><g:InlineLabel text="New InlineLabel" ui:field="item"/></span>
+		<span style="width:40%" ><g:InlineLabel text="New InlineLabel" ui:field="observacao"/></span>
+		<span style="width:17%" ><g:InlineLabel text="New InlineLabel" ui:field="qtd"/></span>
+	</g:HTMLPanel>
+</ui:UiBinder> 

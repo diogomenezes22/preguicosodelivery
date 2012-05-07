@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="grid_3 coluna3 alpha omega"
+		ui:field="item">
+		<div class="container_barra"><g:Image ui:field="salvar" url="img/salvar.png"/>x</div>
+			<div class="container_coluna3">
+				<div class="container">
+					<h1>Editando Item</h1>
+					<div class="imagem">
+						Foto item
+					</div>
+					<h3><label><g:TextBox ui:field="nome" text="Cerveja"/></label></h3>
+					<label>Número: <g:TextBox ui:field="numero" text="110"/></label>
+					<label>Preco:<g:TextBox text="0" ui:field="preco"/></label>
+					<label>Categoria: <g:ListBox ui:field="categoria"/></label>
+					<label>Descrição do item:<g:TextArea ui:field="descricao" text="nada"/></label>
+					<label class="check"><g:SimpleCheckBox ui:field="disponivel"/>Disponivel</label>
+				</div>
+			</div>
+			
+			
+	</g:HTMLPanel>
+</ui:UiBinder> 
