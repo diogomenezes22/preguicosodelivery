@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.preguicoso.server.entities.ItemPedido;
 import com.preguicoso.shared.RegistroStatusPedido;
-import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 public class PedidoBean implements Serializable {
 

@@ -13,26 +13,19 @@ import com.preguicoso.server.carrinho.CarrinhoDeCompra;
 import com.preguicoso.server.dao.BairroDAO;
 import com.preguicoso.server.dao.CidadeDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
-import com.preguicoso.server.dao.cardapio.IngredienteDAO;
-import com.preguicoso.server.dao.cardapio.ItemCardapioDAO;
-import com.preguicoso.server.dao.cardapio.OpcoesDAO;
+import com.preguicoso.server.dao.ItemCardapioDAO;
 import com.preguicoso.server.dbgenerator.BairroGenerator;
 import com.preguicoso.server.entities.Bairro;
 import com.preguicoso.server.entities.Cidade;
 import com.preguicoso.server.entities.Estabelecimento;
-import com.preguicoso.server.entities.cardapio.Ingrediente;
-import com.preguicoso.server.entities.cardapio.ItemCardapio;
-import com.preguicoso.server.entities.cardapio.Opcoes;
+import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
-import com.preguicoso.shared.RegistroFormaPagamento;
 import com.preguicoso.shared.RegistroStatusRestaurante;
 import com.preguicoso.shared.entities.BairroBean;
+import com.preguicoso.shared.entities.CategoriaBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
-import com.preguicoso.shared.entities.cardapio.CategoriaBean;
-import com.preguicoso.shared.entities.cardapio.IngredienteBean;
-import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
-import com.preguicoso.shared.entities.cardapio.OpcoesBean;
+import com.preguicoso.shared.entities.ItemCardapioBean;
 
 /**
  * Author: Abraao Barros Lacerda The server side implementation of the RPC
@@ -113,7 +106,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 	public void carrinhoClean() {
 		this.getThreadLocalRequest().getSession().setAttribute("pedido", null);
 
-		// TODO @Osman gera cidades - temporário
+		// TODO @Osman gera cidades - temporÃ¡rio
 		CidadeDAO cdao = new CidadeDAO();
 		List<Cidade> listac = cdao.listAll();
 		if (listac != null) {
@@ -125,7 +118,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 			}
 		}
 
-		// TODO @Osman gera bairros - temporário
+		// TODO @Osman gera bairros - temporÃ¡rio
 		BairroDAO bdao = new BairroDAO();
 		List<Bairro> listab = bdao.listAll();
 		if (listab != null) {
@@ -142,7 +135,7 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 			}
 		}
 
-		// TODO @Osman gera restaurantes - temporário
+		// TODO @Osman gera restaurantes - temporÃ¡rio
 		EstabelecimentoDAO edao = new EstabelecimentoDAO();
 		List<Estabelecimento> lista = edao.listAll();
 		if (lista != null) {
@@ -164,10 +157,10 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				e.setIdCidade((long) 1);
 				e.setTelefone("32221313");
 				e.setEndereco("Rua x 123, Aldeota");
-				e.setFormasPagamento(RegistroFormaPagamento.values());
-				String[] horariosFuncionamento = { "08:00 às 00:00",
-						"08:00 às 23:00", "08:00 às 23:00", "08:00 às 23:00",
-						"08:00 às 23:00", "09:00 às 23:00", "08:00 às 23:00" };
+			//e.setFormasPagamento(RegistroFormaPagamento.values());
+				String[] horariosFuncionamento = { "08:00 Ã s 00:00",
+						"08:00 Ã s 23:00", "08:00 Ã s 23:00", "08:00 Ã s 23:00",
+						"08:00 Ã s 23:00", "09:00 Ã s 23:00", "08:00 Ã s 23:00" };
 				e.setHorariosFuncionamento(horariosFuncionamento);
 				edao.create(e);
 
@@ -185,14 +178,14 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 				e.putBairroFrete((long) 20, (long) 110);
 				e.putBairroFrete((long) 25, (long) 100);
 				e.putBairroFrete((long) 30, (long) 150);
-				e.setFormasPagamento(RegistroFormaPagamento.values());
+				//e.setFormasPagamento(RegistroFormaPagamento.values());
 				e.setIdCidade((long) 1);
 				e.setTelefone("31154444");
 				e.setEndereco("Rua y 1234, Mucuripe");
-				e.setFormasPagamento(RegistroFormaPagamento.values());
-				String[] horariosFuncionamento2 = { "10:00 às 00:00",
-						"08:00 às 23:00", "08:00 às 23:00", "08:00 às 23:00",
-						"10:00 às 23:00", "10:00 às 23:00", "10:00 às 23:00" };
+				//e.setFormasPagamento(RegistroFormaPagamento.values());
+				String[] horariosFuncionamento2 = { "10:00 Ã s 00:00",
+						"08:00 Ã s 23:00", "08:00 Ã s 23:00", "08:00 Ã s 23:00",
+						"10:00 Ã s 23:00", "10:00 Ã s 23:00", "10:00 Ã s 23:00" };
 				e.setHorariosFuncionamento(horariosFuncionamento2);
 				edao.create(e);
 			}
@@ -296,57 +289,5 @@ public class CardapioServiceImpl extends RemoteServiceServlet implements
 			e.putBairroFrete(bId, (long) 100);
 		}
 		edao.update(e);
-	}
-
-	@Override
-	public OpcoesBean criarCategoriaOpcao(String categoria,
-			Long idEstabelecimento) {
-		OpcoesDAO odao = new OpcoesDAO();
-		Opcoes o = new Opcoes();
-		o.setNome(categoria);
-		o.setListaOpcoes(new ArrayList<String>());
-		o.setIdEstabelecimento(idEstabelecimento);
-		odao.create(o);
-		return o.toBean();
-	}
-
-	@Override
-	public List<OpcoesBean> getListaOpcoes(Long idEstabelecimento) {
-		OpcoesDAO odao = new OpcoesDAO();
-		return odao.listByIdEstabelecimento(idEstabelecimento);
-	}
-
-	@Override
-	public void updateOpcoes(OpcoesBean ob) {
-		OpcoesDAO odao = new OpcoesDAO();
-		odao.update(new Opcoes(ob));
-	}
-
-	@Override
-	public void removeOpcoes(OpcoesBean ob) {
-		OpcoesDAO odao = new OpcoesDAO();
-		odao.delete(new Opcoes(ob));
-	}
-
-	@Override
-	public IngredienteBean criarIngrediente(String nome, Long preco,
-			Long idEstabelecimento) {
-		IngredienteDAO idao = new IngredienteDAO();
-		Ingrediente i = new Ingrediente();
-		i.setIdEstabelecimento(idEstabelecimento);
-		i.setNome(nome);
-		i.setPreco(preco);
-		idao.create(i);
-		return i.toBean();
-	}
-
-	@Override
-	public List<IngredienteBean> getListaIngredientes(Long idEstabelecimento) {
-		return new IngredienteDAO().listByIdEstabelecimento(idEstabelecimento);
-	}
-
-	@Override
-	public void removeIngrediente(IngredienteBean ib) {
-		new IngredienteDAO().delete(new Ingrediente(ib));
 	}
 }

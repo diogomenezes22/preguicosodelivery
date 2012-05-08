@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
+import com.preguicoso.shared.entities.ItemCardapioBean;
 
 /**
  * The client side stub for the RPC service.
@@ -35,6 +36,8 @@ public interface BuscaService extends RemoteService {
 	List<EstabelecimentoBean> getListaEstabelecimentoByCidade(Long idCidade);
 
 	List<EstabelecimentoBean> getListaEstabelecimentoBySession(String categoria);
+
+	List<ItemCardapioBean> getListaItensByName(String nome);
 
 	CidadeBean getCidadeBeanSession();
 

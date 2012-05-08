@@ -26,6 +26,9 @@ public class Estabelecimento implements Serializable {
 	String razaoSocial;
 	String cnpj;
 	String logoURL;
+	String descricao;
+	
+
 	RegistroCategoriaEstabelecimento categoria;
 	Date dataRegistro;
 	Date ultimaAtualizacao;
@@ -50,7 +53,15 @@ public class Estabelecimento implements Serializable {
 	public Estabelecimento() {
 		listaIdBairrosAtendidos = new ArrayList<Long>();
 		listaFretes = new ArrayList<Long>();
-	};
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
 	public Estabelecimento(EstabelecimentoBean eb) {
 		this.setId(eb.getId());
@@ -67,6 +78,7 @@ public class Estabelecimento implements Serializable {
 		this.setIdCidade(eb.getIdCidade());
 		this.setTelefone(eb.getTelefone());
 		this.setEndereco(eb.getEndereco());
+		this.setDescricao(eb.getDescricao());
 		this.setFormasPagamento(eb.getFormasPagamento());
 		this.setHorariosFuncionamento(eb.getHorariosFuncionamento());
 	}
@@ -87,6 +99,7 @@ public class Estabelecimento implements Serializable {
 		eb.setIdCidade(this.idCidade);
 		eb.setTelefone(this.telefone);
 		eb.setEndereco(this.endereco);
+		eb.setDescricao(this.descricao);
 		eb.setFormasPagamento(this.formasPagamento);
 		eb.setHorariosFuncionamento(this.horariosFuncionamento);
 		return eb;

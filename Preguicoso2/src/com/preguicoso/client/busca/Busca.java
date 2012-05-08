@@ -11,6 +11,8 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FocusListener;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SuggestBox;
@@ -42,13 +44,14 @@ public class Busca extends Composite {
 	}
 
 	public Busca(Entities e) {
+		
 		if (e.equals(Entities.Estabelecimento)) {
 			this.buscaService
 					.getListaEstabelecimento(new AsyncCallback<ArrayList<EstabelecimentoBean>>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("N√£o foi poss√≠vel carregar a lista de resteurantes. Recarregue a p√°gina.");
+							Window.alert("N„o foi possÌvel carregar a lista de estabelecimentos. Recarregue a p·gina.");
 						}
 
 						@Override
@@ -63,9 +66,22 @@ public class Busca extends Composite {
 		}
 		Busca.this.suggestBox = new SuggestBox(Busca.this.oracle);
 		this.suggestBox.getElement().setId("searchField");
+		suggestBox.setAutoSelectEnabled(false);
 		Busca.this.suggestBox.addStyleName("busca");
 		this.initWidget(uiBinder.createAndBindUi(this));
-
+		suggestBox.setText("Busque por Produtos ou Parceiros");
+		suggestBox.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void onLostFocus(Widget sender) {
+				suggestBox.setText("Busque por Produtos ou Parceiros");				
+			}
+			
+			@Override
+			public void onFocus(Widget sender) {
+				suggestBox.setText("");				
+			}
+		});
 	}
 
 	@UiHandler("suggestBox")
@@ -75,7 +91,11 @@ public class Busca extends Composite {
 				RootPanel.get("busca").clear();
 				ListaEstabelecimento lista = new ListaEstabelecimento(
 						this.suggestBox.getText());
+				ListarItens listaitens = new ListarItens(this.suggestBox.getText());
+				RootPanel.get("busca").add(new HTMLPanel("<h3>Parceiros</h3>"));
 				RootPanel.get("busca").add(lista);
+				RootPanel.get("busca").add(new HTMLPanel("<h3>Produtos</h3>"));
+				RootPanel.get("busca").add(listaitens);
 			}
 		}
 	}

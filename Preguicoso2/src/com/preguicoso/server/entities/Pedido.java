@@ -7,13 +7,10 @@ import java.util.List;
 
 import javax.persistence.Id;
 
-import com.google.appengine.repackaged.org.json.JSONArray;
-import com.google.appengine.repackaged.org.json.JSONException;
-import com.google.appengine.repackaged.org.json.JSONObject;
 import com.googlecode.objectify.annotation.Entity;
 import com.preguicoso.shared.RegistroStatusPedido;
+import com.preguicoso.shared.entities.ItemCardapioBean;
 import com.preguicoso.shared.entities.PedidoBean;
-import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
 
 @Entity
 public class Pedido implements Serializable {
@@ -36,8 +33,10 @@ public class Pedido implements Serializable {
 	RegistroStatusPedido status;
 	String motivo;
 	Long troco;
-
 	String listaItensJSON;
+	List<String> itens;
+
+
 
 	public Pedido() {
 
@@ -75,27 +74,42 @@ public class Pedido implements Serializable {
 		pb.setTroco(this.troco);
 
 		try {
-			if (listaItensJSON != null) {
-				JSONArray ja = new JSONArray(listaItensJSON);
+			if (itens != null) {
 				List<ItemCardapioBean> listaRec = new ArrayList<ItemCardapioBean>();
-				JSONObject jo;
-				for (int i = 0; i < ja.length(); i++) {
-					jo = new JSONObject(ja.get(i).toString());
-					ItemCardapioBean item = new ItemCardapioBean();
-					item.setId(jo.getLong("id"));
-					item.setNumero(jo.getInt("numero"));
-					item.setNome(jo.getString("nome"));
-					item.setObservacao(jo.getString("observacao"));
-					item.setQuantidade(jo.getInt("quantidade"));
-					listaRec.add(item);
+				for (int i = 0; i < itens.size(); i++) {
+					
+					listaRec.add((new ItemPedido(itens.get(i))).toBean());
 				}
 				pb.setListaItens(listaRec);
 			}
-		} catch (JSONException e) {
+		} catch (ArrayIndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
+		
+//		try {
+//			if (listaItensJSON != null) {
+//				JSONArray ja = new JSONArray(listaItensJSON);
+//				List<ItemCardapioBean> listaRec = new ArrayList<ItemCardapioBean>();
+//				JSONObject jo;
+//				for (int i = 0; i < ja.length(); i++) {
+//					jo = new JSONObject(ja.get(i).toString());
+//					ItemCardapioBean item = new ItemCardapioBean();
+//					item.setId(jo.getLong("id"));
+//					item.setNumero(jo.getInt("numero"));
+//					item.setNome(jo.getString("nome"));
+//					item.setObservacao(jo.getString("observacao"));
+//					item.setQuantidade(jo.getInt("quantidade"));
+//					listaRec.add(item);
+//				}
+//				pb.setListaItens(listaRec);
+//			}
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
 		return pb;
 	}
+	
+
 
 	public String getEmailUsuario() {
 		return emailUsuario;
@@ -109,17 +123,31 @@ public class Pedido implements Serializable {
 		return listaItensJSON;
 	}
 
+	public void setItens(List<String> itens) {
+		this.itens = itens;
+	}
+	
+	public List<String> getItens() {
+		return itens;
+	}
+
 	public void setListaItensJSON(List<ItemCardapioBean> lista) {
 
-		List<JSONObject> listaJSON = new ArrayList<JSONObject>();
-		JSONObject jo;
-		for (ItemCardapioBean item : lista) {
-			jo = new JSONObject(item);
-			listaJSON.add(jo);
+		itens = new ArrayList<String>();
+		for (ItemCardapioBean itemCardapioBean : lista) {
+			ItemPedido i = new ItemPedido(itemCardapioBean.getId(),itemCardapioBean.getNome(),itemCardapioBean.getQuantidade(),itemCardapioBean.getObservacao());
+			itens.add(i.toString());
 		}
-
-		JSONArray ja = new JSONArray(listaJSON);
-		this.listaItensJSON = ja.toString();
+		
+//	List<JSONObject> listaJSON = new ArrayList<JSONObject>();
+//		JSONObject jo;
+//		for (ItemCardapioBean item : lista) {
+//			jo = new JSONObject(item);
+//			listaJSON.add(jo);
+//		}
+//
+//		JSONArray ja = new JSONArray(listaJSON);
+//		this.listaItensJSON = ja.toString();
 	}
 
 	public Long getId() {

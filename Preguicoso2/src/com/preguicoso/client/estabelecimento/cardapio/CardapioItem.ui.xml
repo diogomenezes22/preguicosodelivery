@@ -6,18 +6,24 @@
 			font-weight: bold;
 		}
 	</ui:style>
-	<g:HTMLPanel styleName="restaurante_cardapio_item">
-			<div class="grid_6_3">
-				<g:Label text="" ui:field="prato"/>
-			</div>
-			<div class="grid_6_6 omega alpha">
-				<g:Label text="" ui:field="descricao"/>
-			</div>
-			<div class="grid_6_2 omega alpha">
-				<g:Label text="" ui:field="preco"/>
-			</div>
-			<div class="grid_6_1 omega alpha">
-				<g:HTMLPanel ui:field="botaoAdd"/>
-			</div>
-	</g:HTMLPanel>
+	<g:FocusPanel styleName="restaurante_cardapio_item" ui:field="focusPanel">
+		<g:HTMLPanel>
+				<g:Image ui:field="imagem"/>
+				<div class="nome">
+					<g:Label text="" ui:field="prato"/>
+				</div>
+				<div class="">
+					<g:Label text="" ui:field="descricao"/>
+				</div>
+				<div class="preco">
+					R$ <g:InlineLabel text="" ui:field="preco" styleName="preco"/>
+				</div>
+				
+				<div class="">
+					<a class="estabelecimentoDeliveryButton">Comprar</a>
+					<g:HTMLPanel ui:field="botaoAdd"/>
+				</div>
+				
+		</g:HTMLPanel>
+	</g:FocusPanel>
 </ui:UiBinder> 

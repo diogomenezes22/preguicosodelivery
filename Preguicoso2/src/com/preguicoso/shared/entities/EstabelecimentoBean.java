@@ -26,6 +26,7 @@ public class EstabelecimentoBean implements Serializable {
 	private Long idCidade;
 	private String telefone;
 	private String endereco;
+	String descricao;
 	private RegistroFormaPagamento[] formasPagamento;
 	private String[] horariosFuncionamento;
 
@@ -159,6 +160,14 @@ public class EstabelecimentoBean implements Serializable {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getDescricao() {
+		// TODO Auto-generated method stub
+		return descricao;
+	}
+	public void setDescricao(String descricao){
+		this.descricao = descricao;
 	}
 
 }

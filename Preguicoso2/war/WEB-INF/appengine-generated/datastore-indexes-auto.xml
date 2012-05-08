@@ -1,4 +1,11 @@
-<!-- Indices written at Thu, 29 Dec 2011 17:52:31 UTC -->
+<!-- Indices written at Sat, 5 May 2012 18:11:36 BRT -->
 
-<datastore-indexes/>
+<datastore-indexes>
 
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Bairro" ancestor="false" source="auto">
+        <property name="idCidade" direction="asc"/>
+        <property name="nome" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

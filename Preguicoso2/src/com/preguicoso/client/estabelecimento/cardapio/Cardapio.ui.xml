@@ -8,8 +8,8 @@
 	</ui:style>
 	<g:HTMLPanel>
 		<g:HTMLPanel ui:field="cardapio">
-			<div class="grid_6 alpha" style="margin-left: -12px;margin-top: 13px;">
-				<div class="grid_6 alpha restaurante_cardapio">
+			<div class="grid_9" style="margin-top: 13px;">
+				<div class="restaurante_cardapio">
 					<g:Image ui:field="loading" styleName="loading"/>
 					<g:HTMLPanel ui:field="listaItensCategoria" />
 				</div>

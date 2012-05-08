@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.carrinho.CarrinhoPedidosUI;
-import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
+import com.preguicoso.shared.entities.ItemCardapioBean;
 
 public class Cardapio extends Composite {
 	private static CardapioUiBinder uiBinder = GWT
@@ -44,7 +44,7 @@ public class Cardapio extends Composite {
 	@UiField
 	HTMLPanel checkout;
 
-	CarrinhoPedidosUI carrinho = new CarrinhoPedidosUI();
+	CarrinhoPedidosUI carrinho = new CarrinhoPedidosUI() ;
 
 	private final CardapioServiceAsync cardapioService = GWT
 			.create(CardapioService.class);
@@ -59,7 +59,7 @@ public class Cardapio extends Composite {
 
 	}
 
-	public Cardapio(final long id, CarrinhoPedidosUI carrinho) {
+	public Cardapio(final long id, final CarrinhoPedidosUI carrinho) {
 		this.initWidget(uiBinder.createAndBindUi(this));
 		this.carrinho = carrinho;
 		this.loading.setUrl("img/ajax-loader.gif");
@@ -110,13 +110,8 @@ public class Cardapio extends Composite {
 							for (ItemCardapioBean itemCardapio : listaItens) {
 								if (itemCardapio.getEstabelecimentoBean()
 										.equals(id)) {
-									CardapioItem item = new CardapioItem(
-											itemCardapio.getNome(),
-											itemCardapio.getDescricao(),
-											"R$ " + itemCardapio.getPreco(),
-											Cardapio.this
-													.templateBotaoItemCardapio(itemCardapio));
-									if (i % 2 == 1) {
+									CardapioItem item = new CardapioItem(itemCardapio);
+									item.setCarrinho(carrinho);									if (i % 2 == 1) {
 										item.addStyleName("restaurante_cardapio_item2");
 									}
 									parada.add(item);

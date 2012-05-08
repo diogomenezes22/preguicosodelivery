@@ -64,8 +64,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public String logarUsuarioEstabelecimento(String login, String password) {
 		UsuarioEstabelecimentoDAO udao = new UsuarioEstabelecimentoDAO();
+		
 
-		// TODO @Osman <temporario>
 		List<UsuarioEstabelecimento> lista = udao.getAll();
 		if (lista != null) {
 			if (lista.isEmpty()) {

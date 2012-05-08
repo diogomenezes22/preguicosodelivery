@@ -8,10 +8,10 @@
 	</ui:style>
 	<g:HTMLPanel styleName="item_pedido">
 		<g:Image ui:field="close" styleName="fechar_botao" />
-		<span class="nome"><strong><g:InlineLabel ui:field="categoria"/> :</strong> <g:InlineLabel ui:field="nome"/></span>
-		<span class="nome">Obs: <g:InlineLabel ui:field="obs"/></span>
+		<span class="nome2"><strong><g:InlineLabel ui:field="categoria"/> :</strong> <g:InlineLabel ui:field="nome"/></span>
+		<span class="nome2">Obs: <g:InlineLabel ui:field="obs"/></span>
 		<hr/>
-		<span class="preco">Preço: R$ <g:InlineLabel ui:field="preco"/></span>
+		<span class="preco2">Preço: R$ <g:InlineLabel ui:field="preco"/></span>
 		<span class="qtde">Qtde: <g:InlineLabel ui:field="qtde"/></span>
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -37,7 +37,6 @@
 		<servlet-name>cadastroServlet</servlet-name>
 		<url-pattern>/preguicoso/cadastro</url-pattern>
 		<url-pattern>/preguicoso2/cadastro</url-pattern>
-
 	</servlet-mapping>
 
 
@@ -51,6 +50,7 @@
 		<url-pattern>/preguicoso/cardapio</url-pattern>
 		<url-pattern>/preguicoso2/cardapio</url-pattern>
 	</servlet-mapping>
+		
 
 	<servlet>
 		<servlet-name>CheckoutService</servlet-name>
@@ -93,6 +93,51 @@
 		<url-pattern>/preguicoso/additem</url-pattern>
 		<url-pattern>/preguicoso2/additem</url-pattern>
 	</servlet-mapping>
+	
+	
+  <servlet>
+    <servlet-name>cadastroEstabelecimento</servlet-name>
+    <servlet-class>com.preguicoso.server.servlets.CadastroEstabelecimento</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>cadastroEstabelecimento</servlet-name>
+    <url-pattern>/preguicoso/store</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>cadastroItem</servlet-name>
+    <servlet-class>com.preguicoso.server.servlets.CadastroItem</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>cadastroItem</servlet-name>
+    <url-pattern>/preguicoso/store/item</url-pattern>
+  </servlet-mapping>
+  
+  	
+  <servlet>
+    <servlet-name>deletarItens</servlet-name>
+    <servlet-class>com.preguicoso.server.servlets.DeletarItens</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>deletarItens</servlet-name>
+    <url-pattern>/preguicoso/store/deletar/item</url-pattern>
+  </servlet-mapping>
+  
+  
+   <servlet>
+    <servlet-name>deletarEstabelecimentos</servlet-name>
+    <servlet-class>com.preguicoso.server.servlets.DeletarEstabelecimentos</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>deletarEstabelecimentos</servlet-name>
+    <url-pattern>/preguicoso/store/deletar/estabelecimentos</url-pattern>
+  </servlet-mapping>
+  
 
 	<!-- Default page to serve -->
 	<welcome-file-list>

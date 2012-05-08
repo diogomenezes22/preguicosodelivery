@@ -13,6 +13,5 @@
 		<g:HTMLPanel styleName="loading" width="644px">
 			<g:Image styleName="loading" url="img/ajax-loader.gif" ui:field="loading"/>
 		</g:HTMLPanel>
-		
 	</g:HTMLPanel>
 </ui:UiBinder> 

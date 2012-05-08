@@ -105,8 +105,8 @@ public class ListaEstabelecimento extends Composite {
 								}
 							} else {
 								ListaEstabelecimento.this.listaEstabelecimento
-										.add(new Label(
-												"Nenhum resultado foi encontrado."));
+										.add(new HTMLPanel(
+												"<h3>nenhum resultado foi encontrado.</h3>"));
 							}
 							loading.setVisible(false);
 
@@ -136,8 +136,8 @@ public class ListaEstabelecimento extends Composite {
 								}
 							} else {
 								ListaEstabelecimento.this.listaEstabelecimento
-										.add(new Label(
-												"Nenhum resultado foi encontrado."));
+										.add(new HTMLPanel(
+												"<h3>nenhum resultado foi encontrado.</h3>"));
 							}
 							loading.setVisible(false);
 						}
@@ -173,8 +173,8 @@ public class ListaEstabelecimento extends Composite {
 						.add(new ListaEstabelecimentoItem(eb));
 			}
 		} else {
-			ListaEstabelecimento.this.listaEstabelecimento.add(new Label(
-					"Nenhum resultado foi encontrado."));
+			ListaEstabelecimento.this.listaEstabelecimento.add(new HTMLPanel(
+					"<h3>nenhum resultado foi encontrado.</h3>"));
 		}
 		loading.setVisible(false);
 	}
