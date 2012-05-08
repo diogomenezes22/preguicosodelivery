@@ -12,6 +12,27 @@
 	-moz-border-radius: 8px;
 	border-radius: 8px;
 }
+.itemListIndividual{
+	background-color: white;
+	padding: 10px;
+	width: 20%;
+	display: inline-block;
+	height: 274px;
+	border: #CDC2BA solid 1px;
+	margin-top: 10px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	float: left;
+	text-align:center;
+	margin-left: 20px;
+	
+}
+.precoListItem{
+	font-size: 22px;
+	color: red;
+	
+}
 
 .restaurantListIndividual .grid_3 {
 	width: 33%;
@@ -54,7 +75,7 @@
 	margin: 10px;
 	padding-top: 0px;
 	padding-left: 20px;
-	font-size: 0.8em;
+	font-size: 1.0em;
 	color: #aaa;
 }
 
@@ -64,24 +85,30 @@
 	margin: 10px;
 	padding-top: 0px;
 	padding-left: 20px;
-	font-size: 0.8em;
+	font-size: 1.0em;
 }
 
 .restaurantListIndividual .descricaoLista small {
-	margin: -20px;
-	padding-left: 40px;
+	margin-left: -20px;
 	background: url(img/sprite.png) 0px -383px no-repeat;
+	display: inline-block;
+	height: 17px;
+	width: 22px;
+	float: left;
 }
 
 .restaurantListIndividual .enderecoLista small {
-	margin: -20px;
-	padding-left: 40px;
+	margin-left: -20px;
+	display: inline-block;
+	height: 17px;
+	width: 22px;
+	float: left;
 	background: url(img/sprite.png) 0px -403px no-repeat;
 }
 
 /**    Categorias  **/
 .categoria {
-	font-size: 24px;
+	font-size: 21px;
 	font-family: Georgia;
 	text-decoration: none;
 	color: #5C371A;
@@ -89,6 +116,12 @@
 	padding: 5px;
 	margin: 8px;
 	display: block;
+	background-color: white;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	color: #5C371A;
+	border: #CDC2BA solid 1px;
 }
 
 .categoria:hover {
@@ -159,7 +192,16 @@
 	background-color: #fff;
 	-webkit-transition: all .5s ease-out, color .5s ease-out;
 }
-
+.nome{
+	height:55px;
+	overflow:hidden;
+}
+.preco{
+	color: red;
+	font-weight: bold;
+	font-size: 18px;
+	
+}
 .restaurante_cardapio {
 	z-index: 0;
 	background-color: #F0EAE7;
@@ -167,13 +209,15 @@
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	padding: 15px;
-	width: 430px;
+	height:1000px;
+	width: 659px;
 	font-family: Arial;
 	font-size: 14px;
 	border: #CDC2BA solid thin;
 	margin-bottom: 10px;
 	margin-top: -14px;
 	-webkit-transition: all .5s ease-out, color .5s ease-out;
+
 }
 
 .restaurante_cardapio h3 {
@@ -210,7 +254,12 @@
 	padding: 5px;
 	border: #DED7D1 solid thin;
 	-webkit-transition: all .5s ease-out, color .5s ease-out;
-	height: 24px;
+	height: 175px;
+	width: 145px;
+	display: inline-block;
+	text-align: center;
+	margin: 3px;
+	float: left;
 }
 
 .restaurante_cardapio_item2 {
@@ -424,7 +473,7 @@
 	-webkit-transition: all .5s ease-out, color .5s ease-out;
 }
 
-.item_pedido .nome {
+.item_pedido .nome2 {
 	text-align: left;
 	display: block;
 	padding: 3px;
@@ -437,7 +486,7 @@
 	margin: 5px;
 }
 
-.item_pedido .preco {
+.item_pedido .preco2 {
 	float: right;
 	margin-right: 10px;
 }
@@ -595,7 +644,7 @@
 #explainConteiner {
 	background-color: #A15D21;
 	margin-left: auto;
-	height: 310px;
+	height: 209px;
 	margin-right: auto;
 	color: white;
 	padding-top: 7px;
@@ -629,12 +678,16 @@
 	text-align: center;
 	height: 361px;
 }
+.mascote img{
+	width:149px;
+}
 
 .howitwork {
 	background-image: url(img/setas.png);
 	background-repeat: no-repeat;
 	margin-top: 32px;
 	height: 361px;
+	background-position: -87px -40px;
 }
 
 #video {
@@ -675,9 +728,10 @@
 /**      RodapŽ  CSS    **/
 .rodape {
 	background-image: url(img/background_rodape.png);
-	height: 400px;
+	height: 50px;
 	display: block;
-	padding-top: 1px;
+	padding-top: 11px;
+	margin-top: 50px;
 }
 
 .rodape_midia {
@@ -727,11 +781,11 @@
 /**      RodapŽ  CSS    **/
 #receba {
 	font-family: Georgia;
-	font-size: 1.6em;
+	font-size: 1.2em;
 	text-align: center;
 	position: relative;
-	left: -70px;
-	top: 56px;
+	left: -91px;
+	top: 88px;
 	width: 180px;
 	font-style: italic;
 }
@@ -739,10 +793,10 @@
 #cep {
 	text-align: center;
 	font-family: Georgia;
-	font-size: 1.6em;
+	font-size: 1.2em;
 	position: relative;
-	left: 102px;
-	top: -98px;
+	left: -96px;
+	top: -71px;
 	width: 180px;
 	font-style: italic;
 }
@@ -750,10 +804,10 @@
 #local {
 	text-align: center;
 	font-family: Georgia;
-	font-size: 1.6em;
+	font-size: 1.2em;
 	position: relative;
-	left: 307px;
-	top: -68px;
+	left: 139px;
+	top: -113px;
 	width: 180px;
 	font-style: italic;
 }
@@ -761,10 +815,10 @@
 #pagamento {
 	text-align: center;
 	font-family: Georgia;
-	font-size: 1.6em;
+	font-size: 1.2em;
 	position: relative;
-	left: 106px;
-	top: -26px;
+	left: 139px;
+	top: -44px;
 	width: 180px;
 	font-style: italic;
 }
@@ -828,7 +882,7 @@ html {
 #searchFieldImg {
 	position: absolute;
 	margin-top: -39px;
-	margin-left: 663px;
+	margin-left: 894px;
 	z-index: 1000;
 }
 
@@ -888,7 +942,6 @@ html {
 
 #estabelecimentoRightColumn {
 	float: left;
-	width: 142px;
 	height: 158px;
 	padding: 12px;
 	padding-bottom: 7px;
@@ -903,7 +956,6 @@ html {
 	font-size: 12pt;
 	color: #FFFFFF;
 	text-shadow: #000000 1px 1px 1px;
-	width: 126px;
 	padding: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;

@@ -12,7 +12,8 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
-import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
+import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.utils.MoneyUtils;
 
 public class ItemPedido extends Composite {
 
@@ -48,7 +49,7 @@ public class ItemPedido extends Composite {
 		categoria.setText(i.getCategoriaBean().getNome());
 		obs.setText(i.getObservacao());
 		qtde.setText(i.getQuantidade() + "");
-		preco.setText(i.getPreco() + "");
+		preco.setText(MoneyUtils.parseString(i.getPreco()));
 		close.setUrl("img/close.png");
 		close.setWidth("30px");
 		close.addClickHandler(new ClickHandler() {

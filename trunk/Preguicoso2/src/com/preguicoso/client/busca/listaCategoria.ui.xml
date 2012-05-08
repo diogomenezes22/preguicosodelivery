@@ -6,13 +6,13 @@
 			font-weight: bold;
 		}
 	</ui:style>
-	<g:HTMLPanel styleName=".grid_3">
-		<h1>Local de Entrega</h1>
-		<g:ListBox ui:field="cidadeBox" />
-		<br />
-		<g:ListBox ui:field="bairroBox" />
-		<h1>Categorias</h1>
-		<g:InlineHyperlink text="Todas" targetHistoryToken="index" ui:field="todas"
+	<g:HTMLPanel styleName="grid_12">
+		<g:HTMLPanel ui:field="localPanel" styleName="categoria">
+			<h4>Descubra quais parceiros entregam no seu bairro:</h4>
+			<g:ListBox ui:field="cidadeBox" />
+			<g:ListBox ui:field="bairroBox" />
+		</g:HTMLPanel>
+		<g:InlineHyperlink text="Trocar o Bairro de entrega" targetHistoryToken="index" ui:field="todas"
 			styleName="categoria" />
 		<g:HTMLPanel ui:field="categoriasPanel"></g:HTMLPanel>
 

@@ -24,6 +24,7 @@ import com.preguicoso.shared.RegistroCategoriaEstabelecimento;
 import com.preguicoso.shared.RegistroErros;
 import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CidadeBean;
+import com.google.gwt.user.client.ui.InlineLabel;
 
 public class listaCategoria extends Composite {
 
@@ -43,6 +44,8 @@ public class listaCategoria extends Composite {
 	@UiField
 	HTMLPanel categoriasPanel;
 	@UiField
+	HTMLPanel localPanel;
+	@UiField
 	InlineHyperlink todas;
 
 	List<CidadeBean> cidadesList;
@@ -53,11 +56,16 @@ public class listaCategoria extends Composite {
 	public listaCategoria() {
 		initWidget(uiBinder.createAndBindUi(this));
 		listarCidades();
-		gerarCategorias();
+		//gerarCategorias();
+		categoriasPanel.setVisible(true);
+		localPanel.setVisible(true);
+		todas.setVisible(false);
 	}
 
 	@UiHandler("todas")
 	void onTodasClick(ClickEvent event) {
+		localPanel.setVisible(true);
+		todas.setVisible(false);
 		for (int i = 0; i < categoriasPanel.getWidgetCount(); i++) {
 			((InlineHyperlink) categoriasPanel.getWidget(i))
 					.setStyleName("categoria");
@@ -92,6 +100,8 @@ public class listaCategoria extends Composite {
 		CidadeBean cbSelected = cidadesList.get(cidadeBox.getSelectedIndex());
 		listarBairros(cbSelected);
 		setCidadeBeanSelected(cbSelected);
+	
+	
 	}
 
 	private void setCidadeBeanSelected(CidadeBean cbSelected) {
@@ -112,6 +122,11 @@ public class listaCategoria extends Composite {
 
 	@UiHandler("bairroBox")
 	void onBairroBoxChange(ChangeEvent event) {
+		todas.setVisible(true);
+		todas.setText("Bairro: "+ bairrosList.get(bairroBox
+					.getSelectedIndex() - 1).getNome());
+		todas.setTitle("Trocar o Bairro de entrega");
+		localPanel.setVisible(false);
 		if (bairroBox.getSelectedIndex() != 0) {
 			BairroBean bbSelected = bairrosList.get(bairroBox
 					.getSelectedIndex() - 1);

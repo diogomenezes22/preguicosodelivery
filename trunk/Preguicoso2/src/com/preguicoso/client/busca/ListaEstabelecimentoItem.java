@@ -45,6 +45,8 @@ public class ListaEstabelecimentoItem extends Composite {
 	public ListaEstabelecimentoItem(EstabelecimentoBean e) {
 		initWidget(uiBinder.createAndBindUi(this));
 		this.nome.setText(e.getNome());
+		this.descricao.setText(e.getDescricao());
+		this.endereco.setText(e.getEndereco());
 		this.link.setText("Delivery " + e.getStatus().name());
 		if (!e.getStatus().name().equals("Aberto")) {
 			// TODO @Osman mudar para botão e ajeitar essa gambiarra
@@ -53,7 +55,7 @@ public class ListaEstabelecimentoItem extends Composite {
 			this.link.setTargetHistoryToken("Estabelecimento/" + e.getId());
 		}
 
-		this.descricao.setText(e.getRazaoSocial());
+		//this.descricao.setText(e.getRazaoSocial());
 		this.logo.setUrl(e.getLogoURL());
 	}
 }

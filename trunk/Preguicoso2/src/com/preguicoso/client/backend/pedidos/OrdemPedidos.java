@@ -56,6 +56,10 @@ public class OrdemPedidos extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 
 		carregaListaDePedidos(idEstabelecimento);
+		// TODO @Osman existe a possibilidade de o pedido não ser atualizado
+		// caso seja
+		// enviado um pedido no instante em que o cara abriu a aba Ordem de
+		// Pedidos
 		final Date lastTimeStamp = new Date();
 
 		Timer t = new Timer() {
@@ -71,6 +75,7 @@ public class OrdemPedidos extends Composite {
 								public void onFailure(Throwable caught) {
 									conexao.setText("Nível da Conexão "
 											+ getStatusConexao(false));
+									Window.alert("Servidor fora do ar: "+caught.getMessage());
 								}
 
 								@Override

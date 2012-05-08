@@ -18,7 +18,8 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioService;
 import com.preguicoso.client.estabelecimento.cardapio.CardapioServiceAsync;
-import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
+import com.preguicoso.shared.entities.ItemCardapioBean;
+import com.preguicoso.shared.utils.MoneyUtils;
 
 public class CarrinhoPedidosUI extends Composite {
 
@@ -69,7 +70,7 @@ public class CarrinhoPedidosUI extends Composite {
 								pedidos.add(new ItemPedido(i, carrinho));
 								soma += i.getQuantidade() * i.getPreco();
 							}
-							total.setText("" + soma);
+							total.setText(MoneyUtils.parseString((long)soma));
 						}
 					}
 

@@ -56,7 +56,7 @@ public class StatusPedido extends Composite {
 			}
 
 		};
-		t.scheduleRepeating(10000);
+		t.scheduleRepeating(5000);
 	}
 
 	private void printStatus() {
@@ -69,20 +69,20 @@ public class StatusPedido extends Composite {
 							RegistroStatusPedido.esperando)) {
 						RootPanel.get("status_esperando")
 								.addStyleName("active");
-						mensagem.setText("Seu Pedido foi recebido pelo restaurante");
+						mensagem.setText("Seu Pedido foi recebido pelo estabelecimento");
 					} else if (result.getStatus().equals(
 							RegistroStatusPedido.visto)) {
 						RootPanel.get("status_esperando")
 								.addStyleName("active");
 						RootPanel.get("status_entrega").addStyleName("active");
-						mensagem.setText("Seu Pedido foi enviado para cozinha");
+						mensagem.setText("Seu Pedido foi enviado para separaÁ„o");
 					} else if (result.getStatus().equals(
 							RegistroStatusPedido.enviado)) {
 						RootPanel.get("status_esperando")
 								.addStyleName("active");
 						RootPanel.get("status_entrega").addStyleName("active");
 						RootPanel.get("status_enviado").addStyleName("active");
-						mensagem.setText("Seu pedido j√° est√° a caminho");
+						mensagem.setText("Seu pedido j· est· a caminho");
 					} else if (result.getStatus().equals(
 							RegistroStatusPedido.recusado)) {
 						mensagem.setText("Pedido recusado.");
@@ -96,6 +96,7 @@ public class StatusPedido extends Composite {
 
 			@Override
 			public void onFailure(Throwable caught) {
+				
 			}
 		});
 	}

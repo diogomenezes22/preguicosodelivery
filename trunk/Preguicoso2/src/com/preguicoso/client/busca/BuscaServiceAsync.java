@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
+import com.preguicoso.shared.entities.ItemCardapioBean;
 
 /**
  * The async counterpart of <code>GreetingService</code>.
@@ -66,4 +67,7 @@ public interface BuscaServiceAsync {
 	void setCidadeBeanSession(CidadeBean cb, AsyncCallback<Void> callback);
 
 	void setBairroBeanSession(BairroBean bb, AsyncCallback<Void> callback);
+
+	void getListaItensByName(String nome,
+			AsyncCallback<List<ItemCardapioBean>> callback);
 }

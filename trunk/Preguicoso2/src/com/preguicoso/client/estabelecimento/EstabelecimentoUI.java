@@ -25,6 +25,7 @@ import com.preguicoso.client.estabelecimento.carrinho.CarrinhoPedidosUI;
 import com.preguicoso.client.estabelecimento.filtro.Filtro;
 import com.preguicoso.shared.RegistroErros;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
+import com.google.gwt.user.client.ui.InlineLabel;
 
 public class EstabelecimentoUI extends Composite {
 
@@ -44,6 +45,8 @@ public class EstabelecimentoUI extends Composite {
 	Label endereco;
 	@UiField
 	Image logo;
+	
+	@UiField InlineLabel descricao;
 
 	private Long estabelecimentoId;
 	private Object currentObject;
@@ -62,8 +65,10 @@ public class EstabelecimentoUI extends Composite {
 	}
 
 	public EstabelecimentoUI(final Long id) {
+		
 		this.estabelecimentoId = id;
 		this.initWidget(uiBinder.createAndBindUi(this));
+		filtro.setVisible(false);
 		this.cadastroService.getEstabelecimento(id,
 				new AsyncCallback<EstabelecimentoBean>() {
 					@Override
@@ -71,7 +76,7 @@ public class EstabelecimentoUI extends Composite {
 						EstabelecimentoUI.this.currentObject = result;
 						EstabelecimentoUI.this.nome.setText(result.getNome());
 						EstabelecimentoUI.this.logo.setUrl(result.getLogoURL());
-
+						EstabelecimentoUI.this.descricao.setText(result.getDescricao());
 						logo.setWidth("218px");
 						CarrinhoPedidosUI carrinho = new CarrinhoPedidosUI();
 						String token = History.getToken();

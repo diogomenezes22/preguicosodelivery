@@ -21,7 +21,7 @@ import com.preguicoso.server.entities.Usuario;
 import com.preguicoso.shared.AtributosSession;
 import com.preguicoso.shared.RegistroStatusPedido;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
-import com.preguicoso.shared.entities.cardapio.ItemCardapioBean;
+import com.preguicoso.shared.entities.ItemCardapioBean;
 
 public class CheckoutServiceImpl extends RemoteServiceServlet implements
 		CheckoutService {
@@ -34,8 +34,11 @@ public class CheckoutServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public List<String> getBairrosAtendidos(EstabelecimentoBean eb) {
 		List<String> lista = new ArrayList<String>();
-		for (Bairro b : (new BairroDAO()).listByEstabelecimento(eb)) {
-			lista.add(b.getNome());
+		BairroDAO banco = new BairroDAO();
+		ArrayList<Bairro> lista2 = (ArrayList<Bairro>) banco.listByEstabelecimento(eb);
+		for (Bairro b : lista2) {
+			if(b!=null)
+				lista.add(b.getNome());
 		}
 		return lista;
 	}
@@ -50,6 +53,8 @@ public class CheckoutServiceImpl extends RemoteServiceServlet implements
 		// id
 		p.setIdEstabelecimento(listaItens.get(0).getEstabelecimentoBean());
 		p.setListaItensJSON(listaItens);
+		
+		
 		p.setNomeCliente(nomeCliente);
 		p.setRua(rua);
 		p.setBairro(bairro);

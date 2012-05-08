@@ -47,6 +47,7 @@ public class RouterHistory {
 		if (token.startsWith("index")) {
 			RootPanel.get("cadastroEstabelecimento").setVisible(true);
 			$(".middle_rodape").as(Effects).slideDown(1000);
+			clearContent();
 			addSuggestBox();
 			addListEstabelecimento();
 		} else if (token.equals("quem")) {
@@ -74,6 +75,11 @@ public class RouterHistory {
 			animateBegin();
 			printStatus(token);
 		}
+	}
+
+	private void addListProdutosMaisVendidos() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void animateBegin() {

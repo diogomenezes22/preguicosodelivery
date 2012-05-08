@@ -9,12 +9,15 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.preguicoso.client.busca.BuscaService;
 import com.preguicoso.server.dao.CidadeDAO;
 import com.preguicoso.server.dao.EstabelecimentoDAO;
+import com.preguicoso.server.dao.ItemCardapioDAO;
 import com.preguicoso.server.entities.Cidade;
 import com.preguicoso.server.entities.Estabelecimento;
+import com.preguicoso.server.entities.ItemCardapio;
 import com.preguicoso.shared.AtributosSession;
 import com.preguicoso.shared.entities.BairroBean;
 import com.preguicoso.shared.entities.CidadeBean;
 import com.preguicoso.shared.entities.EstabelecimentoBean;
+import com.preguicoso.shared.entities.ItemCardapioBean;
 
 /**
  * The server side implementation of the RPC service.
@@ -217,5 +220,19 @@ public class BuscaServiceImpl extends RemoteServiceServlet implements
 					(new CidadeDAO()).retrieveById(bb.getIdCidade()).toBean());
 		}
 		session.setAttribute(AtributosSession.bairroBeanSession, bb);
+	}
+
+	@Override
+	public List<ItemCardapioBean> getListaItensByName(String nome) {
+		//TODO Abraao: Utilizar Filter objectfy
+		ItemCardapioDAO banco = new ItemCardapioDAO();
+		ArrayList<ItemCardapio> lista = (ArrayList<ItemCardapio>) banco.listAll();
+		ArrayList<ItemCardapioBean> retorno = new ArrayList<ItemCardapioBean>();
+		for (ItemCardapio itemCardapio : lista) {
+			if(itemCardapio!=null)
+				if(itemCardapio.getNome().toLowerCase().contains(nome.toLowerCase()) || itemCardapio.getDescricao().toLowerCase().contains(nome.toLowerCase()))
+					retorno.add(itemCardapio.toBean());
+		}
+		return retorno;
 	}
 }

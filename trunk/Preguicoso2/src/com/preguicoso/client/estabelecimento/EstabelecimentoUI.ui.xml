@@ -27,9 +27,8 @@
 						<div class="grid_6 alpha omega" style="width: 438px;">
 							<h4>Horário de Funcionamento: 16:00 as 22:00</h4>
 						</div>
-						<div class="grid_6 alpha omega" style="width: 438px;">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam placerat, magna eget imperdiet viverra, nulla velit blandit erat. </p>
-						</div>
+						<div class="grid_6 alpha omega" style="width: 438px;">							
+						<g:InlineLabel text="New InlineLabel" ui:field="descricao"/></div>
 					</div>
 					 <g:HTMLPanel ui:field="filtro" styleName="grid_3 omega alpha">
 					 	
