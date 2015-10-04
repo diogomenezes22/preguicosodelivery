@@ -1,0 +1,1 @@
+Você nunca mais pedirá comida pelo telefone.
